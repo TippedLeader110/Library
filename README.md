@@ -1,14 +1,14 @@
 # Library
 <h2>Aplikasi pengelolah perpustakaan dengan fitur</h2>
 <li>
-	<ul>
+	<ol>
 		CRUD Buku
-	</ul>
-	<ul>
+	</ol>
+	<ol>
 		Cari Buku
-	</ul>
-	<ul>
+	</ol>
+	<ol>
 		Masih dipikirkan
-	</ul>
+	</ol>
 </li>
 
