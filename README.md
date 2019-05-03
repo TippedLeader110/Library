@@ -11,4 +11,9 @@
 			Masih dipikirkan
 		</li>
 	</ol>
+<h3>
+	<p>TippedLeader110 = Bayhaqi</p>
+	<p>UsoKun = Ali</p>
+	<p>Yoraisme = Rafid</p>
+</h3>
 
