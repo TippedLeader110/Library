@@ -22,6 +22,20 @@ public class MysqlCon{
         }catch(Exception e){ System.out.println(e);}  
     }
     
+    public Statement query() {
+        
+        Connection con;
+        Statement stmt = null;
+        try {  
+            con = DriverManager.getConnection(  
+                    "jdbc:mysql://localhost","root","");
+            stmt =con.createStatement();  
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung");
+        }
+        return stmt;
+    }
+    
     public int login(String F1, String F2) throws ClassNotFoundException, SQLException{
         int num = 0;
 //    try{  
