@@ -5,6 +5,7 @@
  */
 package library.Main;
 
+import library.showData.UsersData;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +40,11 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Username");
 
@@ -112,8 +118,8 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         passCek();
     }//GEN-LAST:event_passMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    public void log(){
+          
         String Field1, Field2, Field3;
 //        Field1 = name.getText();
         Field2 = username.getText();
@@ -122,19 +128,28 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         try{
         a = send.login(Field2, Field3);
         }catch(Exception e){ JOptionPane.showMessageDialog(null, "Error , " + e);}  
-        if(a==1)
-        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + Field2);
+        if(a==1){
+        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + Field2);    
+        this.setVisible(false);
+        new UsersData().setVisible(true);
+        }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");
         
-        
-        
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      log();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusGained
         passCek();
     }//GEN-LAST:event_passFocusGained
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+    
     /**
      * @param args the command line arguments
      */
