@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import library.Main.DaftarPrototipe;
-import library.Main.MysqlCon;
+import library.Mysql.MysqlCon;
 /**
  *
  * @author TippedLeader
