@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2019 at 05:07 AM
+-- Generation Time: May 06, 2019 at 06:26 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -47,11 +47,18 @@ DELIMITER ;
 --
 
 CREATE TABLE `anggota` (
-  `ID_anggota` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
   `nama_anggota` varchar(52) DEFAULT NULL,
   `alamat` text,
   `no_telp` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anggota`
+--
+
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `alamat`, `no_telp`) VALUES
+(1, 'rafid', 'Goblogverse', 666);
 
 -- --------------------------------------------------------
 
@@ -76,7 +83,7 @@ CREATE TABLE `book` (
 --
 CREATE TABLE `kembali` (
 `id_transaksi` int(11)
-,`id_anggota` int(11)
+,`nama_anggota` varchar(52)
 ,`ISBN` varchar(32)
 ,`t_pinjam` date
 ,`t_kembali` date
@@ -128,7 +135,7 @@ CREATE TABLE `pengarang_book` (
 --
 CREATE TABLE `pinjam` (
 `id_transaksi` int(11)
-,`id_anggota` int(11)
+,`nama_anggota` varchar(52)
 ,`ISBN` varchar(32)
 ,`t_pinjam` date
 ,`t_kembali` date
@@ -196,7 +203,7 @@ INSERT INTO `users` (`id_users`, `username`, `password`, `name`) VALUES
 --
 DROP TABLE IF EXISTS `kembali`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `pinjam_book`.`id_transaksi` AS `id_transaksi`,`pinjam_book`.`id_anggota` AS `id_anggota`,`pinjam_book`.`ISBN` AS `ISBN`,`pinjam_book`.`t_pinjam` AS `t_pinjam`,`pinjam_book`.`t_kembali` AS `t_kembali`,`pinjam_book`.`denda` AS `denda` from `pinjam_book` where ((`pinjam_book`.`t_pinjam` is not null) and (`pinjam_book`.`t_kembali` is not null)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null) and (`a`.`t_kembali` is not null)) ;
 
 -- --------------------------------------------------------
 
@@ -205,7 +212,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pinjam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `pinjam_book`.`id_transaksi` AS `id_transaksi`,`pinjam_book`.`id_anggota` AS `id_anggota`,`pinjam_book`.`ISBN` AS `ISBN`,`pinjam_book`.`t_pinjam` AS `t_pinjam`,`pinjam_book`.`t_kembali` AS `t_kembali`,`pinjam_book`.`denda` AS `denda` from `pinjam_book` where (`pinjam_book`.`t_pinjam` is not null) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null)) ;
 
 --
 -- Indexes for dumped tables
@@ -215,7 +222,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD PRIMARY KEY (`ID_anggota`);
+  ADD PRIMARY KEY (`id_anggota`);
 
 --
 -- Indexes for table `book`

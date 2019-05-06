@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package library.Main;
+import java.sql.*;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import library.Main.DaftarPrototipe;
+import library.Mysql.MysqlCon;
 
 /**
  *
@@ -11,11 +18,59 @@ package library.Main;
  */
 public class transaksiBuku extends javax.swing.JFrame {
 
-    /**
-     * Creates new form transaksiBuku
-     */
+    MysqlCon send = new MysqlCon( );
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ID Transaksi", "Nama Anggota", "ISBN", "Tanggal Pinjam", "Tanggal kembali", "Denda"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+            return false;
+    }
+    };
+            
+    DefaultTableModel model2 = new DefaultTableModel(new String[]{"ID Transaksi", "Nama Anggota", "ISBN", "Tanggal Pinjam", "Tanggal kembali", "Denda"}, 0){
+        @Override
+        
+         public boolean isCellEditable(int row, int column) {
+            return false;
+    }
+    };
     public transaksiBuku() {
         initComponents();
+       
+        Statement stmt = send.query();
+        ResultSet rs;
+        ResultSet rs2;
+        int q = 0;
+        String w;
+        String e;
+        String r;
+        String t;
+        int y = 0;
+        try {
+            rs = stmt.executeQuery("select * from library.pinjam");
+            while(rs.next()){
+            q = rs.getInt("id_transaksi");
+            w = rs.getString("nama_anggota");
+            e = rs.getString("ISBN");
+            r = rs.getString("t_pinjam");
+            t = rs.getString("t_kembali");
+            y = rs.getInt("denda");
+            model.addRow(new Object[]{q, w, e, r, t, y});}
+            rs2 = stmt.executeQuery("select * from library.kembali");
+            while(rs2.next()){
+            q = rs2.getInt("id_transaksi");
+            w = rs2.getString("nama_anggota");
+            e = rs2.getString("ISBN");
+            r = rs2.getString("t_pinjam");
+            t = rs2.getString("t_kembali");
+            y = rs2.getInt("denda");
+            model2.addRow(new Object[]{q, w, e, r, t, y});}
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
+        
+        jTable1.setModel(model);
+        jTable2.setModel(model2);
     }
 
     /**
@@ -41,7 +96,6 @@ public class transaksiBuku extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(854, 480));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Transaksi Buku");
