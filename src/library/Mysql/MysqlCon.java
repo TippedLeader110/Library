@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library.Main;
+package library.Mysql;
 
 /**
  *
@@ -22,10 +22,24 @@ public class MysqlCon{
         }catch(Exception e){ System.out.println(e);}  
     }
     
+    public Statement query() {
+        
+        Connection con;
+        Statement stmt = null;
+        try {  
+            con = DriverManager.getConnection(  
+                    "jdbc:mysql://localhost","root","");
+            stmt =con.createStatement();  
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung");
+        }
+        return stmt;
+    }
+    
     public int login(String F1, String F2) throws ClassNotFoundException, SQLException{
         int num = 0;
 //    try{  
-        Class.forName("com.mysql.jdbc.Driver");  
+//        Class.forName("com.mysql.jdbc.Driver");  
         Connection con=DriverManager.getConnection(  
         "jdbc:mysql://localhost","root","");  
         Statement stmt=con.createStatement();  

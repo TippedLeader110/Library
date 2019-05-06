@@ -5,6 +5,11 @@
  */
 package library.Main;
 
+import java.sql.*;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import library.Mysql.MysqlCon;
+import library.showData.UsersData;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +19,13 @@ import javax.swing.JOptionPane;
 public class DaftarPrototipe extends javax.swing.JFrame {
     
     MysqlCon send = new MysqlCon( );
+    private String nama;
     /**
      * Creates new form DaftarPrototipe
      */
     private boolean initPass;
     public DaftarPrototipe() {
+        this.nama = "";
         initComponents();
         this.initPass = false;
     }
@@ -37,11 +44,22 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         pass = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(480, 480));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
+        username.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Username");
 
+        pass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pass.setText("jPasswordField1");
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -54,50 +72,63 @@ public class DaftarPrototipe extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Password");
 
-        jButton1.setText("login");
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Login");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pass)
-                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                            .addComponent(username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel1)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(38, 38, 38)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(363, 288));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void passCek(){
@@ -108,12 +139,25 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         }
     }
     
+    
+    
+    public void name(String F1, String F2) throws SQLException {
+        System.out.println(F1 + "\n" + F2);
+        Statement stmt = send.query();
+        ResultSet rs=stmt.executeQuery("select * from library.users WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
+        while (rs.next()){
+            this.nama = rs.getString("name");
+            System.out.println(this.nama);
+        }
+            
+    }
+    
     private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
         passCek();
     }//GEN-LAST:event_passMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    public void log(){
+          
         String Field1, Field2, Field3;
 //        Field1 = name.getText();
         Field2 = username.getText();
@@ -122,19 +166,34 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         try{
         a = send.login(Field2, Field3);
         }catch(Exception e){ JOptionPane.showMessageDialog(null, "Error , " + e);}  
-        if(a==1)
-        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + Field2);
+        if(a==1){
+            try {
+                name(Field2, Field3);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Login" + ex);
+            }
+        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + this.nama);    
+            
+        this.setVisible(false);
+        new mainPage(this.nama).setVisible(true);
+        }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");
         
-        
-        
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      log();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusGained
         passCek();
     }//GEN-LAST:event_passFocusGained
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+    
     /**
      * @param args the command line arguments
      */
@@ -172,6 +231,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField pass;
