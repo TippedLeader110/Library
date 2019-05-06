@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2019 at 06:26 AM
+-- Generation Time: May 06, 2019 at 08:07 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -58,7 +58,8 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `alamat`, `no_telp`) VALUES
-(1, 'rafid', 'Goblogverse', 666);
+(1, 'rafid', 'Goblogverse', 666),
+(2, 'ali', 'Tololverse', 6969);
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,8 @@ CREATE TABLE `pinjam_book` (
 --
 
 INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `ISBN`, `t_pinjam`, `t_kembali`, `denda`) VALUES
-(1, 1, '1', '2019-05-06', '2019-05-08', 900);
+(1, 1, '1', '2019-05-06', '2019-05-08', 900),
+(2, 2, '2', '2019-05-02', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -212,7 +214,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pinjam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null) and isnull(`a`.`t_kembali`)) ;
 
 --
 -- Indexes for dumped tables
