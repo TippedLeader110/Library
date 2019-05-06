@@ -151,8 +151,9 @@ public class aturBuku extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new mainPage().setVisible(true);
+        //this.setVisible(false);
+        //new mainPage().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
