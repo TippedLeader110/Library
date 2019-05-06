@@ -4,18 +4,54 @@
  * and open the template in the editor.
  */
 package library.Main;
-
+import java.sql.*;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import library.Main.DaftarPrototipe;
+import library.Mysql.MysqlCon;
 /**
  *
  * @author My Computer
  */
 public class Keanggotaan extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Keanggotaan
-     */
+    MysqlCon send = new MysqlCon( );
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ID anggota, Nama anggota, Alamat, No Telepon"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+            return false;
+    }
+    };
+    
     public Keanggotaan() {
         initComponents();
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+        
+        int q = 0;
+        String w;
+        String e;
+        int r = 0;
+        
+        try {
+            rs = stmt.executeQuery("select * from library.anggota");
+            while(rs.next()){
+            q = rs.getInt("id_anggota");
+            w = rs.getString("nama_anggota");
+            e = rs.getString("alamat");
+            r = rs.getInt("no_telp");
+            model.addRow(new Object[]{q, w, e, r});}
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
+        
+        jTable1.setModel(model);
+        
     }
 
     /**

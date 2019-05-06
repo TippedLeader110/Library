@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2019 at 04:18 PM
+-- Generation Time: May 06, 2019 at 06:26 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -26,7 +26,7 @@ DELIMITER $$
 --
 -- Functions
 --
-CREATE DEFINER=`bayhaqi`@`localhost` FUNCTION `login` (`A` VARCHAR(32), `B` VARCHAR(32)) RETURNS INT(11) begin
+CREATE DEFINER=`root`@`localhost` FUNCTION `login` (`A` VARCHAR(32), `B` VARCHAR(32)) RETURNS INT(11) begin
     declare cou int;
 
 SELECT COUNT(*) 
@@ -47,11 +47,18 @@ DELIMITER ;
 --
 
 CREATE TABLE `anggota` (
-  `ID_anggota` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
   `nama_anggota` varchar(52) DEFAULT NULL,
   `alamat` text,
   `no_telp` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anggota`
+--
+
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `alamat`, `no_telp`) VALUES
+(1, 'rafid', 'Goblogverse', 666);
 
 -- --------------------------------------------------------
 
@@ -67,6 +74,21 @@ CREATE TABLE `book` (
   `jmlh` int(4) DEFAULT NULL,
   `tgl_pengadaan` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `kembali`
+-- (See below for the actual view)
+--
+CREATE TABLE `kembali` (
+`id_transaksi` int(11)
+,`nama_anggota` varchar(52)
+,`ISBN` varchar(32)
+,`t_pinjam` date
+,`t_kembali` date
+,`denda` int(8)
+);
 
 -- --------------------------------------------------------
 
@@ -108,6 +130,21 @@ CREATE TABLE `pengarang_book` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `pinjam`
+-- (See below for the actual view)
+--
+CREATE TABLE `pinjam` (
+`id_transaksi` int(11)
+,`nama_anggota` varchar(52)
+,`ISBN` varchar(32)
+,`t_pinjam` date
+,`t_kembali` date
+,`denda` int(8)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pinjam_book`
 --
 
@@ -119,6 +156,13 @@ CREATE TABLE `pinjam_book` (
   `t_kembali` date DEFAULT NULL,
   `denda` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pinjam_book`
+--
+
+INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `ISBN`, `t_pinjam`, `t_kembali`, `denda`) VALUES
+(1, 1, '1', '2019-05-06', '2019-05-08', 900);
 
 -- --------------------------------------------------------
 
@@ -152,6 +196,24 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_users`, `username`, `password`, `name`) VALUES
 (1, 'bayhaqi', '1', 'bayhaqi');
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `kembali`
+--
+DROP TABLE IF EXISTS `kembali`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null) and (`a`.`t_kembali` is not null)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pinjam`
+--
+DROP TABLE IF EXISTS `pinjam`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null)) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -160,7 +222,7 @@ INSERT INTO `users` (`id_users`, `username`, `password`, `name`) VALUES
 -- Indexes for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD PRIMARY KEY (`ID_anggota`);
+  ADD PRIMARY KEY (`id_anggota`);
 
 --
 -- Indexes for table `book`
