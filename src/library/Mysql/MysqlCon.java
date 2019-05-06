@@ -39,7 +39,7 @@ public class MysqlCon{
     public int login(String F1, String F2) throws ClassNotFoundException, SQLException{
         int num = 0;
 //    try{  
-        Class.forName("com.mysql.jdbc.Driver");  
+//        Class.forName("com.mysql.jdbc.Driver");  
         Connection con=DriverManager.getConnection(  
         "jdbc:mysql://localhost","root","");  
         Statement stmt=con.createStatement();  
