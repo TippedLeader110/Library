@@ -74,7 +74,7 @@ public class cover extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(203, 203, 203))
+                .addGap(209, 209, 209))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,9 +85,9 @@ public class cover extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addComponent(jButton1)
-                .addGap(28, 28, 28))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(528, 509));
