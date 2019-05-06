@@ -18,7 +18,7 @@ import library.Mysql.MysqlCon;
 public class Keanggotaan extends javax.swing.JFrame {
 
     MysqlCon send = new MysqlCon( );
-    DefaultTableModel model = new DefaultTableModel(new String[]{"ID anggota, Nama anggota, Alamat, No Telepon"}, 0){
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ID anggota", "Nama anggota", "Alamat", "No Telepon"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
@@ -32,10 +32,10 @@ public class Keanggotaan extends javax.swing.JFrame {
         Statement stmt = send.query();
         ResultSet rs;
         
-        int q = 0;
+        int q;
         String w;
         String e;
-        int r = 0;
+        int r;
         
         try {
             rs = stmt.executeQuery("select * from library.anggota");
@@ -89,7 +89,12 @@ public class Keanggotaan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Cari");
