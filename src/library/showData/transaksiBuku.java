@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library.Main;
+package library.showData;
 import java.sql.*;  
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import library.Main.DaftarPrototipe;
+import library.Main.mainPage;
 import library.Mysql.MysqlCon;
 
 /**

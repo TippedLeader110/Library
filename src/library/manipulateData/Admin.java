@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library.Main;
+package library.manipulateData;
+
+import library.Main.mainPage;
 
 /**
  *
@@ -51,7 +53,6 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admin");
-        setPreferredSize(new java.awt.Dimension(854, 480));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Admin");
