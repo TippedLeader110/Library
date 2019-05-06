@@ -5,6 +5,9 @@
  */
 package library.Main;
 
+import java.sql.*;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import library.Mysql.MysqlCon;
 import library.showData.UsersData;
 import javax.swing.JOptionPane;
@@ -16,11 +19,13 @@ import javax.swing.JOptionPane;
 public class DaftarPrototipe extends javax.swing.JFrame {
     
     MysqlCon send = new MysqlCon( );
+    private String nama;
     /**
      * Creates new form DaftarPrototipe
      */
     private boolean initPass;
     public DaftarPrototipe() {
+        this.nama = "";
         initComponents();
         this.initPass = false;
     }
@@ -134,6 +139,19 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         }
     }
     
+    
+    
+    public void name(String F1, String F2) throws SQLException {
+        System.out.println(F1 + "\n" + F2);
+        Statement stmt = send.query();
+        ResultSet rs=stmt.executeQuery("select * from library.users WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
+        while (rs.next()){
+            this.nama = rs.getString("name");
+            System.out.println(this.nama);
+        }
+            
+    }
+    
     private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
         passCek();
     }//GEN-LAST:event_passMouseClicked
@@ -149,9 +167,15 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         a = send.login(Field2, Field3);
         }catch(Exception e){ JOptionPane.showMessageDialog(null, "Error , " + e);}  
         if(a==1){
-        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + Field2);    
+            try {
+                name(Field2, Field3);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Login" + ex);
+            }
+        JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + this.nama);    
+            
         this.setVisible(false);
-        new mainPage().setVisible(true);
+        new mainPage(this.nama).setVisible(true);
         }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");
