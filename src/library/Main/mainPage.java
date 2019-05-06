@@ -7,6 +7,7 @@
 package library.Main;
 
 import javax.swing.JOptionPane;
+//import javax.swing.JFrame;
 
 /**
  *
@@ -15,8 +16,17 @@ import javax.swing.JOptionPane;
 public class mainPage extends javax.swing.JFrame {
 
     /** Creates new form mainPage */
-    public mainPage() {
+    String nama;
+    DaftarPrototipe valueName = new DaftarPrototipe();
+    public mainPage( ) {
         initComponents();
+        welcomeText.setText(nama);
+    }
+    
+    public mainPage(String nama) {
+        this.nama = nama;
+        initComponents();
+        welcomeText.setText(nama);
     }
 
     /** This method is called from within the constructor to
@@ -35,7 +45,7 @@ public class mainPage extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        welcomeText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,8 +95,8 @@ public class mainPage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Logo");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("<username>");
+        welcomeText.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        welcomeText.setText("<username>");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Selamat Datang,");
@@ -117,7 +127,7 @@ public class mainPage extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)))
+                        .addComponent(welcomeText)))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -131,7 +141,7 @@ public class mainPage extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
+                        .addComponent(welcomeText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -225,8 +235,8 @@ public class mainPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel welcomeText;
     // End of variables declaration//GEN-END:variables
 
 }
