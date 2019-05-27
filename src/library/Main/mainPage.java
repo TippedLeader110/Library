@@ -57,7 +57,7 @@ public class mainPage extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(854, 480));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Atur Buku");
+        jButton1.setText("Daftar Buku");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
