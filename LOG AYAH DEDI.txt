@@ -1,0 +1,13 @@
+create or replace procedure tambah_buku (
+IN ISBN varchar(32), 
+IN ID_Penerbit int(8),
+IN ID_Pengarang int(8), 
+IN thn_buku int(4),
+IN jmlh int(4),
+IN tgl_pengadaan date,
+IN Judul varchar(50))
+begin
+insert into book values(ISBN, ID_Penerbit, ID_Pengarang, thn_buku, jmlh, tgl_pengadaan, Judul);
+end
+
+-------------------------------------------------------
