@@ -37,7 +37,7 @@ public class Keanggotaan extends javax.swing.JFrame {
         int q = 0;
         String w;
         String e;
-        int r = 0;
+        String r;
         
         try {
             rs = stmt.executeQuery("select * from library.anggota");
@@ -45,7 +45,7 @@ public class Keanggotaan extends javax.swing.JFrame {
             q = rs.getInt("id_anggota");
             w = rs.getString("nama_anggota");
             e = rs.getString("alamat");
-            r = rs.getInt("no_telp");
+            r = rs.getString("no_telp");
             model.addRow(new Object[]{q, w, e, r});}
         }
         catch (SQLException ex) {
