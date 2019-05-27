@@ -3,7 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Main/cover.java</file>
+=======
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/exitAlert.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/showData/aturBuku.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/DaftarPrototipe.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/cover.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/Admin.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/Register.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/mainPage.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/showData/transaksiBuku.java</file>
+>>>>>>> AliBranch
         </group>
     </open-files>
 </project-private>
