@@ -1,4 +1,8 @@
 /build/
+<<<<<<< HEAD
 /nbproject/private/private.xml
+=======
+>>>>>>> AliBranch
 /nbproject/private/
 /dist/
+nbproject/private/private.xml
