@@ -41,7 +41,7 @@ public class cover extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/library-bg.png"))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 19)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jButton1.setText("Mulai!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +68,7 @@ public class cover extends javax.swing.JFrame {
                         .addGap(200, 200, 200)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGap(155, 155, 155)
                         .addComponent(jLabel4)))
                 .addContainerGap(157, Short.MAX_VALUE))
@@ -75,6 +76,15 @@ public class cover extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(201, 201, 201))
+=======
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel4)))
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(209, 209, 209))
+>>>>>>> parent of 85cd831... update 2
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,11 +93,19 @@ public class cover extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
+<<<<<<< HEAD
                 .addGap(35, 35, 35)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
+=======
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(52, 52, 52)
+                .addComponent(jButton1)
+                .addContainerGap(80, Short.MAX_VALUE))
+>>>>>>> parent of 85cd831... update 2
         );
 
         setSize(new java.awt.Dimension(528, 509));
