@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2019 at 08:07 AM
+-- Generation Time: May 28, 2019 at 06:10 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -23,6 +23,21 @@ SET time_zone = "+00:00";
 --
 
 DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `orang` (IN `human` TEXT)  begin
+select id, nama, alamat, no_telp from human;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sel_branch` ()  begin
+select * from branch;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tambah_buku` (IN `ISBN` VARCHAR(32), IN `ID_Penerbit` INT(8), IN `ID_Pengarang` INT(8), IN `thn_buku` INT(4), IN `jmlh` INT(4), IN `tgl_pengadaan` DATE, IN `Judul` VARCHAR(50))  begin
+insert into book values(ISBN, ID_Penerbit, ID_Pengarang, thn_buku, jmlh, tgl_pengadaan, Judul);
+end$$
+
 --
 -- Functions
 --
@@ -47,19 +62,28 @@ DELIMITER ;
 --
 
 CREATE TABLE `anggota` (
-  `id_anggota` int(11) NOT NULL,
-  `nama_anggota` varchar(52) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `nama` varchar(11) DEFAULT NULL,
   `alamat` text,
-  `no_telp` int(4) DEFAULT NULL
+  `no_telp` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `alamat`, `no_telp`) VALUES
-(1, 'rafid', 'Goblogverse', 666),
-(2, 'ali', 'Tololverse', 6969);
+INSERT INTO `anggota` (`id`, `nama`, `alamat`, `no_telp`) VALUES
+(1, '0', 'Goblogverse', '666'),
+(2, '0', 'Tololverse', '6969');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `apa`
+-- (See below for the actual view)
+--
+CREATE TABLE `apa` (
+);
 
 -- --------------------------------------------------------
 
@@ -73,8 +97,16 @@ CREATE TABLE `book` (
   `ID_Pengarang` int(8) DEFAULT NULL,
   `thn_buku` int(4) DEFAULT NULL,
   `jmlh` int(4) DEFAULT NULL,
-  `tgl_pengadaan` date DEFAULT NULL
+  `tgl_pengadaan` date DEFAULT NULL,
+  `Judul` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`ISBN`, `ID_Penerbit`, `ID_Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`) VALUES
+('69666', 666, 69, 2019, 3, '2019-05-09', 'How to be a N I G G A');
 
 -- --------------------------------------------------------
 
@@ -83,12 +115,6 @@ CREATE TABLE `book` (
 -- (See below for the actual view)
 --
 CREATE TABLE `kembali` (
-`id_transaksi` int(11)
-,`nama_anggota` varchar(52)
-,`ISBN` varchar(32)
-,`t_pinjam` date
-,`t_kembali` date
-,`denda` int(8)
 );
 
 -- --------------------------------------------------------
@@ -135,12 +161,6 @@ CREATE TABLE `pengarang_book` (
 -- (See below for the actual view)
 --
 CREATE TABLE `pinjam` (
-`id_transaksi` int(11)
-,`nama_anggota` varchar(52)
-,`ISBN` varchar(32)
-,`t_pinjam` date
-,`t_kembali` date
-,`denda` int(8)
 );
 
 -- --------------------------------------------------------
@@ -185,18 +205,30 @@ CREATE TABLE `reg_book` (
 --
 
 CREATE TABLE `users` (
-  `id_users` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `name` text NOT NULL
+  `nama` varchar(11) DEFAULT NULL,
+  `alamat` text,
+  `no_telp` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_users`, `username`, `password`, `name`) VALUES
-(1, 'bayhaqi', '1', 'bayhaqi');
+INSERT INTO `users` (`id`, `username`, `password`, `nama`, `alamat`, `no_telp`) VALUES
+(1, 'bayhaqi', '1', 'bayhaqi', NULL, NULL),
+(2, 'rafid', '2', 'rafid', 'lala', '666');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `apa`
+--
+DROP TABLE IF EXISTS `apa`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `apa`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where (`a`.`id_anggota` = `b`.`id_anggota`) ;
 
 -- --------------------------------------------------------
 
@@ -224,7 +256,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD PRIMARY KEY (`id_anggota`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `book`
@@ -271,17 +303,7 @@ ALTER TABLE `reg_book`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_users`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Constraints for dumped tables
