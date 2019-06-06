@@ -3,20 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Library/src/library/Main/exitAlert.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/showData/aturBuku.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/hapusBuku.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/splashScreen/splashCode.java</file>
             <file>file:/C:/xampp/htdocs/Library/src/library/Main/DaftarPrototipe.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/showData/UsersData.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/Main/cover.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/tambahBuku.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/Admin.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/showData/Keanggotaan.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/EditUsers.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/editBuku.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/manipulateData/Register.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/showData/Siswa.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/splashScreen/splash.java</file>
             <file>file:/C:/xampp/htdocs/Library/src/library/Main/mainPage.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/showData/transaksiBuku.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/Main.java</file>
         </group>
     </open-files>
 </project-private>

@@ -44,8 +44,8 @@ public class tambahBuku extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        simpantbB = new javax.swing.JButton();
+        bataltbB = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -58,7 +58,7 @@ public class tambahBuku extends javax.swing.JFrame {
         jLabel1.setText("Tambah Buku");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Kode");
+        jLabel2.setText("ISBN ");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Judul");
@@ -95,16 +95,22 @@ public class tambahBuku extends javax.swing.JFrame {
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("Halaman");
+        jLabel9.setText("Jlh Halaman (lembar)");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Simpan");
+        simpantbB.setBackground(new java.awt.Color(0, 204, 0));
+        simpantbB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        simpantbB.setForeground(new java.awt.Color(255, 255, 255));
+        simpantbB.setText("Simpan");
+        simpantbB.setBorder(null);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Reset");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bataltbB.setBackground(new java.awt.Color(255, 0, 0));
+        bataltbB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bataltbB.setForeground(new java.awt.Color(255, 255, 255));
+        bataltbB.setText("Batal");
+        bataltbB.setBorder(null);
+        bataltbB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bataltbBActionPerformed(evt);
             }
         });
 
@@ -133,9 +139,9 @@ public class tambahBuku extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton3))
+                        .addComponent(simpantbB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(bataltbB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField6)
                         .addComponent(jTextField5)
@@ -144,7 +150,7 @@ public class tambahBuku extends javax.swing.JFrame {
                         .addComponent(jTextField2)
                         .addComponent(jTextField1)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,14 +187,14 @@ public class tambahBuku extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(simpantbB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bataltbB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(488, 425));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,9 +202,11 @@ public class tambahBuku extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bataltbBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bataltbBActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        this.dispose();
+        
+    }//GEN-LAST:event_bataltbBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,9 +244,8 @@ public class tambahBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bataltbB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,5 +262,6 @@ public class tambahBuku extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton simpantbB;
     // End of variables declaration//GEN-END:variables
 }
