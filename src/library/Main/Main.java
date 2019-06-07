@@ -20,6 +20,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        
 //        this.pengarangL.setVisible(false);
 //        this.penerbitL.setVisible(false);
 //        this.kategoriL.setVisible(false);
@@ -94,12 +95,31 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         panelBawah = new javax.swing.JPanel();
         laporanPanel = new javax.swing.JPanel();
+        titleLaporan = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        jLabel52 = new javax.swing.JLabel();
+        jButton21 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jPanel29 = new javax.swing.JPanel();
+        jLabel53 = new javax.swing.JLabel();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jPanel30 = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jPanel31 = new javax.swing.JPanel();
+        jLabel58 = new javax.swing.JLabel();
+        jButton28 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
         kasPanel = new javax.swing.JPanel();
         titleKas = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
@@ -297,6 +317,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
         bukuB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/buku.png"))); // NOI18N
+        bukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bukuB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bukuBActionPerformed(evt);
@@ -304,6 +325,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         siswaB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/siswa.png"))); // NOI18N
+        siswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         siswaB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 siswaBActionPerformed(evt);
@@ -311,6 +333,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         guruB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/guru.png"))); // NOI18N
+        guruB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guruB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guruBActionPerformed(evt);
@@ -318,6 +341,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         staffB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/staff.png"))); // NOI18N
+        staffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         staffB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 staffBActionPerformed(evt);
@@ -325,6 +349,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         backofficeB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/backoffice.png"))); // NOI18N
+        backofficeB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         backofficeB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backofficeBActionPerformed(evt);
@@ -332,8 +357,10 @@ public class Main extends javax.swing.JFrame {
         });
 
         passwordB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/password.png"))); // NOI18N
+        passwordB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         settingB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/setting.png"))); // NOI18N
+        settingB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         settingB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingBActionPerformed(evt);
@@ -445,6 +472,7 @@ public class Main extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 
         peminjamanB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/peminjaman.png"))); // NOI18N
+        peminjamanB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         peminjamanB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 peminjamanBActionPerformed(evt);
@@ -452,6 +480,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         pengembalianB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/pengembalian.png"))); // NOI18N
+        pengembalianB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pengembalianB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pengembalianBActionPerformed(evt);
@@ -459,6 +488,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         datapinjamB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/datapinjam.png"))); // NOI18N
+        datapinjamB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         datapinjamB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datapinjamBActionPerformed(evt);
@@ -466,8 +496,10 @@ public class Main extends javax.swing.JFrame {
         });
 
         katalogB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/katalog.png"))); // NOI18N
+        katalogB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         presensiB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/presensi.png"))); // NOI18N
+        presensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         presensiB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 presensiBActionPerformed(evt);
@@ -475,6 +507,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         kasB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/kas.png"))); // NOI18N
+        kasB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         kasB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kasBActionPerformed(evt);
@@ -482,6 +515,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         laporanB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/laporan.png"))); // NOI18N
+        laporanB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         laporanB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanBActionPerformed(evt);
@@ -607,7 +641,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(panelAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         panelAtasLayout.setVerticalGroup(
             panelAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,15 +663,200 @@ public class Main extends javax.swing.JFrame {
 
         laporanPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        titleLaporan.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        titleLaporan.setForeground(new java.awt.Color(51, 51, 51));
+        titleLaporan.setText("Title");
+
+        jPanel28.setBackground(new java.awt.Color(51, 153, 255));
+
+        jLabel52.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel52.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel52.setText("Laporan Data Buku & Keanggotaan");
+
+        jButton21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton21.setText("Laporan Data Buku");
+        jButton21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton23.setText("Laporan Data Anggota");
+        jButton23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel52)
+                    .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel52)
+                .addGap(18, 18, 18)
+                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanel29.setBackground(new java.awt.Color(51, 153, 255));
+
+        jLabel53.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel53.setText("Laporan Peringkat Presensi");
+
+        jButton24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton24.setText("Laporan Presensi (Kunjungan)");
+        jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton25.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton25.setText("Laporan Peringkat Pengunjung");
+        jButton25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel53)
+                    .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel53)
+                .addGap(18, 18, 18)
+                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanel30.setBackground(new java.awt.Color(51, 153, 255));
+
+        jLabel54.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setText("Laporan Pendapatan");
+
+        jButton26.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton26.setText("Laporan Kas Harian Operator");
+        jButton26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton27.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton27.setText("Laporan Pendapatan Denda");
+        jButton27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        jPanel30.setLayout(jPanel30Layout);
+        jPanel30Layout.setHorizontalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel54)
+                    .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel30Layout.setVerticalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel54)
+                .addGap(18, 18, 18)
+                .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanel31.setBackground(new java.awt.Color(51, 153, 255));
+
+        jLabel58.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel58.setText("Laporan Aliran Kas");
+
+        jButton28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton28.setText("Laporan Kas Masuk");
+        jButton28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton29.setText("Laporan Kas Keluar");
+        jButton29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
+        jPanel31.setLayout(jPanel31Layout);
+        jPanel31Layout.setHorizontalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel58)
+                    .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel31Layout.setVerticalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel58)
+                .addGap(18, 18, 18)
+                .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout laporanPanelLayout = new javax.swing.GroupLayout(laporanPanel);
         laporanPanel.setLayout(laporanPanelLayout);
         laporanPanelLayout.setHorizontalGroup(
             laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1414, Short.MAX_VALUE)
+            .addGroup(laporanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleLaporan)
+                    .addGroup(laporanPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(laporanPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(821, Short.MAX_VALUE))
         );
         laporanPanelLayout.setVerticalGroup(
             laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(laporanPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleLaporan)
+                .addGap(18, 18, 18)
+                .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(laporanPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(laporanPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         panelBawah.add(laporanPanel, "card10");
@@ -658,6 +877,12 @@ public class Main extends javax.swing.JFrame {
         jLabel48.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel48.setText("Sampai Tanggal");
 
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -665,18 +890,28 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel48))
-                .addContainerGap(264, Short.MAX_VALUE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(73, 73, 73)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addGap(59, 59, 59)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel48)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jButton12.setBackground(new java.awt.Color(51, 204, 0));
@@ -684,22 +919,26 @@ public class Main extends javax.swing.JFrame {
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
         jButton12.setText("Pemasukan");
         jButton12.setBorder(null);
+        jButton12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton13.setBackground(new java.awt.Color(255, 0, 0));
         jButton13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("Hapus");
         jButton13.setBorder(null);
+        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton14.setBackground(new java.awt.Color(255, 204, 0));
         jButton14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
         jButton14.setText("Pengeluaran");
         jButton14.setBorder(null);
+        jButton14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton15.setForeground(new java.awt.Color(51, 51, 51));
         jButton15.setText("Tampilkan");
+        jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -727,12 +966,12 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel20.setBackground(new java.awt.Color(51, 153, 255));
@@ -757,7 +996,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 1360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -791,8 +1030,8 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         panelBawah.add(kasPanel, "card11");
@@ -825,7 +1064,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 1361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -840,13 +1079,14 @@ public class Main extends javax.swing.JFrame {
         jLabel47.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel47.setText("NIS / Kode Anggota");
 
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextField8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
         jButton11.setBackground(new java.awt.Color(51, 153, 255));
-        jButton11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Cari");
         jButton11.setBorder(null);
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout presensiPanelLayout = new javax.swing.GroupLayout(presensiPanel);
         presensiPanel.setLayout(presensiPanelLayout);
@@ -864,7 +1104,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(44, 44, 44)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -873,11 +1113,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(presensiPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titlePresensi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4))
@@ -891,11 +1131,11 @@ public class Main extends javax.swing.JFrame {
         katalogPanel.setLayout(katalogPanelLayout);
         katalogPanelLayout.setHorizontalGroup(
             katalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1414, Short.MAX_VALUE)
+            .addGap(0, 1457, Short.MAX_VALUE)
         );
         katalogPanelLayout.setVerticalGroup(
             katalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
 
         panelBawah.add(katalogPanel, "card13");
@@ -905,10 +1145,14 @@ public class Main extends javax.swing.JFrame {
         titleDatapinjam.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titleDatapinjam.setText("Title");
 
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextField7.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jButton10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton10.setBackground(new java.awt.Color(51, 153, 255));
+        jButton10.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Cari");
+        jButton10.setBorder(null);
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel16.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -932,7 +1176,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -951,13 +1195,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(datapinjamPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(datapinjamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
                     .addGroup(datapinjamPanelLayout.createSequentialGroup()
                         .addComponent(titleDatapinjam)
                         .addGap(65, 65, 65)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -972,9 +1216,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(datapinjamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10))))
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1065,7 +1309,9 @@ public class Main extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jButton6.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton6.setText("Cari");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel43.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
@@ -1073,7 +1319,9 @@ public class Main extends javax.swing.JFrame {
 
         jTextField6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jButton7.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton7.setText("Cari");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1146,12 +1394,14 @@ public class Main extends javax.swing.JFrame {
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("Simpan");
         jButton8.setBorder(null);
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton9.setBackground(new java.awt.Color(255, 255, 255));
         jButton9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton9.setForeground(new java.awt.Color(51, 51, 51));
         jButton9.setText("Baru");
         jButton9.setBorder(null);
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1170,13 +1420,13 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(63, 63, 63)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton6))
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addComponent(jLabel43)
                                 .addGap(142, 142, 142)
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton7))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1191,7 +1441,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1199,7 +1449,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel43)
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton7)))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1220,7 +1470,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(pengembalianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titlePengembalian)
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         pengembalianPanelLayout.setVerticalGroup(
             pengembalianPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1229,7 +1479,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(titlePengembalian)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panelBawah.add(pengembalianPanel, "card15");
@@ -1250,6 +1500,7 @@ public class Main extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton2.setText("Cari");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1385,8 +1636,8 @@ public class Main extends javax.swing.JFrame {
                         .addGap(71, 71, 71)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
-                .addContainerGap(278, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1395,7 +1646,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -1411,6 +1662,7 @@ public class Main extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton3.setText("Cari");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jScrollPane9.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1432,12 +1684,14 @@ public class Main extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Simpan");
         jButton4.setBorder(null);
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(51, 51, 51));
         jButton5.setText("Baru");
         jButton5.setBorder(null);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1452,7 +1706,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(146, 146, 146)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1466,7 +1720,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1497,7 +1751,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         panelBawah.add(peminjamanPanel, "card9");
@@ -1533,7 +1787,7 @@ public class Main extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 1335, Short.MAX_VALUE)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 1378, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
@@ -1551,18 +1805,26 @@ public class Main extends javax.swing.JFrame {
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("Tambah Operator Baru");
         jButton16.setBorder(null);
+        jButton16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setBackground(new java.awt.Color(255, 204, 0));
         jButton17.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton17.setForeground(new java.awt.Color(255, 255, 255));
         jButton17.setText("Edit");
         jButton17.setBorder(null);
+        jButton17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton18.setBackground(new java.awt.Color(255, 0, 0));
         jButton18.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton18.setForeground(new java.awt.Color(255, 255, 255));
         jButton18.setText("Hapus");
         jButton18.setBorder(null);
+        jButton18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1571,12 +1833,12 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 1374, Short.MAX_VALUE)
+                    .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 1417, Short.MAX_VALUE)
                     .addGroup(jPanel21Layout.createSequentialGroup()
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel49)
                             .addGroup(jPanel21Layout.createSequentialGroup()
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1737,12 +1999,14 @@ public class Main extends javax.swing.JFrame {
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("Simpan");
         jButton19.setBorder(null);
+        jButton19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton20.setBackground(new java.awt.Color(255, 0, 0));
         jButton20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("Batal");
         jButton20.setBorder(null);
+        jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -1807,7 +2071,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         panelBawah.add(pengaturanPanel, "card8");
@@ -1825,14 +2089,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(passwordPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(1354, Short.MAX_VALUE))
+                .addContainerGap(1397, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addContainerGap(559, Short.MAX_VALUE))
         );
 
         panelBawah.add(passwordPanel, "card7");
@@ -1851,21 +2115,27 @@ public class Main extends javax.swing.JFrame {
 
         ekspordataBuku.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku.setText("Ekspor Data Guru");
+        ekspordataBuku.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ekspordataBuku1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku1.setText("Ekspor Data Pinjam");
+        ekspordataBuku1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ekspordataBuku2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku2.setText("Ekspor Data Pendapatan Denda");
+        ekspordataBuku2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ekspordataBuku3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku3.setText("Ekspor Data Staff");
+        ekspordataBuku3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ekspordataBuku4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku4.setText("Ekspor Data Siswa");
+        ekspordataBuku4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ekspordataBuku5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ekspordataBuku5.setText("Ekspor Data Guru");
+        ekspordataBuku5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1912,6 +2182,7 @@ public class Main extends javax.swing.JFrame {
         backupdbB.setForeground(new java.awt.Color(255, 255, 255));
         backupdbB.setText("Backup Database");
         backupdbB.setBorder(null);
+        backupdbB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel9.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -1921,15 +2192,19 @@ public class Main extends javax.swing.JFrame {
 
         impordataBuku.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         impordataBuku.setText("Impor Data Buku");
+        impordataBuku.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         impordataSiswa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         impordataSiswa.setText("Impor Data Siswa");
+        impordataSiswa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         impordataStaff.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         impordataStaff.setText("Impor Data Staff");
+        impordataStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         impordataGuru.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         impordataGuru.setText("Impot Data Guru");
+        impordataGuru.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1972,31 +2247,29 @@ public class Main extends javax.swing.JFrame {
             .addGroup(backofficePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleBackoffice)
-                .addGap(118, 118, 118)
-                .addGroup(backofficePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(1397, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backofficePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(backofficePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backupdbB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backofficePanelLayout.createSequentialGroup()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backofficePanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(backupdbB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(231, 231, 231))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(256, 256, 256))
         );
         backofficePanelLayout.setVerticalGroup(
             backofficePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backofficePanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(titleBackoffice)
+                .addGap(31, 31, 31)
+                .addComponent(backupdbB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backofficePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleBackoffice)
-                    .addGroup(backofficePanelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(backupdbB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(backofficePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         panelBawah.add(backofficePanel, "card6");
@@ -2010,10 +2283,11 @@ public class Main extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         caristaffB.setBackground(new java.awt.Color(51, 153, 255));
-        caristaffB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        caristaffB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         caristaffB.setForeground(new java.awt.Color(255, 255, 255));
         caristaffB.setText("Cari");
         caristaffB.setBorder(null);
+        caristaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         caristaffB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 caristaffBActionPerformed(evt);
@@ -2025,18 +2299,21 @@ public class Main extends javax.swing.JFrame {
         tambahstaffB.setForeground(new java.awt.Color(255, 255, 255));
         tambahstaffB.setText("Tambah");
         tambahstaffB.setBorder(null);
+        tambahstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         editstaffB.setBackground(new java.awt.Color(255, 153, 0));
         editstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         editstaffB.setForeground(new java.awt.Color(255, 255, 255));
         editstaffB.setText("Edit");
         editstaffB.setBorder(null);
+        editstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         hapusstaffB.setBackground(new java.awt.Color(255, 0, 0));
         hapusstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         hapusstaffB.setForeground(new java.awt.Color(255, 255, 255));
         hapusstaffB.setText("Hapus");
         hapusstaffB.setBorder(null);
+        hapusstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -2060,7 +2337,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2092,7 +2369,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField2))
                         .addGap(18, 18, 18)
-                        .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2115,7 +2392,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         panelBawah.add(staffPanel, "card5");
@@ -2129,16 +2406,18 @@ public class Main extends javax.swing.JFrame {
         cariguruTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Cari");
         jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tambahguruB.setBackground(new java.awt.Color(51, 153, 0));
         tambahguruB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tambahguruB.setForeground(new java.awt.Color(255, 255, 255));
         tambahguruB.setText("Tambah");
         tambahguruB.setBorder(null);
+        tambahguruB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tambahguruB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tambahguruBActionPerformed(evt);
@@ -2150,12 +2429,14 @@ public class Main extends javax.swing.JFrame {
         editguruB.setForeground(new java.awt.Color(255, 255, 255));
         editguruB.setText("Edit ");
         editguruB.setBorder(null);
+        editguruB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         hapusguruB.setBackground(new java.awt.Color(255, 0, 0));
         hapusguruB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         hapusguruB.setForeground(new java.awt.Color(255, 255, 255));
         hapusguruB.setText("Hapus");
         hapusguruB.setBorder(null);
+        hapusguruB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel6.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -2179,7 +2460,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2211,7 +2492,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(hapusguruB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cariguruTF, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2255,28 +2536,32 @@ public class Main extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jButton22.setBackground(new java.awt.Color(51, 153, 255));
-        jButton22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton22.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton22.setForeground(new java.awt.Color(255, 255, 255));
         jButton22.setText("Cari");
         jButton22.setBorder(null);
+        jButton22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tambahsiswaB.setBackground(new java.awt.Color(51, 153, 0));
         tambahsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tambahsiswaB.setForeground(new java.awt.Color(255, 255, 255));
         tambahsiswaB.setText("Tambah");
         tambahsiswaB.setBorder(null);
+        tambahsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         editsiswaB.setBackground(new java.awt.Color(255, 153, 0));
         editsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         editsiswaB.setForeground(new java.awt.Color(255, 255, 255));
         editsiswaB.setText("Edit");
         editsiswaB.setBorder(null);
+        editsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         hapussiswaB.setBackground(new java.awt.Color(255, 0, 0));
         hapussiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         hapussiswaB.setForeground(new java.awt.Color(255, 255, 255));
         hapussiswaB.setText("Hapus");
         hapussiswaB.setBorder(null);
+        hapussiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -2300,7 +2585,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 1354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2338,7 +2623,7 @@ public class Main extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2362,7 +2647,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         panelBawah.add(siswaPanel, "card3");
@@ -2396,7 +2681,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2457,6 +2742,7 @@ public class Main extends javax.swing.JFrame {
         tambahbukuB.setForeground(new java.awt.Color(255, 255, 255));
         tambahbukuB.setText("Tambah");
         tambahbukuB.setBorder(null);
+        tambahbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tambahbukuB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tambahbukuBActionPerformed(evt);
@@ -2468,6 +2754,7 @@ public class Main extends javax.swing.JFrame {
         editbukuB.setForeground(new java.awt.Color(255, 255, 255));
         editbukuB.setText("Edit");
         editbukuB.setBorder(null);
+        editbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editbukuB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editbukuBActionPerformed(evt);
@@ -2479,20 +2766,23 @@ public class Main extends javax.swing.JFrame {
         hapusbukuB.setForeground(new java.awt.Color(255, 255, 255));
         hapusbukuB.setText("Hapus");
         hapusbukuB.setBorder(null);
+        hapusbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         eksporB.setBackground(new java.awt.Color(0, 204, 0));
         eksporB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         eksporB.setForeground(new java.awt.Color(255, 255, 255));
         eksporB.setText("Ekspor ke Excel");
         eksporB.setBorder(null);
+        eksporB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         cariB.setBackground(new java.awt.Color(51, 153, 255));
-        cariB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cariB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         cariB.setForeground(new java.awt.Color(255, 255, 255));
         cariB.setText("Cari");
         cariB.setBorder(null);
+        cariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
         bukuPanel.setLayout(bukuPanelLayout);
@@ -2501,7 +2791,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(bukuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1394, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
                     .addGroup(bukuPanelLayout.createSequentialGroup()
                         .addComponent(titleBuku)
                         .addGap(53, 53, 53)
@@ -2539,8 +2829,8 @@ public class Main extends javax.swing.JFrame {
                                     .addGroup(bukuPanelLayout.createSequentialGroup()
                                         .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 386, Short.MAX_VALUE)))
+                                        .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 420, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         bukuPanelLayout.setVerticalGroup(
@@ -2574,7 +2864,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(eksporB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelBawah.add(bukuPanel, "card2");
@@ -2605,7 +2895,11 @@ public class Main extends javax.swing.JFrame {
 
     private void laporanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanBActionPerformed
         // TODO add your handling code here:
-
+        this.titleLaporan.setText("Laporan");
+        panelBawah.removeAll();
+        panelBawah.add(laporanPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
     }//GEN-LAST:event_laporanBActionPerformed
 
     private void siswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siswaBActionPerformed
@@ -2714,6 +3008,10 @@ public class Main extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_kasBActionPerformed
 
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2797,7 +3095,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2805,6 +3111,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2852,9 +3160,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2879,7 +3191,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -2971,6 +3287,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel titleDatapinjam;
     private javax.swing.JLabel titleGuru;
     private javax.swing.JLabel titleKas;
+    private javax.swing.JLabel titleLaporan;
     private javax.swing.JLabel titlePeminjaman;
     private javax.swing.JLabel titlePengaturan;
     private javax.swing.JLabel titlePengembalian;
