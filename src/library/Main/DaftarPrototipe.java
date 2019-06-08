@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import library.Mysql.MysqlCon;
-import library.showData.UsersData;
+import library.Main.Main;
 import javax.swing.JOptionPane;
 
 /**
@@ -165,7 +165,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + this.nama);    
             
         this.setVisible(false);
-        new mainPage(this.nama).setVisible(true);
+        new Main(this.nama).setVisible(true);
         }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");

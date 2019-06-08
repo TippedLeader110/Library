@@ -5,9 +5,6 @@
  */
 package library.Main;
 
-import library.manipulateData.editBuku;
-import library.manipulateData.tambahBuku;
-import library.showData.Siswa;
 
 /**
  *
@@ -43,6 +40,20 @@ public class Main extends javax.swing.JFrame {
 //        this.panelBawah.add(bukuPanel);
 
         this.titleBuku.setText("Buku");
+        panelBawah.removeAll();
+        panelBawah.add(bukuPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+        
+    }
+    
+    
+    public Main(String name) {
+        initComponents();
+        this.panelBawah.add(bukuPanel);
+
+        this.titleBuku.setText("Buku");
+        LabelUser.setText(name);
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
         panelBawah.repaint();
@@ -92,7 +103,7 @@ public class Main extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LabelUser = new javax.swing.JLabel();
         panelBawah = new javax.swing.JPanel();
         laporanPanel = new javax.swing.JPanel();
         titleLaporan = new javax.swing.JLabel();
@@ -626,9 +637,9 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Selamat Datang,");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("<Username>");
+        LabelUser.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        LabelUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelUser.setText("<Username>");
 
         javax.swing.GroupLayout panelAtasLayout = new javax.swing.GroupLayout(panelAtas);
         panelAtas.setLayout(panelAtasLayout);
@@ -640,7 +651,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(579, 579, 579)
                 .addGroup(panelAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(LabelUser))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         panelAtasLayout.setVerticalGroup(
@@ -651,7 +662,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(LabelUser))
                     .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -2949,15 +2960,13 @@ public class Main extends javax.swing.JFrame {
 
     private void tambahbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahbukuBActionPerformed
         // TODO add your handling code here:
-        tambahBuku tb = new tambahBuku();
-        tb.setVisible(true);
+      
         
     }//GEN-LAST:event_tambahbukuBActionPerformed
 
     private void editbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbukuBActionPerformed
         // TODO add your handling code here:
-        editBuku eb = new editBuku();
-        eb.setVisible(true);
+
     }//GEN-LAST:event_editbukuBActionPerformed
 
     private void bukuTabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bukuTabelMouseClicked
@@ -3049,6 +3058,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelUser;
     private javax.swing.JComboBox<String> angkatanSiswaCB;
     private javax.swing.JButton backofficeB;
     private javax.swing.JPanel backofficePanel;
@@ -3125,7 +3135,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

@@ -15,8 +15,7 @@ import javax.swing.JOptionPane;
 public class MysqlCon{  
     
     public MysqlCon( ){
-        try{  
-        Class.forName("com.mysql.jdbc.Driver");  
+        try{   
         Connection con=DriverManager.getConnection(  
         "jdbc:mysql://localhost","root","");  
         }catch(Exception e){ System.out.println(e);}  
