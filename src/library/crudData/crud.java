@@ -33,7 +33,7 @@ public class crud extends library.Main.Main {
      * @return
      */
     
-    public String create(String isbn, String judul, String penerbit, int tahun, String tgl_pengadaan, String pengarang, String lok_rak, String lok_tingkat){
+    public create(String isbn, String judul, String penerbit, int tahun, String tgl_pengadaan, String pengarang, String lok_rak, String lok_tingkat){
         Statement stmt=kon.query();
         String a[];
         try {  
