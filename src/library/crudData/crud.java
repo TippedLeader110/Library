@@ -47,7 +47,7 @@ public class crud extends library.Main.Main {
         else{
             JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
-        return a;
+        //return a;
     }
     
 }

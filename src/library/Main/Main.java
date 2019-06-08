@@ -5,6 +5,9 @@
  */
 package library.Main;
 
+import library.crudData.editBuku;
+import library.crudData.tambahBuku;
+
 
 /**
  *
@@ -2045,12 +2048,17 @@ public class Main extends javax.swing.JFrame {
 
     private void tambahbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahbukuBActionPerformed
         // TODO add your handling code here:
+        tambahBuku tb = new tambahBuku();
+        tb.setVisible(true);
+        
       
         
     }//GEN-LAST:event_tambahbukuBActionPerformed
 
     private void editbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbukuBActionPerformed
         // TODO add your handling code here:
+        editBuku eb = new editBuku();
+        eb.setVisible(true);
 
     }//GEN-LAST:event_editbukuBActionPerformed
 
