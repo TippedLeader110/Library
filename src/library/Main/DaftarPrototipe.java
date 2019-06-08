@@ -140,7 +140,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         Statement stmt = send.query();
         ResultSet rs=stmt.executeQuery("select * from library.users WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
         while (rs.next()){
-            this.nama = rs.getString("name");
+            this.nama = rs.getString("nama");
             System.out.println(this.nama);
         }
             
