@@ -2037,15 +2037,6 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tambahguruBActionPerformed
 
-    private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
-        // TODO add your handling code here:
-        this.titleStaff.setText("Staff");
-        panelBawah.removeAll();
-        panelBawah.add(staffPanel);
-        panelBawah.repaint();
-        panelBawah.revalidate();
-    }//GEN-LAST:event_staffBActionPerformed
-
     private void tambahbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahbukuBActionPerformed
         // TODO add your handling code here:
         tambahBuku tb = new tambahBuku();
@@ -2096,6 +2087,15 @@ public class Main extends javax.swing.JFrame {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
+        // TODO add your handling code here:
+        this.titleStaff.setText("Staff");
+        panelBawah.removeAll();
+        panelBawah.add(staffPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_staffBActionPerformed
 
     /**
      * @param args the command line arguments
