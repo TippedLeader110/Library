@@ -7,7 +7,10 @@ package library.Main;
 
 import library.crudData.editBuku;
 import library.crudData.tambahBuku;
-
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import library.Mysql.MysqlCon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,10 +44,49 @@ public class Main extends javax.swing.JFrame {
 //        
 //        this.title.setText("Buku");
 //        this.panelBawah.add(bukuPanel);
-
+        MysqlCon send = new MysqlCon( );
+        DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi Rak", "Lokasi Tingkat"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            String e;
+            String r;
+            String t;
+            String y;
+            String u;
+            String i;
+            
+            
+            try {
+                rs = stmt.executeQuery("select * from library.book");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("penerbit");
+                r = rs.getString("thn_buku");
+                t = rs.getString("tgl_pengadaan");
+                y = rs.getString("pengarang");
+                u = rs.getString("lok_rak");
+                i = rs.getString("lok_tingkat");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+            
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
         
@@ -2004,9 +2046,47 @@ public class Main extends javax.swing.JFrame {
 
     private void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
         // TODO add your handling code here:
+        MysqlCon send = new MysqlCon( );
+        DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi Rak", "Lokasi Tingkat"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            String e;
+            String r;
+            String t;
+            String y;
+            String u;
+            String i;
+            
+            try {
+                rs = stmt.executeQuery("select * from library.book");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("penerbit");
+                r = rs.getString("thn_buku");
+                t = rs.getString("tgl_pengadaan");
+                y = rs.getString("pengarang");
+                u = rs.getString("lok_rak");
+                i = rs.getString("lok_tingkat");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_bukuBActionPerformed
