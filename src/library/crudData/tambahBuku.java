@@ -177,6 +177,11 @@ public class tambahBuku extends javax.swing.JFrame {
         simpanB.setText("Simpan");
         simpanB.setBorder(null);
         simpanB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        simpanB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanBActionPerformed(evt);
+            }
+        });
 
         batalB.setBackground(new java.awt.Color(255, 0, 0));
         batalB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -238,6 +243,10 @@ public class tambahBuku extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_batalBActionPerformed
+
+    private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_simpanBActionPerformed
 
     /**
      * @param args the command line arguments

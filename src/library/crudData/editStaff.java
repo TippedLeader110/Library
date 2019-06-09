@@ -42,6 +42,7 @@ public class editStaff extends javax.swing.JFrame {
         batalB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Staff");
         setPreferredSize(new java.awt.Dimension(410, 330));
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
@@ -118,12 +119,14 @@ public class editStaff extends javax.swing.JFrame {
         simpanB.setForeground(new java.awt.Color(255, 255, 255));
         simpanB.setText("Simpan");
         simpanB.setBorder(null);
+        simpanB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         batalB.setBackground(new java.awt.Color(255, 0, 0));
         batalB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         batalB.setForeground(new java.awt.Color(255, 255, 255));
         batalB.setText("Batal");
         batalB.setBorder(null);
+        batalB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
