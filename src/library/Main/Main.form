@@ -2080,7 +2080,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="angkatanSiswaCB" min="-2" pref="100" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jTextField1" min="-2" pref="228" max="-2" attributes="0"/>
+                                              <Component id="JcariAnggota" min="-2" pref="228" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="tambahsiswaB" min="-2" pref="75" max="-2" attributes="0"/>
@@ -2091,7 +2091,7 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton22" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="cariAnggotaB" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -2112,8 +2112,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="angkatanSiswaCB" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="jButton22" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="JcariAnggota" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="cariAnggotaB" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -2171,14 +2171,14 @@
                 <Property name="text" type="java.lang.String" value="Angkatan"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="JcariAnggota">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton22">
+            <Component class="javax.swing.JButton" name="cariAnggotaB">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -2197,6 +2197,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cariAnggotaBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="tambahsiswaB">
               <Properties>
@@ -2361,11 +2364,6 @@
                                       <Component id="hapusbukuB" min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="pengarangCB" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <Component id="pengarangL" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="cariTF" min="-2" pref="250" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="cariB" min="-2" pref="50" max="-2" attributes="0"/>
@@ -2385,11 +2383,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="titleBuku" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="pengarangL" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="pengarangCB" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cariTF" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="cariB" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
@@ -2483,36 +2478,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Title"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="pengarangL">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Kategori"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="pengarangCB">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-                <Property name="name" type="java.lang.String" value="Kategori" noResource="true"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="tambahbukuB">
               <Properties>
@@ -2609,6 +2574,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cariBActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -8,6 +8,8 @@ package library.Main;
 import library.crudData.tambahBuku;
 import library.crudData.tambahAnggota;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import library.Mysql.MysqlCon;
 import javax.swing.JOptionPane;
@@ -22,6 +24,15 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
     public Main() {
         initComponents();
         
@@ -267,8 +278,8 @@ MysqlCon send = new MysqlCon( );
         titleSiswa = new javax.swing.JLabel();
         angkatanSiswaCB = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton22 = new javax.swing.JButton();
+        JcariAnggota = new javax.swing.JTextField();
+        cariAnggotaB = new javax.swing.JButton();
         tambahsiswaB = new javax.swing.JButton();
         editsiswaB = new javax.swing.JButton();
         hapussiswaB = new javax.swing.JButton();
@@ -282,8 +293,6 @@ MysqlCon send = new MysqlCon( );
         jScrollPane4 = new javax.swing.JScrollPane();
         bukuTabel = new javax.swing.JTable();
         titleBuku = new javax.swing.JLabel();
-        pengarangL = new javax.swing.JLabel();
-        pengarangCB = new javax.swing.JComboBox<>();
         tambahbukuB = new javax.swing.JButton();
         editbukuB = new javax.swing.JButton();
         hapusbukuB = new javax.swing.JButton();
@@ -1419,14 +1428,19 @@ MysqlCon send = new MysqlCon( );
         jLabel39.setForeground(new java.awt.Color(51, 51, 51));
         jLabel39.setText("Angkatan");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        JcariAnggota.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jButton22.setBackground(new java.awt.Color(51, 153, 255));
-        jButton22.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton22.setForeground(new java.awt.Color(255, 255, 255));
-        jButton22.setText("Cari");
-        jButton22.setBorder(null);
-        jButton22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariAnggotaB.setBackground(new java.awt.Color(51, 153, 255));
+        cariAnggotaB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        cariAnggotaB.setForeground(new java.awt.Color(255, 255, 255));
+        cariAnggotaB.setText("Cari");
+        cariAnggotaB.setBorder(null);
+        cariAnggotaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariAnggotaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariAnggotaBActionPerformed(evt);
+            }
+        });
 
         tambahsiswaB.setBackground(new java.awt.Color(51, 153, 0));
         tambahsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1524,7 +1538,7 @@ MysqlCon send = new MysqlCon( );
                                     .addGroup(siswaPanelLayout.createSequentialGroup()
                                         .addComponent(angkatanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(JcariAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(siswaPanelLayout.createSequentialGroup()
                                         .addComponent(tambahsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -1532,7 +1546,7 @@ MysqlCon send = new MysqlCon( );
                                         .addGap(18, 18, 18)
                                         .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cariAnggotaB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1547,8 +1561,8 @@ MysqlCon send = new MysqlCon( );
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(angkatanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JcariAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariAnggotaB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1614,14 +1628,6 @@ MysqlCon send = new MysqlCon( );
         titleBuku.setForeground(new java.awt.Color(51, 51, 51));
         titleBuku.setText("Title");
 
-        pengarangL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        pengarangL.setForeground(new java.awt.Color(51, 51, 51));
-        pengarangL.setText("Kategori");
-
-        pengarangCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        pengarangCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pengarangCB.setName("Kategori"); // NOI18N
-
         tambahbukuB.setBackground(new java.awt.Color(0, 153, 0));
         tambahbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tambahbukuB.setForeground(new java.awt.Color(255, 255, 255));
@@ -1666,6 +1672,11 @@ MysqlCon send = new MysqlCon( );
         cariB.setText("Cari");
         cariB.setBorder(null);
         cariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
         bukuPanel.setLayout(bukuPanelLayout);
@@ -1686,10 +1697,6 @@ MysqlCon send = new MysqlCon( );
                                 .addGap(18, 18, 18)
                                 .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bukuPanelLayout.createSequentialGroup()
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pengarangL))
-                                .addGap(18, 18, 18)
                                 .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1703,11 +1710,8 @@ MysqlCon send = new MysqlCon( );
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titleBuku)
                     .addGroup(bukuPanelLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(pengarangL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(24, 24, 24)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1767,15 +1771,8 @@ MysqlCon send = new MysqlCon( );
 
     private void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
         // TODO add your handling code here:
-        
+        model.setRowCount(0);
         MysqlCon send = new MysqlCon( );
-        DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi"}, 0){
-        @Override
-        
-        public boolean isCellEditable(int row, int column) {
-                return false;
-        }
-        };
         
         Statement stmt = send.query();
             ResultSet rs;
@@ -1807,8 +1804,10 @@ MysqlCon send = new MysqlCon( );
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
         bukuTabel.setModel(model);
+        editbukuB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
+        
     }//GEN-LAST:event_bukuBActionPerformed
 
     private void siswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siswaBActionPerformed
@@ -1846,7 +1845,8 @@ MysqlCon send = new MysqlCon( );
         this.titleSiswa.setText("Siswa");
         panelBawah.removeAll();
         panelBawah.add(siswaPanel);
-        anggotaTable.setModel(model);  
+        anggotaTable.setModel(model);
+        editsiswaB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_siswaBActionPerformed
@@ -2037,6 +2037,71 @@ MysqlCon send = new MysqlCon( );
 //        editsiswaB.setEnabled(false);
     }//GEN-LAST:event_anggotaTableFocusLost
 
+    private void cariBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBActionPerformed
+        model.setRowCount(0);
+        try {
+            // TODO add your handling code here:
+            MysqlCon send = new MysqlCon( );
+            
+            String c = cariTF.getText();
+            Statement stmt = send.query();
+            ResultSet rs;
+            rs = stmt.executeQuery("Select * from library.book where book.ISBN like '" + c + "'" + "or book.Penerbit like '" + c + "'" + "or book.Pengarang like '" + c + "'" + "or book.thn_buku like '" + c + "'" + "or book.Judul like '" + c + "'" + "or book.lokasi like '" + c + "'");
+            
+            String q;
+            String w;
+            String e;
+            String r;
+            String t;
+            String y;
+            String u;
+            
+             while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("penerbit");
+                r = rs.getString("thn_buku");
+                t = rs.getString("tgl_pengadaan");
+                y = rs.getString("pengarang");
+                u = rs.getString("lokasi");
+                model.addRow(new Object[]{q, w, e, r, t,y,u});}
+                
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
+        bukuTabel.setModel(model);
+    }//GEN-LAST:event_cariBActionPerformed
+
+    private void cariAnggotaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariAnggotaBActionPerformed
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        try {
+            // TODO add your handling code here:
+            MysqlCon send = new MysqlCon( );
+            
+            String c = JcariAnggota.getText();
+            Statement stmt = send.query();
+            ResultSet rs;
+            rs = stmt.executeQuery("Select * from library.anggota where anggota.id like '" + c + "'" + "or anggota.nama like'" + c + "'" + "or anggota.alamat like '" + c + "'" + "or anggota.no_telp like '" + c + "'");
+            
+            String q;
+            String w;
+            String e;
+            String r;
+            
+             while(rs.next()){
+                q = rs.getString("id");
+                w = rs.getString("nama");
+                e = rs.getString("alamat");
+                r = rs.getString("no_telp");
+                model.addRow(new Object[]{q, w, e, r});}
+                
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
+        anggotaTable.setModel(model);
+    }//GEN-LAST:event_cariAnggotaBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2073,12 +2138,14 @@ MysqlCon send = new MysqlCon( );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JcariAnggota;
     private javax.swing.JLabel LabelUser;
     private javax.swing.JTable anggotaTable;
     private javax.swing.JComboBox<String> angkatanSiswaCB;
     private javax.swing.JButton bukuB;
     private javax.swing.JPanel bukuPanel;
     private javax.swing.JTable bukuTabel;
+    private javax.swing.JButton cariAnggotaB;
     private javax.swing.JButton cariB;
     private javax.swing.JTextField cariTF;
     private javax.swing.JButton caristaffB;
@@ -2096,7 +2163,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2174,7 +2240,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -2187,8 +2252,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JPanel panelBawah;
     private javax.swing.JButton peminjamanB;
     private javax.swing.JPanel peminjamanPanel;
-    private javax.swing.JComboBox<String> pengarangCB;
-    private javax.swing.JLabel pengarangL;
     private javax.swing.JPanel pengaturanPanel;
     private javax.swing.JButton pengembalianB;
     private javax.swing.JPanel pengembalianPanel;
