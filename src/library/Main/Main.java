@@ -279,7 +279,7 @@ MysqlCon send = new MysqlCon( );
         jScrollPane6 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        staffTable = new javax.swing.JTable();
         guruPanel = new javax.swing.JPanel();
         titleGuru = new javax.swing.JLabel();
         cariguruTF = new javax.swing.JTextField();
@@ -1578,7 +1578,7 @@ MysqlCon send = new MysqlCon( );
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1589,7 +1589,7 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        jScrollPane7.setViewportView(staffTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -2271,11 +2271,43 @@ MysqlCon send = new MysqlCon( );
 
     private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
         // TODO add your handling code here:
+        
+        MysqlCon send = new MysqlCon( );
+        DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nama", "Alamat", "No Telepon"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            String e;
+            String r;
+            
+            try {
+                rs = stmt.executeQuery("select * from library.users");
+                while(rs.next()){
+                q = rs.getString("id");
+                w = rs.getString("nama");
+                e = rs.getString("alamat");
+                r = rs.getString("no_telp");
+                model.addRow(new Object[]{q, w, e, r});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleStaff.setText("Staff");
         panelBawah.removeAll();
         panelBawah.add(staffPanel);
+        staffTable.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
+        
     }//GEN-LAST:event_staffBActionPerformed
 
     /**
@@ -2437,7 +2469,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable5;
@@ -2470,6 +2501,7 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JPanel siswaPanel;
     private javax.swing.JButton staffB;
     private javax.swing.JPanel staffPanel;
+    private javax.swing.JTable staffTable;
     private javax.swing.JButton tambahbukuB;
     private javax.swing.JButton tambahguruB;
     private javax.swing.JButton tambahsiswaB;
