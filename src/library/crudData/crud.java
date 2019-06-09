@@ -144,7 +144,65 @@ public class crud extends library.Main.Main {
     
      public void deleteAnggota(String id){
         try {  
-            rs=stmt.executeUpdate("DELETE from anggota where id = " + id);
+            rs=stmt.executeUpdate("DELETE from library.anggota where id = " + id);
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+     public void createStaff(String id, String nama, String alamat, String no_telp, String username, String password){
+         try {  
+            rs=stmt.executeUpdate("insert into library.users(id, nama, alamat, no_telp, username, password) VALUE('" + id + "',' " +  nama + "',' " +  alamat + "',' " + no_telp +  "', username = '" + username + "', password = '" + password +"')");
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+     
+      public void updateStaff(String val, String id, String nama, String alamat, String no_telp, String username, String password){
+        Statement stmt=kon.query();
+         try {  
+            rs=stmt.executeUpdate("update library.users set id = '" + id + "', nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "', username = '" + username + "', password = '" + password + "' where id = " + val);
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+     public void updateStaff2(String id, String nama, String alamat, String no_telp, String username, String password){
+        Statement stmt=kon.query();
+       try {  
+            rs=stmt.executeUpdate("update library.users set nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "', username = '" + username + "', password = '" + password + "' where id = " + id);
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+     public void deleteStaff(String id){
+        try {  
+            rs=stmt.executeUpdate("DELETE from library.users where id = " + id);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }

@@ -7,6 +7,7 @@ package library.Main;
 
 import library.crudData.tambahBuku;
 import library.crudData.tambahAnggota;
+import library.crudData.tambahStaff;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +102,7 @@ MysqlCon send = new MysqlCon( );
         panelBawah.revalidate();
         editsiswaB.setEnabled(false);
         editbukuB.setEnabled(false);
+        editstaffB.setEnabled(false);
     }
     
     
@@ -152,6 +154,7 @@ MysqlCon send = new MysqlCon( );
         panelBawah.revalidate();
         editsiswaB.setEnabled(false);
         editbukuB.setEnabled(false);
+        editstaffB.setEnabled(false);
     }
 
     /**
@@ -243,18 +246,16 @@ MysqlCon send = new MysqlCon( );
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -265,8 +266,6 @@ MysqlCon send = new MysqlCon( );
         jButton5 = new javax.swing.JButton();
         staffPanel = new javax.swing.JPanel();
         titleStaff = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        caristaffB = new javax.swing.JButton();
         tambahstaffB = new javax.swing.JButton();
         editstaffB = new javax.swing.JButton();
         hapusstaffB = new javax.swing.JButton();
@@ -1046,41 +1045,35 @@ MysqlCon send = new MysqlCon( );
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setText("Nama");
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel10.setText("Kelas");
-
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setText("<NIS/KA>");
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("<Nama>");
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel13.setText("<Kelas>");
-
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("Maks. Pinjam");
-
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel15.setText("Tanggungan");
+        jLabel14.setText("Alamat");
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel16.setText("<Maks. Pinjam>");
-
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel17.setText("<Tanggungan>");
+        jLabel16.setText("<Alamat>");
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel18.setText("Jenis Anggota");
+        jLabel18.setText("No Telepon");
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel19.setText("Durasi Pinjam");
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("<Jenis Anggota>");
+        jLabel20.setText("<Maks. Pinjam>");
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("<Durasi Pinjam>");
+
+        jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel26.setText("Maks. Pinjam");
+
+        jLabel28.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel28.setText("<No Telepon>");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1095,30 +1088,22 @@ MysqlCon send = new MysqlCon( );
                         .addComponent(jLabel11)
                         .addGap(136, 136, 136))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                        .addComponent(jLabel9)
                         .addGap(125, 125, 125)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
+                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabel17))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabel16)))
-                .addGap(96, 96, 96)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel18))
+                .addGap(75, 75, 75)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel16))
+                .addGap(181, 181, 181)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel18)))
-                .addGap(66, 66, 66)
+                    .addComponent(jLabel26))
+                .addGap(68, 68, 68)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21))
@@ -1130,11 +1115,12 @@ MysqlCon send = new MysqlCon( );
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
+                        .addGap(35, 35, 35)
                         .addComponent(jLabel19))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel26))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel21))
                     .addGroup(jPanel11Layout.createSequentialGroup()
@@ -1144,19 +1130,12 @@ MysqlCon send = new MysqlCon( );
                             .addComponent(jLabel14)
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel17))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel10))))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel28))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1173,7 +1152,7 @@ MysqlCon send = new MysqlCon( );
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1298,26 +1277,17 @@ MysqlCon send = new MysqlCon( );
         titleStaff.setForeground(new java.awt.Color(51, 51, 51));
         titleStaff.setText("Title");
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        caristaffB.setBackground(new java.awt.Color(51, 153, 255));
-        caristaffB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        caristaffB.setForeground(new java.awt.Color(255, 255, 255));
-        caristaffB.setText("Cari");
-        caristaffB.setBorder(null);
-        caristaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        caristaffB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                caristaffBActionPerformed(evt);
-            }
-        });
-
         tambahstaffB.setBackground(new java.awt.Color(0, 153, 0));
         tambahstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tambahstaffB.setForeground(new java.awt.Color(255, 255, 255));
         tambahstaffB.setText("Tambah");
         tambahstaffB.setBorder(null);
         tambahstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahstaffBActionPerformed(evt);
+            }
+        });
 
         editstaffB.setBackground(new java.awt.Color(255, 153, 0));
         editstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1325,6 +1295,11 @@ MysqlCon send = new MysqlCon( );
         editstaffB.setText("Edit");
         editstaffB.setBorder(null);
         editstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editstaffBActionPerformed(evt);
+            }
+        });
 
         hapusstaffB.setBackground(new java.awt.Color(255, 0, 0));
         hapusstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1332,6 +1307,11 @@ MysqlCon send = new MysqlCon( );
         hapusstaffB.setText("Hapus");
         hapusstaffB.setBorder(null);
         hapusstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapusstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusstaffBActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -1346,6 +1326,11 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        staffTable.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                staffTableFocusGained(evt);
+            }
+        });
         jScrollPane7.setViewportView(staffTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1374,36 +1359,25 @@ MysqlCon send = new MysqlCon( );
             .addGroup(staffPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
                     .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addComponent(titleStaff)
-                        .addGap(49, 49, 49)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleStaff)
                             .addGroup(staffPanelLayout.createSequentialGroup()
                                 .addComponent(tambahstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(editstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2))
-                        .addGap(18, 18, 18)
-                        .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         staffPanelLayout.setVerticalGroup(
             staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(staffPanelLayout.createSequentialGroup()
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(titleStaff))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(titleStaff)
+                .addGap(23, 23, 23)
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1851,10 +1825,6 @@ MysqlCon send = new MysqlCon( );
         panelBawah.revalidate();
     }//GEN-LAST:event_siswaBActionPerformed
 
-    private void caristaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caristaffBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_caristaffBActionPerformed
-
     private void tambahbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahbukuBActionPerformed
         // TODO add your handling code here:
         tambahBuku tb = new tambahBuku();
@@ -1946,7 +1916,7 @@ MysqlCon send = new MysqlCon( );
 
     private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
         // TODO add your handling code here:
-        
+        editstaffB.setEnabled(false);
         MysqlCon send = new MysqlCon( );
         DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nama", "Alamat", "No Telepon"}, 0){
         @Override
@@ -2012,7 +1982,7 @@ MysqlCon send = new MysqlCon( );
         // TODO add your handling code here:
         crud n = new crud();
         int column = 0;
-        int row = bukuTabel.getSelectedRow();
+        int row = anggotaTable.getSelectedRow();
         String value = anggotaTable.getModel().getValueAt(row, column).toString();
         n.deleteAnggota(value);
     }//GEN-LAST:event_hapussiswaBActionPerformed
@@ -2102,6 +2072,35 @@ MysqlCon send = new MysqlCon( );
         anggotaTable.setModel(model);
     }//GEN-LAST:event_cariAnggotaBActionPerformed
 
+    private void staffTableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staffTableFocusGained
+        // TODO add your handling code here:
+        editstaffB.setEnabled(true);
+    }//GEN-LAST:event_staffTableFocusGained
+
+    private void tambahstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahstaffBActionPerformed
+        // TODO add your handling code here:
+        tambahStaff ta = new tambahStaff();
+        ta.setVisible(true);
+    }//GEN-LAST:event_tambahstaffBActionPerformed
+
+    private void editstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editstaffBActionPerformed
+        // TODO add your handling code here:
+        int column = 0;
+        int row = staffTable.getSelectedRow();
+        String value = staffTable.getModel().getValueAt(row, column).toString();
+        tambahStaff et = new tambahStaff(value);
+        et.setVisible(true);
+    }//GEN-LAST:event_editstaffBActionPerformed
+
+    private void hapusstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusstaffBActionPerformed
+        // TODO add your handling code here:
+        crud n = new crud();
+        int column = 0;
+        int row = staffTable.getSelectedRow();
+        String value = staffTable.getModel().getValueAt(row, column).toString();
+        n.deleteStaff(value);
+    }//GEN-LAST:event_hapusstaffBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2148,7 +2147,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JButton cariAnggotaB;
     private javax.swing.JButton cariB;
     private javax.swing.JTextField cariTF;
-    private javax.swing.JButton caristaffB;
     private javax.swing.JButton datapinjamB;
     private javax.swing.JPanel datapinjamPanel;
     private javax.swing.JButton editbukuB;
@@ -2171,14 +2169,10 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -2187,7 +2181,9 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -2240,7 +2236,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;

@@ -223,7 +223,7 @@ public class tambahAnggota extends javax.swing.JFrame {
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
         // TODO add your handling code here:
         crud c = new crud();
-        System.out.println(edit);
+//        System.out.println(edit);
         if(this.edit==true){
 //            System.out.println("masuk");
             String v =JId.getText();
