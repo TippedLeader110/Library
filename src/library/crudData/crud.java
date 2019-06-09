@@ -15,8 +15,8 @@ import library.Mysql.MysqlCon;
 public class crud extends library.Main.Main {
     MysqlCon kon = new MysqlCon( );
     int rs;
-    
-    crud(){
+    Statement stmt=kon.query();
+    public crud(){
         this.rs = 0;
     }
     
@@ -50,11 +50,24 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void updatebuku(String val , String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
-        Statement stmt=kon.query();
+    public void deleteBook(String isbn){
+        try {  
+            rs=stmt.executeUpdate("DELETE from book where isbn = " + isbn);
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void update(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set isbn = " + isbn + " judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = " + val );
+            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "'");
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -67,7 +80,7 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void updatebuku2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void update2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
@@ -83,6 +96,4 @@ public class crud extends library.Main.Main {
         }
         //return a;
     }
-    
-    public void updatesiswa
 }

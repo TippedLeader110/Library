@@ -10,6 +10,7 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import library.Mysql.MysqlCon;
 import javax.swing.JOptionPane;
+import library.crudData.crud;
 
 /**
  *
@@ -1995,6 +1996,11 @@ MysqlCon send = new MysqlCon( );
         hapusbukuB.setText("Hapus");
         hapusbukuB.setBorder(null);
         hapusbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapusbukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusbukuBActionPerformed(evt);
+            }
+        });
 
         cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -2335,6 +2341,14 @@ MysqlCon send = new MysqlCon( );
         panelBawah.revalidate();
         
     }//GEN-LAST:event_staffBActionPerformed
+
+    private void hapusbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbukuBActionPerformed
+        crud n = new crud();
+        int column = 0;
+        int row = bukuTabel.getSelectedRow();
+        String value = bukuTabel.getModel().getValueAt(row, column).toString();
+        n.deleteBook(value);
+    }//GEN-LAST:event_hapusbukuBActionPerformed
 
     /**
      * @param args the command line arguments
