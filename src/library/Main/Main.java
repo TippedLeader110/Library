@@ -179,7 +179,7 @@ MysqlCon send = new MysqlCon( );
         jScrollPane18 = new javax.swing.JScrollPane();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
+        settingTable = new javax.swing.JTable();
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
@@ -572,7 +572,7 @@ MysqlCon send = new MysqlCon( );
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setText("Pengaturan Akun Operator");
 
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+        settingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -583,7 +583,7 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane19.setViewportView(jTable10);
+        jScrollPane19.setViewportView(settingTable);
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -2070,9 +2070,36 @@ MysqlCon send = new MysqlCon( );
 
     private void settingBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingBActionPerformed
         // TODO add your handling code here:
+       MysqlCon send = new MysqlCon( );
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Username", "Password"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            
+            try {
+                rs = stmt.executeQuery("select * from library.users");
+                while(rs.next()){
+                q = rs.getString("username");
+                w = rs.getString("password");
+                model.addRow(new Object[]{q, w});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
         this.titlePengaturan.setText("Pengaturan");
         panelBawah.removeAll();
         panelBawah.add(pengaturanPanel);
+        settingTable.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_settingBActionPerformed
@@ -2469,7 +2496,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
@@ -2497,6 +2523,7 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JPanel pengembalianPanel;
     private javax.swing.JTable pinjamTable;
     private javax.swing.JButton settingB;
+    private javax.swing.JTable settingTable;
     private javax.swing.JButton siswaB;
     private javax.swing.JPanel siswaPanel;
     private javax.swing.JButton staffB;
