@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2019 at 06:10 AM
+-- Generation Time: Jun 09, 2019 at 06:46 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -73,8 +73,8 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id`, `nama`, `alamat`, `no_telp`) VALUES
-(1, '0', 'Goblogverse', '666'),
-(2, '0', 'Tololverse', '6969');
+(1, 'ali', 'Goblogverse', '666'),
+(2, 'rafid', 'Tololverse', '6969');
 
 -- --------------------------------------------------------
 
@@ -93,28 +93,30 @@ CREATE TABLE `apa` (
 
 CREATE TABLE `book` (
   `ISBN` varchar(32) NOT NULL,
-  `ID_Penerbit` int(8) DEFAULT NULL,
-  `ID_Pengarang` int(8) DEFAULT NULL,
+  `Penerbit` text,
+  `Pengarang` text,
   `thn_buku` int(4) DEFAULT NULL,
   `jmlh` int(4) DEFAULT NULL,
   `tgl_pengadaan` date DEFAULT NULL,
-  `Judul` varchar(50) DEFAULT NULL
+  `Judul` varchar(50) DEFAULT NULL,
+  `lokasi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`ISBN`, `ID_Penerbit`, `ID_Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`) VALUES
-('69666', 666, 69, 2019, 3, '2019-05-09', 'How to be a N I G G A');
+INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `lokasi`) VALUES
+('1', '1', '1', 1, 1, '2019-05-04', '1', ''),
+('69666', '666', '69', 2019, 3, '2019-05-09', 'How to be a N I G G A', '');
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `kembali`
+-- Stand-in structure for view `buku`
 -- (See below for the actual view)
 --
-CREATE TABLE `kembali` (
+CREATE TABLE `buku` (
 );
 
 -- --------------------------------------------------------
@@ -141,6 +143,14 @@ CREATE TABLE `penerbit_book` (
   `no_telp` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `penerbit_book`
+--
+
+INSERT INTO `penerbit_book` (`ID_penerbit`, `nama_p`, `alamat`, `no_telp`) VALUES
+(1, '1', '1', 1),
+(666, 'Nibba', 'nibba', 6969);
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +164,14 @@ CREATE TABLE `pengarang_book` (
   `no_telp` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pengarang_book`
+--
+
+INSERT INTO `pengarang_book` (`ID_pengarang`, `nama_pengarang`, `alamat`, `no_telp`) VALUES
+(1, '1', '1', 1),
+(69, 'lala', 'lala', 666);
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +179,12 @@ CREATE TABLE `pengarang_book` (
 -- (See below for the actual view)
 --
 CREATE TABLE `pinjam` (
+`id_transaksi` int(11)
+,`nama` varchar(11)
+,`ISBN` varchar(32)
+,`t_pinjam` date
+,`t_kembali` date
+,`denda` int(8)
 );
 
 -- --------------------------------------------------------
@@ -233,11 +257,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `kembali`
+-- Structure for view `buku`
 --
-DROP TABLE IF EXISTS `kembali`;
+DROP TABLE IF EXISTS `buku`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null) and (`a`.`t_kembali` is not null)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buku`  AS  select `a`.`ISBN` AS `ISBN`,`a`.`Judul` AS `judul`,`b`.`nama_p` AS `nama_p`,`c`.`nama_pengarang` AS `nama_pengarang`,`a`.`thn_buku` AS `thn_buku`,`a`.`jmlh` AS `jmlh` from ((`book` `a` join `penerbit_book` `b`) join `pengarang_book` `c`) where ((`a`.`ID_Penerbit` = `b`.`ID_penerbit`) and (`a`.`ID_Pengarang` = `c`.`ID_pengarang`)) ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +270,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pinjam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where ((`a`.`id_anggota` = `b`.`id_anggota`) and (`a`.`t_pinjam` is not null) and isnull(`a`.`t_kembali`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama` AS `nama`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where (`a`.`id_anggota` = `b`.`id`) ;
 
 --
 -- Indexes for dumped tables
@@ -262,9 +286,7 @@ ALTER TABLE `anggota`
 -- Indexes for table `book`
 --
 ALTER TABLE `book`
-  ADD PRIMARY KEY (`ISBN`),
-  ADD KEY `ID_Penerbit` (`ID_Penerbit`),
-  ADD KEY `ID_Pengarang` (`ID_Pengarang`);
+  ADD PRIMARY KEY (`ISBN`);
 
 --
 -- Indexes for table `lok_book`
