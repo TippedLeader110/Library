@@ -50,11 +50,11 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void update(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void updatebuku(String val , String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "'");
+            rs=stmt.executeUpdate("update library.book set isbn = " + isbn + " judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = " + val );
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -67,7 +67,7 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void update2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void updatebuku2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
@@ -83,4 +83,6 @@ public class crud extends library.Main.Main {
         }
         //return a;
     }
+    
+    public void updatesiswa
 }

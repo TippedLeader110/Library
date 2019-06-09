@@ -26,6 +26,7 @@ public class tambahBuku extends javax.swing.JFrame {
         edit = false;
         initComponents();
     }
+    
     MysqlCon kon = new MysqlCon();
     public tambahBuku(String val){
         this.val = val;
@@ -268,15 +269,13 @@ public class tambahBuku extends javax.swing.JFrame {
         if(this.edit=true){
             String v =Jisbn.getText();
             int thn = Integer.parseInt(Jthn.getText());
-            if(v==this.val){
-                System.out.println("LEL");
-                c.update(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+            if(v!=this.val){
+                c.updatebuku(this.val , Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
             }
             else
-                c.update2(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+                c.updatebuku2(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
         }
         else{
-            System.out.println("LUL");
         int thn = Integer.parseInt(Jthn.getText());
         c.create(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
         }
