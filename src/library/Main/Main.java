@@ -2160,7 +2160,10 @@ MysqlCon send = new MysqlCon( );
 
     private void editbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbukuBActionPerformed
         // TODO add your handling code here:
-        editBuku eb = new editBuku();
+        int column = 0;
+        int row = bukuTabel.getSelectedRow();
+        String value = bukuTabel.getModel().getValueAt(row, column).toString();
+        tambahBuku eb = new tambahBuku(value);
         eb.setVisible(true);
 
     }//GEN-LAST:event_editbukuBActionPerformed

@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package library.crudData;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import library.Mysql.MysqlCon;
 /**
  *
  * @author My Computer
@@ -14,8 +20,14 @@ public class editBuku extends javax.swing.JFrame {
     /**
      * Creates new form editBuku
      */
+    MysqlCon kon = new MysqlCon( );
     public editBuku() {
         initComponents();
+    }
+    
+    public editBuku(String val){
+        initComponents();
+        
     }
 
     /**
@@ -44,8 +56,6 @@ public class editBuku extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         simpanB = new javax.swing.JButton();
         simpanB1 = new javax.swing.JButton();
 
@@ -92,14 +102,9 @@ public class editBuku extends javax.swing.JFrame {
         jLabel7.setText("Pengarang");
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel8.setText("Lokasi Rak");
+        jLabel8.setText("Lokasi Buku");
 
         jTextField7.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel9.setText("Lokasi Tingkat");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,7 +113,6 @@ public class editBuku extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
@@ -124,7 +128,6 @@ public class editBuku extends javax.swing.JFrame {
                     .addComponent(jTextField7)
                     .addComponent(jTextField6)
                     .addComponent(jTextField5)
-                    .addComponent(jTextField8)
                     .addComponent(jTextField1))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -159,11 +162,7 @@ public class editBuku extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         simpanB.setBackground(new java.awt.Color(0, 204, 0));
@@ -276,7 +275,6 @@ public class editBuku extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
@@ -286,7 +284,6 @@ public class editBuku extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JButton simpanB;
     private javax.swing.JButton simpanB1;
     // End of variables declaration//GEN-END:variables

@@ -33,12 +33,12 @@ public class crud extends library.Main.Main {
      * @return
      */
     
-    public void create(String isbn, String judul, String penerbit, int tahun, String tgl_pengadaan, String pengarang, String lok_rak, String lok_tingkat){
+    public void create(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, tahun, tgl_pengadaan, pengarang, lok_rak, lok_tingkat) VALUE('" + isbn + "',' " +  judul + "',' " +  penerbit + "',' " + tahun + "',' " +  tgl_pengadaan + "',' " + pengarang + "',' " + lok_rak + "',' " +  lok_tingkat +"')");
-        } catch (SQLException ex) {
+            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, thn_buku, tgl_pengadaan, pengarang, lokasi) VALUE('" + isbn + "',' " +  judul + "',' " +  penerbit + "',' " + thn_buku + "',' " +  tgl_pengadaan + "',' " + pengarang + "',' " + lokasi + "')");
+        } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
         if(rs!=0){
@@ -50,4 +50,37 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
+    public void update(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+        Statement stmt=kon.query();
+        String a[];
+        try {  
+            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "'");
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        //return a;
+    }
+    
+    public void update2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+        Statement stmt=kon.query();
+        String a[];
+        try {  
+            rs=stmt.executeUpdate("update library.book set judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = " + isbn );
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        //return a;
+    }
 }

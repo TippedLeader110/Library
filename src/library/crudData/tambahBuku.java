@@ -5,6 +5,12 @@
  */
 package library.crudData;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import library.Mysql.MysqlCon;
+
 /**
  *
  * @author My Computer
@@ -14,8 +20,35 @@ public class tambahBuku extends javax.swing.JFrame {
     /**
      * Creates new form tambahBuku
      */
+    boolean edit;
+    String val;
     public tambahBuku() {
+        edit = false;
         initComponents();
+    }
+    MysqlCon kon = new MysqlCon();
+    public tambahBuku(String val){
+        this.val = val;
+        edit = true;
+        initComponents();
+        title.setText("Edit Buku");
+        Statement stmt=kon.query();
+        try {
+            
+        ResultSet rs = stmt.executeQuery("SELECT * FROM library.book where isbn = " + val);
+        while (rs.next()){
+                Jisbn.setText(rs.getString("ISBN"));
+                Jjudul.setText(rs.getString("judul"));
+                Jpenerbit.setText(rs.getString("penerbit"));
+                Jthn.setText(rs.getString("thn_buku"));
+                Jtgl.setText(rs.getString("tgl_pengadaan"));
+                Jpengarang.setText(rs.getString("pengarang"));
+                Jlokasi.setText(rs.getString("lokasi"));
+            }
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
     }
 
     /**
@@ -28,24 +61,22 @@ public class tambahBuku extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        Jisbn = new javax.swing.JTextField();
+        Jjudul = new javax.swing.JTextField();
+        Jpenerbit = new javax.swing.JTextField();
+        Jtgl = new javax.swing.JTextField();
+        Jthn = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        Jpengarang = new javax.swing.JTextField();
+        Jlokasi = new javax.swing.JTextField();
         simpanB = new javax.swing.JButton();
         batalB = new javax.swing.JButton();
 
@@ -55,9 +86,9 @@ public class tambahBuku extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Tambah Buku");
+        title.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
+        title.setText("Tambah Buku");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -76,30 +107,25 @@ public class tambahBuku extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel6.setText("Tanggal Pengadaan");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jisbn.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jjudul.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jpenerbit.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jtgl.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jthn.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel7.setText("Pengarang");
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel8.setText("Lokasi Rak");
+        jLabel8.setText("Lokasi Buku");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel9.setText("Lokasi Tingkat");
+        Jpengarang.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Jlokasi.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,7 +137,7 @@ public class tambahBuku extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Jisbn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -119,56 +145,49 @@ public class tambahBuku extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(Jjudul, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jpenerbit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jtgl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jthn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jpengarang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jlokasi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Jisbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jjudul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jpenerbit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jtgl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jthn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jpengarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jlokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         simpanB.setBackground(new java.awt.Color(0, 204, 0));
@@ -202,7 +221,7 @@ public class tambahBuku extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(title)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(simpanB, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -214,7 +233,7 @@ public class tambahBuku extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(title)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -245,7 +264,22 @@ public class tambahBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_batalBActionPerformed
 
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
-        // TODO add your handling code here:
+        crud c = new crud();
+        if(this.edit=true){
+            String v =Jisbn.getText();
+            int thn = Integer.parseInt(Jthn.getText());
+            if(v==this.val){
+                System.out.println("LEL");
+                c.update(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+            }
+            else
+                c.update2(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+        }
+        else{
+            System.out.println("LUL");
+        int thn = Integer.parseInt(Jthn.getText());
+        c.create(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+        }
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**
@@ -284,8 +318,14 @@ public class tambahBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Jisbn;
+    private javax.swing.JTextField Jjudul;
+    private javax.swing.JTextField Jlokasi;
+    private javax.swing.JTextField Jpenerbit;
+    private javax.swing.JTextField Jpengarang;
+    private javax.swing.JTextField Jtgl;
+    private javax.swing.JTextField Jthn;
     private javax.swing.JButton batalB;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -293,17 +333,9 @@ public class tambahBuku extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JButton simpanB;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
