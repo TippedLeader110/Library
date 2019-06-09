@@ -266,18 +266,18 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
         crud c = new crud();
-        if(this.edit=true){
+        if(this.edit==true){
             String v =Jisbn.getText();
             int thn = Integer.parseInt(Jthn.getText());
             if(v!=this.val){
-                c.updatebuku(this.val , Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+                c.updateBuku(this.val , Jisbn.getText(), Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
             }
             else
-                c.updatebuku2(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+                c.updateBuku2(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
         }
         else{
         int thn = Integer.parseInt(Jthn.getText());
-        c.create(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
+        c.createBuku(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
         }
     }//GEN-LAST:event_simpanBActionPerformed
 

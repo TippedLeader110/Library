@@ -475,7 +475,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane18" pref="1417" max="32767" attributes="0"/>
+                              <Component id="jScrollPane18" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jButton16" min="-2" pref="147" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -493,7 +493,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane18" pref="448" max="32767" attributes="0"/>
+                          <Component id="jScrollPane18" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jButton16" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -2217,6 +2217,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahsiswaBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="editsiswaB">
               <Properties>
@@ -2237,6 +2240,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editsiswaBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="hapussiswaB">
               <Properties>
@@ -2257,6 +2263,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapussiswaBActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane5">
 
@@ -2308,6 +2317,10 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="anggotaTableFocusGained"/>
+                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="anggotaTableFocusLost"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2449,6 +2462,8 @@
                             </Property>
                           </Properties>
                           <Events>
+                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bukuTabelFocusGained"/>
+                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bukuTabelFocusLost"/>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bukuTabelMouseClicked"/>
                           </Events>
                         </Component>

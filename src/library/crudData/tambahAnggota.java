@@ -39,7 +39,7 @@ public class tambahAnggota extends javax.swing.JFrame {
                 JId.setText(rs.getString("id"));
                 JNama.setText(rs.getString("nama"));
                 JAlamat.setText(rs.getString("alamat"));
-                JTelepon.setText(rs.getString("no_telepon"));
+                JTelepon.setText(rs.getString("no_telp"));
             }
         
      }catch (SQLException ex) {
@@ -67,7 +67,7 @@ public class tambahAnggota extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         JTelepon = new javax.swing.JTextField();
         simpanB = new javax.swing.JButton();
-        simpanB1 = new javax.swing.JButton();
+        batal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Siswa");
@@ -81,7 +81,7 @@ public class tambahAnggota extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel2.setText("NISN");
+        jLabel2.setText("ID");
 
         JId.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
@@ -150,15 +150,20 @@ public class tambahAnggota extends javax.swing.JFrame {
         simpanB.setForeground(new java.awt.Color(255, 255, 255));
         simpanB.setText("Simpan");
         simpanB.setBorder(null);
-
-        simpanB1.setBackground(new java.awt.Color(255, 0, 0));
-        simpanB1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        simpanB1.setForeground(new java.awt.Color(255, 255, 255));
-        simpanB1.setText("Batal");
-        simpanB1.setBorder(null);
-        simpanB1.addActionListener(new java.awt.event.ActionListener() {
+        simpanB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                simpanB1ActionPerformed(evt);
+                simpanBActionPerformed(evt);
+            }
+        });
+
+        batal.setBackground(new java.awt.Color(255, 0, 0));
+        batal.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        batal.setForeground(new java.awt.Color(255, 255, 255));
+        batal.setText("Batal");
+        batal.setBorder(null);
+        batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalActionPerformed(evt);
             }
         });
 
@@ -176,7 +181,7 @@ public class tambahAnggota extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(simpanB, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(simpanB1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -190,7 +195,7 @@ public class tambahAnggota extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanB, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(simpanB1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -211,11 +216,30 @@ public class tambahAnggota extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void simpanB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanB1ActionPerformed
+    private void batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalActionPerformed
         // TODO add your handling code here:
         this.dispose();
         
-    }//GEN-LAST:event_simpanB1ActionPerformed
+    }//GEN-LAST:event_batalActionPerformed
+
+    private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
+        // TODO add your handling code here:
+        crud c = new crud();
+        System.out.println(edit);
+        if(this.edit==true){
+//            System.out.println("masuk");
+            String v =JId.getText();
+            if(v!=this.val){
+                c.updateAnggota(this.val, JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText());
+            }
+            else
+                c.updateAnggota2(this.val, JNama.getText(), JAlamat.getText(), JTelepon.getText());
+        }
+        else{
+//            System.out.println("keluar");
+        c.createAnggota(JId.getText() , JNama.getText(), JAlamat.getText(), JTelepon.getText());
+        }
+    }//GEN-LAST:event_simpanBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,6 +282,7 @@ public class tambahAnggota extends javax.swing.JFrame {
     private javax.swing.JTextField JId;
     private javax.swing.JTextField JNama;
     private javax.swing.JTextField JTelepon;
+    private javax.swing.JButton batal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -265,7 +290,6 @@ public class tambahAnggota extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton simpanB;
-    private javax.swing.JButton simpanB1;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

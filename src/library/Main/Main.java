@@ -6,6 +6,7 @@
 package library.Main;
 
 import library.crudData.tambahBuku;
+import library.crudData.tambahAnggota;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import library.Mysql.MysqlCon;
@@ -87,7 +88,8 @@ MysqlCon send = new MysqlCon( );
         bukuTabel.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
-        
+        editsiswaB.setEnabled(false);
+        editbukuB.setEnabled(false);
     }
     
     
@@ -137,7 +139,8 @@ MysqlCon send = new MysqlCon( );
         bukuTabel.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
-        
+        editsiswaB.setEnabled(false);
+        editbukuB.setEnabled(false);
     }
 
     /**
@@ -577,7 +580,7 @@ MysqlCon send = new MysqlCon( );
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 1417, Short.MAX_VALUE)
+                    .addComponent(jScrollPane18)
                     .addGroup(jPanel21Layout.createSequentialGroup()
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -591,7 +594,7 @@ MysqlCon send = new MysqlCon( );
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(jScrollPane18)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1431,6 +1434,11 @@ MysqlCon send = new MysqlCon( );
         tambahsiswaB.setText("Tambah");
         tambahsiswaB.setBorder(null);
         tambahsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahsiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahsiswaBActionPerformed(evt);
+            }
+        });
 
         editsiswaB.setBackground(new java.awt.Color(255, 153, 0));
         editsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1438,6 +1446,11 @@ MysqlCon send = new MysqlCon( );
         editsiswaB.setText("Edit");
         editsiswaB.setBorder(null);
         editsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editsiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editsiswaBActionPerformed(evt);
+            }
+        });
 
         hapussiswaB.setBackground(new java.awt.Color(255, 0, 0));
         hapussiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1445,6 +1458,11 @@ MysqlCon send = new MysqlCon( );
         hapussiswaB.setText("Hapus");
         hapussiswaB.setBorder(null);
         hapussiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapussiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapussiswaBActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -1459,6 +1477,14 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        anggotaTable.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                anggotaTableFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                anggotaTableFocusLost(evt);
+            }
+        });
         jScrollPane10.setViewportView(anggotaTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1550,6 +1576,14 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        bukuTabel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bukuTabelFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                bukuTabelFocusLost(evt);
+            }
+        });
         bukuTabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bukuTabelMouseClicked(evt);
@@ -1956,8 +1990,52 @@ MysqlCon send = new MysqlCon( );
         int column = 0;
         int row = bukuTabel.getSelectedRow();
         String value = bukuTabel.getModel().getValueAt(row, column).toString();
-        n.deleteBook(value);
+        n.deleteBuku(value);
     }//GEN-LAST:event_hapusbukuBActionPerformed
+
+    private void tambahsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahsiswaBActionPerformed
+        // TODO add your handling code here:
+        tambahAnggota ta = new tambahAnggota();
+        ta.setVisible(true);
+    }//GEN-LAST:event_tambahsiswaBActionPerformed
+
+    private void editsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editsiswaBActionPerformed
+        // TODO add your handling code here:
+        int column = 0;
+        int row = anggotaTable.getSelectedRow();
+        String value = anggotaTable.getModel().getValueAt(row, column).toString();
+        tambahAnggota et = new tambahAnggota(value);
+        et.setVisible(true);
+    }//GEN-LAST:event_editsiswaBActionPerformed
+
+    private void hapussiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapussiswaBActionPerformed
+        // TODO add your handling code here:
+        crud n = new crud();
+        int column = 0;
+        int row = bukuTabel.getSelectedRow();
+        String value = anggotaTable.getModel().getValueAt(row, column).toString();
+        n.deleteAnggota(value);
+    }//GEN-LAST:event_hapussiswaBActionPerformed
+
+    private void anggotaTableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_anggotaTableFocusGained
+        // TODO add your handling code here:
+        editsiswaB.setEnabled(true);
+    }//GEN-LAST:event_anggotaTableFocusGained
+
+    private void bukuTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bukuTabelFocusGained
+        // TODO add your handling code here:
+        editbukuB.setEnabled(true);
+    }//GEN-LAST:event_bukuTabelFocusGained
+
+    private void bukuTabelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bukuTabelFocusLost
+        // TODO add your handling code here:
+//        editbukuB.setEnabled(false);
+    }//GEN-LAST:event_bukuTabelFocusLost
+
+    private void anggotaTableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_anggotaTableFocusLost
+        // TODO add your handling code here:
+//        editsiswaB.setEnabled(false);
+    }//GEN-LAST:event_anggotaTableFocusLost
 
     /**
      * @param args the command line arguments
