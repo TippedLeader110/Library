@@ -206,7 +206,7 @@ MysqlCon send = new MysqlCon( );
         jScrollPane12 = new javax.swing.JScrollPane();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        pinjamTable = new javax.swing.JTable();
         pengembalianPanel = new javax.swing.JPanel();
         titlePengembalian = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
@@ -320,7 +320,6 @@ MysqlCon send = new MysqlCon( );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
-        setPreferredSize(new java.awt.Dimension(1366, 720));
 
         panelAtas.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -897,7 +896,7 @@ MysqlCon send = new MysqlCon( );
 
         jPanel16.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        pinjamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -908,7 +907,7 @@ MysqlCon send = new MysqlCon( );
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane13.setViewportView(jTable7);
+        jScrollPane13.setViewportView(pinjamTable);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -2190,9 +2189,47 @@ MysqlCon send = new MysqlCon( );
 
     private void datapinjamBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datapinjamBActionPerformed
         // TODO add your handling code here:
+        
+        MysqlCon send = new MysqlCon( );
+        DefaultTableModel model = new DefaultTableModel(new String[]{"No Transaksi", "Nama", "ISBN", "Judul", "Tanggal Pinjam", "Tanggal Kembali", "Denda"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            String e;
+            String r;
+            String t;
+            String y;
+            String u;
+            
+            try {
+                rs = stmt.executeQuery("select * from library.pinjam");
+                while(rs.next()){
+                q = rs.getString("id_transaksi");
+                w = rs.getString("nama");
+                e = rs.getString("ISBN");
+                r = rs.getString("judul");
+                t = rs.getString("t_pinjam");
+                y = rs.getString("t_kembali");
+                u = rs.getString("denda");
+                model.addRow(new Object[]{q, w, e, r, t,y,u});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
         this.titleDatapinjam.setText("Data Pinjam");
         panelBawah.removeAll();
         panelBawah.add(datapinjamPanel);
+        pinjamTable.setModel(model);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_datapinjamBActionPerformed
@@ -2374,7 +2411,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -2397,6 +2433,7 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JPanel pengaturanPanel;
     private javax.swing.JButton pengembalianB;
     private javax.swing.JPanel pengembalianPanel;
+    private javax.swing.JTable pinjamTable;
     private javax.swing.JButton settingB;
     private javax.swing.JButton siswaB;
     private javax.swing.JPanel siswaPanel;
