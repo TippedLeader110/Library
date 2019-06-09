@@ -6,7 +6,7 @@
 package library.showData;
 
 import library.Main.mainPage;
-import library.manipulateData.editBuku;
+
 import library.manipulateData.hapusBuku;
 import library.manipulateData.tambahBuku;
 
@@ -206,7 +206,7 @@ public class aturBuku extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new editBuku().setVisible(true);
+        //new editBuku().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
