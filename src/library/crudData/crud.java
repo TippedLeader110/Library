@@ -52,7 +52,7 @@ public class crud extends library.Main.Main {
     
     public void deleteBuku(String isbn){
         try {  
-            rs=stmt.executeUpdate("DELETE from book where isbn = " + isbn);
+            rs=stmt.executeUpdate("DELETE from library.book where isbn = " + isbn);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -213,4 +213,32 @@ public class crud extends library.Main.Main {
             JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
     }
+     
+     public void createPinjam(String id, String isbn, String durasi){
+         try {  
+            rs=stmt.executeUpdate("insert into library.pinjam_book(id_anggota, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('" + id + "',' " +  isbn + "', CURDATE(), DATE_ADD(CURDATE(), INTERVAL " + durasi + " DAY), NULL, NULL)");
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+     
+     public void createPinjam(String uang, String isbn){
+         try{
+             rs=stmt.executeUpdate("UPDATE pinjam_book SET t_kembali = CURDATE(), denda = denda("+ isbn +","+ uang +") WHERE isbn = " + isbn + "");
+         }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
 }

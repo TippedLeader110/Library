@@ -265,6 +265,7 @@ public class tambahStaff extends javax.swing.JFrame {
 //            System.out.println("keluar");
         c.createStaff(JId.getText() , JNama.getText(), JAlamat.getText(), JTelepon.getText(), JUsername.getText(), JPassword.getText());
         }
+        this.dispose();
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**

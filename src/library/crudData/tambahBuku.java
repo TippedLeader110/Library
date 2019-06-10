@@ -279,6 +279,7 @@ public class tambahBuku extends javax.swing.JFrame {
         int thn = Integer.parseInt(Jthn.getText());
         c.createBuku(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jtgl.getText(), Jpengarang.getText(), Jlokasi.getText());
         }
+        this.dispose();
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**

@@ -237,6 +237,7 @@ public class tambahAnggota extends javax.swing.JFrame {
 //            System.out.println("keluar");
         c.createAnggota(JId.getText() , JNama.getText(), JAlamat.getText(), JTelepon.getText());
         }
+        this.dispose();
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**
