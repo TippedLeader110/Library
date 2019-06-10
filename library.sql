@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2019 at 06:46 AM
+-- Generation Time: Jun 10, 2019 at 05:24 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -41,6 +41,18 @@ end$$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `denda` (`id` INT(11), `uang` INT(11)) RETURNS INT(11) begin
+declare date1 date;
+declare date2 date;
+declare b int;
+Select t_deadline from pinjam_book where isbn = id into date1;
+Select t_kembali from pinjam_book where isbn = id into date2;
+if day(date2) > day(date1) then
+set b = (day(date2) - day(date1)) * uang;
+end if;
+return b;
+end$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `login` (`A` VARCHAR(32), `B` VARCHAR(32)) RETURNS INT(11) begin
     declare cou int;
 
@@ -73,8 +85,9 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 'ali', 'Goblogverse', '666'),
-(2, 'rafid', 'Tololverse', '6969');
+(1, 'bayhaqi', 'Goblogverse', '666'),
+(2, ' ihsan', ' budi', ' 9087'),
+(4, ' ali', ' patumbak', ' 09876');
 
 -- --------------------------------------------------------
 
@@ -108,6 +121,7 @@ CREATE TABLE `book` (
 
 INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `lokasi`) VALUES
 ('1', '1', '1', 1, 1, '2019-05-04', '1', ''),
+('2', '  waow', '  ihsan', 2019, NULL, '2019-02-02', '  wao', '  disini'),
 ('69666', '666', '69', 2019, 3, '2019-05-09', 'How to be a N I G G A', '');
 
 -- --------------------------------------------------------
@@ -182,6 +196,7 @@ CREATE TABLE `pinjam` (
 `id_transaksi` int(11)
 ,`nama` varchar(11)
 ,`ISBN` varchar(32)
+,`judul` varchar(50)
 ,`t_pinjam` date
 ,`t_kembali` date
 ,`denda` int(8)
@@ -198,6 +213,7 @@ CREATE TABLE `pinjam_book` (
   `id_anggota` int(11) NOT NULL,
   `ISBN` varchar(32) NOT NULL,
   `t_pinjam` date DEFAULT NULL,
+  `t_deadline` date DEFAULT NULL,
   `t_kembali` date DEFAULT NULL,
   `denda` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -206,9 +222,9 @@ CREATE TABLE `pinjam_book` (
 -- Dumping data for table `pinjam_book`
 --
 
-INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `ISBN`, `t_pinjam`, `t_kembali`, `denda`) VALUES
-(1, 1, '1', '2019-05-06', '2019-05-08', 900),
-(2, 2, '2', '2019-05-02', NULL, NULL);
+INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
+(2, 2, '2', '2019-05-02', '0000-00-00', NULL, NULL),
+(3, 1, ' 1', '2019-06-10', '2019-06-13', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,7 +259,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `nama`, `alamat`, `no_telp`) VALUES
 (1, 'bayhaqi', '1', 'bayhaqi', NULL, NULL),
-(2, 'rafid', '2', 'rafid', 'lala', '666');
+(2, 'rafid', '2', 'rafid', 'lala', '666'),
+(3, 'ali', 'nigger', '  ali', ' patumbak', '  96');
 
 -- --------------------------------------------------------
 
@@ -270,7 +287,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pinjam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama` AS `nama`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where (`a`.`id_anggota` = `b`.`id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama` AS `nama`,`a`.`ISBN` AS `ISBN`,`c`.`Judul` AS `judul`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from ((`pinjam_book` `a` join `anggota` `b`) join `book` `c`) where ((`a`.`id_anggota` = `b`.`id`) and (`a`.`ISBN` = `c`.`ISBN`)) ;
 
 --
 -- Indexes for dumped tables
@@ -326,6 +343,16 @@ ALTER TABLE `reg_book`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `pinjam_book`
+--
+ALTER TABLE `pinjam_book`
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
