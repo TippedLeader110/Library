@@ -29,7 +29,7 @@ public class tambahStaff extends javax.swing.JFrame {
         this.val = val;
         edit = true;
         initComponents();
-        title.setText("Edit Staff");
+        titleOp.setText("Edit Staff");
         Statement stmt=kon.query();
         try{
             ResultSet rs = stmt.executeQuery("SELECT * FROM library.users where id = " + val);
@@ -56,7 +56,7 @@ public class tambahStaff extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
+        titleOp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         JId = new javax.swing.JTextField();
@@ -73,13 +73,14 @@ public class tambahStaff extends javax.swing.JFrame {
         simpanB = new javax.swing.JButton();
         batalB = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Staff");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
-        title.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Tambah Staff");
+        titleOp.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        titleOp.setForeground(new java.awt.Color(255, 255, 255));
+        titleOp.setText("Tambah Staff / Operator");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -202,7 +203,7 @@ public class tambahStaff extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title)
+                    .addComponent(titleOp)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(simpanB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +215,7 @@ public class tambahStaff extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(title)
+                .addComponent(titleOp)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -320,6 +321,6 @@ public class tambahStaff extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton simpanB;
-    private javax.swing.JLabel title;
+    public javax.swing.JLabel titleOp;
     // End of variables declaration//GEN-END:variables
 }
