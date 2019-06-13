@@ -33,11 +33,11 @@ public class crud extends library.Main.Main {
      * @return
      */
     
-    public void createBuku(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
+    public void createBuku(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi, String jumlah){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, thn_buku, tgl_pengadaan, pengarang, lokasi) VALUE('" + isbn + "','" +  judul + "','" +  penerbit + "','" + thn_buku + "', CURDATE(), '" + pengarang + "','" + lokasi + "')");
+            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, thn_buku, tgl_pengadaan, pengarang, lokasi, jmlh) VALUE('" + isbn + "','" +  judul + "','" +  penerbit + "','" + thn_buku + "', CURDATE(), '" + pengarang + "','" + lokasi + "',"+ jumlah +")");
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -64,10 +64,10 @@ public class crud extends library.Main.Main {
         }
     }
     
-    public void updateBuku(String val, String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
+    public void updateBuku(String val, String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi, String jumlah){
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = "+ val);
+            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi + "', jumlah = '"+ jumlah +"' where isbn = "+ val);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -80,11 +80,11 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void updateBuku2(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
+    public void updateBuku2(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi, String jumlah){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi + "' where isbn = " + isbn );
+            rs=stmt.executeUpdate("update library.book set judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi +"', jumlah = '"+ jumlah +"' where isbn = " + isbn );
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -100,7 +100,7 @@ public class crud extends library.Main.Main {
     public void createAnggota(String id, String nama, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("insert into library.anggota(id, nama, alamat, no_telp) VALUE('" + id + "',' " +  nama + "',' " +  alamat + "',' " + no_telp +"')");
+            rs=stmt.executeUpdate("insert into library.anggota(id, nama, alamat, no_telp) VALUE('" + id + "','" +  nama + "','" +  alamat + "','" + no_telp +"')");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }

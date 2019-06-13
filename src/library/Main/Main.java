@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     
-    DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi"}, 0){
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi", "Jumlah"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
@@ -66,15 +66,7 @@ public class Main extends javax.swing.JFrame {
 //        
 //        this.title.setText("Buku");
 //        this.panelBawah.add(bukuPanel);
-MysqlCon send = new MysqlCon( );
-        DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi"}, 0){
-        @Override
-        
-        public boolean isCellEditable(int row, int column) {
-                return false;
-        }
-        };
-        
+        MysqlCon send = new MysqlCon( );        
         Statement stmt = send.query();
             ResultSet rs;
            
@@ -85,6 +77,7 @@ MysqlCon send = new MysqlCon( );
             String t;
             String y;
             String u;
+            String i;
 
             try {
                 rs = stmt.executeQuery("select * from library.book");
@@ -96,8 +89,8 @@ MysqlCon send = new MysqlCon( );
                 t = rs.getString("tgl_pengadaan");
                 y = rs.getString("pengarang");
                 u = rs.getString("lokasi");
-                
-                model.addRow(new Object[]{q, w, e, r, t,y,u});}
+                i = rs.getString("jmlh");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
@@ -118,14 +111,6 @@ MysqlCon send = new MysqlCon( );
         initComponents();
         
         MysqlCon send = new MysqlCon( );
-        DefaultTableModel model = new DefaultTableModel(new String[]{"ISBN", "Judul", "Penerbit", "Tahun Buku", "Tanggal Pengadaan", "Pengarang", "Lokasi"}, 0){
-        @Override
-        
-        public boolean isCellEditable(int row, int column) {
-                return false;
-        }
-        };
-        
         Statement stmt = send.query();
             ResultSet rs;
            
@@ -136,7 +121,7 @@ MysqlCon send = new MysqlCon( );
             String t;
             String y;
             String u;
-
+            String i;
             try {
                 rs = stmt.executeQuery("select * from library.book");
                 while(rs.next()){
@@ -147,8 +132,8 @@ MysqlCon send = new MysqlCon( );
                 t = rs.getString("tgl_pengadaan");
                 y = rs.getString("pengarang");
                 u = rs.getString("lokasi");
-                
-                model.addRow(new Object[]{q, w, e, r, t,y,u});}
+                i = rs.getString("jmlh");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
@@ -1161,8 +1146,8 @@ MysqlCon send = new MysqlCon( );
                         .addGap(18, 18, 18)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel56)
+                            .addComponent(LabelMaxPinjam)
                             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(LabelMaxPinjam)
                                 .addComponent(jLabel26)
                                 .addComponent(jLabel21))))
                     .addGroup(jPanel11Layout.createSequentialGroup()
@@ -1827,7 +1812,7 @@ MysqlCon send = new MysqlCon( );
             String t;
             String y;
             String u;
-            
+            String i;
             try {
                 rs = stmt.executeQuery("select * from library.book");
                 while(rs.next()){
@@ -1838,7 +1823,8 @@ MysqlCon send = new MysqlCon( );
                 t = rs.getString("tgl_pengadaan");
                 y = rs.getString("pengarang");
                 u = rs.getString("lokasi");
-                model.addRow(new Object[]{q, w, e, r, t,y,u});}
+                i = rs.getString("jmlh");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
@@ -1909,7 +1895,6 @@ MysqlCon send = new MysqlCon( );
         String value = bukuTabel.getModel().getValueAt(row, column).toString();
         tambahBuku eb = new tambahBuku(value);
         eb.setVisible(true);
-
     }//GEN-LAST:event_editbukuBActionPerformed
 
     private void bukuTabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bukuTabelMouseClicked
@@ -2321,7 +2306,7 @@ MysqlCon send = new MysqlCon( );
             Statement stmt = send.query();
             ResultSet rs;
             ResultSet rs2;
-            rs = stmt.executeQuery("Select * from library.kembali where kembali.isbn like '" + c + "' and kembali.anggota like '"+ x +"'group by kembali.id_transaksi");
+            rs = stmt.executeQuery("Select * from library.kembali where t_kembali is NULL and kembali.isbn like '" + c + "' and kembali.anggota like '"+ x +"'");
             String q;
             String w;
             String e;
@@ -2338,11 +2323,14 @@ MysqlCon send = new MysqlCon( );
                 t = rs.getString("t_pinjam");
                 y = rs.getString("t_deadline");
                 model.addRow(new Object[]{q, r, w, e, t, y});}
-             
+             BukuKembaliTable.setModel(model);
              //labeld total denda
              String id = JCariAnggotaKembali.getText();
              String uang = LabelUang.getText();
-             rs2 = stmt.executeQuery("Select library.denda(CURDATE(),"+ id +","+ c +","+ uang +") as denda");
+             int row = 0;
+             int column = 0;
+             String id_trans = BukuKembaliTable.getModel().getValueAt(row, column).toString();
+             rs2 = stmt.executeQuery("Select library.denda(CURDATE(),"+ id +","+ id_trans +","+ uang +") as denda");
              while(rs2.next()){
                 String k = rs2.getString("denda");
                 LabelDenda.setText(k);
@@ -2351,7 +2339,6 @@ MysqlCon send = new MysqlCon( );
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
         }
-        BukuKembaliTable.setModel(model);
     }//GEN-LAST:event_CariBukuKembaliBActionPerformed
 
     private void KembaliBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembaliBActionPerformed
