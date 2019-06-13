@@ -189,7 +189,7 @@ MysqlCon send = new MysqlCon( );
         jPanel22 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
         settingTable = new javax.swing.JTable();
-        tambahOperator = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         datapinjamPanel = new javax.swing.JPanel();
@@ -293,7 +293,7 @@ MysqlCon send = new MysqlCon( );
         cariB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistem Tata Kelola Perpustakaan (v 0.0.1)");
+        setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
 
         panelAtas.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -549,15 +549,15 @@ MysqlCon send = new MysqlCon( );
 
         jScrollPane18.setViewportView(jPanel22);
 
-        tambahOperator.setBackground(new java.awt.Color(0, 204, 0));
-        tambahOperator.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tambahOperator.setForeground(new java.awt.Color(255, 255, 255));
-        tambahOperator.setText("Tambah Operator Baru");
-        tambahOperator.setBorder(null);
-        tambahOperator.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tambahOperator.addActionListener(new java.awt.event.ActionListener() {
+        jButton16.setBackground(new java.awt.Color(0, 204, 0));
+        jButton16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton16.setForeground(new java.awt.Color(255, 255, 255));
+        jButton16.setText("Tambah Operator Baru");
+        jButton16.setBorder(null);
+        jButton16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahOperatorActionPerformed(evt);
+                jButton16ActionPerformed(evt);
             }
         });
 
@@ -584,7 +584,7 @@ MysqlCon send = new MysqlCon( );
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane18)
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(tambahOperator, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -599,7 +599,7 @@ MysqlCon send = new MysqlCon( );
                 .addComponent(jScrollPane18)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahOperator, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(90, 90, 90))
@@ -1224,7 +1224,7 @@ MysqlCon send = new MysqlCon( );
                     .addComponent(ScrollPanelPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 1105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel22)
-                        .addGap(99, 99, 99)
+                        .addGap(146, 146, 146)
                         .addComponent(JBukuPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CariBukuPinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1913,12 +1913,9 @@ MysqlCon send = new MysqlCon( );
         panelBawah.revalidate();
     }//GEN-LAST:event_datapinjamBActionPerformed
 
-    private void tambahOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahOperatorActionPerformed
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        tambahStaff ts = new tambahStaff();
-        ts.setVisible(true);
-        //titleOp.setText("Tambah Operator");
-    }//GEN-LAST:event_tambahOperatorActionPerformed
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
         // TODO add your handling code here:
@@ -2274,6 +2271,7 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JButton hapusstaffB;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton8;
@@ -2354,7 +2352,6 @@ MysqlCon send = new MysqlCon( );
     private javax.swing.JButton staffB;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JTable staffTable;
-    private javax.swing.JButton tambahOperator;
     private javax.swing.JButton tambahbukuB;
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
