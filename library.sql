@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2019 at 05:24 PM
+-- Generation Time: Jun 13, 2019 at 02:32 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -41,14 +41,14 @@ end$$
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `denda` (`id` INT(11), `uang` INT(11)) RETURNS INT(11) begin
-declare date1 date;
+CREATE DEFINER=`root`@`localhost` FUNCTION `denda` (`date1` DATE, `id` INT(11), `id_trans` INT(11), `uang` INT(11)) RETURNS INT(11) begin
 declare date2 date;
 declare b int;
-Select t_deadline from pinjam_book where isbn = id into date1;
-Select t_kembali from pinjam_book where isbn = id into date2;
-if day(date2) > day(date1) then
-set b = (day(date2) - day(date1)) * uang;
+Select t_deadline from pinjam_book where id_anggota = id and id_transaksi = id_trans into date2;
+if day(date1) > day(date2) then
+set b = (day(date1) - day(date2)) * uang;
+else
+set b = 0;
 end if;
 return b;
 end$$
@@ -120,9 +120,10 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `lokasi`) VALUES
-('1', '1', '1', 1, 1, '2019-05-04', '1', ''),
-('2', '  waow', '  ihsan', 2019, NULL, '2019-02-02', '  wao', '  disini'),
-('69666', '666', '69', 2019, 3, '2019-05-09', 'How to be a N I G G A', '');
+('1', '1', 'Two', 2019, 1, '2019-05-04', '3', 'rak b'),
+('2', ' wao', '  ihsan', 2019, NULL, '2019-02-02', ' wao', '  disini'),
+('3', 'Milkita', 'Saiki Kusuo', 2019, 3, '2019-05-09', 'How to be a esper', 'rak a'),
+('4', 'TeaSeries', 'Pewdiepie', 2017, NULL, '2019-06-11', 'Cross a bridge', 'Swedia');
 
 -- --------------------------------------------------------
 
@@ -131,6 +132,22 @@ INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pe
 -- (See below for the actual view)
 --
 CREATE TABLE `buku` (
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `kembali`
+-- (See below for the actual view)
+--
+CREATE TABLE `kembali` (
+`id_transaksi` int(11)
+,`anggota` varchar(11)
+,`petugas` varchar(11)
+,`judul` varchar(50)
+,`t_pinjam` date
+,`t_deadline` date
+,`isbn` varchar(32)
 );
 
 -- --------------------------------------------------------
@@ -195,7 +212,7 @@ INSERT INTO `pengarang_book` (`ID_pengarang`, `nama_pengarang`, `alamat`, `no_te
 CREATE TABLE `pinjam` (
 `id_transaksi` int(11)
 ,`nama` varchar(11)
-,`ISBN` varchar(32)
+,`isbn` varchar(32)
 ,`judul` varchar(50)
 ,`t_pinjam` date
 ,`t_kembali` date
@@ -211,6 +228,7 @@ CREATE TABLE `pinjam` (
 CREATE TABLE `pinjam_book` (
   `id_transaksi` int(11) NOT NULL,
   `id_anggota` int(11) NOT NULL,
+  `id_petugas` int(11) NOT NULL,
   `ISBN` varchar(32) NOT NULL,
   `t_pinjam` date DEFAULT NULL,
   `t_deadline` date DEFAULT NULL,
@@ -222,9 +240,10 @@ CREATE TABLE `pinjam_book` (
 -- Dumping data for table `pinjam_book`
 --
 
-INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
-(2, 2, '2', '2019-05-02', '0000-00-00', NULL, NULL),
-(3, 1, ' 1', '2019-06-10', '2019-06-13', NULL, NULL);
+INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `id_petugas`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
+(9, 2, 3, '1', '2019-06-11', '2019-06-14', '2019-06-13', 0),
+(10, 2, 3, '2', '2019-06-11', '2019-06-14', NULL, NULL),
+(11, 2, 3, '4', '2019-06-11', '2019-06-14', '2019-06-12', 0);
 
 -- --------------------------------------------------------
 
@@ -283,11 +302,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `kembali`
+--
+DROP TABLE IF EXISTS `kembali`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `d`.`id_transaksi` AS `id_transaksi`,`a`.`nama` AS `anggota`,`b`.`nama` AS `petugas`,`c`.`Judul` AS `judul`,`d`.`t_pinjam` AS `t_pinjam`,`d`.`t_deadline` AS `t_deadline`,`c`.`ISBN` AS `isbn` from (((`pinjam_book` `d` join `anggota` `a` on((`a`.`id` = `d`.`id_anggota`))) join `users` `b` on((`b`.`id` = `d`.`id_petugas`))) join `book` `c` on((`c`.`ISBN` = `d`.`ISBN`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `pinjam`
 --
 DROP TABLE IF EXISTS `pinjam`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama` AS `nama`,`a`.`ISBN` AS `ISBN`,`c`.`Judul` AS `judul`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from ((`pinjam_book` `a` join `anggota` `b`) join `book` `c`) where ((`a`.`id_anggota` = `b`.`id`) and (`a`.`ISBN` = `c`.`ISBN`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pinjam`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama` AS `nama`,`a`.`ISBN` AS `isbn`,`c`.`Judul` AS `judul`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from ((`pinjam_book` `a` join `anggota` `b` on((`a`.`id_anggota` = `b`.`id`))) join `book` `c` on((`a`.`ISBN` = `c`.`ISBN`))) ;
 
 --
 -- Indexes for dumped tables
@@ -352,7 +380,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `pinjam_book`
 --
 ALTER TABLE `pinjam_book`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

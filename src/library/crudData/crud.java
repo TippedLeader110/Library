@@ -33,11 +33,11 @@ public class crud extends library.Main.Main {
      * @return
      */
     
-    public void createBuku(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void createBuku(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, thn_buku, tgl_pengadaan, pengarang, lokasi) VALUE('" + isbn + "',' " +  judul + "',' " +  penerbit + "',' " + thn_buku + "',' " +  tgl_pengadaan + "',' " + pengarang + "',' " + lokasi + "')");
+            rs=stmt.executeUpdate("insert into library.book(isbn, judul, penerbit, thn_buku, tgl_pengadaan, pengarang, lokasi) VALUE('" + isbn + "','" +  judul + "','" +  penerbit + "','" + thn_buku + "', CURDATE(), '" + pengarang + "','" + lokasi + "')");
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -64,10 +64,10 @@ public class crud extends library.Main.Main {
         }
     }
     
-    public void updateBuku(String val, String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void updateBuku(String val, String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = "+ val);
+            rs=stmt.executeUpdate("update library.book set isbn = '" + isbn + "', judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = "+ val);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -80,11 +80,11 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void updateBuku2(String isbn, String judul, String penerbit, int thn_buku, String tgl_pengadaan, String pengarang, String lokasi){
+    public void updateBuku2(String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi){
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("update library.book set judul =  ' " +  judul + "', penerbit = ' " +  penerbit + "', thn_buku = ' " + thn_buku + "', tgl_pengadaan = ' " +  tgl_pengadaan + "', pengarang = ' " + pengarang + "', lokasi = ' " + lokasi + "' where isbn = " + isbn );
+            rs=stmt.executeUpdate("update library.book set judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi + "' where isbn = " + isbn );
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -214,23 +214,18 @@ public class crud extends library.Main.Main {
         }
     }
      
-     public void createPinjam(String id, String isbn, String durasi){
+     public int createPinjam(String id, String petugas, String isbn, String durasi){
          try {  
-            rs=stmt.executeUpdate("insert into library.pinjam_book(id_anggota, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('" + id + "',' " +  isbn + "', CURDATE(), DATE_ADD(CURDATE(), INTERVAL " + durasi + " DAY), NULL, NULL)");
+            rs=stmt.executeUpdate("insert into library.pinjam_book(id_anggota, id_petugas, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('"+ id + "','" + petugas + "','" +  isbn + "', CURDATE(), DATE_ADD(CURDATE(), INTERVAL " + durasi + " DAY), NULL, NULL)");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
-        if(rs!=0){
-            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
+         return rs;
      }
      
-     public void createPinjam(String uang, String isbn){
+     public void createKembali(String uang, String id_trans, String id){
          try{
-             rs=stmt.executeUpdate("UPDATE pinjam_book SET t_kembali = CURDATE(), denda = denda("+ isbn +","+ uang +") WHERE isbn = " + isbn + "");
+             rs=stmt.executeUpdate("UPDATE library.pinjam_book SET t_kembali = CURDATE(), denda = library.denda(CURDATE(),"+id+","+id_trans+","+uang+") WHERE id_anggota = "+id+" and id_transaksi = "+id_trans);
          }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -238,7 +233,7 @@ public class crud extends library.Main.Main {
             JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, rs, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
      }
 }
