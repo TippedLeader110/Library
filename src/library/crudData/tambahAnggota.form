@@ -60,7 +60,7 @@
                                   <Component id="batal" min="-2" pref="74" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="224" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -117,15 +117,15 @@
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="JId" min="-2" pref="208" max="-2" attributes="0"/>
-                                  <Component id="JAlamat" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="JNama" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="JTelepon" min="-2" pref="190" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="JAlamat" pref="190" max="32767" attributes="0"/>
+                                  <Component id="JNama" pref="190" max="32767" attributes="0"/>
+                                  <Component id="JTelepon" pref="190" max="32767" attributes="0"/>
+                                  <Component id="JId" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="76" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
