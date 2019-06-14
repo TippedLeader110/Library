@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2019 at 08:49 AM
+-- Generation Time: Jun 14, 2019 at 10:04 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -92,15 +92,6 @@ INSERT INTO `anggota` (`id`, `nama`, `alamat`, `no_telp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `apa`
--- (See below for the actual view)
---
-CREATE TABLE `apa` (
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `book`
 --
 
@@ -129,15 +120,6 @@ INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pe
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `buku`
--- (See below for the actual view)
---
-CREATE TABLE `buku` (
-);
-
--- --------------------------------------------------------
-
---
 -- Stand-in structure for view `kembali`
 -- (See below for the actual view)
 --
@@ -162,48 +144,6 @@ CREATE TABLE `lok_book` (
   `id_rak` int(11) NOT NULL,
   `lokasi` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `penerbit_book`
---
-
-CREATE TABLE `penerbit_book` (
-  `ID_penerbit` int(11) NOT NULL,
-  `nama_p` varchar(52) DEFAULT NULL,
-  `alamat` text,
-  `no_telp` int(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `penerbit_book`
---
-
-INSERT INTO `penerbit_book` (`ID_penerbit`, `nama_p`, `alamat`, `no_telp`) VALUES
-(1, '1', '1', 1),
-(666, 'Nibba', 'nibba', 6969);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengarang_book`
---
-
-CREATE TABLE `pengarang_book` (
-  `ID_pengarang` int(11) NOT NULL,
-  `nama_pengarang` varchar(52) DEFAULT NULL,
-  `alamat` text,
-  `no_telp` int(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pengarang_book`
---
-
-INSERT INTO `pengarang_book` (`ID_pengarang`, `nama_pengarang`, `alamat`, `no_telp`) VALUES
-(1, '1', '1', 1),
-(69, 'lala', 'lala', 666);
 
 -- --------------------------------------------------------
 
@@ -308,24 +248,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `nama`, `alamat`, `no_telp`) 
 -- --------------------------------------------------------
 
 --
--- Structure for view `apa`
---
-DROP TABLE IF EXISTS `apa`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `apa`  AS  select `a`.`id_transaksi` AS `id_transaksi`,`b`.`nama_anggota` AS `nama_anggota`,`a`.`ISBN` AS `ISBN`,`a`.`t_pinjam` AS `t_pinjam`,`a`.`t_kembali` AS `t_kembali`,`a`.`denda` AS `denda` from (`pinjam_book` `a` join `anggota` `b`) where (`a`.`id_anggota` = `b`.`id_anggota`) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `buku`
---
-DROP TABLE IF EXISTS `buku`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buku`  AS  select `a`.`ISBN` AS `ISBN`,`a`.`Judul` AS `judul`,`b`.`nama_p` AS `nama_p`,`c`.`nama_pengarang` AS `nama_pengarang`,`a`.`thn_buku` AS `thn_buku`,`a`.`jmlh` AS `jmlh` from ((`book` `a` join `penerbit_book` `b`) join `pengarang_book` `c`) where ((`a`.`ID_Penerbit` = `b`.`ID_penerbit`) and (`a`.`ID_Pengarang` = `c`.`ID_pengarang`)) ;
-
--- --------------------------------------------------------
-
---
 -- Structure for view `kembali`
 --
 DROP TABLE IF EXISTS `kembali`;
@@ -362,18 +284,6 @@ ALTER TABLE `book`
 --
 ALTER TABLE `lok_book`
   ADD PRIMARY KEY (`id_rak`);
-
---
--- Indexes for table `penerbit_book`
---
-ALTER TABLE `penerbit_book`
-  ADD PRIMARY KEY (`ID_penerbit`);
-
---
--- Indexes for table `pengarang_book`
---
-ALTER TABLE `pengarang_book`
-  ADD PRIMARY KEY (`ID_pengarang`);
 
 --
 -- Indexes for table `pinjam_book`
