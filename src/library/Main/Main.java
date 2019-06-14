@@ -6,6 +6,7 @@
 package library.Main;
 
 
+import javax.swing.table.DefaultTableModel;
 import library.manipulateData.editBuku;
 import library.manipulateData.tambahBuku;
 import library.showData.Siswa;
@@ -19,6 +20,20 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    DefaultTableModel model_buku = new DefaultTableModel(new String[]{"ISBN", "Judul", "Pengarang", "Penerbit", "Tahun Buku", "Kategori","Tanggal Pengadaan","Jenis", "Lokasi", "Jumlah"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+     DefaultTableModel model_pinjam = new DefaultTableModel(new String[]{"ISBN", "Judul", "Tahun Buku", "Lokasi"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
     public Main() {
         initComponents();
         

@@ -138,7 +138,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
     public void name(String F1, String F2) throws SQLException {
         System.out.println(F1 + "\n" + F2);
         Statement stmt = send.query();
-        ResultSet rs=stmt.executeQuery("select * from library.users WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
+        ResultSet rs=stmt.executeQuery("select * from perpus.petugas WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
         while (rs.next()){
             this.nama = rs.getString("name");
             System.out.println(this.nama);
@@ -165,7 +165,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + this.nama);    
             
         this.setVisible(false);
-        new mainPage(this.nama).setVisible(true);
+        new Main().setVisible(true);
         }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");
