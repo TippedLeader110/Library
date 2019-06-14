@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2019 at 02:32 AM
+-- Generation Time: Jun 14, 2019 at 08:49 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -86,7 +86,7 @@ CREATE TABLE `anggota` (
 
 INSERT INTO `anggota` (`id`, `nama`, `alamat`, `no_telp`) VALUES
 (1, 'bayhaqi', 'Goblogverse', '666'),
-(2, ' ihsan', ' budi', ' 9087'),
+(2, 'ihsan', ' budi', ' 9087'),
 (4, ' ali', ' patumbak', ' 09876');
 
 -- --------------------------------------------------------
@@ -120,10 +120,11 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`ISBN`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `lokasi`) VALUES
-('1', '1', 'Two', 2019, 1, '2019-05-04', '3', 'rak b'),
-('2', ' wao', '  ihsan', 2019, NULL, '2019-02-02', ' wao', '  disini'),
+('1', '2', '1', 1, 1, '2019-06-14', '3', '1'),
+('2', ' wao', 'ihsan', 2019, 4, '2019-02-02', ' wao', 'disini'),
 ('3', 'Milkita', 'Saiki Kusuo', 2019, 3, '2019-05-09', 'How to be a esper', 'rak a'),
-('4', 'TeaSeries', 'Pewdiepie', 2017, NULL, '2019-06-11', 'Cross a bridge', 'Swedia');
+('4', 'TeaSeries', 'Pewdiepie', 2017, 5, '2019-06-11', 'Cross a bridge', 'Swedia'),
+('6', '10', '6', 2019, 6, '2019-06-13', '8', '6');
 
 -- --------------------------------------------------------
 
@@ -142,12 +143,13 @@ CREATE TABLE `buku` (
 --
 CREATE TABLE `kembali` (
 `id_transaksi` int(11)
+,`isbn` varchar(32)
 ,`anggota` varchar(11)
 ,`petugas` varchar(11)
 ,`judul` varchar(50)
 ,`t_pinjam` date
+,`t_kembali` date
 ,`t_deadline` date
-,`isbn` varchar(32)
 );
 
 -- --------------------------------------------------------
@@ -245,6 +247,28 @@ INSERT INTO `pinjam_book` (`id_transaksi`, `id_anggota`, `id_petugas`, `ISBN`, `
 (10, 2, 3, '2', '2019-06-11', '2019-06-14', NULL, NULL),
 (11, 2, 3, '4', '2019-06-11', '2019-06-14', '2019-06-12', 0);
 
+--
+-- Triggers `pinjam_book`
+--
+DELIMITER $$
+CREATE TRIGGER `peminjaman` AFTER INSERT ON `pinjam_book` FOR EACH ROW BEGIN
+UPDATE book
+SET jumlah = jumlah - 1
+WHERE
+isbn = NEW.isbn;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `pengembalian` AFTER UPDATE ON `pinjam_book` FOR EACH ROW BEGIN
+UPDATE book
+SET jumlah = jumlah + 1
+WHERE
+isbn = NEW.isbn;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -306,7 +330,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `kembali`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `d`.`id_transaksi` AS `id_transaksi`,`a`.`nama` AS `anggota`,`b`.`nama` AS `petugas`,`c`.`Judul` AS `judul`,`d`.`t_pinjam` AS `t_pinjam`,`d`.`t_deadline` AS `t_deadline`,`c`.`ISBN` AS `isbn` from (((`pinjam_book` `d` join `anggota` `a` on((`a`.`id` = `d`.`id_anggota`))) join `users` `b` on((`b`.`id` = `d`.`id_petugas`))) join `book` `c` on((`c`.`ISBN` = `d`.`ISBN`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kembali`  AS  select `d`.`id_transaksi` AS `id_transaksi`,`c`.`ISBN` AS `isbn`,`a`.`nama` AS `anggota`,`b`.`nama` AS `petugas`,`c`.`Judul` AS `judul`,`d`.`t_pinjam` AS `t_pinjam`,`d`.`t_kembali` AS `t_kembali`,`d`.`t_deadline` AS `t_deadline` from (((`pinjam_book` `d` join `anggota` `a` on((`a`.`id` = `d`.`id_anggota`))) join `users` `b` on((`b`.`id` = `d`.`id_petugas`))) join `book` `c` on((`c`.`ISBN` = `d`.`ISBN`))) ;
 
 -- --------------------------------------------------------
 
