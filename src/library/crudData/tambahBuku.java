@@ -281,7 +281,6 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
         crud c = new crud();
-        Main m = new Main();
         if(this.edit==true){
             String v =Jisbn.getText();
             int thn = Integer.parseInt(Jthn.getText());
@@ -296,7 +295,6 @@ public class tambahBuku extends javax.swing.JFrame {
         c.createBuku(Jisbn.getText() , Jjudul.getText(), Jpenerbit.getText(),thn , Jpengarang.getText(), Jlokasi.getText(), JJumlah.getText());
         }
         this.dispose();
-        model.fireTableDataChanged();
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**

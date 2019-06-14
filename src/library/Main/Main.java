@@ -292,6 +292,7 @@ public class Main extends javax.swing.JFrame {
         hapusbukuB = new javax.swing.JButton();
         cariTF = new javax.swing.JTextField();
         cariB = new javax.swing.JButton();
+        refreshB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
@@ -1706,6 +1707,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        refreshB.setBackground(new java.awt.Color(0, 153, 0));
+        refreshB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        refreshB.setForeground(new java.awt.Color(255, 255, 255));
+        refreshB.setText("refesh");
+        refreshB.setBorder(null);
+        refreshB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        refreshB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
         bukuPanel.setLayout(bukuPanelLayout);
         bukuPanelLayout.setHorizontalGroup(
@@ -1715,8 +1728,10 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1521, Short.MAX_VALUE)
                     .addGroup(bukuPanelLayout.createSequentialGroup()
-                        .addComponent(titleBuku)
-                        .addGap(53, 53, 53)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleBuku)
+                            .addComponent(refreshB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bukuPanelLayout.createSequentialGroup()
                                 .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1736,7 +1751,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(bukuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleBuku)
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addComponent(titleBuku)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(refreshB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bukuPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1797,7 +1815,7 @@ public class Main extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_settingBActionPerformed
 
-    private void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
+    public void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
         // TODO add your handling code here:
         model.setRowCount(0);
         MysqlCon send = new MysqlCon( );
@@ -1840,9 +1858,11 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bukuBActionPerformed
 
+        
+    
     private void AnggotaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnggotaBActionPerformed
         // TODO add your handling code here:
-        
+        bukuBActionPerformed(evt);
         MysqlCon send = new MysqlCon( );
         DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nama", "Alamat", "No Telepon"}, 0){
         @Override
@@ -2367,6 +2387,49 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DeleteBukuPinjamBActionPerformed
 
+    private void refreshBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBActionPerformed
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q;
+            String w;
+            String e;
+            String r;
+            String t;
+            String y;
+            String u;
+            String i;
+            try {
+                rs = stmt.executeQuery("select * from library.book");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("penerbit");
+                r = rs.getString("thn_buku");
+                t = rs.getString("tgl_pengadaan");
+                y = rs.getString("pengarang");
+                u = rs.getString("lokasi");
+                i = rs.getString("jmlh");
+                model.addRow(new Object[]{q, w, e, r, t,y,u,i});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        this.titleBuku.setText("Buku");
+        panelBawah.removeAll();
+        panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model);
+        editbukuB.setEnabled(false);
+        hapusbukuB.setEnabled(false);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+        
+    }//GEN-LAST:event_refreshBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2435,7 +2498,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton TambahBukuPinjamB;
     private javax.swing.JPanel anggotaPanel;
     private javax.swing.JTable anggotaTable;
-    private javax.swing.JButton bukuB;
+    public javax.swing.JButton bukuB;
     private javax.swing.JPanel bukuPanel;
     private javax.swing.JTable bukuTabel;
     private javax.swing.JButton cariAnggotaB;
@@ -2522,6 +2585,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton pengembalianB;
     private javax.swing.JPanel pengembalianPanel;
     private javax.swing.JTable pinjamTable;
+    private javax.swing.JButton refreshB;
     private javax.swing.JButton settingB;
     private javax.swing.JTable settingTable;
     private javax.swing.JButton staffB;
