@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambahBuku.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambahAnggota.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Main/Main.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Main/DaftarPrototipe.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Mysql/MysqlCon.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambahStaff.java</file>
-            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/crud.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/tambahStaff.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/DaftarPrototipe.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/tambahBuku.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/crud.java</file>
+            <file>file:/C:/xampp/htdocs/Library/src/library/Main/Main.java</file>
         </group>
     </open-files>
 </project-private>
