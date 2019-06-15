@@ -63,7 +63,7 @@ public class crud extends library.Main.Main {
     public void updateBuku(String val, String isbn, String judul, String penerbit, int thn_buku, String pengarang, String lokasi, String jumlah, String jenis, String kategori){
         String a[];
         try {  
-            rs=stmt.executeUpdate("update perpus.book set isbn = '" + isbn + "', judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi + "', jmlh = '"+ jumlah +"', jenis_buku = '"+ jenis +"', kategori = '"+ kategori +"' where isbn = "+ val);
+            rs=stmt.executeUpdate("update perpus.book set isbn = '" + isbn + "', judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', id_rak = '" + lokasi + "', jmlh = '"+ jumlah +"', jenis_buku = '"+ jenis +"', kategori = '"+ kategori +"' where isbn = "+ val);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -80,7 +80,7 @@ public class crud extends library.Main.Main {
         Statement stmt=kon.query();
         String a[];
         try {  
-            rs=stmt.executeUpdate("update perpus.book set judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', lokasi = '" + lokasi +"', jmlh = '"+ jumlah +"', jenis_buku = '"+ jenis +"', kategori = '"+kategori+"' where isbn = " + isbn );
+            rs=stmt.executeUpdate("update perpus.book set judul =  '" +  judul + "', penerbit = '" +  penerbit + "', thn_buku = '" + thn_buku + "', pengarang = '" + pengarang + "', id_rak = '" + lokasi +"', jmlh = '"+ jumlah +"', jenis_buku = '"+ jenis +"', kategori = '"+kategori+"' where isbn = " + isbn );
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
