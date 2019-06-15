@@ -1,0 +1,48 @@
+VIEW PINJAM
+create or replace view pinjam as select a.id_transaksi, b.nama , a.isbn , c.judul , a.t_pinjam , a.t_kembali, a.denda from pinjam_book a inner join anggota b on a.id_anggota = b.id inner join book c on a.isbn = c.isbn;
+
+-------------------------------------------------------
+
+VIEW KEMBALI
+create or replace view kembali as select d.id_transaksi, c.isbn, a.nama as anggota, b.nama as petugas, c.judul, d.t_pinjam, d.t_kembali, d.t_deadline from pinjam_book d inner join anggota a on a.id = d.id_anggota inner join users b on b.id = d.id_petugas inner join book c on c.isbn = d.isbn;
+
+-------------------------------------------------------
+
+FUNCTION DENDA
+create or replace function denda (date1 date, id int(11), id_trans int(11), uang int(11))
+returns int 
+begin
+declare date2 date;
+declare b int;
+Select t_deadline from pinjam_book where id_anggota = id and id_transaksi = id_trans into date2;
+if day(date1) > day(date2) then
+set b = (day(date1) - day(date2)) * uang;
+else
+set b = 0;
+end if;
+return b;
+end!
+
+-------------------------------------------------------
+
+TRIGGER PEMINJAMAN
+CREATE TRIGGER peminjaman after INSERT ON pinjam_book
+FOR EACH ROW BEGIN
+UPDATE book
+SET jumlah = jumlah - 1
+WHERE
+isbn = NEW.isbn;
+END!
+
+-------------------------------------------------------
+
+TRIGGER PENGEMBALIAN
+CREATE TRIGGER pengembalian after update ON pinjam_book
+FOR EACH ROW BEGIN
+UPDATE book
+SET jumlah = jumlah + 1
+WHERE
+isbn = NEW.isbn;
+END!
+
+-------------------------------------------------------  

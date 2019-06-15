@@ -6,11 +6,15 @@
 package library.Main;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import library.manipulateData.editBuku;
-import library.manipulateData.tambahBuku;
-import library.showData.Siswa;
-
+import library.Mysql.MysqlCon;
+import library.crudData.crud;
+import library.crudData.editBuku;
+import library.crudData.tambahBuku;
 /**
  *
  * @author My Computer
@@ -20,7 +24,8 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    DefaultTableModel model_buku = new DefaultTableModel(new String[]{"ISBN", "Judul", "Pengarang", "Penerbit", "Tahun Buku", "Kategori","Tanggal Pengadaan","Jenis", "Lokasi", "Jumlah"}, 0){
+    MysqlCon send = new MysqlCon( );
+    DefaultTableModel model_buku = new DefaultTableModel(new String[]{"ISBN", "Judul", "Pengarang", "Penerbit", "Tahun Buku", "Jenis", "Kategori","Tanggal Pengadaan","Lokasi", "Jumlah"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
@@ -56,16 +61,73 @@ public class Main extends javax.swing.JFrame {
 //        this.cariB.setVisible(false);
 //        
 //        this.title.setText("Buku");
-//        this.panelBawah.add(bukuPanel);
-
+//        this.panelBawah.add(bukuPanel);        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model_buku);
+        editbukuB.setEnabled(false);
+        hapusbukuB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
         
     }
-
+    
+    public Main(String name) {
+        initComponents();
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("Kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        this.titleBuku.setText("Buku");
+        panelBawah.removeAll();
+        panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model_buku);
+        editbukuB.setEnabled(false);
+        hapusbukuB.setEnabled(false);
+        panelBawah.repaint();
+        panelBawah.revalidate();;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,8 +170,30 @@ public class Main extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LabelUser = new javax.swing.JLabel();
         panelBawah = new javax.swing.JPanel();
+        bukuPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        bukuTabel = new javax.swing.JTable();
+        titleBuku = new javax.swing.JLabel();
+        pengarangL = new javax.swing.JLabel();
+        penerbitL = new javax.swing.JLabel();
+        kategoriL = new javax.swing.JLabel();
+        sumberL = new javax.swing.JLabel();
+        rakL = new javax.swing.JLabel();
+        pengarangCB = new javax.swing.JComboBox<>();
+        penerbitCB = new javax.swing.JComboBox<>();
+        kategoriCB = new javax.swing.JComboBox<>();
+        sumberCB = new javax.swing.JComboBox<>();
+        rakCB = new javax.swing.JComboBox<>();
+        tambahbukuB = new javax.swing.JButton();
+        editbukuB = new javax.swing.JButton();
+        hapusbukuB = new javax.swing.JButton();
+        eksporB = new javax.swing.JButton();
+        cariTF = new javax.swing.JTextField();
+        cariB = new javax.swing.JButton();
         laporanPanel = new javax.swing.JPanel();
         titleLaporan = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
@@ -299,32 +383,9 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        bukuPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        bukuTabel = new javax.swing.JTable();
-        titleBuku = new javax.swing.JLabel();
-        pengarangL = new javax.swing.JLabel();
-        penerbitL = new javax.swing.JLabel();
-        kategoriL = new javax.swing.JLabel();
-        sumberL = new javax.swing.JLabel();
-        rakL = new javax.swing.JLabel();
-        pengarangCB = new javax.swing.JComboBox<>();
-        penerbitCB = new javax.swing.JComboBox<>();
-        kategoriCB = new javax.swing.JComboBox<>();
-        sumberCB = new javax.swing.JComboBox<>();
-        rakCB = new javax.swing.JComboBox<>();
-        tambahbukuB = new javax.swing.JButton();
-        editbukuB = new javax.swing.JButton();
-        hapusbukuB = new javax.swing.JButton();
-        eksporB = new javax.swing.JButton();
-        cariTF = new javax.swing.JTextField();
-        cariB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         panelAtas.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -642,9 +703,9 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Selamat Datang,");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("<Username>");
+        LabelUser.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        LabelUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelUser.setText("<Username>");
 
         javax.swing.GroupLayout panelAtasLayout = new javax.swing.GroupLayout(panelAtas);
         panelAtas.setLayout(panelAtasLayout);
@@ -656,7 +717,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(579, 579, 579)
                 .addGroup(panelAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(LabelUser))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         panelAtasLayout.setVerticalGroup(
@@ -667,7 +728,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(LabelUser))
                     .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -676,6 +737,233 @@ public class Main extends javax.swing.JFrame {
 
         panelBawah.setBackground(new java.awt.Color(255, 255, 255));
         panelBawah.setLayout(new java.awt.CardLayout());
+
+        bukuPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel7.setBackground(new java.awt.Color(51, 153, 255));
+
+        bukuTabel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        bukuTabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bukuTabelMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(bukuTabel);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(332, Short.MAX_VALUE))
+        );
+
+        jScrollPane3.setViewportView(jPanel7);
+
+        titleBuku.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        titleBuku.setForeground(new java.awt.Color(51, 51, 51));
+        titleBuku.setText("Title");
+
+        pengarangL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        pengarangL.setForeground(new java.awt.Color(51, 51, 51));
+        pengarangL.setText("Pengarang");
+
+        penerbitL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        penerbitL.setForeground(new java.awt.Color(51, 51, 51));
+        penerbitL.setText("Penerbit");
+
+        kategoriL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        kategoriL.setForeground(new java.awt.Color(51, 51, 51));
+        kategoriL.setText("Kategori");
+
+        sumberL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        sumberL.setForeground(new java.awt.Color(51, 51, 51));
+        sumberL.setText("Sumber");
+
+        rakL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rakL.setForeground(new java.awt.Color(51, 51, 51));
+        rakL.setText("Rak");
+
+        pengarangCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        pengarangCB.setName("Kategori"); // NOI18N
+        pengarangCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pengarangCBActionPerformed(evt);
+            }
+        });
+
+        penerbitCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        penerbitCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        penerbitCB.setName("Kategori"); // NOI18N
+
+        kategoriCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategoriCB.setName("Kategori"); // NOI18N
+
+        sumberCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sumberCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sumberCB.setName("Kategori"); // NOI18N
+
+        rakCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rakCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rakCB.setName("Kategori"); // NOI18N
+
+        tambahbukuB.setBackground(new java.awt.Color(0, 153, 0));
+        tambahbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tambahbukuB.setForeground(new java.awt.Color(255, 255, 255));
+        tambahbukuB.setText("Tambah");
+        tambahbukuB.setBorder(null);
+        tambahbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahbukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahbukuBActionPerformed(evt);
+            }
+        });
+
+        editbukuB.setBackground(new java.awt.Color(255, 153, 0));
+        editbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        editbukuB.setForeground(new java.awt.Color(255, 255, 255));
+        editbukuB.setText("Edit");
+        editbukuB.setBorder(null);
+        editbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editbukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editbukuBActionPerformed(evt);
+            }
+        });
+
+        hapusbukuB.setBackground(new java.awt.Color(255, 0, 0));
+        hapusbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        hapusbukuB.setForeground(new java.awt.Color(255, 255, 255));
+        hapusbukuB.setText("Hapus");
+        hapusbukuB.setBorder(null);
+        hapusbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapusbukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusbukuBActionPerformed(evt);
+            }
+        });
+
+        eksporB.setBackground(new java.awt.Color(0, 204, 0));
+        eksporB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        eksporB.setForeground(new java.awt.Color(255, 255, 255));
+        eksporB.setText("Ekspor ke Excel");
+        eksporB.setBorder(null);
+        eksporB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        cariB.setBackground(new java.awt.Color(51, 153, 255));
+        cariB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        cariB.setForeground(new java.awt.Color(255, 255, 255));
+        cariB.setText("Cari");
+        cariB.setBorder(null);
+        cariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
+        bukuPanel.setLayout(bukuPanelLayout);
+        bukuPanelLayout.setHorizontalGroup(
+            bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bukuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addComponent(titleBuku)
+                        .addGap(53, 53, 53)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bukuPanelLayout.createSequentialGroup()
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pengarangL))
+                                .addGap(18, 18, 18)
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(penerbitCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(penerbitL))
+                                .addGap(18, 18, 18)
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kategoriL))
+                                .addGap(18, 18, 18)
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sumberCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sumberL)))
+                            .addGroup(bukuPanelLayout.createSequentialGroup()
+                                .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rakL)
+                            .addGroup(bukuPanelLayout.createSequentialGroup()
+                                .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(eksporB, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                                        .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 420, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        bukuPanelLayout.setVerticalGroup(
+            bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bukuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pengarangL)
+                            .addComponent(penerbitL)
+                            .addComponent(kategoriL)
+                            .addComponent(sumberL)
+                            .addComponent(rakL))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(penerbitCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sumberCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(titleBuku))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tambahbukuB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(eksporB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        panelBawah.add(bukuPanel, "card2");
 
         laporanPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -2668,224 +2956,6 @@ public class Main extends javax.swing.JFrame {
 
         panelBawah.add(siswaPanel, "card3");
 
-        bukuPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel7.setBackground(new java.awt.Color(51, 153, 255));
-
-        bukuTabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        bukuTabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bukuTabelMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(bukuTabel);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
-        );
-
-        jScrollPane3.setViewportView(jPanel7);
-
-        titleBuku.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        titleBuku.setForeground(new java.awt.Color(51, 51, 51));
-        titleBuku.setText("Title");
-
-        pengarangL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        pengarangL.setForeground(new java.awt.Color(51, 51, 51));
-        pengarangL.setText("Pengarang");
-
-        penerbitL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        penerbitL.setForeground(new java.awt.Color(51, 51, 51));
-        penerbitL.setText("Penerbit");
-
-        kategoriL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        kategoriL.setForeground(new java.awt.Color(51, 51, 51));
-        kategoriL.setText("Kategori");
-
-        sumberL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        sumberL.setForeground(new java.awt.Color(51, 51, 51));
-        sumberL.setText("Sumber");
-
-        rakL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        rakL.setForeground(new java.awt.Color(51, 51, 51));
-        rakL.setText("Rak");
-
-        pengarangCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        pengarangCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pengarangCB.setName("Kategori"); // NOI18N
-
-        penerbitCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        penerbitCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        penerbitCB.setName("Kategori"); // NOI18N
-
-        kategoriCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        kategoriCB.setName("Kategori"); // NOI18N
-
-        sumberCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        sumberCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        sumberCB.setName("Kategori"); // NOI18N
-
-        rakCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        rakCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        rakCB.setName("Kategori"); // NOI18N
-
-        tambahbukuB.setBackground(new java.awt.Color(0, 153, 0));
-        tambahbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tambahbukuB.setForeground(new java.awt.Color(255, 255, 255));
-        tambahbukuB.setText("Tambah");
-        tambahbukuB.setBorder(null);
-        tambahbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tambahbukuB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahbukuBActionPerformed(evt);
-            }
-        });
-
-        editbukuB.setBackground(new java.awt.Color(255, 153, 0));
-        editbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        editbukuB.setForeground(new java.awt.Color(255, 255, 255));
-        editbukuB.setText("Edit");
-        editbukuB.setBorder(null);
-        editbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editbukuB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editbukuBActionPerformed(evt);
-            }
-        });
-
-        hapusbukuB.setBackground(new java.awt.Color(255, 0, 0));
-        hapusbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        hapusbukuB.setForeground(new java.awt.Color(255, 255, 255));
-        hapusbukuB.setText("Hapus");
-        hapusbukuB.setBorder(null);
-        hapusbukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        eksporB.setBackground(new java.awt.Color(0, 204, 0));
-        eksporB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        eksporB.setForeground(new java.awt.Color(255, 255, 255));
-        eksporB.setText("Ekspor ke Excel");
-        eksporB.setBorder(null);
-        eksporB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        cariB.setBackground(new java.awt.Color(51, 153, 255));
-        cariB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        cariB.setForeground(new java.awt.Color(255, 255, 255));
-        cariB.setText("Cari");
-        cariB.setBorder(null);
-        cariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
-        bukuPanel.setLayout(bukuPanelLayout);
-        bukuPanelLayout.setHorizontalGroup(
-            bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bukuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
-                    .addGroup(bukuPanelLayout.createSequentialGroup()
-                        .addComponent(titleBuku)
-                        .addGap(53, 53, 53)
-                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bukuPanelLayout.createSequentialGroup()
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pengarangL))
-                                .addGap(18, 18, 18)
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(penerbitCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(penerbitL))
-                                .addGap(18, 18, 18)
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(kategoriL))
-                                .addGap(18, 18, 18)
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sumberCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sumberL)))
-                            .addGroup(bukuPanelLayout.createSequentialGroup()
-                                .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rakL)
-                            .addGroup(bukuPanelLayout.createSequentialGroup()
-                                .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(eksporB, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(bukuPanelLayout.createSequentialGroup()
-                                        .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 420, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        bukuPanelLayout.setVerticalGroup(
-            bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bukuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bukuPanelLayout.createSequentialGroup()
-                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pengarangL)
-                            .addComponent(penerbitL)
-                            .addComponent(kategoriL)
-                            .addComponent(sumberL)
-                            .addComponent(rakL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pengarangCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(penerbitCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sumberCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(titleBuku))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tambahbukuB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(eksporB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        panelBawah.add(bukuPanel, "card2");
-
         getContentPane().add(panelBawah, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -2903,9 +2973,37 @@ public class Main extends javax.swing.JFrame {
 
     private void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
         // TODO add your handling code here:
+        model_buku.setRowCount(0);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("Kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model_buku);
+        editbukuB.setEnabled(false);
+        hapusbukuB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_bukuBActionPerformed
@@ -2928,15 +3026,6 @@ public class Main extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_siswaBActionPerformed
 
-    private void guruBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guruBActionPerformed
-        // TODO add your handling code here:
-        this.titleGuru.setText("Guru");
-        panelBawah.removeAll();
-        panelBawah.add(guruPanel);
-        panelBawah.repaint();
-        panelBawah.revalidate();
-    }//GEN-LAST:event_guruBActionPerformed
-
     private void caristaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caristaffBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_caristaffBActionPerformed
@@ -2944,15 +3033,6 @@ public class Main extends javax.swing.JFrame {
     private void tambahguruBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahguruBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tambahguruBActionPerformed
-
-    private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
-        // TODO add your handling code here:
-        this.titleStaff.setText("Staff");
-        panelBawah.removeAll();
-        panelBawah.add(staffPanel);
-        panelBawah.repaint();
-        panelBawah.revalidate();
-    }//GEN-LAST:event_staffBActionPerformed
 
     private void backofficeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backofficeBActionPerformed
         // TODO add your handling code here:
@@ -2967,14 +3047,15 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         tambahBuku tb = new tambahBuku();
         tb.setVisible(true);
-        
     }//GEN-LAST:event_tambahbukuBActionPerformed
 
     private void editbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbukuBActionPerformed
         // TODO add your handling code here:
-        editBuku eb = new editBuku();
-        eb.setVisible(true);
-        
+        int column = 0;
+        int row = bukuTabel.getSelectedRow();
+        String value = bukuTabel.getModel().getValueAt(row, column).toString();
+        editBuku eb = new editBuku(value);
+        eb.setVisible(true);        
     }//GEN-LAST:event_editbukuBActionPerformed
 
     private void bukuTabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bukuTabelMouseClicked
@@ -3030,6 +3111,37 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void pengarangCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pengarangCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pengarangCBActionPerformed
+
+    private void hapusbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbukuBActionPerformed
+        // TODO add your handling code here:
+        crud n = new crud();
+        int column = 0;
+        int row = bukuTabel.getSelectedRow();
+        String value = bukuTabel.getModel().getValueAt(row, column).toString();
+        n.deleteBuku(value);
+    }//GEN-LAST:event_hapusbukuBActionPerformed
+
+    private void staffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBActionPerformed
+        // TODO add your handling code here:
+        this.titleStaff.setText("Staff");
+        panelBawah.removeAll();
+        panelBawah.add(staffPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_staffBActionPerformed
+
+    private void guruBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guruBActionPerformed
+        // TODO add your handling code here:
+        this.titleGuru.setText("Guru");
+        panelBawah.removeAll();
+        panelBawah.add(guruPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_guruBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3066,6 +3178,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelUser;
     private javax.swing.JComboBox<String> angkatanSiswaCB;
     private javax.swing.JButton backofficeB;
     private javax.swing.JPanel backofficePanel;
@@ -3142,7 +3255,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

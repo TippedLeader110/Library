@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import library.Mysql.MysqlCon;
-import library.showData.UsersData;
 import javax.swing.JOptionPane;
 
 /**
@@ -160,7 +159,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         Statement stmt = send.query();
         ResultSet rs=stmt.executeQuery("select * from perpus.petugas WHERE username = '" + F1 + "' AND PASSWORD =  '" + F2 + "'");  
         while (rs.next()){
-            this.nama = rs.getString("name");
+            this.nama = rs.getString("nama");
             System.out.println(this.nama);
         }
             
@@ -185,7 +184,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Sukses Login, Selamat Datang " + this.nama);    
             
         this.setVisible(false);
-        new Main().setVisible(true);
+        new Main(this.nama).setVisible(true);
         }
         else
             JOptionPane.showMessageDialog(null, "Gagal Login");
