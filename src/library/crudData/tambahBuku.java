@@ -557,6 +557,7 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void TambahBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahBActionPerformed
         // TODO add your handling code here:
+        
         String jenis = (JenisCB.getSelectedItem()).toString();
         //lokasi
         String lokasi;

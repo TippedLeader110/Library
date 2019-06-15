@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import library.Mysql.MysqlCon;
 import library.crudData.crud;
 import library.crudData.editBuku;
@@ -39,6 +41,7 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
+     TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
     public Main() {
         initComponents();
         
@@ -194,6 +197,9 @@ public class Main extends javax.swing.JFrame {
         cariTF = new javax.swing.JTextField();
         cariB = new javax.swing.JButton();
         penerbitL1 = new javax.swing.JLabel();
+        rakL1 = new javax.swing.JLabel();
+        penerbitL2 = new javax.swing.JLabel();
+        ResetBukuB = new javax.swing.JButton();
         laporanPanel = new javax.swing.JPanel();
         titleLaporan = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
@@ -733,6 +739,11 @@ public class Main extends javax.swing.JFrame {
         rakCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rakCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rak" }));
         rakCB.setName("Kategori"); // NOI18N
+        rakCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rakCBItemStateChanged(evt);
+            }
+        });
 
         tambahbukuB.setBackground(new java.awt.Color(0, 153, 0));
         tambahbukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -783,6 +794,26 @@ public class Main extends javax.swing.JFrame {
         penerbitL1.setForeground(new java.awt.Color(51, 51, 51));
         penerbitL1.setText("*Pilih Jenis Buku sebelum memilih kategori");
 
+        rakL1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rakL1.setForeground(new java.awt.Color(51, 51, 51));
+        rakL1.setText("Nama");
+
+        penerbitL2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        penerbitL2.setForeground(new java.awt.Color(51, 51, 51));
+        penerbitL2.setText("*Untuk reset ComboBox pilih item nama ComboBox, reset ComboBox kategori pilih item kategori pada ComboBox Kategori");
+        penerbitL2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        ResetBukuB.setBackground(new java.awt.Color(255, 255, 255));
+        ResetBukuB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        ResetBukuB.setText("Reset");
+        ResetBukuB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ResetBukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ResetBukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetBukuBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
         bukuPanel.setLayout(bukuPanelLayout);
         bukuPanelLayout.setHorizontalGroup(
@@ -790,17 +821,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(bukuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(bukuPanelLayout.createSequentialGroup()
                         .addComponent(titleBuku)
                         .addGap(53, 53, 53)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bukuPanelLayout.createSequentialGroup()
-                                .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bukuPanelLayout.createSequentialGroup()
                                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JenisCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -815,12 +842,23 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(rakL))
                                 .addGap(18, 18, 18)
                                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(penerbitL1)
-                                    .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rakL1))
+                                .addGap(18, 18, 18)
+                                .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(bukuPanelLayout.createSequentialGroup()
+                                .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ResetBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(penerbitL2)
+                                    .addComponent(penerbitL1))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         bukuPanelLayout.setVerticalGroup(
             bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -833,7 +871,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(kategoriL)
                             .addComponent(sumberL)
                             .addComponent(rakL)
-                            .addComponent(penerbitL1))
+                            .addComponent(rakL1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JenisCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -842,12 +880,20 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tambahbukuB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tambahbukuB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(editbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hapusbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ResetBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bukuPanelLayout.createSequentialGroup()
+                        .addComponent(penerbitL1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(penerbitL2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -2913,24 +2959,60 @@ public class Main extends javax.swing.JFrame {
 
     private void KategoriCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_KategoriCBItemStateChanged
         // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = evt.getItem().toString();
+        if(Kategori.equals("Kategori")){
+            if(lokasi.equals("Rak")){
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+            }else{
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+            }
+        }else{
+            tr.setRowFilter(RowFilter.regexFilter(Kategori));
+        }
     }//GEN-LAST:event_KategoriCBItemStateChanged
 
     private void JenisCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisCBItemStateChanged
         // TODO add your handling code here:
+        
         //combo box kategori
         KategoriCB.setEnabled(true);
         KategoriCB.removeAllItems();
+        KategoriCB.addItem("Kategori"); 
         Statement stmt = send.query();
         try{
             String jenis = JenisCB.getSelectedItem().toString();
             ResultSet rs2 = stmt.executeQuery("Select distinct book.kategori from perpus.book where jenis_buku = '"+ jenis +"'");
             while(rs2.next()){
                 String kategori = rs2.getString("kategori");
-                KategoriCB.addItem(kategori); 
+                KategoriCB.addItem(kategori);
+                KategoriCB.setSelectedIndex(0);
             }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
+        
+        //search by combo box
+        bukuTabel.setRowSorter(tr);
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String lokasi = rakCB.getSelectedItem().toString();
+        if(jenis.equals("Jenis")){
+            KategoriCB.setEnabled(false);
+            if(lokasi.equals("Rak"))
+                tr.setRowFilter(RowFilter.regexFilter(""));
+            else{
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+            }
+        }
+        else
+            tr.setRowFilter(RowFilter.regexFilter(jenis));
+            
     }//GEN-LAST:event_JenisCBItemStateChanged
 
     private void bukuTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bukuTabelFocusGained
@@ -2938,6 +3020,68 @@ public class Main extends javax.swing.JFrame {
         editbukuB.setEnabled(true);
         hapusbukuB.setEnabled(true);
     }//GEN-LAST:event_bukuTabelFocusGained
+
+    private void rakCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rakCBItemStateChanged
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        bukuTabel.setRowSorter(tr);
+        if(!lokasi.equals("Rak")){
+            tr.setRowFilter(RowFilter.regexFilter(lokasi));
+        }
+        else{
+            if(jenis.equals("Jenis"))
+                tr.setRowFilter(RowFilter.regexFilter(""));
+            else{
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                if(!Kategori.equals("Kategori"))
+                    tr.setRowFilter(RowFilter.regexFilter(Kategori));
+            }
+        }
+            
+    }//GEN-LAST:event_rakCBItemStateChanged
+
+    private void ResetBukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBukuBActionPerformed
+        // TODO add your handling code here:
+        rakCB.setSelectedIndex(0);
+        JenisCB.setSelectedIndex(0);
+        cariTF.setText("");
+        model_buku.setRowCount(0);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("Kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        this.titleBuku.setText("Buku");
+        panelBawah.removeAll();
+        panelBawah.add(bukuPanel);
+        bukuTabel.setModel(model_buku);
+        editbukuB.setEnabled(false);
+        hapusbukuB.setEnabled(false);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_ResetBukuBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2978,6 +3122,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> JenisCB;
     private javax.swing.JComboBox<String> KategoriCB;
     private javax.swing.JLabel LabelUser;
+    private javax.swing.JButton ResetBukuB;
     private javax.swing.JComboBox<String> angkatanSiswaCB;
     private javax.swing.JPanel backofficePanel;
     private javax.swing.JButton backupdbB;
@@ -3174,11 +3319,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton peminjamanB;
     private javax.swing.JPanel peminjamanPanel;
     private javax.swing.JLabel penerbitL1;
+    private javax.swing.JLabel penerbitL2;
     private javax.swing.JPanel pengaturanPanel;
     private javax.swing.JButton pengembalianB;
     private javax.swing.JPanel pengembalianPanel;
     private javax.swing.JComboBox<String> rakCB;
     private javax.swing.JLabel rakL;
+    private javax.swing.JLabel rakL1;
     private javax.swing.JButton settingB;
     private javax.swing.JButton siswaB;
     private javax.swing.JPanel siswaPanel;
