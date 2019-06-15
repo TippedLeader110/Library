@@ -21,26 +21,23 @@ public class editBuku extends javax.swing.JFrame {
      * Creates new form editBuku
      */
     String val;
-    public editBuku() {
+    MysqlCon kon = new MysqlCon();
+    public editBuku(String val){
         initComponents();
         LokasiCB.setEnabled(true);
         Jrak.setEnabled(false);
         Jtingkat.setEnabled(false);
         KategoriCB.setEnabled(true);
         JNewKategori.setEnabled(false);
-    }
-    
-    MysqlCon kon = new MysqlCon();
-    public editBuku(String val){
         this.val = val;
         title.setText("Edit Buku");
         Statement stmt=kon.query();
         
         //lokasi
         try{
-            ResultSet rs = stmt.executeQuery("Select lok_book.id_rak from perpus.lok_book");
-            while(rs.next()){
-                String lokasi = rs.getString("id_rak");
+            ResultSet rs3 = stmt.executeQuery("Select lok_book.id_rak from perpus.lok_book");
+            while(rs3.next()){
+                String lokasi = rs3.getString("id_rak");
                 LokasiCB.addItem(lokasi); 
             }   
         }catch (SQLException ex) {
@@ -60,16 +57,17 @@ public class editBuku extends javax.swing.JFrame {
         
         try {
             
-        ResultSet rs = stmt.executeQuery("SELECT * FROM library.book where isbn = " + val);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.book where isbn = " + val);
         while (rs.next()){
                 Jisbn.setText(rs.getString("ISBN"));
+                System.out.println(rs.getString("ISBN"));
                 Jjudul.setText(rs.getString("judul"));
                 Jpenerbit.setText(rs.getString("penerbit"));
                 Jthn.setText(rs.getString("thn_buku"));
                 Jpengarang.setText(rs.getString("pengarang"));
                 JJumlah.setText(rs.getString("jmlh"));
                 LokasiCB.setSelectedItem(rs.getString("id_rak"));
-                JenisCB.setSelectedItem(rs.getString("jenis"));
+                JenisCB.setSelectedItem(rs.getString("jenis_buku"));
                 KategoriCB.setSelectedItem(rs.getString("kategori"));
             }
         
@@ -414,6 +412,7 @@ public class editBuku extends javax.swing.JFrame {
         String v =Jisbn.getText();
         int thn = Integer.parseInt(Jthn.getText());
         String jenis = (JenisCB.getSelectedItem()).toString();
+        
         //lokasi
         String lokasi;
         if((Jrak.getText()).equals("No Rak")){
@@ -491,7 +490,7 @@ public class editBuku extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -515,13 +514,8 @@ public class editBuku extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new editBuku().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

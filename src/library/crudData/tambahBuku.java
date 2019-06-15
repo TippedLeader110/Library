@@ -40,7 +40,7 @@ public class tambahBuku extends javax.swing.JFrame {
         Statement stmt=kon.query();
         //combo box lokasi
         try{
-            ResultSet rs = stmt.executeQuery("Select lok_book.id_rak from perpus.lok_book");
+            ResultSet rs = stmt.executeQuery("Select distinct lok_book.id_rak from perpus.lok_book");
             while(rs.next()){
                 String lokasi = rs.getString("id_rak");
                 LokasiCB.addItem(lokasi); 
@@ -61,6 +61,9 @@ public class tambahBuku extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
+        
+        KategoriCB.setEnabled(false);
+        BuatBaru2.setEnabled(false);
     }
 
     /**
@@ -650,14 +653,15 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void JenisCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisCBItemStateChanged
         // TODO add your handling code here:
+        KategoriCB.setEnabled(true);
+        BuatBaru2.setEnabled(true);
         Statement stmt=kon.query();
         KategoriCB.removeAllItems();
          try{
             String jenis = JenisCB.getSelectedItem().toString();
             ResultSet rs2 = stmt.executeQuery("Select distinct book.kategori from perpus.book where jenis_buku = '"+ jenis +"'");
             while(rs2.next()){
-                String kategori = rs2.getString("kategori"); 
-                System.out.println(rs2.next());
+                String kategori = rs2.getString("kategori");
                 KategoriCB.addItem(kategori); 
             }
         }catch (SQLException ex) {
