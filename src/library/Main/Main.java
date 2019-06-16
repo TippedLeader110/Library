@@ -454,7 +454,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        siswaTabel = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu11 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -3174,6 +3174,11 @@ public class Main extends javax.swing.JFrame {
         tambahsiswaB.setText("Tambah");
         tambahsiswaB.setBorder(null);
         tambahsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahsiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahsiswaBActionPerformed(evt);
+            }
+        });
 
         editsiswaB.setBackground(new java.awt.Color(255, 153, 0));
         editsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -3191,7 +3196,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        siswaTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -3202,7 +3207,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane10.setViewportView(jTable4);
+        jScrollPane10.setViewportView(siswaTabel);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -3969,6 +3974,44 @@ public class Main extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void tambahsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahsiswaBActionPerformed
+        // TODO add your handling code here:
+        this.titleSiswa.setText("Siswa");
+        panelBawah.removeAll();
+        panelBawah.add(siswaPanel);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+        
+        model_siswa.setRowCount(0);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+           
+        String q, w, e, r, t, y, u;
+        try {
+                rs = stmt.executeQuery("select * from perpus.siswa_view");
+                while(rs.next()){
+                q = rs.getString("nis");
+                w = rs.getString("nama");
+                e = rs.getString("tingkat");
+                r = rs.getString("jurusan");
+                t = rs.getString("kelas");
+                y = rs.getString("alamat");
+                u = rs.getString("no_telp");
+                model_siswa.addRow(new Object[]{q, w, e, r, t,y,u});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+         this.titleSiswa.setText("Siswa");
+        panelBawah.removeAll();
+        panelBawah.add(siswaPanel);
+        siswaTabel.setModel(model_siswa);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_tambahsiswaBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4241,7 +4284,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTable12;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
@@ -4280,6 +4322,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel rakL;
     private javax.swing.JLabel rakL2;
     private javax.swing.JPanel siswaPanel;
+    private javax.swing.JTable siswaTabel;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JLabel sumberL;
     private javax.swing.JButton tambahbukuB;
