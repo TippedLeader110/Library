@@ -332,7 +332,7 @@ public class Main extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tableMapel = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
@@ -472,10 +472,10 @@ public class Main extends javax.swing.JFrame {
         jButton47 = new javax.swing.JButton();
         siswaPanel = new javax.swing.JPanel();
         titleSiswa = new javax.swing.JLabel();
-        angkatanSiswaCB = new javax.swing.JComboBox<>();
+        tingkatSiswaCB = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton22 = new javax.swing.JButton();
+        cariSiswaField = new javax.swing.JTextField();
+        cariSiswaB = new javax.swing.JButton();
         tambahsiswaB = new javax.swing.JButton();
         editsiswaB = new javax.swing.JButton();
         hapussiswaB = new javax.swing.JButton();
@@ -483,6 +483,10 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         siswaTabel = new javax.swing.JTable();
+        jurusanSiswaCB = new javax.swing.JComboBox<>();
+        jLabel93 = new javax.swing.JLabel();
+        kelasSiswaCB = new javax.swing.JComboBox<>();
+        jLabel94 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
@@ -1749,7 +1753,7 @@ public class Main extends javax.swing.JFrame {
         jButton7.setText("Cari");
         jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tableMapel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1760,7 +1764,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(jTable6);
+        jScrollPane11.setViewportView(tableMapel);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -3324,21 +3328,36 @@ public class Main extends javax.swing.JFrame {
         titleSiswa.setForeground(new java.awt.Color(51, 51, 51));
         titleSiswa.setText("Title");
 
-        angkatanSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        angkatanSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tingkatSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tingkatSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tingkat", "10", "11", "12", "Alumni" }));
+        tingkatSiswaCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tingkatSiswaCBItemStateChanged(evt);
+            }
+        });
 
         jLabel39.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel39.setText("Angkatan");
+        jLabel39.setText("Tingkat");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cariSiswaField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cariSiswaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariSiswaFieldActionPerformed(evt);
+            }
+        });
 
-        jButton22.setBackground(new java.awt.Color(51, 153, 255));
-        jButton22.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton22.setForeground(new java.awt.Color(255, 255, 255));
-        jButton22.setText("Cari");
-        jButton22.setBorder(null);
-        jButton22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariSiswaB.setBackground(new java.awt.Color(51, 153, 255));
+        cariSiswaB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        cariSiswaB.setForeground(new java.awt.Color(255, 255, 255));
+        cariSiswaB.setText("Cari");
+        cariSiswaB.setBorder(null);
+        cariSiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariSiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariSiswaBActionPerformed(evt);
+            }
+        });
 
         tambahsiswaB.setBackground(new java.awt.Color(51, 153, 0));
         tambahsiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -3415,6 +3434,30 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane5.setViewportView(jPanel2);
 
+        jurusanSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jurusanSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jurusan" }));
+        jurusanSiswaCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jurusanSiswaCBItemStateChanged(evt);
+            }
+        });
+
+        jLabel93.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel93.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel93.setText("Jurusan");
+
+        kelasSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        kelasSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kelas", "1", "2", "3" }));
+        kelasSiswaCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                kelasSiswaCBItemStateChanged(evt);
+            }
+        });
+
+        jLabel94.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel94.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel94.setText("Kelas");
+
         javax.swing.GroupLayout siswaPanelLayout = new javax.swing.GroupLayout(siswaPanel);
         siswaPanel.setLayout(siswaPanelLayout);
         siswaPanelLayout.setHorizontalGroup(
@@ -3427,21 +3470,27 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(titleSiswa)
                         .addGap(51, 51, 51)
                         .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tingkatSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel39)
+                            .addComponent(tambahsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(siswaPanelLayout.createSequentialGroup()
+                                .addComponent(editsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(siswaPanelLayout.createSequentialGroup()
                                 .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(siswaPanelLayout.createSequentialGroup()
-                                        .addComponent(angkatanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(siswaPanelLayout.createSequentialGroup()
-                                        .addComponent(tambahsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(editsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel93)
+                                    .addComponent(jurusanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel94)
+                                    .addComponent(kelasSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(cariSiswaField, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cariSiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -3452,20 +3501,27 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titleSiswa)
                     .addGroup(siswaPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel39)
+                        .addComponent(jLabel94)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cariSiswaField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(siswaPanelLayout.createSequentialGroup()
+                        .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel93))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(angkatanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tingkatSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jurusanSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kelasSiswaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cariSiswaB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hapussiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         panelBawah.add(siswaPanel, "card3");
@@ -3801,7 +3857,7 @@ public class Main extends javax.swing.JFrame {
         
         Statement stmt = send.query();
         ResultSet rs;
-           
+        
         String q, w, e, r, t, y, u;
         try {
                 rs = stmt.executeQuery("select * from perpus.siswa_view");
@@ -3818,7 +3874,19 @@ public class Main extends javax.swing.JFrame {
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
             }
-         this.titleSiswa.setText("Siswa");
+        
+        //jurusan
+        try{
+            ResultSet rs_jurusan = stmt.executeQuery("select distinct kelas.jurusan from perpus.kelas order by kelas.jurusan asc");
+            while(rs_jurusan.next()){
+                String jurusan = rs_jurusan.getString("jurusan");
+               jurusanSiswaCB.addItem(jurusan); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+        
+        this.titleSiswa.setText("Siswa");
         panelBawah.removeAll();
         panelBawah.add(siswaPanel);
         siswaTabel.setModel(model_siswa);
@@ -3972,6 +4040,86 @@ public class Main extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_jButton43ActionPerformed
 
+    private void cariSiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariSiswaBActionPerformed
+        // TODO add your handling code here:
+        siswaTabel.setRowSorter(ts);
+        String tingkat = tingkatSiswaCB.getSelectedItem().toString();
+        String jurusan = jurusanSiswaCB.getSelectedItem().toString();
+        String kelas = kelasSiswaCB.getSelectedItem().toString();
+        String nama = cariSiswaField.getText();
+        if(nama.equals("")){
+            ts.setRowFilter(RowFilter.regexFilter(""));
+            if(!jurusan.equals("Jurusan"))
+                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+            if(!tingkat.equals("Tingkat"))
+                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+            if(!kelas.equals("Kelas"))
+                ts.setRowFilter(RowFilter.regexFilter(kelas));
+        }else
+            ts.setRowFilter(RowFilter.regexFilter(nama));
+    }//GEN-LAST:event_cariSiswaBActionPerformed
+
+    private void cariSiswaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariSiswaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariSiswaFieldActionPerformed
+
+    private void tingkatSiswaCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tingkatSiswaCBItemStateChanged
+        // TODO add your handling code here:
+        siswaTabel.setRowSorter(ts);
+        String tingkat = tingkatSiswaCB.getSelectedItem().toString();
+        String jurusan = jurusanSiswaCB.getSelectedItem().toString();
+        String kelas = kelasSiswaCB.getSelectedItem().toString();
+        String nama = cariSiswaField.getText();
+        if(tingkat.equals("Tingkat")){
+            ts.setRowFilter(RowFilter.regexFilter(""));
+            if(!jurusan.equals("Jurusan"))
+                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+            if(!kelas.equals("Kelas"))
+                ts.setRowFilter(RowFilter.regexFilter(kelas));
+            if(!nama.equals(""))
+                ts.setRowFilter(RowFilter.regexFilter(nama));
+        }else
+            ts.setRowFilter(RowFilter.regexFilter(tingkat));
+    }//GEN-LAST:event_tingkatSiswaCBItemStateChanged
+
+    private void jurusanSiswaCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jurusanSiswaCBItemStateChanged
+        // TODO add your handling code here:
+        siswaTabel.setRowSorter(ts);
+        String tingkat = tingkatSiswaCB.getSelectedItem().toString();
+        String jurusan = jurusanSiswaCB.getSelectedItem().toString();
+        String kelas = kelasSiswaCB.getSelectedItem().toString();
+        String nama = cariSiswaField.getText();
+        if(jurusan.equals("Jurusan")){
+            ts.setRowFilter(RowFilter.regexFilter(""));
+            if(!tingkat.equals("Tingkat"))
+                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+            if(!kelas.equals("Kelas"))
+                ts.setRowFilter(RowFilter.regexFilter(kelas));
+            if(!nama.equals(""))
+                ts.setRowFilter(RowFilter.regexFilter(nama));
+        }else
+            ts.setRowFilter(RowFilter.regexFilter(jurusan));
+    }//GEN-LAST:event_jurusanSiswaCBItemStateChanged
+
+    private void kelasSiswaCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kelasSiswaCBItemStateChanged
+        // TODO add your handling code here:
+        siswaTabel.setRowSorter(ts);
+        String tingkat = tingkatSiswaCB.getSelectedItem().toString();
+        String jurusan = jurusanSiswaCB.getSelectedItem().toString();
+        String kelas = kelasSiswaCB.getSelectedItem().toString();
+        String nama = cariSiswaField.getText();
+        if(kelas.equals("Kelas")){
+            ts.setRowFilter(RowFilter.regexFilter(""));
+            if(!tingkat.equals("Tingkat"))
+                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+            if(!jurusan.equals("Jurusan"))
+                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+            if(!nama.equals(""))
+                ts.setRowFilter(RowFilter.regexFilter(nama));
+        }else
+            ts.setRowFilter(RowFilter.regexFilter(kelas));
+    }//GEN-LAST:event_kelasSiswaCBItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -4014,12 +4162,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel PengembalianMapelPanel;
     private javax.swing.JPanel PengembalianUmumPanel;
     private javax.swing.JButton ResetBukuB;
-    private javax.swing.JComboBox<String> angkatanSiswaCB;
     private javax.swing.JPanel backofficePanel;
     private javax.swing.JButton backupdbB;
     private javax.swing.JPanel bukuPanel;
     private javax.swing.JTable bukuTabel;
     private javax.swing.JButton cariBukuB;
+    private javax.swing.JButton cariSiswaB;
+    private javax.swing.JTextField cariSiswaField;
     private javax.swing.JTextField cariTF;
     private javax.swing.JTextField cariguruTF;
     private javax.swing.JButton caristaffB;
@@ -4058,7 +4207,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
@@ -4163,6 +4311,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -4226,11 +4376,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTable13;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
@@ -4242,8 +4390,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JComboBox<String> jurusanSiswaCB;
     private javax.swing.JPanel kasPanel;
     private javax.swing.JLabel kategoriL;
+    private javax.swing.JComboBox<String> kelasSiswaCB;
     private javax.swing.JLabel kodeanggota;
     private javax.swing.JLabel kodeanggota1;
     private javax.swing.JPanel laporanPanel;
@@ -4269,12 +4419,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel staffPanel;
     private javax.swing.JTable staffTabel;
     private javax.swing.JLabel sumberL;
+    private javax.swing.JTable tableMapel;
     private javax.swing.JButton tambahUserB;
     private javax.swing.JButton tambahbukuB;
     private javax.swing.JButton tambahguruB;
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
     private javax.swing.JComboBox<String> thnCB;
+    private javax.swing.JComboBox<String> tingkatSiswaCB;
     private javax.swing.JLabel titleBackoffice;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;

@@ -207,7 +207,7 @@ public class tambahBuku extends javax.swing.JFrame {
         Kategori1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Kategori1.setText("Jenis Buku");
 
-        JenisCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Umum", "Khusus", "Mapel" }));
+        JenisCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jenis", "Umum", "Khusus", "Mapel" }));
         JenisCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 JenisCBItemStateChanged(evt);
