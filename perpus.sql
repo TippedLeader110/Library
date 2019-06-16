@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2019 at 05:43 PM
--- Server version: 10.1.26-MariaDB
+-- Generation Time: 16 Jun 2019 pada 18.47
+-- Versi Server: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 
 DELIMITER $$
 --
--- Functions
+-- Fungsi
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `denda` (`id` INT(11)) RETURNS INT(11) begin
 declare date1 date;
@@ -43,7 +43,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `book`
+-- Struktur dari tabel `book`
 --
 
 CREATE TABLE `book` (
@@ -54,13 +54,13 @@ CREATE TABLE `book` (
   `thn_buku` int(4) DEFAULT NULL,
   `jmlh` int(4) DEFAULT NULL,
   `tgl_pengadaan` date DEFAULT NULL,
-  `Judul` varchar(50) DEFAULT NULL,
+  `Judul` varchar(150) DEFAULT NULL,
   `jenis_buku` enum('Umum','Khusus','Mapel','') NOT NULL,
   `kategori` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `book`
+-- Dumping data untuk tabel `book`
 --
 
 INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `jenis_buku`, `kategori`) VALUES
@@ -72,10 +72,18 @@ INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh
 ('172044', 'a1', 'GachaGacha', 'Rafid Syahrial', 2010, 401, '2011-02-19', 'Mari Belajar bahasa nigeria', 'Umum', 'Bahasa'),
 ('177013', 'a1', 'Gramenigga', 'Bayhaqi Daulay', 2013, 231, '2014-02-01', 'Kelapa Jatuh kok dihitung?', 'Umum', 'IPA'),
 ('2', 'b2', 'Anotha One', 'DJ Khaled', 2019, 3, '2019-05-09', 'How to be Succesful in Suffering', 'Umum', 'Keuangan'),
-('90', 'a1', 'Gramedia', 'naufal', 2077, 1000, '2019-05-04', 'Glad to be white', 'Umum', 'Biografi');
+('90', 'a1', 'Gramedia', 'naufal', 2077, 1000, '2019-05-04', 'Glad to be white', 'Umum', 'Biografi'),
+('978-602-250-149-7', 'a2', 'Gema Insani', 'Fikri Habibullah M', 2013, 8, '2019-06-16', 'Tuhan, Izinkan Aku Pacaran', 'Khusus', 'Romansa'),
+('978-602-250-235-7', 'a1', 'Gema Insani', 'Uwais Ramadhan', 2015, 3, '2019-06-16', 'Kisah 7 Bayi Bisa Bicara', 'Umum', 'IPA'),
+('978-602-250-262-3', 'a1', 'Gema Insani', 'Toni Raharjo', 2015, 17, '2019-06-16', 'Jejak-jejak Cinta', 'Umum', 'Novel'),
+('978-602-260-233-3', 'a3', 'Gema Insani', 'Salma', 2014, 3, '2019-06-16', 'Tetap Sehat setelah Usia 40 Tahun', 'Umum', 'IPA'),
+('978-602-289-123-94', 'a1', 'Alfabeta, cv', 'Jacobus Ranjabar', 2015, 18, '2019-06-16', 'Perubahan Sosial', 'Umum', 'Sosial'),
+('978-602-702-60-0-1', 'a2', 'Dimar Intermedia - Kediri', 'Bayu Pramutoko', 2014, 5, '2019-06-16', 'Manajemen Pemasaran', 'Umum', 'Keuangan'),
+('978-602-760-511-4', 'a2', 'Wedatama Widya Sastra', 'Maman Mahayana', 2015, 21, '2019-06-16', 'Bahasa Indonesia Kreatif Edisi Revisi', 'Umum', 'Bahasa'),
+('979-97312-11-6', 'a1', 'Lentera Dipantera', 'Pramoedya Ananta Toer', 2010, 12, '2019-06-16', 'Panggil Aku Kartini Saja', 'Umum', 'Biografi');
 
 --
--- Triggers `book`
+-- Trigger `book`
 --
 DELIMITER $$
 CREATE TRIGGER `insert_lokasi` AFTER INSERT ON `book` FOR EACH ROW BEGIN
@@ -98,7 +106,7 @@ DELIMITER ;
 
 --
 -- Stand-in structure for view `buku`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `buku` (
 `isbn` varchar(32)
@@ -108,7 +116,7 @@ CREATE TABLE `buku` (
 ,`thn_buku` int(4)
 ,`jmlh` int(4)
 ,`tgl_pengadaan` date
-,`judul` varchar(50)
+,`judul` varchar(150)
 ,`jenis_buku` enum('Umum','Khusus','Mapel','')
 ,`kategori` varchar(11)
 );
@@ -116,7 +124,7 @@ CREATE TABLE `buku` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas`
+-- Struktur dari tabel `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -127,7 +135,7 @@ CREATE TABLE `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kelas`
+-- Dumping data untuk tabel `kelas`
 --
 
 INSERT INTO `kelas` (`id_kelas`, `tingkat`, `jurusan`, `kelas`) VALUES
@@ -260,7 +268,7 @@ INSERT INTO `kelas` (`id_kelas`, `tingkat`, `jurusan`, `kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lok_book`
+-- Struktur dari tabel `lok_book`
 --
 
 CREATE TABLE `lok_book` (
@@ -269,7 +277,7 @@ CREATE TABLE `lok_book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `lok_book`
+-- Dumping data untuk tabel `lok_book`
 --
 
 INSERT INTO `lok_book` (`id_rak`, `lokasi`) VALUES
@@ -284,7 +292,7 @@ INSERT INTO `lok_book` (`id_rak`, `lokasi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `petugas`
+-- Struktur dari tabel `petugas`
 --
 
 CREATE TABLE `petugas` (
@@ -297,7 +305,7 @@ CREATE TABLE `petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `petugas`
+-- Dumping data untuk tabel `petugas`
 --
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama`, `alamat`, `no_telp`) VALUES
@@ -310,7 +318,7 @@ INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama`, `alamat`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pihak_pinjam`
+-- Struktur dari tabel `pihak_pinjam`
 --
 
 CREATE TABLE `pihak_pinjam` (
@@ -320,7 +328,7 @@ CREATE TABLE `pihak_pinjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pihak_pinjam`
+-- Dumping data untuk tabel `pihak_pinjam`
 --
 
 INSERT INTO `pihak_pinjam` (`id_transaksi`, `nis`, `id_petugas`) VALUES
@@ -329,7 +337,7 @@ INSERT INTO `pihak_pinjam` (`id_transaksi`, `nis`, `id_petugas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pinjam_book`
+-- Struktur dari tabel `pinjam_book`
 --
 
 CREATE TABLE `pinjam_book` (
@@ -342,7 +350,7 @@ CREATE TABLE `pinjam_book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pinjam_book`
+-- Dumping data untuk tabel `pinjam_book`
 --
 
 INSERT INTO `pinjam_book` (`id_transaksi`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
@@ -351,7 +359,7 @@ INSERT INTO `pinjam_book` (`id_transaksi`, `ISBN`, `t_pinjam`, `t_deadline`, `t_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `siswa`
+-- Struktur dari tabel `siswa`
 --
 
 CREATE TABLE `siswa` (
@@ -363,7 +371,7 @@ CREATE TABLE `siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `siswa`
+-- Dumping data untuk tabel `siswa`
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
@@ -376,7 +384,7 @@ INSERT INTO `siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
 
 --
 -- Stand-in structure for view `siswa_view`
--- (See below for the actual view)
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `siswa_view` (
 `nis` int(11)
@@ -391,7 +399,7 @@ CREATE TABLE `siswa_view` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `buku`
+-- Struktur untuk view `buku`
 --
 DROP TABLE IF EXISTS `buku`;
 
@@ -400,7 +408,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `siswa_view`
+-- Struktur untuk view `siswa_view`
 --
 DROP TABLE IF EXISTS `siswa_view`;
 
