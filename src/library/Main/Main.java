@@ -16,7 +16,10 @@ import javax.swing.table.TableRowSorter;
 import library.Mysql.MysqlCon;
 import library.crudData.crud;
 import library.crudData.editBuku;
+import library.crudData.editSiswa;
 import library.crudData.tambahBuku;
+import library.crudData.tambahSiswa;
+import library.crudData.tambaheditStaff;
 /**
  *
  * @author My Computer
@@ -48,8 +51,16 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
+     DefaultTableModel model_staff = new DefaultTableModel(new String[]{"ID petugas", "Nama", "Alamat", "No Telepon"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
      TableRowSorter<DefaultTableModel> ts = new TableRowSorter<DefaultTableModel>(model_siswa);
+     TableRowSorter<DefaultTableModel> ts2 = new TableRowSorter<DefaultTableModel>(model_staff);
     public Main() {
         initComponents();
         
@@ -393,7 +404,7 @@ public class Main extends javax.swing.JFrame {
         impordataGuru = new javax.swing.JButton();
         staffPanel = new javax.swing.JPanel();
         titleStaff = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        staffField = new javax.swing.JTextField();
         caristaffB = new javax.swing.JButton();
         tambahstaffB = new javax.swing.JButton();
         editstaffB = new javax.swing.JButton();
@@ -401,7 +412,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        staffTabel = new javax.swing.JTable();
         guruPanel = new javax.swing.JPanel();
         titleGuru = new javax.swing.JLabel();
         cariguruTF = new javax.swing.JTextField();
@@ -2634,7 +2645,7 @@ public class Main extends javax.swing.JFrame {
         titleStaff.setForeground(new java.awt.Color(51, 51, 51));
         titleStaff.setText("Title");
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        staffField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         caristaffB.setBackground(new java.awt.Color(51, 153, 255));
         caristaffB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -2654,6 +2665,11 @@ public class Main extends javax.swing.JFrame {
         tambahstaffB.setText("Tambah");
         tambahstaffB.setBorder(null);
         tambahstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahstaffBActionPerformed(evt);
+            }
+        });
 
         editstaffB.setBackground(new java.awt.Color(255, 153, 0));
         editstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2661,6 +2677,11 @@ public class Main extends javax.swing.JFrame {
         editstaffB.setText("Edit");
         editstaffB.setBorder(null);
         editstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editstaffBActionPerformed(evt);
+            }
+        });
 
         hapusstaffB.setBackground(new java.awt.Color(255, 0, 0));
         hapusstaffB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2668,10 +2689,15 @@ public class Main extends javax.swing.JFrame {
         hapusstaffB.setText("Hapus");
         hapusstaffB.setBorder(null);
         hapusstaffB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapusstaffB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusstaffBActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        staffTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2682,7 +2708,12 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        staffTabel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                staffTabelFocusGained(evt);
+            }
+        });
+        jScrollPane7.setViewportView(staffTabel);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -2721,7 +2752,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(editstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2))
+                            .addComponent(staffField))
                         .addGap(18, 18, 18)
                         .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -2737,7 +2768,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(staffField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -3186,6 +3217,11 @@ public class Main extends javax.swing.JFrame {
         editsiswaB.setText("Edit");
         editsiswaB.setBorder(null);
         editsiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editsiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editsiswaBActionPerformed(evt);
+            }
+        });
 
         hapussiswaB.setBackground(new java.awt.Color(255, 0, 0));
         hapussiswaB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -3193,6 +3229,11 @@ public class Main extends javax.swing.JFrame {
         hapussiswaB.setText("Hapus");
         hapussiswaB.setBorder(null);
         hapussiswaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapussiswaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapussiswaBActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -3207,6 +3248,11 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        siswaTabel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                siswaTabelFocusGained(evt);
+            }
+        });
         jScrollPane10.setViewportView(siswaTabel);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -3490,6 +3536,12 @@ public class Main extends javax.swing.JFrame {
 
     private void caristaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caristaffBActionPerformed
         // TODO add your handling code here:
+        staffTabel.setRowSorter(ts2);
+        if(staffField.equals(""))
+            ts2.setRowFilter(RowFilter.regexFilter(""));
+        else
+            ts2.setRowFilter(RowFilter.regexFilter(staffField.getText()));
+            
     }//GEN-LAST:event_caristaffBActionPerformed
 
     private void tambahguruBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahguruBActionPerformed
@@ -3883,6 +3935,8 @@ public class Main extends javax.swing.JFrame {
 
     private void SiswaMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiswaMBActionPerformed
         // TODO add your handling code here:
+        editsiswaB.setEnabled(false);
+        hapussiswaB.setEnabled(false);
         model_siswa.setRowCount(0);
         MysqlCon send = new MysqlCon( );
         
@@ -3915,11 +3969,35 @@ public class Main extends javax.swing.JFrame {
 
     private void StaffMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffMBActionPerformed
         // TODO add your handling code here:
+        editstaffB.setEnabled(false);
+        hapusstaffB.setEnabled(false);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+        
+        String q, w, e, r;
+        
+        try {
+                rs = stmt.executeQuery("select * from perpus.petugas");
+                while(rs.next()){
+                q = rs.getString("id_petugas");
+                w = rs.getString("nama");
+                e = rs.getString("alamat");
+                r = rs.getString("no_telp");
+                model_staff.addRow(new Object[]{q, w, e, r});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
         this.titleStaff.setText("Staff");
         panelBawah.removeAll();
         panelBawah.add(staffPanel);
+        staffTabel.setModel(model_staff);
         panelBawah.repaint();
         panelBawah.revalidate();
+        
     }//GEN-LAST:event_StaffMBActionPerformed
 
     private void SettingMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingMBActionPerformed
@@ -3999,9 +4077,64 @@ public class Main extends javax.swing.JFrame {
 
     private void tambahsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahsiswaBActionPerformed
         // TODO add your handling code here:
-        crud c = new crud();
+        tambahSiswa ts = new tambahSiswa();
+        ts.setVisible(true);
         
     }//GEN-LAST:event_tambahsiswaBActionPerformed
+
+    private void editsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editsiswaBActionPerformed
+        // TODO add your handling code here:
+        int column = 0;
+        int row = siswaTabel.getSelectedRow();
+        String value = siswaTabel.getModel().getValueAt(row, column).toString();
+        editSiswa es = new editSiswa(value);
+        es.setVisible(true);
+    }//GEN-LAST:event_editsiswaBActionPerformed
+
+    private void hapussiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapussiswaBActionPerformed
+        // TODO add your handling code here:
+        crud n = new crud();
+        int column = 0;
+        int row = siswaTabel.getSelectedRow();
+        String value = siswaTabel.getModel().getValueAt(row, column).toString();
+        n.deleteSiswa(value);
+    }//GEN-LAST:event_hapussiswaBActionPerformed
+
+    private void siswaTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_siswaTabelFocusGained
+        // TODO add your handling code here:
+        editsiswaB.setEnabled(true);
+        hapussiswaB.setEnabled(true);
+    }//GEN-LAST:event_siswaTabelFocusGained
+
+    private void tambahstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahstaffBActionPerformed
+        // TODO add your handling code here:
+        tambaheditStaff te = new tambaheditStaff();
+        te.setVisible(true);
+    }//GEN-LAST:event_tambahstaffBActionPerformed
+
+    private void hapusstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusstaffBActionPerformed
+        // TODO add your handling code here:
+        crud n = new crud();
+        int column = 0;
+        int row = staffTabel.getSelectedRow();
+        String value = staffTabel.getModel().getValueAt(row, column).toString();
+        n.deleteStaff(value);
+    }//GEN-LAST:event_hapusstaffBActionPerformed
+
+    private void staffTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staffTabelFocusGained
+        // TODO add your handling code here:
+        editstaffB.setEnabled(true);
+        hapusstaffB.setEnabled(true);
+    }//GEN-LAST:event_staffTabelFocusGained
+
+    private void editstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editstaffBActionPerformed
+        // TODO add your handling code here:
+        int column = 0;
+        int row = staffTabel.getSelectedRow();
+        String value = staffTabel.getModel().getValueAt(row, column).toString();
+        tambaheditStaff te = new tambaheditStaff(value);
+        te.setVisible(true);
+    }//GEN-LAST:event_editstaffBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4269,7 +4402,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable12;
@@ -4287,7 +4419,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -4314,7 +4445,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel rakL2;
     private javax.swing.JPanel siswaPanel;
     private javax.swing.JTable siswaTabel;
+    private javax.swing.JTextField staffField;
     private javax.swing.JPanel staffPanel;
+    private javax.swing.JTable staffTabel;
     private javax.swing.JLabel sumberL;
     private javax.swing.JButton tambahbukuB;
     private javax.swing.JButton tambahguruB;

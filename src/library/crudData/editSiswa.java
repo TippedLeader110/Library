@@ -27,12 +27,25 @@ public class editSiswa extends javax.swing.JFrame {
         initComponents();
         title.setText("Edit Siswa");
         Statement stmt=kon.query();
+        
+        try{
+            ResultSet rs = stmt.executeQuery("Select distinct kelas.jurusan from perpus.kelas");
+            while(rs.next()){
+                String lokasi = rs.getString("jurusan");
+                jurusanCB.addItem(lokasi); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+        
         try {
-            
-        ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.siswa where nis = " + val);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.siswa_view where nis = " + val);
         while (rs.next()){
                 JId.setText(rs.getString("nis"));
                 JNama.setText(rs.getString("nama"));
+                TingkatCB.setSelectedItem(rs.getString("tingkat"));
+                jurusanCB.setSelectedItem(rs.getString("jurusan"));
+                KelasCB.setSelectedItem(rs.getString("kelas"));
                 JAlamat.setText(rs.getString("alamat"));
                 JTelepon.setText(rs.getString("no_telp"));
             }
@@ -67,7 +80,7 @@ public class editSiswa extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         TingkatCB = new javax.swing.JComboBox<>();
-        JurusanCB = new javax.swing.JComboBox<>();
+        jurusanCB = new javax.swing.JComboBox<>();
         KelasCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,8 +176,8 @@ public class editSiswa extends javax.swing.JFrame {
                         .addComponent(JNama)
                         .addComponent(JId)
                         .addComponent(JAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .addComponent(JurusanCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TingkatCB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jurusanCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TingkatCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(KelasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -186,7 +199,7 @@ public class editSiswa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
-                    .addComponent(JurusanCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jurusanCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
@@ -256,11 +269,23 @@ public class editSiswa extends javax.swing.JFrame {
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
         crud c = new crud();
         String v =JId.getText();
-        if(v!=this.val){
-            c.updateSiswa(this.val, JId.getText(),JNama.getText(),"1",JAlamat.getText(), JTelepon.getText());
+        Statement stmt=kon.query();
+        String tingkat = TingkatCB.getSelectedItem().toString();
+        String jurusan = jurusanCB.getSelectedItem().toString();
+        String kelas = KelasCB.getSelectedItem().toString();
+        try{
+                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = '"+kelas);
+                while(rs2.next()){
+                    String id_kelas = rs2.getString("id_kelas");
+                    if(v!=this.val){
+                        c.updateSiswa(this.val, JId.getText(),JNama.getText(), id_kelas,JAlamat.getText(), JTelepon.getText());
+                    }
+                    else
+                        c.updateSiswa2(this.val, JNama.getText(), id_kelas, JAlamat.getText(), JTelepon.getText());
+                    }
+        }catch (SQLException ex){
+                JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
-        else
-        c.updateSiswa2(this.val, JNama.getText(), "1", JAlamat.getText(), JTelepon.getText());
     }//GEN-LAST:event_simpanBActionPerformed
 
     private void batalBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalBActionPerformed
@@ -307,7 +332,6 @@ public class editSiswa extends javax.swing.JFrame {
     private javax.swing.JTextField JId;
     private javax.swing.JTextField JNama;
     private javax.swing.JTextField JTelepon;
-    private javax.swing.JComboBox<String> JurusanCB;
     private javax.swing.JComboBox<String> KelasCB;
     private javax.swing.JComboBox<String> TingkatCB;
     private javax.swing.JButton batalB;
@@ -320,6 +344,7 @@ public class editSiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JComboBox<String> jurusanCB;
     private javax.swing.JButton simpanB;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables

@@ -173,8 +173,8 @@
                               <Component id="JNama" alignment="0" max="32767" attributes="0"/>
                               <Component id="JId" alignment="0" max="32767" attributes="0"/>
                               <Component id="JAlamat" alignment="0" pref="190" max="32767" attributes="0"/>
-                              <Component id="JurusanCB" alignment="0" max="32767" attributes="0"/>
-                              <Component id="TingkatCB" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jurusanCB" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TingkatCB" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="KelasCB" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
@@ -203,7 +203,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="JurusanCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jurusanCB" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -328,7 +328,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="JurusanCB">
+            <Component class="javax.swing.JComboBox" name="jurusanCB">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>

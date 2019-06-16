@@ -96,7 +96,7 @@ public class crud extends library.Main.Main {
     public int createSiswa(String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("insert into perpus.siswa(id, nama, alamat, no_telp, id_kelas) VALUE('" + id + "','" +  nama + "','" +  alamat + "','" + no_telp +"','"+ kelas +"')");
+            rs=stmt.executeUpdate("insert into perpus.siswa(nis, nama, alamat, no_telp, id_kelas) VALUE('" + id + "','" +  nama + "','" +  alamat + "','" + no_telp +"','"+ kelas +"')");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -107,7 +107,7 @@ public class crud extends library.Main.Main {
     public void updateSiswa(String val, String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
          try {  
-            rs=stmt.executeUpdate("update perpus.siswa set id = '" + id + "', nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where id = " + val);
+            rs=stmt.executeUpdate("update perpus.siswa set nis = '" + id + "', nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where nis = " + val);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -122,7 +122,7 @@ public class crud extends library.Main.Main {
     public void updateSiswa2(String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("update perpus.siswa set nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where id = " + id);
+            rs=stmt.executeUpdate("update perpus.siswa set nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where nis = " + id);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -136,7 +136,7 @@ public class crud extends library.Main.Main {
     
      public void deleteSiswa(String id){
         try {  
-            rs=stmt.executeUpdate("DELETE from perpus.siswa where id = " + id);
+            rs=stmt.executeUpdate("DELETE from perpus.siswa where nis = " + id);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -148,9 +148,9 @@ public class crud extends library.Main.Main {
         }
     }
      
-     public void createStaff(String id, String nama, String alamat, String no_telp, String username, String password){
+     public void createStaff(String id, String nama, String alamat, String no_telp){
          try {  
-            rs=stmt.executeUpdate("insert into library.users(id, nama, alamat, no_telp, username, password) VALUE('" + id + "',' " +  nama + "',' " +  alamat + "',' " + no_telp +  "', username = '" + username + "', password = '" + password +"')");
+            rs=stmt.executeUpdate("insert into perpus.petugas(id_petugas, nama, alamat, no_telp, username, password) VALUE('" + id + "',' " +  nama + "',' " +  alamat + "',' " + no_telp +  "', username = NULL, password = NULL)");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -162,10 +162,10 @@ public class crud extends library.Main.Main {
         }
      }
      
-      public void updateStaff(String val, String id, String nama, String alamat, String no_telp, String username, String password){
+      public void updateStaff(String val, String id, String nama, String alamat, String no_telp){
         Statement stmt=kon.query();
          try {  
-            rs=stmt.executeUpdate("update library.users set id = '" + id + "', nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "', username = '" + username + "', password = '" + password + "' where id = " + val);
+            rs=stmt.executeUpdate("update perpus.petugas set id_petugas = '" + id + "', nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "' where id_petugas = " + val);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -177,10 +177,10 @@ public class crud extends library.Main.Main {
         }
     }
      
-     public void updateStaff2(String id, String nama, String alamat, String no_telp, String username, String password){
+     public void updateStaff2(String id, String nama, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("update library.users set nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "', username = '" + username + "', password = '" + password + "' where id = " + id);
+            rs=stmt.executeUpdate("update perpus.petugas set nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "' where id_petugas = " + id);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -194,7 +194,7 @@ public class crud extends library.Main.Main {
      
      public void deleteStaff(String id){
         try {  
-            rs=stmt.executeUpdate("DELETE from library.users where id = " + id);
+            rs=stmt.executeUpdate("DELETE from perpus.petugas where id_petugas = " + id);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
