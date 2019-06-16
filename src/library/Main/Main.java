@@ -41,7 +41,15 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
+     DefaultTableModel model_siswa = new DefaultTableModel(new String[]{"Nis", "Nama", "Tingkat", "Jurusan", "Kelas", "Alamat", "No Telepon"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
+     TableRowSorter<DefaultTableModel> ts = new TableRowSorter<DefaultTableModel>(model_siswa);
     public Main() {
         initComponents();
         
@@ -98,11 +106,23 @@ public class Main extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
+        
+        //combo box tahun buku
+        try{
+            ResultSet rs_thn = stmt.executeQuery("Select distinct buku.thn_buku from perpus.buku order by thn_buku asc");
+            while(rs_thn.next()){
+                String thn = rs_thn.getString("thn_buku");
+                thnCB.addItem(thn); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
             
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
         bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
         editbukuB.setEnabled(false);
         hapusbukuB.setEnabled(false);
         panelBawah.repaint();
@@ -134,10 +154,22 @@ public class Main extends javax.swing.JFrame {
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
             }
+            
+        //combo box lokasi
+        try{
+            ResultSet rs_lok = stmt.executeQuery("Select distinct buku.lokasi from perpus.buku");
+            while(rs_lok.next()){
+                String lokasi = rs_lok.getString("lokasi");
+                rakCB.addItem(lokasi); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
         bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
         editbukuB.setEnabled(false);
         hapusbukuB.setEnabled(false);
         panelBawah.repaint();
@@ -195,11 +227,12 @@ public class Main extends javax.swing.JFrame {
         editbukuB = new javax.swing.JButton();
         hapusbukuB = new javax.swing.JButton();
         cariTF = new javax.swing.JTextField();
-        cariB = new javax.swing.JButton();
+        cariBukuB = new javax.swing.JButton();
         penerbitL1 = new javax.swing.JLabel();
-        rakL1 = new javax.swing.JLabel();
         penerbitL2 = new javax.swing.JLabel();
         ResetBukuB = new javax.swing.JButton();
+        thnCB = new javax.swing.JComboBox<>();
+        rakL2 = new javax.swing.JLabel();
         laporanPanel = new javax.swing.JPanel();
         titleLaporan = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
@@ -783,20 +816,21 @@ public class Main extends javax.swing.JFrame {
 
         cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        cariB.setBackground(new java.awt.Color(51, 153, 255));
-        cariB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        cariB.setForeground(new java.awt.Color(255, 255, 255));
-        cariB.setText("Cari");
-        cariB.setBorder(null);
-        cariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariBukuB.setBackground(new java.awt.Color(51, 153, 255));
+        cariBukuB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        cariBukuB.setForeground(new java.awt.Color(255, 255, 255));
+        cariBukuB.setText("Cari");
+        cariBukuB.setBorder(null);
+        cariBukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariBukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariBukuBActionPerformed(evt);
+            }
+        });
 
         penerbitL1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         penerbitL1.setForeground(new java.awt.Color(51, 51, 51));
         penerbitL1.setText("*Pilih Jenis Buku sebelum memilih kategori");
-
-        rakL1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        rakL1.setForeground(new java.awt.Color(51, 51, 51));
-        rakL1.setText("Nama");
 
         penerbitL2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         penerbitL2.setForeground(new java.awt.Color(51, 51, 51));
@@ -813,6 +847,19 @@ public class Main extends javax.swing.JFrame {
                 ResetBukuBActionPerformed(evt);
             }
         });
+
+        thnCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        thnCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tahun Buku" }));
+        thnCB.setName("Kategori"); // NOI18N
+        thnCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                thnCBItemStateChanged(evt);
+            }
+        });
+
+        rakL2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rakL2.setForeground(new java.awt.Color(51, 51, 51));
+        rakL2.setText("Tahun Buku");
 
         javax.swing.GroupLayout bukuPanelLayout = new javax.swing.GroupLayout(bukuPanel);
         bukuPanel.setLayout(bukuPanelLayout);
@@ -840,12 +887,14 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rakL))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(rakL1))
+                                    .addComponent(rakL2)
+                                    .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cariBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bukuPanelLayout.createSequentialGroup()
                                 .addComponent(tambahbukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -871,15 +920,19 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(kategoriL)
                             .addComponent(sumberL)
                             .addComponent(rakL)
-                            .addComponent(rakL1))
+                            .addComponent(rakL2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JenisCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(KategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cariBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16)
                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(bukuPanelLayout.createSequentialGroup()
                         .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -895,7 +948,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(penerbitL2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         panelBawah.add(bukuPanel, "card2");
@@ -2848,6 +2901,7 @@ public class Main extends javax.swing.JFrame {
         panelBawah.removeAll();
         panelBawah.add(bukuPanel);
         bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
         editbukuB.setEnabled(false);
         hapusbukuB.setEnabled(false);
         panelBawah.repaint();
@@ -2959,17 +3013,28 @@ public class Main extends javax.swing.JFrame {
 
     private void KategoriCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_KategoriCBItemStateChanged
         // TODO add your handling code here:
+        bukuTabel.setRowSorter(tr);
         String lokasi = rakCB.getSelectedItem().toString();
         String jenis = JenisCB.getSelectedItem().toString();
         String Kategori = evt.getItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
         if(Kategori.equals("Kategori")){
             if(lokasi.equals("Rak")){
                 tr.setRowFilter(RowFilter.regexFilter(""));
                 tr.setRowFilter(RowFilter.regexFilter(jenis));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+                if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             }else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
                 tr.setRowFilter(RowFilter.regexFilter(jenis));
                 tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+                if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             }
         }else{
             tr.setRowFilter(RowFilter.regexFilter(Kategori));
@@ -3001,13 +3066,24 @@ public class Main extends javax.swing.JFrame {
         String jenis = JenisCB.getSelectedItem().toString();
         String Kategori = KategoriCB.getSelectedItem().toString();
         String lokasi = rakCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
         if(jenis.equals("Jenis")){
             KategoriCB.setEnabled(false);
-            if(lokasi.equals("Rak"))
+            if(lokasi.equals("Rak")){
                 tr.setRowFilter(RowFilter.regexFilter(""));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+                if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
+            }    
             else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
                 tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+                if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             }
         }
         else
@@ -3026,18 +3102,27 @@ public class Main extends javax.swing.JFrame {
         String lokasi = rakCB.getSelectedItem().toString();
         String jenis = JenisCB.getSelectedItem().toString();
         String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
         bukuTabel.setRowSorter(tr);
         if(!lokasi.equals("Rak")){
             tr.setRowFilter(RowFilter.regexFilter(lokasi));
         }
         else{
-            if(jenis.equals("Jenis"))
+            if(jenis.equals("Jenis")){
                 tr.setRowFilter(RowFilter.regexFilter(""));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+                if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
+            }
             else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
                 tr.setRowFilter(RowFilter.regexFilter(jenis));
                 if(!Kategori.equals("Kategori"))
                     tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
             }
         }
             
@@ -3047,41 +3132,89 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         rakCB.setSelectedIndex(0);
         JenisCB.setSelectedIndex(0);
+        thnCB.setSelectedIndex(0);
         cariTF.setText("");
-        model_buku.setRowCount(0);
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
-            ResultSet rs;
-           
-            String q, w, e, r, t, y, u, i, o, p;
-            try {
-                rs = stmt.executeQuery("select * from perpus.buku");
-                while(rs.next()){
-                q = rs.getString("ISBN");
-                w = rs.getString("judul");
-                e = rs.getString("pengarang");
-                r = rs.getString("penerbit");
-                t = rs.getString("thn_buku");
-                y = rs.getString("jenis_buku");
-                u = rs.getString("Kategori");
-                i = rs.getString("tgl_pengadaan");
-                o = rs.getString("lokasi");
-                p = rs.getString("jmlh");
-                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
-            }
-            catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
-            }
-        this.titleBuku.setText("Buku");
-        panelBawah.removeAll();
-        panelBawah.add(bukuPanel);
-        bukuTabel.setModel(model_buku);
-        editbukuB.setEnabled(false);
-        hapusbukuB.setEnabled(false);
-        panelBawah.repaint();
-        panelBawah.revalidate();
+        bukuTabel.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(""));
     }//GEN-LAST:event_ResetBukuBActionPerformed
+
+    private void cariBukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBukuBActionPerformed
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        bukuTabel.setRowSorter(tr);
+        if(nama.equals("")){
+            if(jenis.equals("Jenis")){
+               tr.setRowFilter(RowFilter.regexFilter(""));
+               if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+               if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }else if(Kategori.equals("Kategori")){
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }else{
+                tr.setRowFilter(RowFilter.regexFilter(""));
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }
+        }else
+            tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
+            if(jenis.equals("Jenis")){
+                if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }else if(Kategori.equals("Kategori")){
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }else{
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                if(!lokasi.equals("Rak"))
+                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                if(!tahun.equals("Tahun Buku"))
+                    tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+            }
+    }//GEN-LAST:event_cariBukuBActionPerformed
+
+    private void thnCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_thnCBItemStateChanged
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        bukuTabel.setRowSorter(tr);
+        if(tahun.equals("Tahun Buku")){
+            tr.setRowFilter(RowFilter.regexFilter(""));
+            if(!jenis.equals("Jenis")){
+                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                if(!Kategori.equals("Kategori"))
+                    tr.setRowFilter(RowFilter.regexFilter(Kategori));
+            }
+            if(!lokasi.equals("Rak"))
+                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+            if(!nama.equals(""))
+                    tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
+        }
+        else
+            tr.setRowFilter(RowFilter.regexFilter("^"+tahun));
+    }//GEN-LAST:event_thnCBItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -3129,7 +3262,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bukuB;
     private javax.swing.JPanel bukuPanel;
     private javax.swing.JTable bukuTabel;
-    private javax.swing.JButton cariB;
+    private javax.swing.JButton cariBukuB;
     private javax.swing.JTextField cariTF;
     private javax.swing.JTextField cariguruTF;
     private javax.swing.JButton caristaffB;
@@ -3325,7 +3458,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pengembalianPanel;
     private javax.swing.JComboBox<String> rakCB;
     private javax.swing.JLabel rakL;
-    private javax.swing.JLabel rakL1;
+    private javax.swing.JLabel rakL2;
     private javax.swing.JButton settingB;
     private javax.swing.JButton siswaB;
     private javax.swing.JPanel siswaPanel;
@@ -3336,6 +3469,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton tambahguruB;
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
+    private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JLabel titleBackoffice;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;

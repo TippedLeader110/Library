@@ -34,8 +34,9 @@ public class tambahBuku extends javax.swing.JFrame {
         LokasiCB.setEnabled(true);
         Jrak.setEnabled(false);
         Jtingkat.setEnabled(false);
-        KategoriCB.setEnabled(true);
         JNewKategori.setEnabled(false);
+        KategoriCB.setEnabled(false);
+        BuatBaru2.setEnabled(false);
         
         Statement stmt=kon.query();
         //combo box lokasi
@@ -61,9 +62,6 @@ public class tambahBuku extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
-        
-        KategoriCB.setEnabled(false);
-        BuatBaru2.setEnabled(false);
     }
 
     /**
@@ -318,9 +316,9 @@ public class tambahBuku extends javax.swing.JFrame {
                     .addComponent(BuatBaru1)
                     .addComponent(LokasiCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Jrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jtingkat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Jtingkat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Kategori1)
@@ -638,13 +636,13 @@ public class tambahBuku extends javax.swing.JFrame {
 	Jthn.setText("");
 	Jpengarang.setText("");
 	Jrak.setText("No Rak");
-	Jtingkat.setText("Tingkat");
+	Jtingkat.setText("No Tingkat");
 	JNewKategori.setText("");
 	JJumlah.setText("");
         LokasiCB.setEnabled(true);
         Jrak.setEnabled(false);
         Jtingkat.setEnabled(false);
-        KategoriCB.setEnabled(true);
+        KategoriCB.setEnabled(false);
         JNewKategori.setEnabled(false);
     }//GEN-LAST:event_ResetFormBActionPerformed
 
