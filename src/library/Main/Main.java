@@ -3883,9 +3883,32 @@ public class Main extends javax.swing.JFrame {
 
     private void SiswaMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiswaMBActionPerformed
         // TODO add your handling code here:
-        this.titleSiswa.setText("Siswa");
+        model_siswa.setRowCount(0);
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+           
+        String q, w, e, r, t, y, u;
+        try {
+                rs = stmt.executeQuery("select * from perpus.siswa_view");
+                while(rs.next()){
+                q = rs.getString("nis");
+                w = rs.getString("nama");
+                e = rs.getString("tingkat");
+                r = rs.getString("jurusan");
+                t = rs.getString("kelas");
+                y = rs.getString("alamat");
+                u = rs.getString("no_telp");
+                model_siswa.addRow(new Object[]{q, w, e, r, t,y,u});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+         this.titleSiswa.setText("Siswa");
         panelBawah.removeAll();
         panelBawah.add(siswaPanel);
+        siswaTabel.setModel(model_siswa);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_SiswaMBActionPerformed
@@ -3976,6 +3999,7 @@ public class Main extends javax.swing.JFrame {
 
     private void tambahsiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahsiswaBActionPerformed
         // TODO add your handling code here:
+        crud c = new crud();
         
     }//GEN-LAST:event_tambahsiswaBActionPerformed
 
