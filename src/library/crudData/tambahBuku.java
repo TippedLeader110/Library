@@ -523,6 +523,7 @@ public class tambahBuku extends javax.swing.JFrame {
         String lokasi;
         String lokasi3;
         Statement stmt=kon.query(); 
+        
         while(row<max_row){
             String isbn =  TambahBukuTable.getModel().getValueAt(row, 0).toString();
             String judul = TambahBukuTable.getModel().getValueAt(row, 1).toString();
@@ -534,41 +535,20 @@ public class tambahBuku extends javax.swing.JFrame {
             String jenis = TambahBukuTable.getModel().getValueAt(row, 5).toString();
             String kategori = TambahBukuTable.getModel().getValueAt(row, 6).toString();
             
-            try{
-                ResultSet rs2 = stmt.executeQuery("Select distinct lok_book.id_rak from perpus.lok_book where lokasi = "+lokasi2);
-                while(rs2.next()){
-                    lokasi3 = rs2.getString("id_rak");
-                    String rak = lokasi3.substring(0,1);
-                    String tingkat= lokasi3.substring(1,2);
-                    lokasi = rak+""+tingkat;
-                    int rs = c.createBuku(isbn,judul,penerbit,tahun,pengarang,lokasi,jumlah,jenis,kategori);
-                    if(rs!=0){
-                        row++;
-                        if(row==max_row){
-                            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                            break;
-                        }
-                    }else{
-                    JOptionPane.showMessageDialog(this, "Kesalahan, isbn tidak boleh sama", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            
+            String rak = lokasi2.substring(4, 5);
+            String tingkat = lokasi2.substring(14, 15);
+            lokasi = rak+""+tingkat;
+            int rs = c.createBuku(isbn,judul,penerbit,tahun,pengarang,lokasi,jumlah,jenis,kategori);
+            if(rs!=0){
+                row++;
+                if(row==max_row){
+                    JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
                     break;
-                    }
-                }   
-            }catch (SQLException ex) {
-                String rak = lokasi2.substring(4, 5);
-                String tingkat = lokasi2.substring(14, 15);
-                lokasi = rak+""+tingkat;
-                int rs = c.createBuku(isbn,judul,penerbit,tahun,pengarang,lokasi,jumlah,jenis,kategori);
-                    if(rs!=0){
-                        row++;
-                        if(row==max_row){
-                            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                            break;
-                        }
-                    }else{
-                    JOptionPane.showMessageDialog(this, "Kesalahan, isbn tidak boleh sama", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-                    break;
-                    }
-            }     
+                }else
+                    continue;
+            }else
+                JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
         
         this.dispose();
@@ -644,6 +624,7 @@ public class tambahBuku extends javax.swing.JFrame {
     private void ResetTableBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetTableBActionPerformed
         // TODO add your handling code here:
         model.setRowCount(0);
+        model.setRowCount(4);
     }//GEN-LAST:event_ResetTableBActionPerformed
 
     private void HapusKolomBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusKolomBActionPerformed

@@ -1,10 +1,19 @@
 VIEW PINJAM
-create or replace view pinjam as select a.id_transaksi, b.nama , a.isbn , c.judul , a.t_pinjam , a.t_kembali, a.denda from pinjam_book a inner join anggota b on a.id_anggota = b.id inner join book c on a.isbn = c.isbn;
+create or replace view pinjam as 
+select a.id_transaksi, b.nama , a.isbn , c.judul , a.t_pinjam , a.t_kembali, a.denda 
+from pinjam_book a 
+inner join anggota b on a.id_anggota = b.id 
+inner join book c on a.isbn = c.isbn;
 
 -------------------------------------------------------
 
 VIEW KEMBALI
-create or replace view kembali as select d.id_transaksi, c.isbn, a.nama as anggota, b.nama as petugas, c.judul, d.t_pinjam, d.t_kembali, d.t_deadline from pinjam_book d inner join anggota a on a.id = d.id_anggota inner join users b on b.id = d.id_petugas inner join book c on c.isbn = d.isbn;
+create or replace view kembali as 
+select d.id_transaksi, c.isbn, a.nama as anggota, b.nama as petugas, c.judul, d.t_pinjam, d.t_kembali, d.t_deadline 
+from pinjam_book d 
+inner join anggota a on a.id = d.id_anggota 
+inner join users b on b.id = d.id_petugas 
+inner join book c on c.isbn = d.isbn;
 
 -------------------------------------------------------
 
@@ -47,7 +56,8 @@ END!
 
 ------------------------------------------------------- 
 VIEW BUKU 
-create or replace view buku as select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
+create or replace view buku as 
+select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
 from book a inner join lok_book b on a.id_rak = b.id_rak;
 
 -------------------------------------------------------
@@ -69,3 +79,8 @@ if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
 insert into lok_book (id_rak, lokasi) values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
 end if;
 END!
+
+-------------------------------------------------------
+
+VIEW SISWA_VIEW
+create or replace view siswa_view as select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp

@@ -76,9 +76,9 @@ public class tambahSiswa extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tambahSiswaTable = new javax.swing.JTable();
         tambahB = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        deletB = new javax.swing.JButton();
+        resetB = new javax.swing.JButton();
+        resetFormB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -232,11 +232,26 @@ public class tambahSiswa extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Delete Kolom");
+        deletB.setText("Delete Kolom");
+        deletB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletBActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Reset Tabel");
+        resetB.setText("Reset Tabel");
+        resetB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Reset Form");
+        resetFormB.setText("Reset Form");
+        resetFormB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetFormBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,7 +261,7 @@ public class tambahSiswa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(resetFormB)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -256,19 +271,19 @@ public class tambahSiswa extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(deletB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))
+                                .addComponent(resetB))
                             .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(35, Short.MAX_VALUE))))
+                        .addContainerGap(87, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(336, 336, 336)
-                        .addComponent(title))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tambahB)))
+                        .addComponent(tambahB))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(325, 325, 325)
+                        .addComponent(title)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -276,14 +291,14 @@ public class tambahSiswa extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(resetFormB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(deletB)
+                            .addComponent(resetB))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +317,9 @@ public class tambahSiswa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +337,40 @@ public class tambahSiswa extends javax.swing.JFrame {
     private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
         // TODO add your handling code here:
         crud c = new crud();
-        c.createSiswa(JId.getText() , JNama.getText(), JAlamat.getText(), JTelepon.getText());
+        int row = 0;
+        int max_row= model.getRowCount();
+        
+        while(row<max_row){
+            String nis = tambahSiswaTable.getModel().getValueAt(row, 0).toString();
+            String nama = tambahSiswaTable.getModel().getValueAt(row, 1).toString();
+            String tingkat = tambahSiswaTable.getModel().getValueAt(row, 2).toString();
+            String jurusan = tambahSiswaTable.getModel().getValueAt(row, 3).toString();
+            String kelas = tambahSiswaTable.getModel().getValueAt(row, 4).toString();
+            String alamat = tambahSiswaTable.getModel().getValueAt(row, 5).toString();
+            String telepon = tambahSiswaTable.getModel().getValueAt(row, 6).toString();
+            
+            Statement stmt=kon.query();
+            try{
+                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = '"+kelas);
+                while(rs2.next()){
+                    String id_kelas = rs2.getString("id_kelas");
+                    int rs = c.createSiswa(nis , nama, id_kelas, alamat, telepon);
+                    if(rs!=0){
+                        row++;
+                        if(row==max_row){
+                            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        }else
+                            continue;
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    }
+                }   
+            }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+            }
+        }
         this.dispose();
     }//GEN-LAST:event_simpanBActionPerformed
 
@@ -349,7 +399,7 @@ public class tambahSiswa extends javax.swing.JFrame {
                 String id = tambahSiswaTable.getModel().getValueAt(row, 0).toString();
                 String id2 = tambahSiswaTable.getModel().getValueAt(row2, 0).toString();
                 if(id.equals(id2)){
-                    JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Kesalahan, nis tidak boleh sama", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                     model.setRowCount(row2);
                     break;
                 }else{
@@ -364,6 +414,32 @@ public class tambahSiswa extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tambahBActionPerformed
+
+    private void deletBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletBActionPerformed
+        // TODO add your handling code here:
+        int numRows = tambahSiswaTable.getSelectedRows().length;
+        for(int i=0; i<numRows ; i++ ) {
+            model.removeRow(tambahSiswaTable.getSelectedRow());
+        }
+    }//GEN-LAST:event_deletBActionPerformed
+
+    private void resetBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBActionPerformed
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        model.setRowCount(4);
+    }//GEN-LAST:event_resetBActionPerformed
+
+    private void resetFormBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFormBActionPerformed
+        // TODO add your handling code here:
+        JId.setText("");
+        JNama.setText("");
+        tingkatCB.setSelectedIndex(0);
+        jurusanCB.setSelectedIndex(0);
+        kelasCB.setSelectedIndex(0);
+        JAlamat.setText("");
+        JTelepon.setText("");
+        
+    }//GEN-LAST:event_resetFormBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,9 +482,7 @@ public class tambahSiswa extends javax.swing.JFrame {
     private javax.swing.JTextField JNama;
     private javax.swing.JTextField JTelepon;
     private javax.swing.JButton batal;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton deletB;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -421,6 +495,8 @@ public class tambahSiswa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jurusanCB;
     private javax.swing.JComboBox<String> kelasCB;
+    private javax.swing.JButton resetB;
+    private javax.swing.JButton resetFormB;
     private javax.swing.JButton simpanB;
     private javax.swing.JButton tambahB;
     private javax.swing.JTable tambahSiswaTable;

@@ -20,9 +20,9 @@ public class editSiswa extends javax.swing.JFrame {
     /**
      * Creates new form editSiswa
      */
-        MysqlCon kon = new MysqlCon();
-        String val;
-        public editSiswa(String val){
+    MysqlCon kon = new MysqlCon();
+    String val;
+    public editSiswa(String val){
         this.val = val;
         initComponents();
         title.setText("Edit Siswa");
@@ -257,10 +257,10 @@ public class editSiswa extends javax.swing.JFrame {
         crud c = new crud();
         String v =JId.getText();
         if(v!=this.val){
-            c.updateSiswa(this.val, JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText());
+            c.updateSiswa(this.val, JId.getText(),JNama.getText(),"1",JAlamat.getText(), JTelepon.getText());
         }
         else
-        c.updateSiswa2(this.val, JNama.getText(), JAlamat.getText(), JTelepon.getText());
+        c.updateSiswa2(this.val, JNama.getText(), "1", JAlamat.getText(), JTelepon.getText());
     }//GEN-LAST:event_simpanBActionPerformed
 
     private void batalBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalBActionPerformed

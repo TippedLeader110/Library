@@ -93,25 +93,21 @@ public class crud extends library.Main.Main {
         //return a;
     }
     
-    public void createSiswa(String id, String nama, String alamat, String no_telp){
+    public int createSiswa(String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("insert into perpus.siswa(id, nama, alamat, no_telp) VALUE('" + id + "','" +  nama + "','" +  alamat + "','" + no_telp +"')");
+            rs=stmt.executeUpdate("insert into perpus.siswa(id, nama, alamat, no_telp, id_kelas) VALUE('" + id + "','" +  nama + "','" +  alamat + "','" + no_telp +"','"+ kelas +"')");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
-        if(rs!=0){
-            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
+        
+       return rs;
     }
     
-    public void updateSiswa(String val, String id, String nama, String alamat, String no_telp){
+    public void updateSiswa(String val, String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
          try {  
-            rs=stmt.executeUpdate("update perpus.siswa set id = '" + id + "', nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "' where id = " + val);
+            rs=stmt.executeUpdate("update perpus.siswa set id = '" + id + "', nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where id = " + val);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -123,10 +119,10 @@ public class crud extends library.Main.Main {
         }
     }
         
-    public void updateSiswa2(String id, String nama, String alamat, String no_telp){
+    public void updateSiswa2(String id, String nama, String kelas, String alamat, String no_telp){
         Statement stmt=kon.query();
        try {  
-            rs=stmt.executeUpdate("update perpus.siswa set nama = ' " +  nama + "', alamat = ' " +  alamat + "', no_telp = ' " + no_telp +  "' where id = " + id);
+            rs=stmt.executeUpdate("update perpus.siswa set nama = '" +  nama + "', alamat = '" +  alamat + "', no_telp = '" + no_telp +  "', id_kelas = '"+ kelas +"' where id = " + id);
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
