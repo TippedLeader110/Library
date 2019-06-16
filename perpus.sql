@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2019 at 07:51 AM
+-- Generation Time: Jun 16, 2019 at 05:43 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -367,11 +367,26 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
-(1, '1', '10.tkj.1', '1', '1'),
 (999101, 'rafid', '10.tkj.1', 'Jalan Sei Padang', '0852100331221'),
 (999102, 'ali', '10.tkj.1', 'Jl. Pertahanan', '083199229922'),
 (999103, 'bayhaqi', '11.rpl.3', 'Jl. Kasih', '081212345667'),
 (999105, 'nopal', '11.rpl.3', 'Jl. Bumi', '081322345678');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `siswa_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `siswa_view` (
+`nis` int(11)
+,`nama` varchar(11)
+,`tingkat` varchar(11)
+,`jurusan` text
+,`kelas` int(11)
+,`alamat` text
+,`no_telp` text
+);
 
 -- --------------------------------------------------------
 
@@ -381,6 +396,15 @@ INSERT INTO `siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
 DROP TABLE IF EXISTS `buku`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buku`  AS  select `a`.`ISBN` AS `isbn`,`b`.`lokasi` AS `lokasi`,`a`.`Penerbit` AS `penerbit`,`a`.`Pengarang` AS `pengarang`,`a`.`thn_buku` AS `thn_buku`,`a`.`jmlh` AS `jmlh`,`a`.`tgl_pengadaan` AS `tgl_pengadaan`,`a`.`Judul` AS `judul`,`a`.`jenis_buku` AS `jenis_buku`,`a`.`kategori` AS `kategori` from (`book` `a` join `lok_book` `b` on((`a`.`id_rak` = `b`.`id_rak`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `siswa_view`
+--
+DROP TABLE IF EXISTS `siswa_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `siswa_view`  AS  select `a`.`nis` AS `nis`,`a`.`nama` AS `nama`,`b`.`tingkat` AS `tingkat`,`b`.`jurusan` AS `jurusan`,`b`.`kelas` AS `kelas`,`a`.`alamat` AS `alamat`,`a`.`no_telp` AS `no_telp` from (`siswa` `a` join `kelas` `b` on((`a`.`id_kelas` = `b`.`id_kelas`))) ;
 
 --
 -- Indexes for dumped tables
@@ -446,30 +470,6 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `pihak_pinjam`
   MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `book`
---
-ALTER TABLE `book`
-  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`id_rak`) REFERENCES `lok_book` (`id_rak`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `pihak_pinjam`
---
-ALTER TABLE `pihak_pinjam`
-  ADD CONSTRAINT `pihak_pinjam_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pihak_pinjam_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pihak_pinjam_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `pinjam_book` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `pinjam_book`
---
-ALTER TABLE `pinjam_book`
-  ADD CONSTRAINT `pinjam_book_ibfk_1` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
