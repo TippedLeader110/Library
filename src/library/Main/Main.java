@@ -41,7 +41,7 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
-     DefaultTableModel model_siswa = new DefaultTableModel(new String[]{"Nis", "Nama", "Tingkat", "Jurusan", "Kelas", "Alamat", "No Telepon"}, 0){
+     DefaultTableModel model_siswa = new DefaultTableModel(new String[]{"NIS", "Nama", "Tingkat", "Jurusan", "Kelas", "Alamat", "No Telepon"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
