@@ -58,7 +58,8 @@ END!
 VIEW BUKU 
 create or replace view buku as 
 select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
-from book a inner join lok_book b on a.id_rak = b.id_rak;
+from book a 
+inner join lok_book b on a.id_rak = b.id_rak;
 
 -------------------------------------------------------
 
@@ -66,21 +67,26 @@ TRIGGER insert_lokasi
 CREATE TRIGGER insert_lokasi after insert ON book
 FOR EACH ROW BEGIN
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
-insert into lok_book (id_rak, lokasi) values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
+insert into lok_book (id_rak, lokasi) 
+values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
 end if;
 END!
 
 -------------------------------------------------------
-
+	
 TRIGGER insert_lokasi2
 CREATE TRIGGER insert_lokasi2 after update ON book
 FOR EACH ROW BEGIN
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
-insert into lok_book (id_rak, lokasi) values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
+insert into lok_book (id_rak, lokasi) 
+values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
 end if;
 END!
 
 -------------------------------------------------------
 
 VIEW SISWA_VIEW
-create or replace view siswa_view as select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
+create or replace view siswa_view as 
+select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
+from siswa a
+inner join kelas b on a.id_kelas = b.id_kelas;
