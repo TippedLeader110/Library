@@ -114,7 +114,7 @@ public class editBuku extends javax.swing.JFrame {
         JenisCB = new javax.swing.JComboBox<>();
         JNewKategori = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 
