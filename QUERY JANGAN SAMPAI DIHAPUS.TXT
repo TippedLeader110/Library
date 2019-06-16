@@ -66,9 +66,11 @@ inner join lok_book b on a.id_rak = b.id_rak;
 TRIGGER insert_lokasi
 CREATE TRIGGER insert_lokasi after insert ON book
 FOR EACH ROW BEGIN
+declare lks text;
+select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
 insert into lok_book (id_rak, lokasi) 
-values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
+values (new.id_rak, lks);
 end if;
 END!
 
@@ -77,9 +79,11 @@ END!
 TRIGGER insert_lokasi2
 CREATE TRIGGER insert_lokasi2 after update ON book
 FOR EACH ROW BEGIN
+declare lks text;
+select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
 insert into lok_book (id_rak, lokasi) 
-values (new.id_rak,'rak '+substring(new.id_rak,1,1)+' tingkat '+substring(new.id_rak,1,2));
+values (new.id_rak, lks);
 end if;
 END!
 
