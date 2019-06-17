@@ -192,6 +192,21 @@ public class crud extends library.Main.Main {
         }
     }
      
+     public void updateAkun(String id, String user, String pass){
+       Statement stmt=kon.query();
+       try {  
+            rs=stmt.executeUpdate("update perpus.petugas set username = '"+ user +"', password = '"+ pass +"' where id_petugas = " + id);
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
      public void deleteStaff(String id){
         try {  
             rs=stmt.executeUpdate("DELETE from perpus.petugas where id_petugas = " + id);

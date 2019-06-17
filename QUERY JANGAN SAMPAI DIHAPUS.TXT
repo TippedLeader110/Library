@@ -1,9 +1,11 @@
 VIEW PINJAM
 create or replace view pinjam as 
-select a.id_transaksi, b.nama , a.isbn , c.judul , a.t_pinjam , a.t_kembali, a.denda 
-from pinjam_book a 
-inner join anggota b on a.id_anggota = b.id 
-inner join book c on a.isbn = c.isbn;
+select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama as siswa, (select concat(a.tingkat,' ',a.jurusan,' ',a.kelas)) as kelas, b.id_petugas, b.nama as petugas, d.t_pinjam, d.t_kembali, d.denda
+from pinjam_book d 
+inner join siswa_view a on a.nis = d.nis
+inner join petugas b on b.id_petugas = d.id_petugas
+inner join book c on c.isbn = d.isbn; 
+
 
 -------------------------------------------------------
 
@@ -38,18 +40,17 @@ TRIGGER PEMINJAMAN
 CREATE TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN
 UPDATE book
-SET jumlah = jumlah - 1
+SET jmlh = jmlh - 1
 WHERE
 isbn = NEW.isbn;
 END!
-
--------------------------------------------------------
+	-------------------------------------------------------
 
 TRIGGER PENGEMBALIAN
 CREATE TRIGGER pengembalian after update ON pinjam_book
 FOR EACH ROW BEGIN
 UPDATE book
-SET jumlah = jumlah + 1
+SET jmlh = jumlh + 1
 WHERE
 isbn = NEW.isbn;
 END!
