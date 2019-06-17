@@ -18,6 +18,7 @@ public class Guest extends javax.swing.JFrame {
      */
     public Guest() {
         initComponents();
+        
     }
 
     /**
@@ -245,12 +246,12 @@ public class Guest extends javax.swing.JFrame {
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(92, 92, 92)
-                                .addComponent(jLabel7)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel10))))
+                                .addComponent(jLabel7))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(280, 280, 280)
-                        .addComponent(jLabel5)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel5))))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
