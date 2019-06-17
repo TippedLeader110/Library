@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import library.Main.Main;
 import library.Mysql.MysqlCon;
 
 /**
@@ -591,7 +592,7 @@ public class tambahBuku extends javax.swing.JFrame {
         int row = 0;
         int row2 = 1;
         int max_row = model.getRowCount();
-        if(max_row>=2){
+        if(max_row>1){
             while(row<max_row){
                 String id = TambahBukuTable.getModel().getValueAt(row, 0).toString();
                 String id2 = TambahBukuTable.getModel().getValueAt(row2, 0).toString();

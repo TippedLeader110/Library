@@ -7,6 +7,7 @@ package library.crudData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import library.Main.Main;
 import library.Mysql.MysqlCon;
 /**
  *
@@ -68,6 +69,7 @@ public class crud extends library.Main.Main {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
         if(rs!=0){
+            new Main().modelbuku();
             JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
@@ -85,6 +87,7 @@ public class crud extends library.Main.Main {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
         if(rs!=0){
+            new Main().modelbuku();
             JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
@@ -223,7 +226,7 @@ public class crud extends library.Main.Main {
      
      public int createPinjam(String id, String petugas, String isbn, String durasi){
          try {  
-            rs=stmt.executeUpdate("insert into library.pinjam_book(id_anggota, id_petugas, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('"+ id + "','" + petugas + "','" +  isbn + "', CURDATE(), DATE_ADD(CURDATE(), INTERVAL " + durasi + " DAY), NULL, NULL)");
+            rs=stmt.executeUpdate("insert into perpus.pinjam_book(nis, id_petugas, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('"+ id + "','" + petugas + "','" +  isbn + "', CURDATE(), DATE_ADD(CURDATE(), INTERVAL " + durasi + " DAY), NULL, NULL)");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
@@ -232,7 +235,7 @@ public class crud extends library.Main.Main {
      
      public void createKembali(String uang, String id_trans, String id){
          try{
-             rs=stmt.executeUpdate("UPDATE library.pinjam_book SET t_kembali = CURDATE(), denda = library.denda(CURDATE(),"+id+","+id_trans+","+uang+") WHERE id_anggota = "+id+" and id_transaksi = "+id_trans);
+             rs=stmt.executeUpdate("UPDATE perpus.pinjam_book SET t_kembali = CURDATE(), denda = perpus.denda(CURDATE(),"+id+","+id_trans+","+uang+") WHERE nis = "+id+" and id_transaksi = "+id_trans);
          }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }

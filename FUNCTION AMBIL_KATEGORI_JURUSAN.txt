@@ -1,0 +1,134 @@
+create or replace function ambil_kategori_jurusan (tgkt int(11), jrsn text, kls int(11))
+returns text
+begin
+declare id varchar(15);
+declare kategori text;
+select id_kelas from kelas where tingkat = tgkt and jurusan = jrsn and kelas = kls into id;
+if id = '10.tpg.1' || id = '10.tpg.2' || id = '10.tpg.3' then
+set kategori  = 'TPG 10';
+end if;
+if id = '11.tpg.1' || id = '11.tpg.2' || id = '11.tpg.3' then
+set kategori = 'TPG 11';
+end if;
+if id = '12.tpg.1' || id = '12.tpg.2' || id = '12.tpg.3' then
+set kategori = 'TPG 12';
+end if;
+if id = '10.tptu.1' || id = '10.tptu.2' || id = '10.tptu.3' then
+set kategori = 'TPTU 10';
+end if;
+if id = '11.tptu.1' || id = '11.tptu.2' || id = '11.tptu.3' then
+set kategori = 'TPTU 11';
+end if;
+if id = '12.tptu.1' || id = '12.tptu.2' || id = '12.tptu.3' then
+set kategori = 'TPTU 12';
+end if;
+if id = '10.tpm.1' || id = '10.tpm.2' || id = '10.tpm.3' then
+set kategori = 'TPM 10';
+end if;
+if id = '11.tpm.1' || id = '11.tpm.2' || id = '11.tpm.3' then
+set kategori = 'TPM 11';
+end if;
+if id = '12.tpm.1' || id = '12.tpm.2' || id = '12.tpm.3' then
+set kategori = 'TPM 12';
+end if;
+if id = '10.tkj.1' || id = '10.tkj.2' || id = '10.tkj.3' then
+set kategori = 'TKJ 10';
+end if;
+if id = '11.tkj.1' || id = '11.tkj.2' || id = '11.tkj.3' then
+set kategori = 'TKJ 11';
+end if;
+if id = '12.tkj.1' || id = '12.tkj.2' || id = '12.tkj.3' then
+set kategori = 'TKJ 12';
+end if;
+if id = '10.tkro.1' || id = '10.tkro.2' || id = '10.tkro.3' then
+set kategori = 'TKRO 10';
+end if;
+if id = '11.tkro.1' || id = '11.tkro.2' || id = '11.tkro.3' then
+set kategori = 'TKRO 11';
+end if;
+if id = '12.tkro.1' || id = '12.tkro.2' || id = '12.tkro.3' then
+set kategori = 'TKRO 12';
+end if;
+if id = '10.tgtl.1' || id = '10.tgtl.2' || id = '10.tgtl.3' then
+set kategori = 'TGTL 10';
+end if;
+if id = '11.tgtl.1' || id = '11.tgtl.2' || id = '11.tgtl.3' then
+set kategori = 'TGTL 11';
+end if;
+if id = '12.tgtl.1' || id = '12.tgtl.2' || id = '12.tgtl.3' then
+set kategori = 'TGTL 12';
+end if;
+if id = '10.titl.1' || id = '10.titl.2' || id = '10.titl.3' then
+set kategori = 'TITL 10';
+end if;
+if id = '11.titl.1' || id = '11.titl.2' || id = '11.titl.3' then
+set kategori = 'TITL 11';
+end if;
+if id = '12.titl.1' || id = '12.titl.2' || id = '12.titl.3' then
+set kategori = 'TITL 12';
+end if;
+if id = '10.tg.1' || id = '10.tg.2' || id = '10.tg.3' then
+set kategori = 'TG 10';
+end if;
+if id = '12.tg.1' || id = '12.tg.2' || id = '12.tg.3' then
+set kategori = 'TG 12';
+end if;
+if id = '11.tg.1' || id = '11.tg.2' || id = '11.tg.3' then
+set kategori = 'TG 11';
+end if;
+if id = '10.tbsm.1' || id = '10.tbsm.2' || id = '10.tbsm.3' then
+set kategori = 'TBSM 10';
+end if;
+if id = '11.tbsm.1' || id = '11.tbsm.2' || id = '11.tbsm.3' then
+set kategori = 'TBSM 11';
+end if;
+if id = '12.tbsm.1' || id = '12.tbsm.2' || id = '12.tbsm.3' then
+set kategori = 'TBSM 12';
+end if;
+if id = '10.tav.1' || id = '10.tav.2' || id = '10.tav.3' then
+set kategori = 'TAV 10';
+end if;
+if id = '11.tav.1' || id = '11.tav.2' || id = '11.tav.3' then
+set kategori = 'TAV 11';
+end if;
+if id = '12.tav.1' || id = '12.tav.2' || id = '12.tav.3' then
+set kategori = 'TAV 12';
+end if;
+if id = '10.rpl.1' || id = '10.rpl.2' || id = '10.rpl.3' then
+set kategori = 'RPL 10';
+end if;
+if id = '11.rpl.1' || id = '11.rpl.2' || id = '11.rpl.3' then
+set kategori = 'RPL 11';
+end if;
+if id = '12.rpl.1' || id = '12.rpl.2' || id = '12.rpl.3' then
+set kategori = 'RPL 12';
+end if;
+if id = '10.pst.1' || id = '10.pst.2' || id = '10.pst.3' then
+set kategori = 'PST 10';
+end if;
+if id = '11.pst.1' || id = '11.pst.2' || id = '11.pst.3' then
+set kategori = 'PST 11';
+end if;
+if id = '12.pst.1' || id = '12.pst.2' || id = '12.pst.3' then
+set kategori = 'PST 12';
+end if;
+if id = '10.dpib.1' || id = '10.dpib.2' || id = '10.dpib.3' then
+set kategori = 'DPIB 10';
+end if;
+if id = '11.dpib.1' || id = '11.dpib.2' || id = '11.dpib.3' then
+set kategori = 'DPIB 11';
+end if;
+if id = '12.dpib.1' || id = '12.dpib.2' || id = '12.dpib.3' then
+set kategori = 'DPIB 12';
+end if;
+if id = '10.bkp.1' || id = '10.bkp.2' || id = '10.bkp.3' then
+set kategori = 'BKP 10';
+end if;
+if id = '11.bkp.1' || id = '11.bkp.2' || id = '11.bkp.3' then
+set kategori = 'BKP 11';
+end if;
+if id = '12.bkp.1' || id = '12.bkp.2' || id = '12.bkp.3' then
+set kategori = 'BKP 12';
+end if;
+return kategori;
+end!

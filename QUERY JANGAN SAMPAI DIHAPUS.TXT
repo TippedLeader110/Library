@@ -1,6 +1,6 @@
-VIEW PINJAM
+VIEW PINJAM (untuk data pinjam)
 create or replace view pinjam as 
-select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama as siswa, (select concat(a.tingkat,' ',a.jurusan,' ',a.kelas)) as kelas, b.id_petugas, b.nama as petugas, d.t_pinjam, d.t_kembali, d.denda
+select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama as siswa, a.tingkat, a.jurusan, a.kelas, b.id_petugas, b.nama as petugas, d.t_pinjam, d.t_kembali, d.denda
 from pinjam_book d 
 inner join siswa_view a on a.nis = d.nis
 inner join petugas b on b.id_petugas = d.id_petugas
@@ -11,10 +11,9 @@ inner join book c on c.isbn = d.isbn;
 
 VIEW KEMBALI
 create or replace view kembali as 
-select d.id_transaksi, c.isbn, a.nama as anggota, b.nama as petugas, c.judul, d.t_pinjam, d.t_kembali, d.t_deadline 
+select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama, d.t_pinjam, d.t_kembali, d.t_deadline 
 from pinjam_book d 
-inner join anggota a on a.id = d.id_anggota 
-inner join users b on b.id = d.id_petugas 
+inner join siswa a on a.nis = d.nis 
 inner join book c on c.isbn = d.isbn;
 
 -------------------------------------------------------
@@ -36,19 +35,26 @@ end!
 
 -------------------------------------------------------
 
+
+
+
+-------------------------------------------------------
+
 TRIGGER PEMINJAMAN
 CREATE TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN
+if exists(select t_pinjam from pinjam_book where id_transaksi = new.id_transaksi and t_pinjam is not null) then
 UPDATE book
 SET jmlh = jmlh - 1
 WHERE
 isbn = NEW.isbn;
 END!
-	-------------------------------------------------------
+-------------------------------------------------------
 
 TRIGGER PENGEMBALIAN
 CREATE TRIGGER pengembalian after update ON pinjam_book
 FOR EACH ROW BEGIN
+if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null)
 UPDATE book
 SET jmlh = jumlh + 1
 WHERE
@@ -56,6 +62,7 @@ isbn = NEW.isbn;
 END!
 
 ------------------------------------------------------- 
+
 VIEW BUKU 
 create or replace view buku as 
 select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
@@ -95,3 +102,5 @@ create or replace view siswa_view as
 select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
 from siswa a
 inner join kelas b on a.id_kelas = b.id_kelas;
+
+-------------------------------------------------------
