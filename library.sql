@@ -67,7 +67,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('1','2','1',1,1,'2019-06-14','3','1'),('2',' wao','ihsan',2019,4,'2019-02-02',' wao','disini'),('3','Milkita','Saiki Kusuo',2019,3,'2019-05-09','How to be a esper','rak a'),('4','TeaSeries','Pewdiepie',2017,5,'2019-06-11','Cross a bridge','Swedia'),('6','10','6',2019,6,'2019-06-13','8','6');
+INSERT INTO `book` VALUES ('1','2','1',1,0,'2019-06-14','3','1'),('2',' wao','ihsan',2019,4,'2019-02-02',' wao','disini'),('3','Milkita','Saiki Kusuo',2019,3,'2019-05-09','How to be a esper','rak a'),('4','TeaSeries','Pewdiepie',2017,5,'2019-06-11','Cross a bridge','Swedia'),('6','10','6',2019,6,'2019-06-13','8','6');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ CREATE TABLE `pinjam_book` (
   PRIMARY KEY (`id_transaksi`),
   KEY `id_anggota` (`id_anggota`),
   KEY `ISBN` (`ISBN`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `pinjam_book` (
 
 LOCK TABLES `pinjam_book` WRITE;
 /*!40000 ALTER TABLE `pinjam_book` DISABLE KEYS */;
-INSERT INTO `pinjam_book` VALUES (9,2,3,'1','2019-06-11','2019-06-14','2019-06-13',0),(10,2,3,'2','2019-06-11','2019-06-14',NULL,NULL),(11,2,3,'4','2019-06-11','2019-06-14','2019-06-12',0);
+INSERT INTO `pinjam_book` VALUES (9,2,3,'1','2019-06-11','2019-06-14','2019-06-13',0),(10,2,3,'2','2019-06-11','2019-06-14',NULL,NULL),(11,2,3,'4','2019-06-11','2019-06-14','2019-06-12',0),(18,1,1,'1','2019-06-17','2019-06-20',NULL,NULL);
 /*!40000 ALTER TABLE `pinjam_book` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -176,7 +176,7 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN
 UPDATE book
-SET jumlah = jumlah - 1
+SET jmlh = jmlh- 1
 WHERE
 isbn = NEW.isbn;
 END */;;
@@ -197,7 +197,7 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER pengembalian after update ON pinjam_book
 FOR EACH ROW BEGIN
 UPDATE book
-SET jumlah = jumlah + 1
+SET jmlh = jmlh+ 1
 WHERE
 isbn = NEW.isbn;
 END */;;
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-17 10:26:47
+-- Dump completed on 2019-06-17 10:58:28
