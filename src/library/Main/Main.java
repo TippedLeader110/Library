@@ -238,11 +238,9 @@ public class Main extends javax.swing.JFrame {
         peminjamanBAtas = new javax.swing.JButton();
         pengembalianBAtas = new javax.swing.JButton();
         datapinjamBAtas = new javax.swing.JButton();
-        kasBAtas = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
         panelBawah = new javax.swing.JPanel();
         peminjamanPanel = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -483,7 +481,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        settingBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/setting.png"))); // NOI18N
+        settingBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/password.png"))); // NOI18N
         settingBAtas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         settingBAtas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -508,7 +506,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel30.setText("Pengaturan");
+        jLabel30.setText("Password");
 
         presensiBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/presensi.png"))); // NOI18N
         presensiBAtas.addActionListener(new java.awt.event.ActionListener() {
@@ -607,14 +605,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        kasBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/kas.png"))); // NOI18N
-        kasBAtas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        kasBAtas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kasBAtasActionPerformed(evt);
-            }
-        });
-
         jLabel31.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Peminjaman");
@@ -626,10 +616,6 @@ public class Main extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("Data Pinjam");
-
-        jLabel36.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("Kas");
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
@@ -650,32 +636,21 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel33)))
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(kasBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel36)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(kasBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pengembalianBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(peminjamanBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(datapinjamBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pengembalianBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(peminjamanBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datapinjamBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel31)
-                        .addComponent(jLabel32)
-                        .addComponent(jLabel33))
-                    .addComponent(jLabel36))
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel33))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -1980,12 +1955,13 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel112)
                     .addComponent(jLabel96))
                 .addGap(28, 28, 28)
-                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel79)
-                    .addComponent(jLabel80)
+                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel82)
-                        .addComponent(jLabel81)))
+                        .addComponent(jLabel81))
+                    .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel79)
+                        .addComponent(jLabel80)))
                 .addGap(100, 100, 100))
         );
 
@@ -3466,15 +3442,6 @@ public class Main extends javax.swing.JFrame {
         tambahUserB.setEnabled(true);
     }//GEN-LAST:event_userTabelFocusGained
 
-    private void kasBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kasBAtasActionPerformed
-        // TODO add your handling code here:
-        this.titleKas.setText("Kas");
-        panelBawah.removeAll();
-        panelBawah.add(kasPanel);
-        panelBawah.repaint();
-        panelBawah.revalidate();
-    }//GEN-LAST:event_kasBAtasActionPerformed
-
     private void datapinjamBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datapinjamBAtasActionPerformed
         // TODO add your handling code here:
         model_datapinjam.setRowCount(0);
@@ -3828,7 +3795,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel48;
@@ -3909,7 +3875,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JComboBox<String> jurusanPinjamMapelCB;
     private javax.swing.JComboBox<String> jurusanSiswaCB;
-    private javax.swing.JButton kasBAtas;
     private javax.swing.JPanel kasPanel;
     private javax.swing.JLabel kategoriL;
     private javax.swing.JComboBox<String> kelasPinjamMapelCB;
