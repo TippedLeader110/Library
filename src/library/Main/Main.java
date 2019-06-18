@@ -3674,17 +3674,30 @@ public class Main extends javax.swing.JFrame {
     private void simpanPinjamUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanPinjamUmumActionPerformed
         // TODO add your handling code here:
         int row = 0;
+        crud c = new crud();
         String nis = siswaPinjamUmumField.getText();
         String durasi = durasiField.getText();
         MysqlCon send = new MysqlCon( );
-
+        int max_row  = model_bukupinjam.getRowCount();
             Statement stmt = send.query();
             ResultSet rs;
         try{
-            rs = stmt.executeQuery("select * from buku where jenis_buku = 'Umum' and isbn = "+isbn);
+            rs = stmt.executeQuery("select id_petugas from perpus.petugas where nama = "+LabelUser.getText());
             while(rs.next()){
-                
+                String id = rs.getString("id_petugas");
+                while(row<max_row){
+                String isbn = bukuPinjamMapelTabel.getModel().getValueAt(row, 0).toString();
+                int rs2 = c.createPinjam(nis, id, isbn, durasi);
+                if(rs2!=0){
+                    row++;
+                    if(row==max_row){
+                         JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                         break;
+                        }
+                }
+                    
             }
+        }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
         }
