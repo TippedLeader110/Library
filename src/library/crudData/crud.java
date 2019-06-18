@@ -242,17 +242,12 @@ public class crud extends library.Main.Main {
          return rs;
      }
      
-     public void createKembali(String uang, String id_trans, String id){
+     public int createKembali(String uang, String id_trans, String id){
          try{
              rs=stmt.executeUpdate("UPDATE perpus.pinjam_book SET t_kembali = CURDATE(), denda = perpus.denda(CURDATE(),"+id+","+id_trans+","+uang+") WHERE nis = "+id+" and id_transaksi = "+id_trans);
          }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
-        if(rs!=0){
-            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, rs, "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
+       return rs; 
      }
 }
