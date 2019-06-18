@@ -43,7 +43,7 @@ public class MysqlCon{
         Connection con=DriverManager.getConnection(  
         "jdbc:mysql://localhost","root","");  
         Statement stmt=con.createStatement();  
-        ResultSet rs=stmt.executeQuery("select library.login('" + F1 + "', '" + F2 + "')");  
+        ResultSet rs=stmt.executeQuery("select perpus.login('" + F1 + "', '" + F2 + "')");  
         
         while(rs.next())
             num = rs.getInt(1);

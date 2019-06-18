@@ -233,6 +233,15 @@ public class crud extends library.Main.Main {
          return rs;
      }
      
+      public int createPinjam2(String id, String petugas, String isbn, String dedlain){
+         try {  
+            rs=stmt.executeUpdate("insert into perpus.pinjam_book(nis, id_petugas, ISBN, t_pinjam, t_deadline, t_kembali, denda) VALUE('"+ id + "','" + petugas + "','" +  isbn + "', CURDATE(),'"+dedlain+"', NULL, NULL)");
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+         return rs;
+     }
+     
      public void createKembali(String uang, String id_trans, String id){
          try{
              rs=stmt.executeUpdate("UPDATE perpus.pinjam_book SET t_kembali = CURDATE(), denda = perpus.denda(CURDATE(),"+id+","+id_trans+","+uang+") WHERE nis = "+id+" and id_transaksi = "+id_trans);

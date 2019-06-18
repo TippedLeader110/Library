@@ -35,11 +35,6 @@ end!
 
 -------------------------------------------------------
 
-
-
-
--------------------------------------------------------
-
 TRIGGER PEMINJAMAN
 CREATE TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN

@@ -352,7 +352,7 @@ public class tambahSiswa extends javax.swing.JFrame {
             
             Statement stmt=kon.query();
             try{
-                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = '"+kelas);
+                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = "+kelas);
                 while(rs2.next()){
                     String id_kelas = rs2.getString("id_kelas");
                     int rs = c.createSiswa(nis , nama, id_kelas, alamat, telepon);
