@@ -609,9 +609,9 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                          <Component id="jTextField18" min="-2" pref="264" max="-2" attributes="0"/>
+                                          <Component id="siswaPinjamUmumField" min="-2" pref="264" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton37" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="cariSiswaPinjamUmumB" min="-2" pref="60" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -624,8 +624,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton37" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="siswaPinjamUmumField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cariSiswaPinjamUmumB" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel40" min="-2" max="-2" attributes="0"/>
@@ -646,14 +646,14 @@
                             <Property name="text" type="java.lang.String" value="NIS"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField18">
+                        <Component class="javax.swing.JTextField" name="siswaPinjamUmumField">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="13" style="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton37">
+                        <Component class="javax.swing.JButton" name="cariSiswaPinjamUmumB">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="13" style="1"/>
@@ -663,6 +663,9 @@
                               <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cariSiswaPinjamUmumBActionPerformed"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JPanel" name="jPanel40">
                           <Properties>
@@ -683,12 +686,12 @@
                                       <EmptySpace pref="88" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jTextField1" min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="durasiField" min="-2" pref="30" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel109" min="-2" pref="27" max="-2" attributes="0"/>
                                               <EmptySpace pref="112" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jLabel97" max="32767" attributes="0"/>
+                                          <Component id="LabelnamaPinjamUmum" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -698,22 +701,22 @@
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jTextField2" min="-2" pref="52" max="-2" attributes="0"/>
+                                              <Component id="dendaField" min="-2" pref="52" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel110" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                                               <Component id="jLabel99" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                              <Component id="jTextField3" min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="maksField" min="-2" pref="33" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel100" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel98" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabeltingkatPinjamUmum" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel103" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabeljurusanPinjamUmum" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel104" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabelkelasPinjamUmum" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
@@ -725,10 +728,10 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel98" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel103" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel104" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel97" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabeltingkatPinjamUmum" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabeljurusanPinjamUmum" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabelkelasPinjamUmum" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LabelnamaPinjamUmum" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel77" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel95" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -737,11 +740,11 @@
                                           <Component id="jLabel101" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel105" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="durasiField" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel109" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="dendaField" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel110" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -749,7 +752,7 @@
                                               <Component id="jLabel99" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="maksField" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel100" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -775,7 +778,7 @@
                                 <Property name="text" type="java.lang.String" value="Kelas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel97">
+                            <Component class="javax.swing.JLabel" name="LabelnamaPinjamUmum">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="14" style="0"/>
@@ -783,7 +786,7 @@
                                 <Property name="text" type="java.lang.String" value="&lt;Nama&gt;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel98">
+                            <Component class="javax.swing.JLabel" name="LabeltingkatPinjamUmum">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="14" style="0"/>
@@ -807,7 +810,7 @@
                                 <Property name="text" type="java.lang.String" value="Durasi Pinjam"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel103">
+                            <Component class="javax.swing.JLabel" name="LabeljurusanPinjamUmum">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="14" style="0"/>
@@ -815,7 +818,7 @@
                                 <Property name="text" type="java.lang.String" value="&lt;Jurusan&gt;"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel104">
+                            <Component class="javax.swing.JLabel" name="LabelkelasPinjamUmum">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="14" style="0"/>
@@ -831,7 +834,7 @@
                                 <Property name="text" type="java.lang.String" value="Denda"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField1">
+                            <Component class="javax.swing.JTextField" name="durasiField">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel109">
                               <Properties>
@@ -841,7 +844,7 @@
                                 <Property name="text" type="java.lang.String" value="Hari"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField2">
+                            <Component class="javax.swing.JTextField" name="dendaField">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel110">
                               <Properties>
@@ -851,7 +854,7 @@
                                 <Property name="text" type="java.lang.String" value="/Hari"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField3">
+                            <Component class="javax.swing.JTextField" name="maksField">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel100">
                               <Properties>
@@ -881,16 +884,14 @@
                                       <Component id="jScrollPane25" alignment="0" min="-2" pref="1105" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
-                                          <Component id="jTextField19" min="-2" pref="264" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton48" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton49" min="-2" pref="105" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jButton50" min="-2" pref="105" max="-2" attributes="0"/>
+                                          <Component id="bukuPinjamUmumField" min="-2" pref="264" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="tambahbukuPinjamField" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="resetbukuPinjamUmum" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="simpanPinjamUmum" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="527" max="32767" attributes="0"/>
                               </Group>
@@ -902,16 +903,14 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField19" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton48" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="tambahbukuPinjamField" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="resetbukuPinjamUmum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="bukuPinjamUmumField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane25" min="-2" pref="116" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jButton49" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="jButton50" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="simpanPinjamUmum" min="-2" pref="35" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -929,23 +928,26 @@
                             <Property name="text" type="java.lang.String" value="Kode Buku"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField19">
+                        <Component class="javax.swing.JTextField" name="bukuPinjamUmumField">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="13" style="0"/>
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton48">
+                        <Component class="javax.swing.JButton" name="tambahbukuPinjamField">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="13" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Cari"/>
+                            <Property name="text" type="java.lang.String" value="Tambah"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                               <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahbukuPinjamFieldActionPerformed"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPane25">
                           <Properties>
@@ -956,7 +958,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable14">
+                            <Component class="javax.swing.JTable" name="bukuPinjamUmumTabel">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="4" rowCount="4">
@@ -970,7 +972,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JButton" name="jButton49">
+                        <Component class="javax.swing.JButton" name="simpanPinjamUmum">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="cc" red="33" type="rgb"/>
@@ -989,26 +991,23 @@
                               <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simpanPinjamUmumActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton50">
+                        <Component class="javax.swing.JButton" name="resetbukuPinjamUmum">
                           <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Arial" size="14" style="1"/>
+                              <Font name="Arial" size="13" style="1"/>
                             </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="33" green="33" red="33" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Baru"/>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="null"/>
-                            </Property>
+                            <Property name="text" type="java.lang.String" value="Reset"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                               <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetbukuPinjamUmumActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
