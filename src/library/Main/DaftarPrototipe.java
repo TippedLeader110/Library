@@ -217,17 +217,17 @@ public class DaftarPrototipe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-//        int jawab = JOptionPane.showOptionDialog(this, 
-//                        "Masuk ke Guest Mode Sekarang?", 
-//                        "Konfirmasi", 
-//                        JOptionPane.YES_NO_OPTION, 
-//                        JOptionPane.QUESTION_MESSAGE, null, null, null);
-//        
-//        if(jawab == JOptionPane.YES_OPTION){
-//            Guest g = new Guest();
-//            this.dispose();
-//            g.setVisible(true);
-//        }
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Masuk ke Guest Mode Sekarang?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            Guest g = new Guest();
+            this.dispose();
+            g.setVisible(true);
+        }
 
         
         
