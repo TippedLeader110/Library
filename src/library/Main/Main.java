@@ -3502,9 +3502,14 @@ public class Main extends javax.swing.JFrame {
         int i = 0;
         int max_row = model_kembali.getRowCount();
         try{
+            int denda;
+                if(dendaField.getText().equals(""))
+                    denda = 0;
+                else
+                    denda = Integer.parseInt(dendaField.getText());
             while(row<max_row){
             String id_trans = bukuKembaliTabel.getModel().getValueAt(row, 0).toString();
-            rs = stmt.executeQuery("Select perpus.denda(CURDATE(),"+ id +","+ id_trans +","+ Integer.parseInt(dendaField.getText()) +") as denda");
+             rs = stmt.executeQuery("Select perpus.denda(CURDATE(),"+ id +","+ id_trans +","+ denda +") as denda");
             while(rs.next()){
                 i = i + rs.getInt("denda");
                 LabelDenda.setText(String.valueOf(i));
