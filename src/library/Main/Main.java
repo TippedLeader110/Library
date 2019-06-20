@@ -3501,12 +3501,12 @@ public class Main extends javax.swing.JFrame {
         int row = 0;
         int i = 0;
         int max_row = model_kembali.getRowCount();
-        try{
-            int denda;
+        int denda;
                 if(dendaField.getText().equals(""))
                     denda = 0;
                 else
                     denda = Integer.parseInt(dendaField.getText());
+        try{            
             while(row<max_row){
             String id_trans = bukuKembaliTabel.getModel().getValueAt(row, 0).toString();
              rs = stmt.executeQuery("Select perpus.denda(CURDATE(),"+ id +","+ id_trans +","+ denda +") as denda");
