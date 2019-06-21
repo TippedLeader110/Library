@@ -2974,22 +2974,22 @@ public class Main extends javax.swing.JFrame {
         if(Kategori.equals("Kategori")){
             if(lokasi.equals("Rak")){
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
                 if(!nama.equals(""))
                     tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             }else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
-                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
+                tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
                 if(!nama.equals(""))
                     tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             }
         }else{
-            tr.setRowFilter(RowFilter.regexFilter(Kategori));
+            tr.setRowFilter(RowFilter.regexFilter("^"+Kategori+"$"));
         }
     }//GEN-LAST:event_KategoriCBItemStateChanged
 
@@ -3031,7 +3031,7 @@ public class Main extends javax.swing.JFrame {
             }    
             else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
                 if(!nama.equals(""))
@@ -3039,7 +3039,7 @@ public class Main extends javax.swing.JFrame {
             }
         }
         else
-            tr.setRowFilter(RowFilter.regexFilter(jenis));
+            tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
             
     }//GEN-LAST:event_JenisCBItemStateChanged
 
@@ -3058,7 +3058,7 @@ public class Main extends javax.swing.JFrame {
         String nama = cariTF.getText();
         bukuTabel.setRowSorter(tr);
         if(!lokasi.equals("Rak")){
-            tr.setRowFilter(RowFilter.regexFilter(lokasi));
+            tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
         }
         else{
             if(jenis.equals("Jenis")){
@@ -3070,9 +3070,9 @@ public class Main extends javax.swing.JFrame {
             }
             else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
                 if(!Kategori.equals("Kategori"))
-                    tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                    tr.setRowFilter(RowFilter.regexFilter("^"+Kategori+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }
@@ -3092,22 +3092,22 @@ public class Main extends javax.swing.JFrame {
             if(jenis.equals("Jenis")){
                tr.setRowFilter(RowFilter.regexFilter(""));
                if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }else if(Kategori.equals("Kategori")){
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
                 if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }else{
                 tr.setRowFilter(RowFilter.regexFilter(""));
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
-                tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
+                tr.setRowFilter(RowFilter.regexFilter("^"+Kategori+"$"));
                 if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }
@@ -3115,20 +3115,20 @@ public class Main extends javax.swing.JFrame {
             tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
             if(jenis.equals("Jenis")){
                 if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }else if(Kategori.equals("Kategori")){
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
                 if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }else{
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
-                tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
+                tr.setRowFilter(RowFilter.regexFilter("^"+Kategori+"$"));
                 if(!lokasi.equals("Rak"))
-                   tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                   tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
                 if(!tahun.equals("Tahun Buku"))
                     tr.setRowFilter(RowFilter.regexFilter("^"+tahun+"$"));
             }
@@ -3145,12 +3145,12 @@ public class Main extends javax.swing.JFrame {
         if(tahun.equals("Tahun Buku")){
             tr.setRowFilter(RowFilter.regexFilter(""));
             if(!jenis.equals("Jenis")){
-                tr.setRowFilter(RowFilter.regexFilter(jenis));
+                tr.setRowFilter(RowFilter.regexFilter("^"+jenis+"$"));
                 if(!Kategori.equals("Kategori"))
-                    tr.setRowFilter(RowFilter.regexFilter(Kategori));
+                    tr.setRowFilter(RowFilter.regexFilter("^"+Kategori+"$"));
             }
             if(!lokasi.equals("Rak"))
-                tr.setRowFilter(RowFilter.regexFilter(lokasi));
+                tr.setRowFilter(RowFilter.regexFilter("^"+lokasi+"$"));
             if(!nama.equals(""))
                     tr.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
         }
@@ -3221,6 +3221,10 @@ public class Main extends javax.swing.JFrame {
 
     private void siswaBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siswaBAtasActionPerformed
         // TODO add your handling code here:
+        ts.setRowFilter(RowFilter.regexFilter(""));
+        tingkatSiswaCB.setSelectedIndex(0);
+        jurusanSiswaCB.setSelectedIndex(0);
+        kelasSiswaCB.setSelectedIndex(0);
         editsiswaB.setEnabled(false);
         hapussiswaB.setEnabled(false);
         model_siswa.setRowCount(0);
@@ -3268,7 +3272,13 @@ public class Main extends javax.swing.JFrame {
 
     private void bukuBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBAtasActionPerformed
         // TODO add your handling code here:
+        tr.setRowFilter(RowFilter.regexFilter(""));
         model_buku.setRowCount(0);
+        JenisCB.setSelectedIndex(0);
+        KategoriCB.setSelectedIndex(0);
+        rakCB.setSelectedIndex(0);
+        thnCB.setSelectedIndex(0);
+        cariTF.setText("");
         MysqlCon send = new MysqlCon( );
         
         Statement stmt = send.query();
@@ -3413,11 +3423,11 @@ public class Main extends javax.swing.JFrame {
         if(nama.equals("")){
             ts.setRowFilter(RowFilter.regexFilter(""));
             if(!jurusan.equals("Jurusan"))
-                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+                ts.setRowFilter(RowFilter.regexFilter("^"+jurusan+"$"));
             if(!tingkat.equals("Tingkat"))
-                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+                ts.setRowFilter(RowFilter.regexFilter("^"+tingkat+"$"));
             if(!kelas.equals("Kelas"))
-                ts.setRowFilter(RowFilter.regexFilter(kelas));
+                ts.setRowFilter(RowFilter.regexFilter("^"+kelas+"$"));
         }else
             ts.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
     }//GEN-LAST:event_cariSiswaBActionPerformed
@@ -3436,13 +3446,13 @@ public class Main extends javax.swing.JFrame {
         if(tingkat.equals("Tingkat")){
             ts.setRowFilter(RowFilter.regexFilter(""));
             if(!jurusan.equals("Jurusan"))
-                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+                ts.setRowFilter(RowFilter.regexFilter("^"+jurusan+"$"));
             if(!kelas.equals("Kelas"))
-                ts.setRowFilter(RowFilter.regexFilter(kelas));
+                ts.setRowFilter(RowFilter.regexFilter("^"+kelas+"$"));
             if(!nama.equals(""))
                 ts.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
         }else
-            ts.setRowFilter(RowFilter.regexFilter(tingkat));
+            ts.setRowFilter(RowFilter.regexFilter("^"+tingkat+"$"));
     }//GEN-LAST:event_tingkatSiswaCBItemStateChanged
 
     private void jurusanSiswaCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jurusanSiswaCBItemStateChanged
@@ -3455,13 +3465,13 @@ public class Main extends javax.swing.JFrame {
         if(jurusan.equals("Jurusan")){
             ts.setRowFilter(RowFilter.regexFilter(""));
             if(!tingkat.equals("Tingkat"))
-                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+                ts.setRowFilter(RowFilter.regexFilter("^"+tingkat+"$"));
             if(!kelas.equals("Kelas"))
-                ts.setRowFilter(RowFilter.regexFilter(kelas));
+                ts.setRowFilter(RowFilter.regexFilter("^"+kelas+"$"));
             if(!nama.equals(""))
                 ts.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
         }else
-            ts.setRowFilter(RowFilter.regexFilter(jurusan));
+            ts.setRowFilter(RowFilter.regexFilter("^"+jurusan+"$"));
     }//GEN-LAST:event_jurusanSiswaCBItemStateChanged
 
     private void kelasSiswaCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_kelasSiswaCBItemStateChanged
@@ -3474,13 +3484,13 @@ public class Main extends javax.swing.JFrame {
         if(kelas.equals("Kelas")){
             ts.setRowFilter(RowFilter.regexFilter(""));
             if(!tingkat.equals("Tingkat"))
-                ts.setRowFilter(RowFilter.regexFilter(tingkat));
+                ts.setRowFilter(RowFilter.regexFilter("^"+tingkat+"$"));
             if(!jurusan.equals("Jurusan"))
-                ts.setRowFilter(RowFilter.regexFilter(jurusan));
+                ts.setRowFilter(RowFilter.regexFilter("^"+jurusan+"$"));
             if(!nama.equals(""))
                 ts.setRowFilter(RowFilter.regexFilter("^(?i)"+nama));
         }else
-            ts.setRowFilter(RowFilter.regexFilter(kelas));
+            ts.setRowFilter(RowFilter.regexFilter("^"+kelas+"$"));
     }//GEN-LAST:event_kelasSiswaCBItemStateChanged
 
     private void presensiBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBAtasActionPerformed
