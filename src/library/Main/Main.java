@@ -88,6 +88,20 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
+      DefaultTableModel model_presensi = new DefaultTableModel(new String[]{"No", "NIS", "Tanggal", "Jam", "keterangan"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+      DefaultTableModel model_cashflow = new DefaultTableModel(new String[]{"No", "Petugas", "Tanggal", "Tipe", "Nominal", "Keterangan"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
      TableRowSorter<DefaultTableModel> ts = new TableRowSorter<DefaultTableModel>(model_siswa);
      TableRowSorter<DefaultTableModel> ts2 = new TableRowSorter<DefaultTableModel>(model_staff);
@@ -360,7 +374,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane16 = new javax.swing.JScrollPane();
         jPanel20 = new javax.swing.JPanel();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+        kastabel = new javax.swing.JTable();
         pengembalianPanel = new javax.swing.JPanel();
         pengeUmumP = new javax.swing.JPanel();
         titlePengembalianUmum = new javax.swing.JLabel();
@@ -451,7 +465,7 @@ public class Main extends javax.swing.JFrame {
         editB = new javax.swing.JButton();
         hapusB = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        presensitabel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
@@ -1828,7 +1842,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel20.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
+        kastabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1839,7 +1853,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane17.setViewportView(jTable9);
+        jScrollPane17.setViewportView(kastabel);
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -2855,8 +2869,8 @@ public class Main extends javax.swing.JFrame {
         hapusB.setBorder(null);
         hapusB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        presensitabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        presensitabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2867,7 +2881,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(presensitabel);
 
         javax.swing.GroupLayout kas2PanelLayout = new javax.swing.GroupLayout(kas2Panel);
         kas2Panel.setLayout(kas2PanelLayout);
@@ -3495,9 +3509,31 @@ public class Main extends javax.swing.JFrame {
 
     private void presensiBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBAtasActionPerformed
         // TODO add your handling code here:
+        MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+        String q, w, e, r, t; 
+        
+        try {
+                rs = stmt.executeQuery("select * from perpus.presensi");
+                while(rs.next()){
+                q = rs.getString("no_presensi");
+                w = rs.getString("nis");
+                e = rs.getString("tanggal");
+                r = rs.getString("jam");
+                t = rs.getString("kegiatan");
+                model_presensi.addRow(new Object[]{q,w,e,r,t});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
+        
         this.titlePresensi.setText("Presensi");
         panelBawah.removeAll();
         panelBawah.add(presensiPanel);
+        presensitabel.setModel(model_presensi);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_presensiBAtasActionPerformed
@@ -3882,11 +3918,31 @@ public class Main extends javax.swing.JFrame {
 
     private void kasBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kasBAtasActionPerformed
         // TODO add your handling code here:
+         MysqlCon send = new MysqlCon( );
+        
+        Statement stmt = send.query();
+        ResultSet rs;
+        String q, w, e, r, t, y; 
+        
+        try {
+                rs = stmt.executeQuery("select * from perpus.cashflow inner join perpus.petugas on cashflow.id_petugas = petugas.id_petugas");
+                while(rs.next()){
+                q = rs.getString("no_cashflow");
+                w = rs.getString("nama");
+                e = rs.getString("tanggal");
+                r = rs.getString("tipe");
+                t = rs.getString("nominal");
+                y = rs.getString("keterangan");
+                model_cashflow.addRow(new Object[]{q,w,e,r,t});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
         this.titleKas.setText("Kas");
         panelBawah.removeAll();
         panelBawah.add(kasPanel);
-        //datapinjamTabel.setModel(model_datapinjam);
-       // datapinjamTabel.setAutoCreateRowSorter(true);
+        kastabel.setModel(model_cashflow);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_kasBAtasActionPerformed
@@ -4087,15 +4143,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable10;
-    private javax.swing.JTable jTable9;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JComboBox<String> jurusanPinjamMapelCB;
     private javax.swing.JComboBox<String> jurusanSiswaCB;
     private javax.swing.JPanel kas2Panel;
     private javax.swing.JButton kasBAtas;
     private javax.swing.JPanel kasPanel;
+    private javax.swing.JTable kastabel;
     private javax.swing.JLabel kategoriL;
     private javax.swing.JComboBox<String> kelasPinjamMapelCB;
     private javax.swing.JComboBox<String> kelasSiswaCB;
@@ -4115,6 +4170,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pengembalianPanel;
     private javax.swing.JButton presensiBAtas;
     private javax.swing.JPanel presensiPanel;
+    private javax.swing.JTable presensitabel;
     private javax.swing.JComboBox<String> rakCB;
     private javax.swing.JLabel rakL;
     private javax.swing.JLabel rakL2;
