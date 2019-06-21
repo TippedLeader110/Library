@@ -128,14 +128,22 @@ public class tambaheditAkun extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setText("Tambah Akun");
 
+        simpanUserB.setBackground(new java.awt.Color(51, 204, 0));
+        simpanUserB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        simpanUserB.setForeground(new java.awt.Color(255, 255, 255));
         simpanUserB.setText("Simpan");
+        simpanUserB.setBorder(null);
         simpanUserB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simpanUserBActionPerformed(evt);
             }
         });
 
+        batal.setBackground(new java.awt.Color(255, 0, 0));
+        batal.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        batal.setForeground(new java.awt.Color(255, 255, 255));
         batal.setText("Batal");
+        batal.setBorder(null);
         batal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalActionPerformed(evt);
@@ -147,18 +155,14 @@ public class tambaheditAkun extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(title))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(simpanUserB)
+                        .addComponent(simpanUserB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(batal))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,8 +174,8 @@ public class tambaheditAkun extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(simpanUserB)
-                    .addComponent(batal))
+                    .addComponent(simpanUserB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -199,8 +203,8 @@ public class tambaheditAkun extends javax.swing.JFrame {
         // TODO add your handling code here:
         crud c = new crud();
         String id = idCB.getSelectedItem().toString();
-        this.val = val;
-        if(id!=val){
+        
+        if(id!=this.val){
             JOptionPane.showMessageDialog(this, "Kesalahan, id tidak boleh diganti", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             idCB.setSelectedItem(val);
         }
