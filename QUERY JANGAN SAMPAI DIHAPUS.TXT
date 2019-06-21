@@ -60,7 +60,7 @@ END!
 
 VIEW BUKU 
 create or replace view buku as 
-select a.isbn, b.rak, b.tingkat, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
+select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
 from book a 
 inner join lok_book b on a.id_rak = b.id_rak;
 
