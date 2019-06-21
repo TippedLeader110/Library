@@ -89,7 +89,7 @@ public class editSiswa extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Tambah Buku");
+        title.setText("Edit Siswa");
 
         simpanB.setBackground(new java.awt.Color(0, 204, 0));
         simpanB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -175,8 +175,8 @@ public class editSiswa extends javax.swing.JFrame {
                         .addComponent(JTelepon)
                         .addComponent(JNama)
                         .addComponent(JId)
-                        .addComponent(JAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .addComponent(jurusanCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JAlamat)
+                        .addComponent(jurusanCB, 0, 190, Short.MAX_VALUE)
                         .addComponent(TingkatCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(KelasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -225,14 +225,15 @@ public class editSiswa extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(title))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(100, 100, 100)
                         .addComponent(simpanB, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
+                        .addGap(29, 29, 29)
                         .addComponent(batalB, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 24, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,9 +253,7 @@ public class editSiswa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +274,7 @@ public class editSiswa extends javax.swing.JFrame {
         String jurusan = jurusanCB.getSelectedItem().toString();
         String kelas = KelasCB.getSelectedItem().toString();
         try{
-                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = '"+kelas);
+                ResultSet rs2 = stmt.executeQuery("Select distinct kelas.id_kelas from perpus.kelas where kelas.tingkat = '"+tingkat+"' and kelas.jurusan = '"+jurusan+"' and kelas.kelas = "+kelas);
                 while(rs2.next()){
                     String id_kelas = rs2.getString("id_kelas");
                     if(v!=this.val){

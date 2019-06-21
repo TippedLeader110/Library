@@ -82,7 +82,7 @@ public class tambaheditAkun extends javax.swing.JFrame {
         jLabel2.setText("ID Petugas");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jLabel3.setText("User");
+        jLabel3.setText("Username");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel4.setText("Password");
