@@ -21,6 +21,7 @@ import library.crudData.tambahBuku;
 import library.crudData.tambahSiswa;
 import library.crudData.tambaheditAkun;
 import library.crudData.tambaheditKas;
+import library.crudData.tambaheditPresensi;
 import library.crudData.tambaheditStaff;
 /**
  *
@@ -452,20 +453,13 @@ public class Main extends javax.swing.JFrame {
         jScrollPane23 = new javax.swing.JScrollPane();
         jPanel39 = new javax.swing.JPanel();
         jScrollPane24 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
+        presensitabel = new javax.swing.JTable();
         jLabel75 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jButton20 = new javax.swing.JButton();
         tambahPresensiB = new javax.swing.JButton();
         editPresensiB = new javax.swing.JButton();
         hapusPresensiB = new javax.swing.JButton();
-        kas2Panel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        tambahB = new javax.swing.JButton();
-        editB = new javax.swing.JButton();
-        hapusB = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        presensitabel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIstem Pengelolaan Perpustakaan (v 0.0.1)");
@@ -493,6 +487,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         siswaBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/siswa.png"))); // NOI18N
+        siswaBAtas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         siswaBAtas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 siswaBAtasActionPerformed(evt);
@@ -1278,7 +1273,7 @@ public class Main extends javax.swing.JFrame {
         bukuPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel7.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel7.setPreferredSize(new java.awt.Dimension(1325, 425));
+        jPanel7.setPreferredSize(new java.awt.Dimension(1320, 425));
 
         bukuTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1402,6 +1397,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cariTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariTFActionPerformed(evt);
+            }
+        });
 
         cariBukuB.setBackground(new java.awt.Color(51, 153, 255));
         cariBukuB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -1464,9 +1464,10 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(bukuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rakL2)
-                                    .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bukuPanelLayout.createSequentialGroup()
+                                        .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(cariBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bukuPanelLayout.createSequentialGroup()
@@ -2184,6 +2185,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jPanel16.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel16.setPreferredSize(new java.awt.Dimension(1290, 425));
 
         datapinjamTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2204,15 +2206,15 @@ public class Main extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jScrollPane12.setViewportView(jPanel16);
@@ -2224,29 +2226,25 @@ public class Main extends javax.swing.JFrame {
             .addGroup(datapinjamPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(datapinjamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1793, Short.MAX_VALUE)
+                    .addComponent(titleDatapinjam)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 1341, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(datapinjamPanelLayout.createSequentialGroup()
-                        .addComponent(titleDatapinjam)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(datapinjamPanelLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(462, Short.MAX_VALUE))
         );
         datapinjamPanelLayout.setVerticalGroup(
             datapinjamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datapinjamPanelLayout.createSequentialGroup()
                 .addComponent(titleDatapinjam)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(datapinjamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         panelBawah.add(datapinjamPanel, "card14");
@@ -2430,6 +2428,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel3.setVerifyInputWhenFocusTarget(false);
 
         staffTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2455,15 +2454,15 @@ public class Main extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(jPanel3);
@@ -2475,22 +2474,22 @@ public class Main extends javax.swing.JFrame {
             .addGroup(staffPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1793, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(staffPanelLayout.createSequentialGroup()
                         .addComponent(titleStaff)
                         .addGap(49, 49, 49)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffPanelLayout.createSequentialGroup()
+                                .addComponent(staffField, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(staffPanelLayout.createSequentialGroup()
                                 .addComponent(tambahstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(editstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(staffField))
-                        .addGap(18, 18, 18)
-                        .addComponent(caristaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGap(18, 18, 18)
+                                .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(452, Short.MAX_VALUE))
         );
         staffPanelLayout.setVerticalGroup(
             staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2510,8 +2509,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(editstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         panelBawah.add(staffPanel, "card5");
@@ -2534,7 +2533,7 @@ public class Main extends javax.swing.JFrame {
         jLabel39.setForeground(new java.awt.Color(51, 51, 51));
         jLabel39.setText("Tingkat");
 
-        cariSiswaField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cariSiswaField.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         cariSiswaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cariSiswaFieldActionPerformed(evt);
@@ -2696,8 +2695,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(titleSiswa)
                     .addGroup(siswaPanelLayout.createSequentialGroup()
                         .addComponent(jLabel94)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cariSiswaField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(cariSiswaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(siswaPanelLayout.createSequentialGroup()
                         .addGroup(siswaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel39)
@@ -2727,8 +2726,9 @@ public class Main extends javax.swing.JFrame {
         titlePresensi.setText("Title");
 
         jPanel39.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel39.setPreferredSize(new java.awt.Dimension(1320, 345));
 
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+        presensitabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2739,7 +2739,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane24.setViewportView(jTable10);
+        jScrollPane24.setViewportView(presensitabel);
 
         javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
         jPanel39.setLayout(jPanel39Layout);
@@ -2747,20 +2747,20 @@ public class Main extends javax.swing.JFrame {
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 1361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 1325, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane23.setViewportView(jPanel39);
 
-        jLabel75.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel75.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel75.setText("NIS / Kode Anggota");
 
         jTextField10.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
@@ -2773,25 +2773,35 @@ public class Main extends javax.swing.JFrame {
         jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tambahPresensiB.setBackground(new java.awt.Color(0, 204, 0));
-        tambahPresensiB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        tambahPresensiB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         tambahPresensiB.setForeground(new java.awt.Color(255, 255, 255));
         tambahPresensiB.setText("Tambah");
         tambahPresensiB.setBorder(null);
         tambahPresensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahPresensiB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahPresensiBActionPerformed(evt);
+            }
+        });
 
         editPresensiB.setBackground(new java.awt.Color(255, 153, 0));
-        editPresensiB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        editPresensiB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         editPresensiB.setForeground(new java.awt.Color(255, 255, 255));
         editPresensiB.setText("Edit");
         editPresensiB.setBorder(null);
         editPresensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         hapusPresensiB.setBackground(new java.awt.Color(255, 0, 0));
-        hapusPresensiB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        hapusPresensiB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         hapusPresensiB.setForeground(new java.awt.Color(255, 255, 255));
         hapusPresensiB.setText("Hapus");
         hapusPresensiB.setBorder(null);
         hapusPresensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapusPresensiB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusPresensiBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout presensiPanelLayout = new javax.swing.GroupLayout(presensiPanel);
         presensiPanel.setLayout(presensiPanelLayout);
@@ -2800,122 +2810,43 @@ public class Main extends javax.swing.JFrame {
             .addGroup(presensiPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 1793, Short.MAX_VALUE)
+                    .addComponent(titlePresensi)
                     .addGroup(presensiPanelLayout.createSequentialGroup()
-                        .addGroup(presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titlePresensi)
-                            .addGroup(presensiPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel75)
-                                .addGap(44, 44, 44)
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(presensiPanelLayout.createSequentialGroup()
-                                .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(editPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(hapusPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hapusPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel75)
+                    .addGroup(presensiPanelLayout.createSequentialGroup()
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 1347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(456, Short.MAX_VALUE))
         );
         presensiPanelLayout.setVerticalGroup(
             presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(presensiPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titlePresensi)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel75)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(presensiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hapusPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         panelBawah.add(presensiPanel, "card12");
-
-        kas2Panel.setBackground(new java.awt.Color(255, 255, 255));
-        kas2Panel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Title");
-
-        tambahB.setBackground(new java.awt.Color(0, 204, 0));
-        tambahB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tambahB.setForeground(new java.awt.Color(255, 255, 255));
-        tambahB.setText("Tambah");
-        tambahB.setBorder(null);
-        tambahB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        editB.setBackground(new java.awt.Color(255, 153, 0));
-        editB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        editB.setForeground(new java.awt.Color(255, 255, 255));
-        editB.setText("Edit");
-        editB.setBorder(null);
-        editB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        hapusB.setBackground(new java.awt.Color(255, 0, 0));
-        hapusB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        hapusB.setForeground(new java.awt.Color(255, 255, 255));
-        hapusB.setText("Hapus");
-        hapusB.setBorder(null);
-        hapusB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        presensitabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        presensitabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(presensitabel);
-
-        javax.swing.GroupLayout kas2PanelLayout = new javax.swing.GroupLayout(kas2Panel);
-        kas2Panel.setLayout(kas2PanelLayout);
-        kas2PanelLayout.setHorizontalGroup(
-            kas2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kas2PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(kas2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(kas2PanelLayout.createSequentialGroup()
-                        .addComponent(tambahB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(editB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(hapusB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(223, Short.MAX_VALUE))
-        );
-        kas2PanelLayout.setVerticalGroup(
-            kas2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kas2PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(kas2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hapusB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
-        );
-
-        panelBawah.add(kas2Panel, "card12");
 
         getContentPane().add(panelBawah, java.awt.BorderLayout.CENTER);
 
@@ -2969,12 +2900,22 @@ public class Main extends javax.swing.JFrame {
 
     private void hapusbukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbukuBActionPerformed
         // TODO add your handling code here:
-        crud n = new crud();
-        int column = 0;
-        int row = bukuTabel.getSelectedRow();
-        String value = bukuTabel.getModel().getValueAt(row, column).toString();
-        n.deleteBuku(value);
-        modelbuku();
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Yakin ingin menghapus?", 
+                        "Hapus", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            crud n = new crud();
+            int column = 0;
+            int row = bukuTabel.getSelectedRow();
+            String value = bukuTabel.getModel().getValueAt(row, column).toString();
+            n.deleteBuku(value);
+            modelbuku();
+        }
+        
+        
     }//GEN-LAST:event_hapusbukuBActionPerformed
 
     private void KategoriCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_KategoriCBItemStateChanged
@@ -3009,6 +2950,7 @@ public class Main extends javax.swing.JFrame {
 
     private void JenisCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisCBItemStateChanged
         // TODO add your handling code here:
+
         
         //combo box kategori
         KategoriCB.setEnabled(true);
@@ -3190,11 +3132,20 @@ public class Main extends javax.swing.JFrame {
 
     private void hapussiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapussiswaBActionPerformed
         // TODO add your handling code here:
-        crud n = new crud();
-        int column = 0;
-        int row = siswaTabel.getSelectedRow();
-        String value = siswaTabel.getModel().getValueAt(row, column).toString();
-        n.deleteSiswa(value);
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Yakin ingin menghapus?", 
+                        "Hapus", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            crud n = new crud();
+            int column = 0;
+            int row = siswaTabel.getSelectedRow();
+            String value = siswaTabel.getModel().getValueAt(row, column).toString();
+            n.deleteSiswa(value);
+        }
+        
     }//GEN-LAST:event_hapussiswaBActionPerformed
 
     private void siswaTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_siswaTabelFocusGained
@@ -3211,11 +3162,21 @@ public class Main extends javax.swing.JFrame {
 
     private void hapusstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusstaffBActionPerformed
         // TODO add your handling code here:
-        crud n = new crud();
-        int column = 0;
-        int row = staffTabel.getSelectedRow();
-        String value = staffTabel.getModel().getValueAt(row, column).toString();
-        n.deleteStaff(value);
+        
+       int jawab = JOptionPane.showOptionDialog(this, 
+                        "Yakin ingin menghapus?", 
+                        "Hapus", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            crud n = new crud();
+            int column = 0;
+            int row = staffTabel.getSelectedRow();
+            String value = staffTabel.getModel().getValueAt(row, column).toString();
+            n.deleteStaff(value);
+        } 
+        
     }//GEN-LAST:event_hapusstaffBActionPerformed
 
     private void staffTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staffTabelFocusGained
@@ -3367,6 +3328,7 @@ public class Main extends javax.swing.JFrame {
     
     private void staffBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBAtasActionPerformed
         // TODO add your handling code here:
+        model_staff.setRowCount(0);
         editstaffB.setEnabled(false);
         hapusstaffB.setEnabled(false);
         MysqlCon send = new MysqlCon( );
@@ -3953,6 +3915,30 @@ public class Main extends javax.swing.JFrame {
         tek.setVisible(true);
     }//GEN-LAST:event_tambahKasBActionPerformed
 
+    private void tambahPresensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahPresensiBActionPerformed
+        // TODO add your handling code here:
+        tambaheditPresensi tep = new tambaheditPresensi();
+        tep.setVisible(true);
+    }//GEN-LAST:event_tambahPresensiBActionPerformed
+
+    private void cariTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariTFActionPerformed
+        // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(cariBukuB);
+    }//GEN-LAST:event_cariTFActionPerformed
+
+    private void hapusPresensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusPresensiBActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Yakin ingin menghapus?", 
+                        "Hapus", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            //
+        }
+    }//GEN-LAST:event_hapusPresensiBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4024,13 +4010,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable datapinjamTabel;
     private javax.swing.JTextField dendaField;
     private javax.swing.JTextField durasiField;
-    private javax.swing.JButton editB;
     private javax.swing.JButton editPresensiB;
     private javax.swing.JButton editbukuB;
     private javax.swing.JButton editkasB;
     private javax.swing.JButton editsiswaB;
     private javax.swing.JButton editstaffB;
-    private javax.swing.JButton hapusB;
     private javax.swing.JButton hapusPresensiB;
     private javax.swing.JButton hapusbukuB;
     private javax.swing.JButton hapuskasB;
@@ -4068,7 +4052,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -4122,7 +4105,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel45;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -4143,11 +4125,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable10;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JComboBox<String> jurusanPinjamMapelCB;
     private javax.swing.JComboBox<String> jurusanSiswaCB;
-    private javax.swing.JPanel kas2Panel;
     private javax.swing.JButton kasBAtas;
     private javax.swing.JPanel kasPanel;
     private javax.swing.JTable kastabel;
@@ -4191,7 +4171,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable staffTabel;
     private javax.swing.JLabel sumberL;
     private javax.swing.JTextField tahunField;
-    private javax.swing.JButton tambahB;
     private javax.swing.JButton tambahKasB;
     private javax.swing.JButton tambahPresensiB;
     private javax.swing.JButton tambahUserB;
