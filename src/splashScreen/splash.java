@@ -28,7 +28,6 @@ public class splash extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        nama = new javax.swing.JLabel();
         loadingbar = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
 
@@ -36,12 +35,6 @@ public class splash extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        nama.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        nama.setForeground(new java.awt.Color(255, 255, 255));
-        nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nama.setText("0%");
-        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 550, 40, -1));
 
         loadingbar.setBackground(new java.awt.Color(255, 255, 255));
         loadingbar.setForeground(new java.awt.Color(255, 179, 24));
@@ -105,6 +98,5 @@ public class splash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JProgressBar loadingbar;
-    public javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
 }

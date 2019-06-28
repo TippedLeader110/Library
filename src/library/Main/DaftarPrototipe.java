@@ -56,7 +56,6 @@ public class DaftarPrototipe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(480, 480));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -66,24 +65,24 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Password");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Username");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        username.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         username.setForeground(new java.awt.Color(0, 153, 255));
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 120, -1));
+        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 130, 25));
 
-        pass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pass.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         pass.setForeground(new java.awt.Color(0, 123, 255));
-        jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 120, -1));
+        jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 130, 25));
 
         jButton1.setBackground(new java.awt.Color(51, 153, 255));
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -95,13 +94,14 @@ public class DaftarPrototipe extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 90, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Exit");
         jButton2.setBorder(null);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -112,7 +112,7 @@ public class DaftarPrototipe extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 153, 255));
         jLabel3.setText("Atau");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 102, 255));
         jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -125,9 +125,9 @@ public class DaftarPrototipe extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 190, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 190, 40));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/login-library.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/login-2.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
