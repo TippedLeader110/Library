@@ -6,10 +6,14 @@
 package library.Main;
 
 
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
+import static java.util.Collections.list;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -23,6 +27,7 @@ import library.crudData.tambaheditAkun;
 import library.crudData.tambaheditKas;
 import library.crudData.tambaheditPresensi;
 import library.crudData.tambaheditStaff;
+import java.util.Date;
 /**
  *
  * @author My Computer
@@ -266,6 +271,8 @@ public class Main extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         kasBAtas = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
+        laporanBAtas = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
         logoutB = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -353,7 +360,7 @@ public class Main extends javax.swing.JFrame {
         titleLaporan = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
-        jButton21 = new javax.swing.JButton();
+        laporanBuku = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
         jPanel29 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
@@ -485,7 +492,7 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(101, 193, 243));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         bukuBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/book-icon.png"))); // NOI18N
         bukuBAtas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -605,7 +612,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel24)
                                 .addComponent(jLabel25)
                                 .addComponent(jLabel30)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Database", jPanel1);
@@ -659,6 +666,17 @@ public class Main extends javax.swing.JFrame {
         jLabel34.setForeground(new java.awt.Color(51, 51, 51));
         jLabel34.setText("Kas");
 
+        laporanBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/laporan-icon.png"))); // NOI18N
+        laporanBAtas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporanBAtasActionPerformed(evt);
+            }
+        });
+
+        jLabel35.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel35.setText("Laporan");
+
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
@@ -682,24 +700,32 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel33)
                         .addGap(37, 37, 37)
                         .addComponent(jLabel34)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(laporanBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel35)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(laporanBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(kasBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(pengembalianBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(peminjamanBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datapinjamBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33)
-                    .addComponent(jLabel34))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel35))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Transaksi", jPanel25);
@@ -762,7 +788,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelAtasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAtasLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -782,7 +808,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelAtas, java.awt.BorderLayout.PAGE_START);
@@ -1406,6 +1432,11 @@ public class Main extends javax.swing.JFrame {
                 JenisCBItemStateChanged(evt);
             }
         });
+        JenisCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JenisCBActionPerformed(evt);
+            }
+        });
 
         KategoriCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         KategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kategori" }));
@@ -1600,10 +1631,17 @@ public class Main extends javax.swing.JFrame {
         jLabel52.setForeground(new java.awt.Color(255, 255, 255));
         jLabel52.setText("Laporan Data Buku & Keanggotaan");
 
-        jButton21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton21.setText("Laporan Data Buku");
-        jButton21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        laporanBuku.setBackground(new java.awt.Color(255, 255, 255));
+        laporanBuku.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        laporanBuku.setText("Laporan Data Buku");
+        laporanBuku.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        laporanBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporanBukuActionPerformed(evt);
+            }
+        });
 
+        jButton23.setBackground(new java.awt.Color(255, 255, 255));
         jButton23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton23.setText("Laporan Data Anggota");
         jButton23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1617,7 +1655,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel52)
                     .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(laporanBuku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1627,7 +1665,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel52)
                 .addGap(18, 18, 18)
-                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(laporanBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -1639,10 +1677,12 @@ public class Main extends javax.swing.JFrame {
         jLabel53.setForeground(new java.awt.Color(255, 255, 255));
         jLabel53.setText("Laporan Peringkat Presensi");
 
+        jButton24.setBackground(new java.awt.Color(255, 255, 255));
         jButton24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton24.setText("Laporan Presensi (Kunjungan)");
         jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jButton25.setBackground(new java.awt.Color(255, 255, 255));
         jButton25.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton25.setText("Laporan Peringkat Pengunjung");
         jButton25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1678,10 +1718,12 @@ public class Main extends javax.swing.JFrame {
         jLabel54.setForeground(new java.awt.Color(255, 255, 255));
         jLabel54.setText("Laporan Pendapatan");
 
+        jButton26.setBackground(new java.awt.Color(255, 255, 255));
         jButton26.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton26.setText("Laporan Kas Harian Operator");
         jButton26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jButton27.setBackground(new java.awt.Color(255, 255, 255));
         jButton27.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton27.setText("Laporan Pendapatan Denda");
         jButton27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1717,10 +1759,12 @@ public class Main extends javax.swing.JFrame {
         jLabel58.setForeground(new java.awt.Color(255, 255, 255));
         jLabel58.setText("Laporan Aliran Kas");
 
+        jButton28.setBackground(new java.awt.Color(255, 255, 255));
         jButton28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton28.setText("Laporan Kas Masuk");
         jButton28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jButton29.setBackground(new java.awt.Color(255, 255, 255));
         jButton29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton29.setText("Laporan Kas Keluar");
         jButton29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1873,8 +1917,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        jButton15.setBackground(new java.awt.Color(81, 193, 240));
         jButton15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton15.setForeground(new java.awt.Color(51, 51, 51));
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("Tampilkan");
         jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -2911,6 +2956,10 @@ public class Main extends javax.swing.JFrame {
             ts2.setRowFilter(RowFilter.regexFilter(staffField.getText()));
             
     }//GEN-LAST:event_caristaffBActionPerformed
+
+    private void print(StringBuffer result1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public final class Allow {
     private Allow(){}
@@ -4002,6 +4051,74 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutBActionPerformed
 
+    private void laporanBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanBAtasActionPerformed
+        // TODO add your handling code here:
+        this.titleKas.setText("Laporan");
+        panelBawah.removeAll();
+        panelBawah.add(laporanPanel);        
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_laporanBAtasActionPerformed
+
+    private void laporanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanBukuActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            String header = "";
+            
+            /*
+            String printTime = "logged at time {0,time} on date {0, date}";
+            StringBuffer result1 = new StringBuffer();
+            MessageFormat messageFormat = new MessageFormat(printTime);
+            messageFormat.format(new Object[] { new Date() }, result1, null);
+            System.out.println(result1);
+
+            */
+            String ketWaktu = "Dicetak Pada {0,time} , {0, date}";
+            StringBuffer result1 = new StringBuffer();
+            
+            MessageFormat printTime = new MessageFormat(ketWaktu);
+            printTime.format(new Object[] { new Date() }, result1, null);
+//            System.out.println(result1);
+            
+                if(JenisCB.getSelectedItem().equals("Umum")){
+                    header = " Umum";
+                }
+                else if(JenisCB.getSelectedItem().equals("Khusus")){
+                    header = " Khusus";
+                }
+                else if(JenisCB.getSelectedItem().equals("Mapel")){
+                    header = " Mapel";
+                }else{
+                    header = "";
+                }               
+            
+            MessageFormat judul = new MessageFormat("Laporan Buku" + header);
+//            MessageFormat footer = new MessageFormat("page(0,number,integer)");
+
+            try {                
+                bukuTabel.print(JTable.PrintMode.FIT_WIDTH, judul, printTime);
+//                boolean complete = bukuTabel.print();
+//                if(complete){
+//                 JOptionPane.showMessageDialog(null, "Selesai Mencetak!","Informasi", JOptionPane.INFORMATION_MESSAGE);                 
+//                }
+            } catch (PrinterException ex){
+                System.err.print("Error Printer");
+            }
+                        
+        }                
+        
+    }//GEN-LAST:event_laporanBukuActionPerformed
+
+    private void JenisCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JenisCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JenisCBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4088,7 +4205,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
@@ -4123,6 +4239,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -4202,6 +4319,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel kategoriL;
     private javax.swing.JComboBox<String> kelasPinjamMapelCB;
     private javax.swing.JComboBox<String> kelasSiswaCB;
+    private javax.swing.JButton laporanBAtas;
+    private javax.swing.JButton laporanBuku;
     private javax.swing.JPanel laporanPanel;
     private javax.swing.JButton logoutB;
     private javax.swing.JTextField maksField;
