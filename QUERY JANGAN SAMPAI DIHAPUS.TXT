@@ -43,17 +43,23 @@ UPDATE book
 SET jmlh = jmlh - 1
 WHERE
 isbn = NEW.isbn;
+end if;
 END!
 -------------------------------------------------------
 
 TRIGGER PENGEMBALIAN
-CREATE TRIGGER pengembalian after update ON pinjam_book
+CREATE TRIGGER pengembalian/kas after update ON pinjam_book
 FOR EACH ROW BEGIN
-if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null)
+if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
 UPDATE book
 SET jmlh = jumlh + 1
 WHERE
 isbn = NEW.isbn;
+end if;
+if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null and denda != 0) then
+insert into cashflow(id_petugas, tipe, tanggal, nominal, keterangan) 
+value(new.id_petugas, 'pemasukan', curdate(), new.denda, 'Denda peminjaman buku');
+end if;
 END!
 
 ------------------------------------------------------- 

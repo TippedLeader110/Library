@@ -210,7 +210,7 @@ public class crud extends library.Main.Main {
         }
     }
      
-     public void deleteStaff(String id){
+    public void deleteStaff(String id){
         try {  
             rs=stmt.executeUpdate("DELETE from perpus.petugas where id_petugas = " + id);
         } catch (SQLException ex){
@@ -250,4 +250,44 @@ public class crud extends library.Main.Main {
         }
        return rs; 
      }
+     
+     public void createCashflow(String petugas, String tipe, String uang, String ket){
+         try{
+             rs = stmt.executeUpdate("insert into perpus.cashflow(id_petugas, tipe, tanggal, nominal, keterangan) value("+petugas+",'"+tipe+"',curdate(),"+uang+",'"+ket+"')");
+         }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+     
+     public void editCashflow(String no, String tipe, String uang, String ket){
+        try{
+           rs = stmt.executeUpdate("UPDATE perpus.cashflow set tipe = '"+tipe+"', nominal = "+uang+", keterangan = '"+ket+"' where no_cashflow = "+no);
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }    
+     }
+     
+     public void deleteCashflow(String no){
+        try {  
+            rs=stmt.executeUpdate("DELETE from perpus.cashdlow where no_cashflow = "+no);
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

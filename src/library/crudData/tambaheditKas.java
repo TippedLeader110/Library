@@ -5,6 +5,12 @@
  */
 package library.crudData;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import library.Mysql.MysqlCon;
+
 /**
  *
  * @author My Computer
@@ -14,10 +20,33 @@ public class tambaheditKas extends javax.swing.JFrame {
     /**
      * Creates new form tambaheditKas
      */
-    public tambaheditKas() {
+    String val;
+    MysqlCon kon = new MysqlCon();
+    Statement stmt=kon.query();
+    boolean edit;
+    String petugas; 
+    public tambaheditKas(String petugas, int i) {
+        edit = false;
+        this.petugas = petugas;
         initComponents();
     }
-
+    
+     public tambaheditKas(String val){
+        this.val = val;
+        edit = true;
+        initComponents();
+        
+        try{
+            ResultSet rs_tipe = stmt.executeQuery("select * from perpus.cashflow where cashflow.no_cashflow = "+ val);
+            while(rs_tipe.next()){
+                tipeCB.setSelectedItem(rs_tipe.getString("tipe"));
+                uangField.setText(rs_tipe.getString("nominal"));
+                ketField.setText(rs_tipe.getString("keterangan"));
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,12 +60,12 @@ public class tambaheditKas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        uangField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        ketField = new javax.swing.JTextArea();
+        tipeCB = new javax.swing.JComboBox<>();
         simpanB = new javax.swing.JButton();
         batalB = new javax.swing.JButton();
 
@@ -53,7 +82,7 @@ public class tambaheditKas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel2.setText("Nominal (Rp)");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        uangField.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel3.setText("Tipe Pemasukan");
@@ -61,12 +90,12 @@ public class tambaheditKas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel5.setText("Keterangan");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        ketField.setColumns(20);
+        ketField.setRows(5);
+        jScrollPane1.setViewportView(ketField);
 
-        jComboBox3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemasukan", "Pengeluaran" }));
+        tipeCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tipeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemasukan", "Pengeluaran" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -78,7 +107,7 @@ public class tambaheditKas extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(uangField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -86,7 +115,7 @@ public class tambaheditKas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(tipeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(85, 85, 85))
         );
         jPanel2Layout.setVerticalGroup(
@@ -95,11 +124,11 @@ public class tambaheditKas extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tipeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uangField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -112,6 +141,11 @@ public class tambaheditKas extends javax.swing.JFrame {
         simpanB.setForeground(new java.awt.Color(255, 255, 255));
         simpanB.setText("Simpan");
         simpanB.setBorder(null);
+        simpanB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanBActionPerformed(evt);
+            }
+        });
 
         batalB.setBackground(new java.awt.Color(255, 0, 0));
         batalB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -177,6 +211,17 @@ public class tambaheditKas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_batalBActionPerformed
 
+    private void simpanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBActionPerformed
+        // TODO add your handling code here:
+        crud c = new crud();
+        if(this.edit==true){
+            c.editCashflow(this.val, tipeCB.getSelectedItem().toString(), uangField.getText(), ketField.getText());
+        }
+        else
+            c.createCashflow(this.petugas, tipeCB.getSelectedItem().toString(), uangField.getText(), ketField.getText());
+        this.dispose();
+    }//GEN-LAST:event_simpanBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,14 +252,12 @@ public class tambaheditKas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tambaheditKas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalB;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -222,8 +265,9 @@ public class tambaheditKas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea ketField;
     private javax.swing.JButton simpanB;
+    private javax.swing.JComboBox<String> tipeCB;
+    private javax.swing.JTextField uangField;
     // End of variables declaration//GEN-END:variables
 }

@@ -114,6 +114,7 @@ public class Main extends javax.swing.JFrame {
      TableRowSorter<DefaultTableModel> ts = new TableRowSorter<DefaultTableModel>(model_siswa);
      TableRowSorter<DefaultTableModel> ts2 = new TableRowSorter<DefaultTableModel>(model_staff);
      TableRowSorter<DefaultTableModel> tp = new TableRowSorter<DefaultTableModel>(model_datapinjam);
+     TableRowSorter<DefaultTableModel> cf = new TableRowSorter<DefaultTableModel>(model_cashflow);
     public Main() {
         initComponents();
         
@@ -396,11 +397,21 @@ public class Main extends javax.swing.JFrame {
         jScrollPane17 = new javax.swing.JScrollPane();
         kastabel = new javax.swing.JTable();
         jPanel19 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton15 = new javax.swing.JButton();
+        tanggal1Label = new javax.swing.JLabel();
+        tanggal2Label = new javax.swing.JLabel();
+        tipetanggalCB = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        tahunField1 = new javax.swing.JTextField();
+        labelt3 = new javax.swing.JLabel();
+        bulanfield1 = new javax.swing.JTextField();
+        labelt1 = new javax.swing.JLabel();
+        hariField1 = new javax.swing.JTextField();
+        tahunField2 = new javax.swing.JTextField();
+        labelt2 = new javax.swing.JLabel();
+        bulanfield2 = new javax.swing.JTextField();
+        labelt4 = new javax.swing.JLabel();
+        hariField2 = new javax.swing.JTextField();
+        tampiltanggalCB = new javax.swing.JButton();
         hapuskasB = new javax.swing.JButton();
         editkasB = new javax.swing.JButton();
         tambahKasB = new javax.swing.JButton();
@@ -1882,24 +1893,69 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jScrollPane16.setViewportView(jPanel20);
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel6.setText("Mulai Tanggal");
+        tanggal1Label.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tanggal1Label.setText("Tanggal 1");
 
-        jLabel48.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel48.setText("Sampai Tanggal");
+        tanggal2Label.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tanggal2Label.setText("Tanggal 2");
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tipetanggalCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        tipetanggalCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipe pencarian tanggal", "Hari ini", "Tanggal Tertentu (Tanggal 1)", "Tanggal 1 - Hari ini", "Tanggal 1 - Tanggal 2" }));
+        tipetanggalCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tipetanggalCBItemStateChanged(evt);
+            }
+        });
 
-        jComboBox2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel10.setText("Tipe pencarian tanggal");
+
+        tahunField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tahunField1.setText("Tahun");
+
+        labelt3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelt3.setText(" - ");
+
+        bulanfield1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bulanfield1.setText("Bulan");
+
+        labelt1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelt1.setText(" - ");
+
+        hariField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hariField1.setText("Hari");
+
+        tahunField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tahunField2.setText("Tahun");
+
+        labelt2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelt2.setText(" - ");
+
+        bulanfield2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bulanfield2.setText("Bulan");
+
+        labelt4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelt4.setText(" - ");
+
+        hariField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hariField2.setText("Hari");
+
+        tampiltanggalCB.setBackground(new java.awt.Color(0, 0, 0));
+        tampiltanggalCB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        tampiltanggalCB.setText("Tampilkan Tanggal");
+        tampiltanggalCB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tampiltanggalCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tampiltanggalCBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1909,34 +1965,70 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(73, 73, 73)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(tanggal1Label))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tipetanggalCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addComponent(tahunField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelt2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                        .addComponent(bulanfield2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelt4))
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addComponent(tahunField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelt1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bulanfield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelt3)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hariField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hariField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(tampiltanggalCB)))
+                        .addGap(18, 18, 18))
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
-                        .addGap(59, 59, 59)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(tanggal2Label)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tipetanggalCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tanggal1Label)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(hariField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tahunField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bulanfield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelt3)
+                        .addComponent(labelt1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(tanggal2Label)
+                    .addComponent(hariField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tahunField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bulanfield2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelt4)
+                    .addComponent(labelt2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tampiltanggalCB)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jButton15.setBackground(new java.awt.Color(81, 193, 240));
-        jButton15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Tampilkan");
-        jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         hapuskasB.setBackground(new java.awt.Color(255, 0, 0));
         hapuskasB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1944,6 +2036,11 @@ public class Main extends javax.swing.JFrame {
         hapuskasB.setText("Hapus");
         hapuskasB.setBorder(null);
         hapuskasB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hapuskasB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapuskasBActionPerformed(evt);
+            }
+        });
 
         editkasB.setBackground(new java.awt.Color(255, 204, 0));
         editkasB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1951,6 +2048,11 @@ public class Main extends javax.swing.JFrame {
         editkasB.setText("Edit");
         editkasB.setBorder(null);
         editkasB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editkasB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editkasBActionPerformed(evt);
+            }
+        });
 
         tambahKasB.setBackground(new java.awt.Color(51, 204, 0));
         tambahKasB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1974,17 +2076,14 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jScrollPane16)
                     .addGroup(kasPanelLayout.createSequentialGroup()
                         .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleKas)
-                            .addGroup(kasPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton15))
                             .addGroup(kasPanelLayout.createSequentialGroup()
                                 .addComponent(tambahKasB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(editkasB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(hapuskasB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(hapuskasB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(titleKas)
+                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1993,17 +2092,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(kasPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleKas)
-                .addGap(18, 18, 18)
-                .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahKasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editkasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hapuskasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane16)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
 
@@ -4051,14 +4148,37 @@ public class Main extends javax.swing.JFrame {
         panelBawah.removeAll();
         panelBawah.add(kasPanel);
         kastabel.setModel(model_cashflow);
+        tanggal1Label.setEnabled(false);
+        tanggal2Label.setEnabled(false);
+        tahunField1.setEnabled(false);
+        tahunField2.setEnabled(false);
+        bulanfield1.setEnabled(false);
+        bulanfield2.setEnabled(false);
+        hariField1.setEnabled(false);
+        hariField2.setEnabled(false);
+        labelt1.setEnabled(false);
+        labelt2.setEnabled(false);
+        labelt3.setEnabled(false);
+        labelt4.setEnabled(false);
+        tampiltanggalCB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_kasBAtasActionPerformed
 
     private void tambahKasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKasBActionPerformed
         // TODO add your handling code here:
-        tambaheditKas tek = new tambaheditKas();
-        tek.setVisible(true);
+        Statement stmt = send.query();
+        ResultSet rs;
+        try{
+            rs = stmt.executeQuery("select id_petugas from perpus.petugas where nama = '"+LabelUser.getText()+"'");
+            while(rs.next()){
+                String petugas = rs.getString("id_petugas");
+                tambaheditKas tek = new tambaheditKas(petugas, 1);
+                tek.setVisible(true);
+            }
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
     }//GEN-LAST:event_tambahKasBActionPerformed
 
     private void tambahPresensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahPresensiBActionPerformed
@@ -4168,6 +4288,87 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JenisCBActionPerformed
 
+    private void editkasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editkasBActionPerformed
+        // TODO add your handling code here:
+        int column = 0;
+        int row = kastabel.getSelectedRow();
+        String value = kastabel.getModel().getValueAt(row, column).toString();
+        tambaheditKas tk = new tambaheditKas(value);
+        tk.setVisible(true); 
+    }//GEN-LAST:event_editkasBActionPerformed
+
+    private void hapuskasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapuskasBActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this,
+            "Yakin ingin menghapus?",
+            "Hapus",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+        if(jawab == JOptionPane.YES_OPTION){
+            crud n = new crud();
+            int column = 0;
+            int row = kastabel.getSelectedRow();
+            String value = kastabel.getModel().getValueAt(row, column).toString();
+            n.deleteCashflow(value);
+        }
+    }//GEN-LAST:event_hapuskasBActionPerformed
+
+    private void tipetanggalCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipetanggalCBItemStateChanged
+        // TODO add your handling code here:
+        if(tipetanggalCB.getSelectedItem().toString().equals("Hari ini")){
+            tampiltanggalCB.setEnabled(true);
+        }
+        else if(tipetanggalCB.getSelectedItem().toString().equals("Tanggal Tertentu (Tanggal 1)") || tipetanggalCB.getSelectedItem().toString().equals("Tanggal 1 - Hari ini")){
+            tanggal1Label.setEnabled(true);
+            tahunField1.setEnabled(true);
+            bulanfield1.setEnabled(true);
+            hariField2.setEnabled(true);
+            labelt1.setEnabled(true);
+            labelt3.setEnabled(true);
+            tampiltanggalCB.setEnabled(true);
+        }
+        else if(tipetanggalCB.getSelectedItem().toString().equals("Tanggal 1 - Tanggal 2")){
+            tanggal1Label.setEnabled(true);
+            tanggal2Label.setEnabled(true);
+            tahunField1.setEnabled(true);
+            tahunField2.setEnabled(true);
+            bulanfield1.setEnabled(true);
+            bulanfield2.setEnabled(true);
+            hariField1.setEnabled(true);
+            hariField2.setEnabled(true);
+            labelt1.setEnabled(true);
+            labelt2.setEnabled(true);
+            labelt3.setEnabled(true);
+            labelt4.setEnabled(true);
+            tampiltanggalCB.setEnabled(true);
+        }
+        else{
+            tanggal1Label.setEnabled(false);
+            tanggal2Label.setEnabled(false);
+            tahunField1.setEnabled(false);
+            tahunField2.setEnabled(false);
+            bulanfield1.setEnabled(false);
+            bulanfield2.setEnabled(false);
+            hariField1.setEnabled(false);
+            hariField2.setEnabled(false);
+            labelt1.setEnabled(false);
+            labelt2.setEnabled(false);
+            labelt3.setEnabled(false);
+            labelt4.setEnabled(false);
+            tampiltanggalCB.setEnabled(false);
+        }
+    }//GEN-LAST:event_tipetanggalCBItemStateChanged
+
+    private void tampiltanggalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampiltanggalCBActionPerformed
+        // TODO add your handling code here:
+        String tipe = tipetanggalCB.getSelectedItem().toString();
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
+        if(tipe.equals("Hari ini")){
+            
+        }
+    }//GEN-LAST:event_tampiltanggalCBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4224,6 +4425,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable bukuPinjamUmumTabel;
     private javax.swing.JTable bukuTabel;
     private javax.swing.JTextField bulanfield;
+    private javax.swing.JTextField bulanfield1;
+    private javax.swing.JTextField bulanfield2;
     private javax.swing.JButton cariBukuB;
     private javax.swing.JButton cariKembaliB;
     private javax.swing.JButton cariSiswaB;
@@ -4250,8 +4453,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton hapussiswaB;
     private javax.swing.JButton hapusstaffB;
     private javax.swing.JTextField hariField;
+    private javax.swing.JTextField hariField1;
+    private javax.swing.JTextField hariField2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton23;
@@ -4262,9 +4466,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel106;
@@ -4292,14 +4495,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
@@ -4368,6 +4569,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel kategoriL;
     private javax.swing.JComboBox<String> kelasPinjamMapelCB;
     private javax.swing.JComboBox<String> kelasSiswaCB;
+    private javax.swing.JLabel labelt1;
+    private javax.swing.JLabel labelt2;
+    private javax.swing.JLabel labelt3;
+    private javax.swing.JLabel labelt4;
     private javax.swing.JButton laporanBAtas;
     private javax.swing.JButton laporanBuku;
     private javax.swing.JPanel laporanPanel;
@@ -4408,6 +4613,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable staffTabel;
     private javax.swing.JLabel sumberL;
     private javax.swing.JTextField tahunField;
+    private javax.swing.JTextField tahunField1;
+    private javax.swing.JTextField tahunField2;
     private javax.swing.JButton tambahKasB;
     private javax.swing.JButton tambahPresensiB;
     private javax.swing.JButton tambahUserB;
@@ -4415,9 +4622,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton tambahbukuPinjamField;
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
+    private javax.swing.JButton tampiltanggalCB;
+    private javax.swing.JLabel tanggal1Label;
+    private javax.swing.JLabel tanggal2Label;
     private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JComboBox<String> tingkatPinjamMapelCB;
     private javax.swing.JComboBox<String> tingkatSiswaCB;
+    private javax.swing.JComboBox<String> tipetanggalCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;
     private javax.swing.JLabel titleKas;
