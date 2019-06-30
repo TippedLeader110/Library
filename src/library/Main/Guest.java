@@ -128,14 +128,14 @@ public class Guest extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable();
-        jLabel47 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton11 = new javax.swing.JButton();
+        jLabel75 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
+        jButton20 = new javax.swing.JButton();
+        tambahPresensiB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Tata Kelola Perpustakaan - Guest Mode");
         setMinimumSize(new java.awt.Dimension(1366, 768));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         panelAtas.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -764,17 +764,29 @@ public class Guest extends javax.swing.JFrame {
 
         jScrollPane14.setViewportView(jPanel18);
 
-        jLabel47.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel47.setText("NIS / Kode Anggota");
+        jLabel75.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel75.setText("NIS / Kode Anggota");
 
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jTextField10.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jButton11.setBackground(new java.awt.Color(51, 153, 255));
-        jButton11.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Cari");
-        jButton11.setBorder(null);
-        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton20.setBackground(new java.awt.Color(51, 153, 255));
+        jButton20.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton20.setForeground(new java.awt.Color(255, 255, 255));
+        jButton20.setText("Cari");
+        jButton20.setBorder(null);
+        jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        tambahPresensiB.setBackground(new java.awt.Color(0, 204, 0));
+        tambahPresensiB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tambahPresensiB.setForeground(new java.awt.Color(255, 255, 255));
+        tambahPresensiB.setText("Tambah");
+        tambahPresensiB.setBorder(null);
+        tambahPresensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tambahPresensiB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahPresensiBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPresensiLayout = new javax.swing.GroupLayout(panelPresensi);
         panelPresensi.setLayout(panelPresensiLayout);
@@ -787,12 +799,12 @@ public class Guest extends javax.swing.JFrame {
                     .addGroup(panelPresensiLayout.createSequentialGroup()
                         .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titlePresensi)
+                            .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel75)
                             .addGroup(panelPresensiLayout.createSequentialGroup()
-                                .addComponent(jLabel47)
+                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -801,13 +813,16 @@ public class Guest extends javax.swing.JFrame {
             .addGroup(panelPresensiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titlePresensi)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -870,7 +885,7 @@ public class Guest extends javax.swing.JFrame {
     private void exitGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGMActionPerformed
         // TODO add your handling code here:
         int jawab = JOptionPane.showOptionDialog(this, 
-                        "Ingin keluar Sekarang?", 
+                        "Tinggalkan Guest Mode Sekarang?", 
                         "Konfirmasi", 
                         JOptionPane.YES_NO_OPTION, 
                         JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -1152,7 +1167,7 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JButton exitGM;
     private javax.swing.JButton homeB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
@@ -1165,10 +1180,10 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1183,7 +1198,7 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable8;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel kategoriL;
     private javax.swing.JPanel panelAtas;
     private javax.swing.JPanel panelBawah;
@@ -1199,6 +1214,7 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JLabel rakL;
     private javax.swing.JLabel rakL2;
     private javax.swing.JLabel sumberL;
+    private javax.swing.JButton tambahPresensiB;
     private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;
