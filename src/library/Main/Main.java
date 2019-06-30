@@ -11,6 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import javax.swing.JOptionPane;
@@ -30,6 +34,9 @@ import library.crudData.tambaheditPresensi;
 import library.crudData.tambaheditStaff;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.RowFilter.ComparisonType;
 /**
  *
  * @author My Computer
@@ -40,6 +47,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     MysqlCon send = new MysqlCon( );
+    Statement stmt = send.query();
     DefaultTableModel model_buku = new DefaultTableModel(new String[]{"ISBN", "Judul", "Pengarang", "Penerbit", "Tahun Buku", "Jenis", "Kategori","Tanggal Pengadaan","Lokasi", "Jumlah"}, 0){
         @Override
         
@@ -411,10 +419,12 @@ public class Main extends javax.swing.JFrame {
         bulanfield2 = new javax.swing.JTextField();
         labelt4 = new javax.swing.JLabel();
         hariField2 = new javax.swing.JTextField();
-        tampiltanggalCB = new javax.swing.JButton();
+        tampiltanggalButton = new javax.swing.JButton();
         hapuskasB = new javax.swing.JButton();
         editkasB = new javax.swing.JButton();
         tambahKasB = new javax.swing.JButton();
+        tipeCB = new javax.swing.JComboBox<>();
+        petugasCB = new javax.swing.JComboBox<>();
         pengembalianPanel = new javax.swing.JPanel();
         pengeUmumP = new javax.swing.JPanel();
         titlePengembalianUmum = new javax.swing.JLabel();
@@ -1947,13 +1957,13 @@ public class Main extends javax.swing.JFrame {
         hariField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hariField2.setText("Hari");
 
-        tampiltanggalCB.setBackground(new java.awt.Color(0, 0, 0));
-        tampiltanggalCB.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        tampiltanggalCB.setText("Tampilkan Tanggal");
-        tampiltanggalCB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tampiltanggalCB.addActionListener(new java.awt.event.ActionListener() {
+        tampiltanggalButton.setBackground(new java.awt.Color(255, 255, 255));
+        tampiltanggalButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        tampiltanggalButton.setText("Tampilkan Tanggal");
+        tampiltanggalButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tampiltanggalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tampiltanggalCBActionPerformed(evt);
+                tampiltanggalButtonActionPerformed(evt);
             }
         });
 
@@ -1995,7 +2005,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(hariField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tampiltanggalCB)))
+                                .addComponent(tampiltanggalButton)))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(tanggal2Label)
@@ -2018,15 +2028,16 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(labelt3)
                         .addComponent(labelt1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tanggal2Label)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(hariField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tahunField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bulanfield2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelt4)
-                    .addComponent(labelt2))
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tanggal2Label)
+                        .addComponent(tahunField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bulanfield2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelt4)
+                        .addComponent(labelt2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tampiltanggalCB)
+                .addComponent(tampiltanggalButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2066,6 +2077,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        tipeCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        tipeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipe Kas", "Pemasukan", "Pengeluaran" }));
+        tipeCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tipeCBItemStateChanged(evt);
+            }
+        });
+
+        petugasCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        petugasCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Petugas" }));
+        petugasCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                petugasCBItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout kasPanelLayout = new javax.swing.GroupLayout(kasPanel);
         kasPanel.setLayout(kasPanelLayout);
         kasPanelLayout.setHorizontalGroup(
@@ -2083,7 +2110,12 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(hapuskasB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(titleKas)
-                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(kasPanelLayout.createSequentialGroup()
+                                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tipeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(petugasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2092,8 +2124,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(kasPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleKas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kasPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kasPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(petugasCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tipeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahKasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3166,7 +3205,7 @@ public class Main extends javax.swing.JFrame {
         KategoriCB.setEnabled(true);
         KategoriCB.removeAllItems();
         KategoriCB.addItem("Kategori"); 
-        Statement stmt = send.query();
+        stmt = send.query();
         try{
             String jenis = JenisCB.getSelectedItem().toString();
             ResultSet rs2 = stmt.executeQuery("Select distinct book.kategori from perpus.book where jenis_buku = '"+ jenis +"'");
@@ -3410,9 +3449,8 @@ public class Main extends javax.swing.JFrame {
         editsiswaB.setEnabled(false);
         hapussiswaB.setEnabled(false);
         model_siswa.setRowCount(0);
-        MysqlCon send = new MysqlCon( );
         
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         
         String q, w, e, r, t, y, u;
@@ -3461,9 +3499,7 @@ public class Main extends javax.swing.JFrame {
         rakCB.setSelectedIndex(0);
         thnCB.setSelectedIndex(0);
         cariTF.setText("");
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+            stmt = send.query();
             ResultSet rs;
            
             String q, w, e, r, t, y, u, i, o, p;
@@ -3498,9 +3534,7 @@ public class Main extends javax.swing.JFrame {
     
     public void modelbuku(){
         model_buku.setRowCount(0);
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+        stmt = send.query();
             ResultSet rs;
            
             String q, w, e, r, t, y, u, i, o, p;
@@ -3538,9 +3572,7 @@ public class Main extends javax.swing.JFrame {
         model_staff.setRowCount(0);
         editstaffB.setEnabled(false);
         hapusstaffB.setEnabled(false);
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         
         String q, w, e, r;
@@ -3569,9 +3601,7 @@ public class Main extends javax.swing.JFrame {
 
     private void settingBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingBAtasActionPerformed
         // TODO add your handling code here:
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         
         String q, w, e;
@@ -3714,9 +3744,7 @@ public class Main extends javax.swing.JFrame {
 
     private void presensiBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBAtasActionPerformed
         // TODO add your handling code here:
-        MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         String q, w, e, r, t; 
         
@@ -3761,9 +3789,7 @@ public class Main extends javax.swing.JFrame {
     private void datapinjamBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datapinjamBAtasActionPerformed
         // TODO add your handling code here:
         model_datapinjam.setRowCount(0);
-        MysqlCon send = new MysqlCon( );
-
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
 
         String q,w,e,r,t,y,u,i,o,p,z,x,c;
@@ -3821,9 +3847,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         model_kembali.setRowCount(0);
         String id = siswakembaliField.getText();
-        MysqlCon send = new MysqlCon( );
-
-            Statement stmt = send.query();
+        stmt = send.query();
             ResultSet rs;
             ResultSet rs2;
         try{
@@ -3881,9 +3905,7 @@ public class Main extends javax.swing.JFrame {
 
     private void carisiswaPinjamMapelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carisiswaPinjamMapelBActionPerformed
         // TODO add your handling code here:
-        MysqlCon send = new MysqlCon( );
-
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
 
         String q,w,e,r,t,y;
@@ -3945,9 +3967,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             crud c = new crud();
-            MysqlCon send = new MysqlCon( );
-
-            Statement stmt = send.query();
+            stmt = send.query();
             ResultSet rs;
             int row = 0;
             int row2 = 0;
@@ -3998,9 +4018,8 @@ public class Main extends javax.swing.JFrame {
         crud c = new crud();
         String nis = siswaPinjamUmumField.getText();
         String durasi = durasiField.getText();
-        MysqlCon send = new MysqlCon( );
         int max_row  = model_bukupinjam.getRowCount();
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         try{
             rs = stmt.executeQuery("select id_petugas from perpus.petugas where nama = '"+LabelUser.getText()+"'");
@@ -4031,9 +4050,7 @@ public class Main extends javax.swing.JFrame {
     private void tambahbukuPinjamFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahbukuPinjamFieldActionPerformed
         // TODO add your handling code here:
         String isbn = bukuPinjamUmumField.getText();
-        MysqlCon send = new MysqlCon( );
-
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         try{
             rs = stmt.executeQuery("select * from perpus.buku where jenis_buku = 'Umum' and isbn = "+isbn);
@@ -4064,9 +4081,7 @@ public class Main extends javax.swing.JFrame {
     private void cariSiswaPinjamUmumBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariSiswaPinjamUmumBActionPerformed
         // TODO add your handling code here:
         String id = siswaPinjamUmumField.getText();
-        MysqlCon send = new MysqlCon( );
-
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         try{
             rs = stmt.executeQuery("select * from perpus.siswa_view where nis = "+id);
@@ -4123,9 +4138,13 @@ public class Main extends javax.swing.JFrame {
 
     private void kasBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kasBAtasActionPerformed
         // TODO add your handling code here:
-         MysqlCon send = new MysqlCon( );
-        
-        Statement stmt = send.query();
+        cf.setRowFilter(RowFilter.regexFilter(""));
+        tipetanggalCB.setSelectedIndex(0);
+        petugasCB.setSelectedIndex(0);
+        tipeCB.setSelectedIndex(0);
+        model_cashflow.setRowCount(0);
+                
+        stmt = send.query();
         ResultSet rs;
         String q, w, e, r, t, y; 
         
@@ -4148,6 +4167,7 @@ public class Main extends javax.swing.JFrame {
         panelBawah.removeAll();
         panelBawah.add(kasPanel);
         kastabel.setModel(model_cashflow);
+        kastabel.setAutoCreateRowSorter(true);
         tanggal1Label.setEnabled(false);
         tanggal2Label.setEnabled(false);
         tahunField1.setEnabled(false);
@@ -4160,14 +4180,13 @@ public class Main extends javax.swing.JFrame {
         labelt2.setEnabled(false);
         labelt3.setEnabled(false);
         labelt4.setEnabled(false);
-        tampiltanggalCB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
     }//GEN-LAST:event_kasBAtasActionPerformed
 
     private void tambahKasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKasBActionPerformed
         // TODO add your handling code here:
-        Statement stmt = send.query();
+        stmt = send.query();
         ResultSet rs;
         try{
             rs = stmt.executeQuery("select id_petugas from perpus.petugas where nama = '"+LabelUser.getText()+"'");
@@ -4317,7 +4336,6 @@ public class Main extends javax.swing.JFrame {
     private void tipetanggalCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipetanggalCBItemStateChanged
         // TODO add your handling code here:
         if(tipetanggalCB.getSelectedItem().toString().equals("Hari ini")){
-            tampiltanggalCB.setEnabled(true);
         }
         else if(tipetanggalCB.getSelectedItem().toString().equals("Tanggal Tertentu (Tanggal 1)") || tipetanggalCB.getSelectedItem().toString().equals("Tanggal 1 - Hari ini")){
             tanggal1Label.setEnabled(true);
@@ -4326,7 +4344,6 @@ public class Main extends javax.swing.JFrame {
             hariField2.setEnabled(true);
             labelt1.setEnabled(true);
             labelt3.setEnabled(true);
-            tampiltanggalCB.setEnabled(true);
         }
         else if(tipetanggalCB.getSelectedItem().toString().equals("Tanggal 1 - Tanggal 2")){
             tanggal1Label.setEnabled(true);
@@ -4341,7 +4358,6 @@ public class Main extends javax.swing.JFrame {
             labelt2.setEnabled(true);
             labelt3.setEnabled(true);
             labelt4.setEnabled(true);
-            tampiltanggalCB.setEnabled(true);
         }
         else{
             tanggal1Label.setEnabled(false);
@@ -4356,18 +4372,217 @@ public class Main extends javax.swing.JFrame {
             labelt2.setEnabled(false);
             labelt3.setEnabled(false);
             labelt4.setEnabled(false);
-            tampiltanggalCB.setEnabled(false);
         }
     }//GEN-LAST:event_tipetanggalCBItemStateChanged
 
-    private void tampiltanggalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampiltanggalCBActionPerformed
-        // TODO add your handling code here:
-        String tipe = tipetanggalCB.getSelectedItem().toString();
-        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
-        if(tipe.equals("Hari ini")){
+    private void tampiltanggalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampiltanggalButtonActionPerformed
+        try {
+            //ambil local date
+            Date now = new Date();
+            java.sql.Date d_now = new java.sql.Date(now.getTime());
             
+            String tipe_t = tipetanggalCB.getSelectedItem().toString();
+            String petugas = petugasCB.getSelectedItem().toString();
+            String tipe = tipeCB.getSelectedItem().toString();
+            String t1 = tahunField1.getText()+""+bulanfield1.getText()+""+hariField1.getText();
+            String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Date parsed1 = format.parse(t1);
+            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+            
+            Date parsed2 = format.parse(t2);
+            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
+            
+            kastabel.setRowSorter(cf);
+            List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
+            if(tipe_t.equals("Hari ini")){
+                filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d_now) );
+                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+            }
+            else if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+            }
+            else if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+            }
+            else if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+            }
+            else{
+                filters.add(RowFilter.regexFilter(""));
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+            }
+            cf.setRowFilter(RowFilter.andFilter(filters));
+        } catch (ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_tampiltanggalCBActionPerformed
+    }//GEN-LAST:event_tampiltanggalButtonActionPerformed
+
+    private void tipeCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipeCBItemStateChanged
+        try {
+            // TODO add your handling code here:
+            kastabel.setRowSorter(cf);
+            List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
+            Date now = new Date();
+            java.sql.Date d_now = new java.sql.Date(now.getTime());
+            
+            String tipe_t = tipetanggalCB.getSelectedItem().toString();
+            String petugas = petugasCB.getSelectedItem().toString();
+            String tipe = tipeCB.getSelectedItem().toString();
+            String t1 = tahunField1.getText()+""+bulanfield1.getText()+""+hariField1.getText();
+            String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Date parsed1 = format.parse(t1);
+            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+            
+            Date parsed2 = format.parse(t2);
+            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
+            
+            if(tipe.equals("Tipe Kas")){
+                filters.add(RowFilter.regexFilter(""));
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe_t.equals("Tipe pencarian tanggal")){
+                    if(tipe_t.equals("Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d_now) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
+                    }
+                }
+            }
+            else{
+                filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+                if(!petugas.equals("Petugas"))
+                    filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe_t.equals("Tipe pencarian tanggal")){
+                    if(tipe_t.equals("Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d_now) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
+                    }
+                }
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tipeCBItemStateChanged
+
+    private void petugasCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_petugasCBItemStateChanged
+        try {
+            // TODO add your handling code here:
+            kastabel.setRowSorter(cf);
+            List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(4);
+            Date now = new Date();
+            java.sql.Date d_now = new java.sql.Date(now.getTime());
+            
+            String tipe_t = tipetanggalCB.getSelectedItem().toString();
+            String petugas = petugasCB.getSelectedItem().toString();
+            String tipe = tipeCB.getSelectedItem().toString();
+            String t1 = tahunField1.getText()+""+bulanfield1.getText()+""+hariField1.getText();
+            String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Date parsed1 = format.parse(t1);
+            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+            
+            Date parsed2 = format.parse(t2);
+            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
+            
+            if(petugas.equals("Petugas")){
+                filters.add(RowFilter.regexFilter(""));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+                if(!tipe_t.equals("Tipe pencarian tanggal")){
+                    if(tipe_t.equals("Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d_now) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
+                    }
+                }
+            }else{
+                filters.add(RowFilter.regexFilter("^"+petugas+"$"));
+                if(!tipe.equals("Tipe Kas"))
+                    filters.add(RowFilter.regexFilter("^"+tipe+"$"));
+                if(!tipe_t.equals("Tipe pencarian tanggal")){
+                    if(tipe_t.equals("Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d_now) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                    }
+                    if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
+                        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
+                    }
+                }
+            }
+            } catch (ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_petugasCBItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -4590,6 +4805,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pengeUmumP;
     private javax.swing.JButton pengembalianBAtas;
     private javax.swing.JPanel pengembalianPanel;
+    private javax.swing.JComboBox<String> petugasCB;
     private javax.swing.JButton presensiBAtas;
     private javax.swing.JPanel presensiPanel;
     private javax.swing.JTable presensitabel;
@@ -4622,12 +4838,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton tambahbukuPinjamField;
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
-    private javax.swing.JButton tampiltanggalCB;
+    private javax.swing.JButton tampiltanggalButton;
     private javax.swing.JLabel tanggal1Label;
     private javax.swing.JLabel tanggal2Label;
     private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JComboBox<String> tingkatPinjamMapelCB;
     private javax.swing.JComboBox<String> tingkatSiswaCB;
+    private javax.swing.JComboBox<String> tipeCB;
     private javax.swing.JComboBox<String> tipetanggalCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;

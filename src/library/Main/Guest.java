@@ -5,13 +5,16 @@
  */
 package library.Main;
 
-import java.beans.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import library.Mysql.MysqlCon;
 
 /**
  *
@@ -22,6 +25,7 @@ public class Guest extends javax.swing.JFrame {
     /**
      * Creates new form Guest
      */
+    MysqlCon send = new MysqlCon( );
     DefaultTableModel model_datapinjam = new DefaultTableModel(new String[]{"ID Transaksi", "ISBN", "Judul", "NIS", "Siswa", "Tingkat", "Jurusan", "Kelas", "ID Petugas", "Petugas", "Tanggal Pinjam", "Tanggal Kembali", "Denda"}, 0){
         @Override
         

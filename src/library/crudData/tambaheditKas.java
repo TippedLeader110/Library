@@ -24,7 +24,8 @@ public class tambaheditKas extends javax.swing.JFrame {
     MysqlCon kon = new MysqlCon();
     Statement stmt=kon.query();
     boolean edit;
-    String petugas; 
+    String petugas;
+    
     public tambaheditKas(String petugas, int i) {
         edit = false;
         this.petugas = petugas;
