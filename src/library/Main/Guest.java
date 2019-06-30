@@ -5,7 +5,13 @@
  */
 package library.Main;
 
+import java.beans.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -16,8 +22,35 @@ public class Guest extends javax.swing.JFrame {
     /**
      * Creates new form Guest
      */
+    DefaultTableModel model_datapinjam = new DefaultTableModel(new String[]{"ID Transaksi", "ISBN", "Judul", "NIS", "Siswa", "Tingkat", "Jurusan", "Kelas", "ID Petugas", "Petugas", "Tanggal Pinjam", "Tanggal Kembali", "Denda"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+    DefaultTableModel model_buku = new DefaultTableModel(new String[]{"ISBN", "Judul", "Pengarang", "Penerbit", "Tahun Buku", "Jenis", "Kategori","Tanggal Pengadaan","Lokasi", "Jumlah"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+    DefaultTableModel model_presensi = new DefaultTableModel(new String[]{"No", "NIS", "Tanggal", "Jam", "keterangan"}, 0){
+        @Override
+        
+        public boolean isCellEditable(int row, int column) {
+                return false;
+        }
+        };
+    
+        TableRowSorter<DefaultTableModel> tp = new TableRowSorter<DefaultTableModel>(model_datapinjam);
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
+        
     public Guest() {
+        
         initComponents();
+        
         
     }
 
@@ -64,11 +97,27 @@ public class Guest extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        bukuTabel = new javax.swing.JTable();
+        kategoriL = new javax.swing.JLabel();
+        JenisCB = new javax.swing.JComboBox<>();
+        sumberL = new javax.swing.JLabel();
+        KategoriCB = new javax.swing.JComboBox<>();
+        rakL = new javax.swing.JLabel();
+        rakCB = new javax.swing.JComboBox<>();
+        rakL2 = new javax.swing.JLabel();
+        thnCB = new javax.swing.JComboBox<>();
+        cariTF = new javax.swing.JTextField();
+        cariBukuB = new javax.swing.JButton();
+        penerbitL1 = new javax.swing.JLabel();
+        penerbitL2 = new javax.swing.JLabel();
+        panelDatapinjam = new javax.swing.JPanel();
+        titleDatapinjam = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jPanel16 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        datapinjamTabel = new javax.swing.JTable();
+        datapinjamField = new javax.swing.JTextField();
+        caridatapinjamB = new javax.swing.JButton();
         panelPresensi = new javax.swing.JPanel();
         titlePresensi = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
@@ -78,14 +127,6 @@ public class Guest extends javax.swing.JFrame {
         jLabel47 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
-        panelDatapinjam = new javax.swing.JPanel();
-        titleDatapinjam = new javax.swing.JLabel();
-        datapinjamField = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jPanel16 = new javax.swing.JPanel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Tata Kelola Perpustakaan - Guest Mode");
@@ -190,7 +231,6 @@ public class Guest extends javax.swing.JFrame {
                         .addComponent(bukuB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(presensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton41, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -405,7 +445,7 @@ public class Guest extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bukuTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -416,7 +456,7 @@ public class Guest extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(bukuTabel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -437,20 +477,90 @@ public class Guest extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel2.setText("Kategori");
+        kategoriL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        kategoriL.setForeground(new java.awt.Color(51, 51, 51));
+        kategoriL.setText("Jenis");
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        JenisCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        JenisCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jenis", "Umum", "Khusus", "Mapel" }));
+        JenisCB.setName("Kategori"); // NOI18N
+        JenisCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JenisCBItemStateChanged(evt);
+            }
+        });
+        JenisCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JenisCBActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        sumberL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        sumberL.setForeground(new java.awt.Color(51, 51, 51));
+        sumberL.setText("Kategori");
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cari");
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        KategoriCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        KategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kategori" }));
+        KategoriCB.setName("Kategori"); // NOI18N
+        KategoriCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                KategoriCBItemStateChanged(evt);
+            }
+        });
+
+        rakL.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rakL.setForeground(new java.awt.Color(51, 51, 51));
+        rakL.setText("Rak");
+
+        rakCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rakCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rak" }));
+        rakCB.setName("Kategori"); // NOI18N
+        rakCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rakCBItemStateChanged(evt);
+            }
+        });
+
+        rakL2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rakL2.setForeground(new java.awt.Color(51, 51, 51));
+        rakL2.setText("Tahun Buku");
+
+        thnCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        thnCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tahun Buku" }));
+        thnCB.setName("Kategori"); // NOI18N
+        thnCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                thnCBItemStateChanged(evt);
+            }
+        });
+
+        cariTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cariTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariTFActionPerformed(evt);
+            }
+        });
+
+        cariBukuB.setBackground(new java.awt.Color(51, 153, 255));
+        cariBukuB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        cariBukuB.setForeground(new java.awt.Color(255, 255, 255));
+        cariBukuB.setText("Cari");
+        cariBukuB.setBorder(null);
+        cariBukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cariBukuB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariBukuBActionPerformed(evt);
+            }
+        });
+
+        penerbitL1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        penerbitL1.setForeground(new java.awt.Color(51, 51, 51));
+        penerbitL1.setText("*Pilih Jenis Buku sebelum memilih kategori");
+
+        penerbitL2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        penerbitL2.setForeground(new java.awt.Color(51, 51, 51));
+        penerbitL2.setText("*Untuk reset ComboBox pilih item nama ComboBox, reset ComboBox kategori pilih item kategori pada ComboBox Kategori");
+        penerbitL2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout panelBukuLayout = new javax.swing.GroupLayout(panelBuku);
         panelBuku.setLayout(panelBukuLayout);
@@ -461,15 +571,34 @@ public class Guest extends javax.swing.JFrame {
                 .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
                     .addGroup(panelBukuLayout.createSequentialGroup()
+                        .addComponent(titleBuku)
+                        .addGap(18, 18, 18)
                         .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleBuku)
-                            .addComponent(jLabel2)
+                            .addComponent(JenisCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kategoriL))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(KategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sumberL))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelBukuLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rakL)
+                                .addGap(90, 90, 90)
+                                .addComponent(rakL2))
+                            .addGroup(panelBukuLayout.createSequentialGroup()
+                                .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cariBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBukuLayout.createSequentialGroup()
+                                .addGap(236, 236, 236)
+                                .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(penerbitL2)
+                                    .addComponent(penerbitL1))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -477,20 +606,119 @@ public class Guest extends javax.swing.JFrame {
             panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBukuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleBuku)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleBuku)
+                    .addGroup(panelBukuLayout.createSequentialGroup()
+                        .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(kategoriL)
+                            .addComponent(sumberL)
+                            .addComponent(rakL)
+                            .addComponent(rakL2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JenisCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(KategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rakCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(thnCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariBukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
+                .addComponent(penerbitL1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(penerbitL2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         panelBawah.add(panelBuku, "card2");
+
+        panelDatapinjam.setBackground(new java.awt.Color(255, 255, 255));
+
+        titleDatapinjam.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        titleDatapinjam.setText("Title");
+
+        jPanel16.setBackground(new java.awt.Color(51, 153, 255));
+
+        datapinjamTabel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane13.setViewportView(datapinjamTabel);
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(326, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane12.setViewportView(jPanel16);
+
+        datapinjamField.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        caridatapinjamB.setBackground(new java.awt.Color(51, 153, 255));
+        caridatapinjamB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        caridatapinjamB.setForeground(new java.awt.Color(255, 255, 255));
+        caridatapinjamB.setText("Cari");
+        caridatapinjamB.setBorder(null);
+        caridatapinjamB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        caridatapinjamB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                caridatapinjamBActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDatapinjamLayout = new javax.swing.GroupLayout(panelDatapinjam);
+        panelDatapinjam.setLayout(panelDatapinjamLayout);
+        panelDatapinjamLayout.setHorizontalGroup(
+            panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatapinjamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+                    .addGroup(panelDatapinjamLayout.createSequentialGroup()
+                        .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleDatapinjam)
+                            .addGroup(panelDatapinjamLayout.createSequentialGroup()
+                                .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDatapinjamLayout.setVerticalGroup(
+            panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatapinjamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleDatapinjam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panelBawah.add(panelDatapinjam, "card14");
 
         panelPresensi.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -581,88 +809,6 @@ public class Guest extends javax.swing.JFrame {
 
         panelBawah.add(panelPresensi, "card12");
 
-        panelDatapinjam.setBackground(new java.awt.Color(255, 255, 255));
-
-        titleDatapinjam.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        titleDatapinjam.setText("Title");
-
-        datapinjamField.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        jButton10.setBackground(new java.awt.Color(51, 153, 255));
-        jButton10.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Cari");
-        jButton10.setBorder(null);
-        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jPanel16.setBackground(new java.awt.Color(51, 153, 255));
-
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane13.setViewportView(jTable7);
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jScrollPane12.setViewportView(jPanel16);
-
-        javax.swing.GroupLayout panelDatapinjamLayout = new javax.swing.GroupLayout(panelDatapinjam);
-        panelDatapinjam.setLayout(panelDatapinjamLayout);
-        panelDatapinjamLayout.setHorizontalGroup(
-            panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatapinjamLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
-                    .addGroup(panelDatapinjamLayout.createSequentialGroup()
-                        .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleDatapinjam)
-                            .addGroup(panelDatapinjamLayout.createSequentialGroup()
-                                .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panelDatapinjamLayout.setVerticalGroup(
-            panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatapinjamLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleDatapinjam)
-                .addGap(1, 1, 1)
-                .addGroup(panelDatapinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(datapinjamField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelBawah.add(panelDatapinjam, "card14");
-
         getContentPane().add(panelBawah, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -745,6 +891,214 @@ public class Guest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton42ActionPerformed
 
+    private void caridatapinjamBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caridatapinjamBActionPerformed
+        // TODO add your handling code here:
+        
+        
+        datapinjamTabel.setRowSorter(tp);
+        String pinjam = datapinjamField.getText();
+        if(pinjam.equals(""))
+        tp.setRowFilter(RowFilter.regexFilter(""));
+        else
+        tp.setRowFilter(RowFilter.regexFilter("^(?i)"+pinjam));
+    }//GEN-LAST:event_caridatapinjamBActionPerformed
+
+    private void JenisCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisCBItemStateChanged
+        // TODO add your handling code here:
+
+        //combo box kategori
+        KategoriCB.setEnabled(true);
+        KategoriCB.removeAllItems();
+        KategoriCB.addItem("Kategori");
+        Statement stmt = send.query();
+        try{
+            String jenis = JenisCB.getSelectedItem().toString();
+            ResultSet rs2 = stmt.executeQuery("Select distinct book.kategori from perpus.book where jenis_buku = '"+ jenis +"'");
+            while(rs2.next()){
+                String kategori = rs2.getString("kategori");
+                KategoriCB.addItem(kategori);
+                KategoriCB.setSelectedIndex(0);
+            }
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+
+        //search by combo box
+        bukuTabel.setRowSorter(tr);
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String lokasi = rakCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
+        if(jenis.equals("Jenis")){
+            KategoriCB.setSelectedIndex(0);
+            KategoriCB.setEnabled(false);
+            filters.add(RowFilter.regexFilter(""));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }
+        else{
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }
+        tr.setRowFilter(RowFilter.andFilter(filters));
+
+    }//GEN-LAST:event_JenisCBItemStateChanged
+
+    private void JenisCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JenisCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JenisCBActionPerformed
+
+    private void KategoriCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_KategoriCBItemStateChanged
+        // TODO add your handling code here:
+        bukuTabel.setRowSorter(tr);
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = evt.getItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
+        if(Kategori.equals("Kategori")){
+            filters.add(RowFilter.regexFilter(""));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }else{
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_KategoriCBItemStateChanged
+
+    private void rakCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rakCBItemStateChanged
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        bukuTabel.setRowSorter(tr);
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
+        if(lokasi.equals("Rak")){
+            filters.add(RowFilter.regexFilter(""));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+        }
+        else{
+            filters.add(RowFilter.regexFilter(lokasi));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+        }
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_rakCBItemStateChanged
+
+    private void thnCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_thnCBItemStateChanged
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        bukuTabel.setRowSorter(tr);
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
+        if(tahun.equals("Tahun Buku")){
+            filters.add(RowFilter.regexFilter(""));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+        }
+        else{
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+            if(!nama.equals(""))
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+        }
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_thnCBItemStateChanged
+
+    private void cariTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariTFActionPerformed
+        // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(cariBukuB);
+    }//GEN-LAST:event_cariTFActionPerformed
+
+    private void cariBukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBukuBActionPerformed
+        // TODO add your handling code here:
+        String lokasi = rakCB.getSelectedItem().toString();
+        String jenis = JenisCB.getSelectedItem().toString();
+        String Kategori = KategoriCB.getSelectedItem().toString();
+        String tahun = thnCB.getSelectedItem().toString();
+        String nama = cariTF.getText();
+        bukuTabel.setRowSorter(tr);
+        List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
+        if(nama.equals("")){
+            filters.add(RowFilter.regexFilter(""));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }
+        else{
+            filters.add(RowFilter.regexFilter("^(?i)"+nama));
+            if(!jenis.equals("Jenis"))
+            filters.add(RowFilter.regexFilter("^"+jenis+"$"));
+            if(!Kategori.equals("Kategori"))
+            filters.add(RowFilter.regexFilter("^"+Kategori+"$"));
+            if(!tahun.equals("Tahun Buku"))
+            filters.add(RowFilter.regexFilter("^"+tahun+"$"));
+            if(!lokasi.equals("Rak"))
+            filters.add(RowFilter.regexFilter("^"+lokasi+"$"));
+        }
+        tr.setRowFilter(RowFilter.andFilter(filters));
+    }//GEN-LAST:event_cariBukuBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -781,25 +1135,28 @@ public class Guest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> JenisCB;
+    private javax.swing.JComboBox<String> KategoriCB;
     private javax.swing.JButton bukuB;
     private javax.swing.JButton bukuBHome;
+    private javax.swing.JTable bukuTabel;
+    private javax.swing.JButton cariBukuB;
+    private javax.swing.JTextField cariTF;
+    private javax.swing.JButton caridatapinjamB;
     private javax.swing.JTextField datapinjamField;
+    private javax.swing.JTable datapinjamTabel;
     private javax.swing.JButton exitGM;
     private javax.swing.JButton homeB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -821,19 +1178,24 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel kategoriL;
     private javax.swing.JPanel panelAtas;
     private javax.swing.JPanel panelBawah;
     private javax.swing.JPanel panelBuku;
     private javax.swing.JPanel panelDatapinjam;
     private javax.swing.JPanel panelHome;
     private javax.swing.JPanel panelPresensi;
+    private javax.swing.JLabel penerbitL1;
+    private javax.swing.JLabel penerbitL2;
     private javax.swing.JButton presensiB;
     private javax.swing.JButton presensiBHome;
+    private javax.swing.JComboBox<String> rakCB;
+    private javax.swing.JLabel rakL;
+    private javax.swing.JLabel rakL2;
+    private javax.swing.JLabel sumberL;
+    private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;
     private javax.swing.JLabel titlePresensi;
