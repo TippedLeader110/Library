@@ -47,16 +47,16 @@ end if;
 END!
 -------------------------------------------------------
 
-TRIGGER PENGEMBALIAN
-CREATE TRIGGER pengembalian/kas after update ON pinjam_book
+TRIGGER PENGEMBALIAN/DENDA
+CREATE TRIGGER pengembalian_kas after update ON pinjam_book
 FOR EACH ROW BEGIN
-if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
+if exists (select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
 UPDATE book
 SET jmlh = jumlh + 1
 WHERE
 isbn = NEW.isbn;
 end if;
-if exists(select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null and denda != 0) then
+if exists (select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null and not denda = 0) then
 insert into cashflow(id_petugas, tipe, tanggal, nominal, keterangan) 
 value(new.id_petugas, 'pemasukan', curdate(), new.denda, 'Denda peminjaman buku');
 end if;
@@ -103,5 +103,14 @@ create or replace view siswa_view as
 select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
 from siswa a
 inner join kelas b on a.id_kelas = b.id_kelas;
+
+-------------------------------------------------------
+
+VIEW PRESENSI
+create or replace view presensi_view as
+select a.no_presensi, a.nis, b.nama, c.tingkat, c.jurusan, c.kelas, a.tanggal, a.kegiatan
+from presensi a
+inner join siswa b on a.nis = b.nis
+inner join kelas c on b.id_kelas = c.id_kelas;
 
 -------------------------------------------------------

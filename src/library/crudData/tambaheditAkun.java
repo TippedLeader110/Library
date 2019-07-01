@@ -209,9 +209,7 @@ public class tambaheditAkun extends javax.swing.JFrame {
             idCB.setSelectedItem(val);
         }
         else
-           c.updateAkun(id,userField.getText(),passField.getText()); 
-                
-        
+           c.updateAkun(id,userField.getText(),passField.getText());
     }//GEN-LAST:event_simpanUserBActionPerformed
 
     /**

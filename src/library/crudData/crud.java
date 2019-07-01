@@ -290,4 +290,45 @@ public class crud extends library.Main.Main {
             JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
     }
+     
+     public void createPresensi(String nis, String ket){
+        try{
+             rs = stmt.executeUpdate("insert into perpus.presensi(nis, tanggal, kegiatan) value("+nis+", curdate(), '"+ket+"')");
+         }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+     
+     public void updatePresensi(String val, String nis, String ket){
+         try{
+             rs = stmt.executeUpdate("update perpus.presensi set nis = "+nis+", keterangan = '"+ket+"' where no_presensi = "+val);
+         }catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+     
+     public void deletePresensi(String no){
+        try {  
+            rs=stmt.executeUpdate("DELETE from perpus.presensi where no_presensi = "+no);
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rs!=0){
+            JOptionPane.showMessageDialog(this, "Sukses ", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Kesalahan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+     }
+        
 }
