@@ -69,7 +69,7 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
-     DefaultTableModel model_staff = new DefaultTableModel(new String[]{"ID petugas", "Nama", "Alamat", "No Telepon"}, 0){
+     DefaultTableModel model_staff = new DefaultTableModel(new String[]{"ID petugas", "Nama", "Alamat", "No Telepon", "Level"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
@@ -97,7 +97,7 @@ public class Main extends javax.swing.JFrame {
                 return false;
         }
         };
-      DefaultTableModel model_kembali = new DefaultTableModel(new String[]{"ID Transaksi", "ISBN", "Judul", "Siswa", "jenis", "kategori", "Tanggal Pinjam"}, 0){
+      DefaultTableModel model_kembali = new DefaultTableModel(new String[]{"ID Transaksi", "ISBN", "Judul", "Siswa", "jenis", "kategori", "Tanggal Pinjam", "Tanggal Kembali"}, 0){
         @Override
         
         public boolean isCellEditable(int row, int column) {
@@ -473,6 +473,7 @@ public class Main extends javax.swing.JFrame {
         userTabel = new javax.swing.JTable();
         tambahUserB = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        GantiTahunAjaranB = new javax.swing.JButton();
         staffPanel = new javax.swing.JPanel();
         titleStaff = new javax.swing.JLabel();
         staffField = new javax.swing.JTextField();
@@ -2655,6 +2656,15 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        GantiTahunAjaranB.setBackground(new java.awt.Color(255, 51, 51));
+        GantiTahunAjaranB.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        GantiTahunAjaranB.setText("NAIK KELAS");
+        GantiTahunAjaranB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GantiTahunAjaranBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pengaturanPanelLayout = new javax.swing.GroupLayout(pengaturanPanel);
         pengaturanPanel.setLayout(pengaturanPanelLayout);
         pengaturanPanelLayout.setHorizontalGroup(
@@ -2664,7 +2674,9 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(pengaturanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pengaturanPanelLayout.createSequentialGroup()
-                        .addComponent(titlePengaturan)
+                        .addGroup(pengaturanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titlePengaturan)
+                            .addComponent(GantiTahunAjaranB, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2675,7 +2687,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(titlePengaturan)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(GantiTahunAjaranB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(363, Short.MAX_VALUE))
         );
 
         panelBawah.add(pengaturanPanel, "card8");
@@ -3650,27 +3664,60 @@ public class Main extends javax.swing.JFrame {
 
     private void tambahstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahstaffBActionPerformed
         // TODO add your handling code here:
-        tambaheditStaff te = new tambaheditStaff();
-        te.setVisible(true);
+        Statement stmt = send.query();
+        ResultSet rs;
+        
+        int t;
+        
+        try {
+                rs = stmt.executeQuery("select level from perpus.petugas where nama = '"+LabelUser.getText()+"'");
+                while(rs.next()){
+                t = rs.getInt("level");
+                if(t==1){
+                    tambaheditStaff te = new tambaheditStaff();
+                    te.setVisible(true);
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Kesalahan, Tidak boleh menambah staff kecuali staff level 1", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
     }//GEN-LAST:event_tambahstaffBActionPerformed
 
     private void hapusstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusstaffBActionPerformed
         // TODO add your handling code here:
+        Statement stmt = send.query();
+        ResultSet rs;
         
-       int jawab = JOptionPane.showOptionDialog(this, 
+        int t;
+        
+        try {
+                rs = stmt.executeQuery("select level from perpus.petugas where nama = '"+LabelUser.getText()+"'");
+                while(rs.next()){
+                t = rs.getInt("level");
+                if(t==1){
+                    int jawab = JOptionPane.showOptionDialog(this, 
                         "Yakin ingin menghapus?", 
                         "Hapus", 
                         JOptionPane.YES_NO_OPTION, 
                         JOptionPane.QUESTION_MESSAGE, null, null, null);
-        
-        if(jawab == JOptionPane.YES_OPTION){
-            crud n = new crud();
-            int column = 0;
-            int row = staffTabel.getSelectedRow();
-            String value = staffTabel.getModel().getValueAt(row, column).toString();
-            n.deleteStaff(value);
-        } 
-        
+                    if(jawab == JOptionPane.YES_OPTION){
+                        crud n = new crud();
+                        int column = 0;
+                        int row = staffTabel.getSelectedRow();
+                        String value = staffTabel.getModel().getValueAt(row, column).toString();
+                        n.deleteStaff(value);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Kesalahan, Tidak boleh menambah staff kecuali staff level 1", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }  
     }//GEN-LAST:event_hapusstaffBActionPerformed
 
     private void staffTabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staffTabelFocusGained
@@ -3681,11 +3728,29 @@ public class Main extends javax.swing.JFrame {
 
     private void editstaffBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editstaffBActionPerformed
         // TODO add your handling code here:
-        int column = 0;
-        int row = staffTabel.getSelectedRow();
-        String value = staffTabel.getModel().getValueAt(row, column).toString();
-        tambaheditStaff te = new tambaheditStaff(value);
-        te.setVisible(true);
+        Statement stmt = send.query();
+        ResultSet rs;
+        
+        int t;
+        
+        try {
+                rs = stmt.executeQuery("select level from perpus.petugas where nama = '"+LabelUser.getText()+"'");
+                while(rs.next()){
+                t = rs.getInt("level");
+                if(t==1){
+                    int column = 0;
+                    int row = staffTabel.getSelectedRow();
+                    String value = staffTabel.getModel().getValueAt(row, column).toString();
+                    tambaheditStaff te = new tambaheditStaff(value);
+                    te.setVisible(true);
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Kesalahan, Tidak boleh edit staff kecuali staff level 1", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
     }//GEN-LAST:event_editstaffBActionPerformed
 
     private void siswaBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siswaBAtasActionPerformed
@@ -3823,7 +3888,7 @@ public class Main extends javax.swing.JFrame {
         stmt = send.query();
         ResultSet rs;
         
-        String q, w, e, r;
+        String q, w, e, r, t;
         
         try {
                 rs = stmt.executeQuery("select * from perpus.petugas");
@@ -3832,7 +3897,8 @@ public class Main extends javax.swing.JFrame {
                 w = rs.getString("nama");
                 e = rs.getString("alamat");
                 r = rs.getString("no_telp");
-                model_staff.addRow(new Object[]{q, w, e, r});}
+                t = rs.getString("level");
+                model_staff.addRow(new Object[]{q, w, e, r, t});}
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
@@ -3849,29 +3915,43 @@ public class Main extends javax.swing.JFrame {
 
     private void settingBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingBAtasActionPerformed
         // TODO add your handling code here:
-        stmt = send.query();
+        Statement stmt = send.query();
         ResultSet rs;
         
-        String q, w, e;
+        int t;
         
         try {
-                rs = stmt.executeQuery("select * from perpus.petugas");
+                rs = stmt.executeQuery("select level from perpus.petugas where nama = '"+LabelUser.getText()+"'");
                 while(rs.next()){
-                q = rs.getString("id_petugas");
-                w = rs.getString("username");
-                e = rs.getString("password");
-                model_user.addRow(new Object[]{q,w,e});}
+                t = rs.getInt("level");
+                if(t==1){
+                    String q, w, e;
+                    try {
+                            rs = stmt.executeQuery("select * from perpus.petugas");
+                            while(rs.next()){
+                            q = rs.getString("id_petugas");
+                            w = rs.getString("username");
+                            e = rs.getString("password");
+                            model_user.addRow(new Object[]{q,w,e});}
+                        }
+                        catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+                        }
+                    this.titlePengaturan.setText("Pengaturan");
+                    panelBawah.removeAll();
+                    panelBawah.add(pengaturanPanel);
+                    userTabel.setModel(model_user);
+                    tambahUserB.setEnabled(false);
+                    panelBawah.repaint();
+                    panelBawah.revalidate();
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Kesalahan, Tidak boleh ke pengaturan kecuali staff level 1", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                }
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
             }
-        this.titlePengaturan.setText("Pengaturan");
-        panelBawah.removeAll();
-        panelBawah.add(pengaturanPanel);
-        userTabel.setModel(model_user);
-        tambahUserB.setEnabled(false);
-        panelBawah.repaint();
-        panelBawah.revalidate();
     }//GEN-LAST:event_settingBAtasActionPerformed
 
     private void cariSiswaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariSiswaBActionPerformed
@@ -4144,9 +4224,10 @@ public class Main extends javax.swing.JFrame {
                 String judul = rs.getString("judul");
                 String siswa = rs.getString("siswa");
                 String t = rs.getString("t_pinjam");
+                String t2 = rs.getString("t_deadline");
                 String j = rs.getString("jenis_buku");
                 String k = rs.getString("kategori");
-                model_kembali.addRow(new Object[]{id_trans,isbn,judul,siswa,j,k,t});}
+                model_kembali.addRow(new Object[]{id_trans,isbn,judul,siswa,j,k,t,t2});}
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
         }
@@ -5470,6 +5551,20 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_carikegBActionPerformed
 
+    private void GantiTahunAjaranBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GantiTahunAjaranBActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this,
+            "Yakin ingin menaikkan kelas?",
+            "Naik Kelas",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+        if(jawab == JOptionPane.YES_OPTION){
+            crud c = new crud();
+            c.naikkelas();
+        }
+    }//GEN-LAST:event_GantiTahunAjaranBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5508,6 +5603,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Cariket;
     private javax.swing.JButton CariketB;
+    private javax.swing.JButton GantiTahunAjaranB;
     private javax.swing.JComboBox<String> JenisCB;
     private javax.swing.JComboBox<String> JurusanPresensiCB;
     private javax.swing.JComboBox<String> KategoriCB;
@@ -5531,15 +5627,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable bukuTabel;
     private javax.swing.JTextField bulanfield;
     private javax.swing.JTextField bulanfield1;
-    private javax.swing.JTextField bulanfield10;
     private javax.swing.JTextField bulanfield2;
-    private javax.swing.JTextField bulanfield3;
-    private javax.swing.JTextField bulanfield4;
-    private javax.swing.JTextField bulanfield5;
-    private javax.swing.JTextField bulanfield6;
-    private javax.swing.JTextField bulanfield7;
-    private javax.swing.JTextField bulanfield8;
-    private javax.swing.JTextField bulanfield9;
     private javax.swing.JTextField bulanpresensifield1;
     private javax.swing.JTextField bulanpresensifield2;
     private javax.swing.JButton cariBukuB;
@@ -5570,15 +5658,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton hapusstaffB;
     private javax.swing.JTextField hariField;
     private javax.swing.JTextField hariField1;
-    private javax.swing.JTextField hariField10;
     private javax.swing.JTextField hariField2;
-    private javax.swing.JTextField hariField3;
-    private javax.swing.JTextField hariField4;
-    private javax.swing.JTextField hariField5;
-    private javax.swing.JTextField hariField6;
-    private javax.swing.JTextField hariField7;
-    private javax.swing.JTextField hariField8;
-    private javax.swing.JTextField hariField9;
     private javax.swing.JTextField haripresensiField1;
     private javax.swing.JTextField haripresensiField2;
     private javax.swing.JButton jButton1;
@@ -5597,11 +5677,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel109;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel111;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -5609,7 +5686,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -5656,11 +5732,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
@@ -5710,25 +5782,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel labelpresensit3;
     private javax.swing.JLabel labelpresensit4;
     private javax.swing.JLabel labelt1;
-    private javax.swing.JLabel labelt10;
-    private javax.swing.JLabel labelt11;
-    private javax.swing.JLabel labelt12;
-    private javax.swing.JLabel labelt13;
-    private javax.swing.JLabel labelt14;
-    private javax.swing.JLabel labelt15;
-    private javax.swing.JLabel labelt16;
-    private javax.swing.JLabel labelt17;
-    private javax.swing.JLabel labelt18;
-    private javax.swing.JLabel labelt19;
     private javax.swing.JLabel labelt2;
-    private javax.swing.JLabel labelt20;
     private javax.swing.JLabel labelt3;
     private javax.swing.JLabel labelt4;
-    private javax.swing.JLabel labelt5;
-    private javax.swing.JLabel labelt6;
-    private javax.swing.JLabel labelt7;
-    private javax.swing.JLabel labelt8;
-    private javax.swing.JLabel labelt9;
     private javax.swing.JButton laporanBAtas;
     private javax.swing.JButton laporanBuku;
     private javax.swing.JPanel laporanPanel;
@@ -5771,15 +5827,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel sumberL;
     private javax.swing.JTextField tahunField;
     private javax.swing.JTextField tahunField1;
-    private javax.swing.JTextField tahunField10;
     private javax.swing.JTextField tahunField2;
-    private javax.swing.JTextField tahunField3;
-    private javax.swing.JTextField tahunField4;
-    private javax.swing.JTextField tahunField5;
-    private javax.swing.JTextField tahunField6;
-    private javax.swing.JTextField tahunField7;
-    private javax.swing.JTextField tahunField8;
-    private javax.swing.JTextField tahunField9;
     private javax.swing.JTextField tahunpresensiField1;
     private javax.swing.JTextField tahunpresensiField2;
     private javax.swing.JButton tambahKasB;
@@ -5790,32 +5838,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton tambahsiswaB;
     private javax.swing.JButton tambahstaffB;
     private javax.swing.JButton tampiltanggalButton;
-    private javax.swing.JButton tampiltanggalButton1;
-    private javax.swing.JButton tampiltanggalButton2;
-    private javax.swing.JButton tampiltanggalButton3;
-    private javax.swing.JButton tampiltanggalButton4;
     private javax.swing.JButton tampiltanggalButtonPB;
     private javax.swing.JLabel tanggal1Label;
-    private javax.swing.JLabel tanggal1Label1;
-    private javax.swing.JLabel tanggal1Label2;
-    private javax.swing.JLabel tanggal1Label3;
-    private javax.swing.JLabel tanggal1Label4;
     private javax.swing.JLabel tanggal1presensiLabel;
     private javax.swing.JLabel tanggal2Label;
-    private javax.swing.JLabel tanggal2Label1;
-    private javax.swing.JLabel tanggal2Label2;
-    private javax.swing.JLabel tanggal2Label3;
-    private javax.swing.JLabel tanggal2Label4;
     private javax.swing.JLabel tanggal2presensiLabel;
     private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JComboBox<String> tingkatPinjamMapelCB;
     private javax.swing.JComboBox<String> tingkatSiswaCB;
     private javax.swing.JComboBox<String> tipeCB;
     private javax.swing.JComboBox<String> tipetanggalCB;
-    private javax.swing.JComboBox<String> tipetanggalCB1;
-    private javax.swing.JComboBox<String> tipetanggalCB2;
-    private javax.swing.JComboBox<String> tipetanggalCB3;
-    private javax.swing.JComboBox<String> tipetanggalCB4;
     private javax.swing.JComboBox<String> tipetanggalpresensiCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;

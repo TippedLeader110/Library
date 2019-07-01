@@ -2,10 +2,9 @@ VIEW PINJAM (untuk data pinjam)
 create or replace view pinjam as 
 select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama as siswa, a.tingkat, a.jurusan, a.kelas, b.id_petugas, b.nama as petugas, d.t_pinjam, d.t_kembali, d.denda
 from pinjam_book d 
-inner join siswa_view a on a.nis = d.nis
+inner join log_siswa_view a on a.nis = d.nis
 inner join petugas b on b.id_petugas = d.id_petugas
 inner join book c on c.isbn = d.isbn; 
-
 
 -------------------------------------------------------
 
@@ -13,7 +12,7 @@ VIEW KEMBALI
 create or replace view kembali as 
 select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama, d.t_pinjam, d.t_kembali, d.t_deadline 
 from pinjam_book d 
-inner join siswa a on a.nis = d.nis 
+inner join log_siswa a on a.nis = d.nis 
 inner join book c on c.isbn = d.isbn;
 
 -------------------------------------------------------
@@ -45,9 +44,10 @@ WHERE
 isbn = NEW.isbn;
 end if;
 END!
+
 -------------------------------------------------------
 
-TRIGGER PENGEMBALIAN/DENDA
+TRIGGER PENGEMBALIAN/KAS
 CREATE TRIGGER pengembalian_kas after update ON pinjam_book
 FOR EACH ROW BEGIN
 if exists (select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
@@ -110,7 +110,29 @@ VIEW PRESENSI
 create or replace view presensi_view as
 select a.no_presensi, a.nis, b.nama, c.tingkat, c.jurusan, c.kelas, a.tanggal, a.kegiatan
 from presensi a
-inner join siswa b on a.nis = b.nis
+inner join log_siswa b on a.nis = b.nis
 inner join kelas c on b.id_kelas = c.id_kelas;
 
 -------------------------------------------------------
+
+TRIGGER INSERT SISWA_INSERT
+create trigger siswa_insert after insert on siswa
+for each row begin
+insert into log_siswa select * from siswa where nis = new.nis;
+end!
+
+-------------------------------------------------------
+
+TRIGGER UPDATE SISWA_UPDATE
+create trigger siswa_update after update on siswa
+for each row begin
+update log_siswa set nis=new.nis, nama=new.nama, id_kelas=new.id_kelas, alamat=new.alamat, no_telp=new.no_telp;
+end!
+
+-------------------------------------------------------
+
+VIEW LOG_SISWA_VIEW
+create or replace view log_siswa_view as 
+select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
+from log_siswa a
+inner join kelas b on a.id_kelas = b.id_kelas;

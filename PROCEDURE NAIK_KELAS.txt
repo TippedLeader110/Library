@@ -1,4 +1,4 @@
-create or replace procedure naik_kelas
+create or replace procedure naik_kelas()
 begin
 update siswa set id_kelas = '11.tpg.1' where id_kelas = '10.tpg.1';
 update siswa set id_kelas = '11.tpg.2' where id_kelas = '10.tpg.2';
@@ -126,3 +126,4 @@ update siswa set id_kelas = '12.bkp.3' where id_kelas = '11.bkp.3';
 update siswa set id_kelas = 'A.bkp.0' where id_kelas = '12.bkp.1';
 update siswa set id_kelas = 'A.bkp.0' where id_kelas = '12.bkp.2';
 update siswa set id_kelas = 'A.bkp.0' where id_kelas = '12.bkp.3';
+end!

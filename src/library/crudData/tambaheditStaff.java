@@ -41,6 +41,7 @@ public class tambaheditStaff extends javax.swing.JFrame {
                 JNama.setText(rs.getString("nama"));
                 JTelepon.setText(rs.getString("alamat"));
                 JTelepon.setText(rs.getString("no_telp"));
+                Jlevel.setText(rs.getString("level"));
             }
         }
         catch (SQLException ex) {
@@ -68,6 +69,8 @@ public class tambaheditStaff extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         JTelepon = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        Jlevel = new javax.swing.JTextField();
         simpanB = new javax.swing.JButton();
         batalB = new javax.swing.JButton();
 
@@ -101,6 +104,11 @@ public class tambaheditStaff extends javax.swing.JFrame {
 
         JTelepon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jLabel6.setText("Level");
+
+        Jlevel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,13 +119,16 @@ public class tambaheditStaff extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JId, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JNama, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JAlamat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Jlevel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(JId, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JNama, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JAlamat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,7 +150,11 @@ public class tambaheditStaff extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(JTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Jlevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         simpanB.setBackground(new java.awt.Color(0, 204, 0));
@@ -222,13 +237,13 @@ public class tambaheditStaff extends javax.swing.JFrame {
         if(this.edit==true){
             String v =JId.getText();
             if(v!=this.val){
-                c.updateStaff(this.val , JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText());
+                c.updateStaff(this.val , JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText(), Jlevel.getText());
             }
             else
-            c.updateStaff2(JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText());
+            c.updateStaff2(JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText(), Jlevel.getText());
         }
         else{
-            c.createStaff(JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText());
+            c.createStaff(JId.getText(), JNama.getText(), JAlamat.getText(), JTelepon.getText(), Jlevel.getText());
         }
         this.dispose();
     }//GEN-LAST:event_simpanBActionPerformed
@@ -278,11 +293,13 @@ public class tambaheditStaff extends javax.swing.JFrame {
     private javax.swing.JTextField JId;
     private javax.swing.JTextField JNama;
     private javax.swing.JTextField JTelepon;
+    private javax.swing.JTextField Jlevel;
     private javax.swing.JButton batalB;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton simpanB;
