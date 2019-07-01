@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Library/src/splashScreen/splashCode.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/Main/DaftarPrototipe.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/Main/cover.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/tambahBuku.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/editSiswa.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/editBuku.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/crudData/crud.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/splashScreen/splash.java</file>
-            <file>file:/C:/xampp/htdocs/Library/src/library/Mysql/MysqlCon.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Main/Main.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambaheditPresensi.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambaheditAkun.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Main/DaftarPrototipe.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambaheditKas.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/tambaheditStaff.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/Mysql/MysqlCon.java</file>
+            <file>file:/C:/Users/windows%2010/Desktop/KULIAH/java/Library/src/library/crudData/crud.java</file>
         </group>
     </open-files>
 </project-private>

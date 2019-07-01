@@ -4173,6 +4173,17 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
             }
         
+        //combo box petugas
+        try{
+            ResultSet rs_pt = stmt.executeQuery("Select distinct petugas.nama from perpus.petugas");
+            while(rs_pt.next()){
+                String petugas = rs_pt.getString("nama");
+                petugasCB.addItem(petugas); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+        
         this.titleKas.setText("Kas");
         panelBawah.removeAll();
         panelBawah.add(kasPanel);

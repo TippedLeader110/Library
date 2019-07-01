@@ -799,12 +799,12 @@ public class Guest extends javax.swing.JFrame {
                     .addGroup(panelPresensiLayout.createSequentialGroup()
                         .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titlePresensi)
-                            .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel75)
                             .addGroup(panelPresensiLayout.createSequentialGroup()
                                 .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1117,6 +1117,10 @@ public class Guest extends javax.swing.JFrame {
         }
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cariBukuBActionPerformed
+
+    private void tambahPresensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahPresensiBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tambahPresensiBActionPerformed
 
     /**
      * @param args the command line arguments
