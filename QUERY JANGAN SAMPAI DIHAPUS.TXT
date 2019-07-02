@@ -35,7 +35,7 @@ end!
 -------------------------------------------------------
 
 TRIGGER PEMINJAMAN (bila dipinjam jumlah buku -1)
-CREATE TRIGGER peminjaman after INSERT ON pinjam_book
+CREATE OR REPLACE TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN
 if exists(select t_pinjam from pinjam_book where id_transaksi = new.id_transaksi and t_pinjam is not null) then
 UPDATE book
@@ -48,7 +48,7 @@ END!
 -------------------------------------------------------
 
 TRIGGER PENGEMBALIAN/KAS (bila di kembalikan, jumlah buku +1, bila ada denda insert ke cashflow dengan keterangan denda)
-CREATE TRIGGER pengembalian_kas after update ON pinjam_book
+CREATE OR REPLACE TRIGGER pengembalian_kas after update ON pinjam_book
 FOR EACH ROW BEGIN
 if exists (select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
 UPDATE book
@@ -73,7 +73,7 @@ inner join lok_book b on a.id_rak = b.id_rak;
 -------------------------------------------------------
 
 TRIGGER insert_lokasi (bila di buku mencoba input id_rak baru, dibuat lagi di tabel lok_book)
-CREATE TRIGGER insert_lokasi after insert ON book
+CREATE or replace TRIGGER insert_lokasi after insert ON book
 FOR EACH ROW BEGIN
 declare lks text;
 select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
@@ -86,7 +86,7 @@ END!
 -------------------------------------------------------
 	
 TRIGGER insert_lokasi2 (bila di buku mencoba update dengan id_rak baru, dibuat lagi di tabel lok_book)
-CREATE TRIGGER insert_lokasi2 after update ON book
+CREATE or replace TRIGGER insert_lokasi2 after update ON book
 FOR EACH ROW BEGIN
 declare lks text;
 select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
@@ -116,7 +116,7 @@ inner join kelas c on b.id_kelas = c.id_kelas;
 -------------------------------------------------------
 
 TRIGGER INSERT SISWA_DELETE (bila di delete insert ke log_siswa)
-create trigger siswa_delete before delete on siswa
+create or replace trigger siswa_delete before delete on siswa
 for each row begin
 insert into log_siswa select * from siswa where nis = old.nis;
 end!
@@ -125,7 +125,7 @@ end!
 
 VIEW SISWA_ALL (untuk union siswa berdasarkan siswa yang sudah di hapus)
 create or replace view siswa_all as 
-select * from siswa union select * from log_siswa
+select * from siswa union select * from log_siswa;
 
 --------------------------------------------------------
 
