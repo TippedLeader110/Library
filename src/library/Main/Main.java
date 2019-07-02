@@ -3915,6 +3915,7 @@ public class Main extends javax.swing.JFrame {
 
     private void settingBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingBAtasActionPerformed
         // TODO add your handling code here:
+        model_user.setRowCount(0);
         Statement stmt = send.query();
         ResultSet rs;
         
@@ -4072,27 +4073,17 @@ public class Main extends javax.swing.JFrame {
 
     private void presensiBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBAtasActionPerformed
         // TODO add your handling code here:
+        pr.setRowFilter(RowFilter.regexFilter(""));
+        model_presensi.setRowCount(0);
+        tipetanggalpresensiCB.setSelectedIndex(0);
+        TingkatPresensiCB.setSelectedIndex(0);
+        JurusanPresensiCB.setSelectedIndex(0);
+        kelasPresensiCB.setSelectedIndex(0);
+        kegfield.setText("");
+        
         stmt = send.query();
         ResultSet rs;
         String q, w, e, r, t,y,u,i,o; 
-        
-        try {
-                rs = stmt.executeQuery("select * from perpus.presensi_view");
-                while(rs.next()){
-                q = rs.getString("no_presensi");
-                w = rs.getString("nis");
-                y = rs.getString("nama");
-                u = rs.getString("tingkat");
-                i = rs.getString("jurusan");
-                o = rs.getString("kelas");
-                e = rs.getString("tanggal");
-                r = rs.getString("jam");
-                t = rs.getString("kegiatan");
-                model_presensi.addRow(new Object[]{q,w,y,u,i,o,e,r,t});}
-            }
-            catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
-            }
         
         //jurusan
         try{
@@ -4104,6 +4095,24 @@ public class Main extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
         }
+        
+        try {
+                rs = stmt.executeQuery("select * from perpus.presensi_view");
+                while(rs.next()){
+                q = rs.getString("no_presensi");
+                w = rs.getString("nis");
+                y = rs.getString("nama");
+                u = rs.getString("tingkat");
+                i = rs.getString("jurusan");
+                o = rs.getString("kelas");
+                e = rs.getString("tanggal");
+                t = rs.getString("kegiatan");
+                model_presensi.addRow(new Object[]{q,w,y,u,i,o,e,t});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
         
         this.titlePresensi.setText("Presensi");
         panelBawah.removeAll();

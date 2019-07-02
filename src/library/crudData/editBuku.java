@@ -32,7 +32,6 @@ public class editBuku extends javax.swing.JFrame {
         this.val = val;
         title.setText("Edit Buku");
         Statement stmt=kon.query();
-        
         //lokasi
         try{
             ResultSet rs3 = stmt.executeQuery("Select lok_book.id_rak from perpus.lok_book");
@@ -57,10 +56,9 @@ public class editBuku extends javax.swing.JFrame {
         
         try {
             
-        ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.book where isbn = " + val);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.book where isbn = '"+val+"'");
         while (rs.next()){
                 Jisbn.setText(rs.getString("ISBN"));
-                System.out.println(rs.getString("ISBN"));
                 Jjudul.setText(rs.getString("judul"));
                 Jpenerbit.setText(rs.getString("penerbit"));
                 Jthn.setText(rs.getString("thn_buku"));
