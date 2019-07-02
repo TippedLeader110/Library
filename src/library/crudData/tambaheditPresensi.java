@@ -21,14 +21,16 @@ public class tambaheditPresensi extends javax.swing.JFrame {
     /**
      * Creates new form tambaheditPresensi
      */
+    
     boolean edit;
     String val;
     MysqlCon kon = new MysqlCon();
     Statement stmt=kon.query();
     public tambaheditPresensi() {
-        initComponents();
+        initComponents();        
         edit = false;
     }
+    
     
     public tambaheditPresensi(String val){
         this.val = val;

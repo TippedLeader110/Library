@@ -15,6 +15,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import library.Mysql.MysqlCon;
+import library.crudData.tambaheditPresensi;
 
 /**
  *
@@ -50,10 +51,69 @@ public class Guest extends javax.swing.JFrame {
     
         TableRowSorter<DefaultTableModel> tp = new TableRowSorter<DefaultTableModel>(model_datapinjam);
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model_buku);
+        TableRowSorter<DefaultTableModel> pr = new TableRowSorter<DefaultTableModel>(model_presensi);
+        
+        Statement stmt = send.query();
         
     public Guest() {
         
         initComponents();
+        
+        ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+            
+        //combo box lokasi
+        try{
+            ResultSet rs_lok = stmt.executeQuery("Select distinct buku.lokasi from perpus.buku");
+            while(rs_lok.next()){
+                String lokasi = rs_lok.getString("lokasi");
+                rakCB.addItem(lokasi); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+        
+        //combo box tahun buku
+        try{
+            ResultSet rs_thn = stmt.executeQuery("Select distinct buku.thn_buku from perpus.buku order by thn_buku asc");
+            while(rs_thn.next()){
+                String thn = rs_thn.getString("thn_buku");
+                thnCB.addItem(thn); 
+            }   
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+        }
+            
+        this.titleBuku.setText("Buku");
+        panelBawah.removeAll();
+        panelBawah.add(panelHome);
+        bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
+        KategoriCB.setEnabled(false);
+//        editbukuB.setEnabled(false);
+//        hapusbukuB.setEnabled(false);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+        KategoriCB.setEnabled(false);
         
         
     }
@@ -75,9 +135,9 @@ public class Guest extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         homeB = new javax.swing.JButton();
-        bukuB = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
-        presensiB = new javax.swing.JButton();
+        bukuBAtas = new javax.swing.JButton();
+        datapinjamBAatas = new javax.swing.JButton();
+        presensiBAtas = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -88,13 +148,13 @@ public class Guest extends javax.swing.JFrame {
         panelHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        bukuBHome = new javax.swing.JButton();
+        bukuBBawah = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        presensiBHome = new javax.swing.JButton();
+        presensiBBawah = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton42 = new javax.swing.JButton();
+        datapinjamBBawah = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         panelBuku = new javax.swing.JPanel();
         titleBuku = new javax.swing.JLabel();
@@ -127,11 +187,11 @@ public class Guest extends javax.swing.JFrame {
         jScrollPane14 = new javax.swing.JScrollPane();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        presensitabel = new javax.swing.JTable();
         jLabel75 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jButton20 = new javax.swing.JButton();
-        tambahPresensiB = new javax.swing.JButton();
+        presensiTF = new javax.swing.JTextField();
+        presensiCariB = new javax.swing.JButton();
+        presensiTambahB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Tata Kelola Perpustakaan - Guest Mode");
@@ -139,7 +199,7 @@ public class Guest extends javax.swing.JFrame {
 
         panelAtas.setBackground(new java.awt.Color(51, 153, 255));
 
-        exitGM.setBackground(new java.awt.Color(0, 110, 198));
+        exitGM.setBackground(new java.awt.Color(255, 0, 0));
         exitGM.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         exitGM.setForeground(new java.awt.Color(255, 255, 255));
         exitGM.setText("Login");
@@ -178,25 +238,25 @@ public class Guest extends javax.swing.JFrame {
             }
         });
 
-        bukuB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/book-icon.png"))); // NOI18N
-        bukuB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bukuB.addActionListener(new java.awt.event.ActionListener() {
+        bukuBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/book-icon.png"))); // NOI18N
+        bukuBAtas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bukuBAtas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bukuBActionPerformed(evt);
+                bukuBAtasActionPerformed(evt);
             }
         });
 
-        jButton41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/datapinjam-icon.png"))); // NOI18N
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
+        datapinjamBAatas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/datapinjam-icon.png"))); // NOI18N
+        datapinjamBAatas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
+                datapinjamBAatasActionPerformed(evt);
             }
         });
 
-        presensiB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/presensi-icon.png"))); // NOI18N
-        presensiB.addActionListener(new java.awt.event.ActionListener() {
+        presensiBAtas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/presensi-icon.png"))); // NOI18N
+        presensiBAtas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                presensiBActionPerformed(evt);
+                presensiBAtasActionPerformed(evt);
             }
         });
 
@@ -212,17 +272,17 @@ public class Guest extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bukuB, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bukuBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datapinjamBAatas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel33)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(presensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(presensiBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -232,9 +292,9 @@ public class Guest extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(homeB, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bukuB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(presensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton41, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bukuBAtas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(presensiBAtas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datapinjamBAatas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -319,11 +379,11 @@ public class Guest extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        bukuBHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/book-icon.png"))); // NOI18N
-        bukuBHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bukuBHome.addActionListener(new java.awt.event.ActionListener() {
+        bukuBBawah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/book-icon.png"))); // NOI18N
+        bukuBBawah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bukuBBawah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bukuBHomeActionPerformed(evt);
+                bukuBBawahActionPerformed(evt);
             }
         });
 
@@ -332,11 +392,11 @@ public class Guest extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Buku");
 
-        presensiBHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/presensi-icon.png"))); // NOI18N
-        presensiBHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        presensiBHome.addActionListener(new java.awt.event.ActionListener() {
+        presensiBBawah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/presensi-icon.png"))); // NOI18N
+        presensiBBawah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        presensiBBawah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                presensiBHomeActionPerformed(evt);
+                presensiBBawahActionPerformed(evt);
             }
         });
 
@@ -352,10 +412,10 @@ public class Guest extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel5.setText("Anda sedang berada dalam Guest Mode (Mode Tamu)");
 
-        jButton42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/datapinjam-icon.png"))); // NOI18N
-        jButton42.addActionListener(new java.awt.event.ActionListener() {
+        datapinjamBBawah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new-icon/datapinjam-icon.png"))); // NOI18N
+        datapinjamBBawah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton42ActionPerformed(evt);
+                datapinjamBBawahActionPerformed(evt);
             }
         });
 
@@ -378,15 +438,15 @@ public class Guest extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(335, 335, 335)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bukuBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bukuBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datapinjamBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel34))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(presensiBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(presensiBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
@@ -399,13 +459,13 @@ public class Guest extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(70, 70, 70)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(presensiBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(presensiBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(bukuBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bukuBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(datapinjamBBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34)
@@ -448,6 +508,7 @@ public class Guest extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1320, 645));
 
         bukuTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -468,15 +529,15 @@ public class Guest extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -573,7 +634,7 @@ public class Guest extends javax.swing.JFrame {
             .addGroup(panelBukuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(panelBukuLayout.createSequentialGroup()
                         .addComponent(titleBuku)
                         .addGap(18, 18, 18)
@@ -603,7 +664,7 @@ public class Guest extends javax.swing.JFrame {
                                 .addGroup(panelBukuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(penerbitL2)
                                     .addComponent(penerbitL1))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 214, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBukuLayout.setVerticalGroup(
@@ -643,6 +704,7 @@ public class Guest extends javax.swing.JFrame {
         titleDatapinjam.setText("Title");
 
         jPanel16.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel16.setPreferredSize(new java.awt.Dimension(1320, 480));
 
         datapinjamTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -663,15 +725,15 @@ public class Guest extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 1324, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jScrollPane12.setViewportView(jPanel16);
@@ -731,8 +793,9 @@ public class Guest extends javax.swing.JFrame {
         titlePresensi.setText("Title");
 
         jPanel18.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel18.setPreferredSize(new java.awt.Dimension(1346, 480));
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        presensitabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -743,7 +806,7 @@ public class Guest extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane15.setViewportView(jTable8);
+        jScrollPane15.setViewportView(presensitabel);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -751,15 +814,15 @@ public class Guest extends javax.swing.JFrame {
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 1361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jScrollPane14.setViewportView(jPanel18);
@@ -767,24 +830,24 @@ public class Guest extends javax.swing.JFrame {
         jLabel75.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel75.setText("NIS / Kode Anggota");
 
-        jTextField10.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        presensiTF.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        jButton20.setBackground(new java.awt.Color(51, 153, 255));
-        jButton20.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton20.setForeground(new java.awt.Color(255, 255, 255));
-        jButton20.setText("Cari");
-        jButton20.setBorder(null);
-        jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        presensiCariB.setBackground(new java.awt.Color(51, 153, 255));
+        presensiCariB.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        presensiCariB.setForeground(new java.awt.Color(255, 255, 255));
+        presensiCariB.setText("Cari");
+        presensiCariB.setBorder(null);
+        presensiCariB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        tambahPresensiB.setBackground(new java.awt.Color(0, 204, 0));
-        tambahPresensiB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tambahPresensiB.setForeground(new java.awt.Color(255, 255, 255));
-        tambahPresensiB.setText("Tambah");
-        tambahPresensiB.setBorder(null);
-        tambahPresensiB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tambahPresensiB.addActionListener(new java.awt.event.ActionListener() {
+        presensiTambahB.setBackground(new java.awt.Color(0, 204, 0));
+        presensiTambahB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        presensiTambahB.setForeground(new java.awt.Color(255, 255, 255));
+        presensiTambahB.setText("Tambah");
+        presensiTambahB.setBorder(null);
+        presensiTambahB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        presensiTambahB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahPresensiBActionPerformed(evt);
+                presensiTambahBActionPerformed(evt);
             }
         });
 
@@ -795,17 +858,17 @@ public class Guest extends javax.swing.JFrame {
             .addGroup(panelPresensiLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(panelPresensiLayout.createSequentialGroup()
                         .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titlePresensi)
                             .addComponent(jLabel75)
                             .addGroup(panelPresensiLayout.createSequentialGroup()
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(presensiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(presensiCariB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(presensiTambahB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 1043, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelPresensiLayout.setVerticalGroup(
@@ -817,10 +880,10 @@ public class Guest extends javax.swing.JFrame {
                 .addComponent(jLabel75)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPresensiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(presensiTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(presensiCariB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tambahPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(presensiTambahB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -834,14 +897,47 @@ public class Guest extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bukuBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBActionPerformed
+    private void bukuBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBAtasActionPerformed
         // TODO add your handling code here:
+        tr.setRowFilter(RowFilter.regexFilter(""));
+        model_buku.setRowCount(0);
+        JenisCB.setSelectedIndex(0);
+        KategoriCB.setSelectedIndex(0);
+        rakCB.setSelectedIndex(0);
+        thnCB.setSelectedIndex(0);
+        cariTF.setText("");
+            stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("Kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(panelBuku);
+        bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
+//        editbukuB.setEnabled(false);
+//        hapusbukuB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
-    }//GEN-LAST:event_bukuBActionPerformed
+    }//GEN-LAST:event_bukuBAtasActionPerformed
 
     private void homeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBActionPerformed
         // TODO add your handling code here:
@@ -852,16 +948,55 @@ public class Guest extends javax.swing.JFrame {
         panelBawah.revalidate();
     }//GEN-LAST:event_homeBActionPerformed
 
-    private void bukuBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBHomeActionPerformed
+    private void bukuBBawahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuBBawahActionPerformed
         // TODO add your handling code here:
+//        this.titleBuku.setText("Buku");
+//        panelBawah.removeAll();
+//        panelBawah.add(panelBuku);
+//        panelBawah.repaint();
+//        panelBawah.revalidate();
+        tr.setRowFilter(RowFilter.regexFilter(""));
+        model_buku.setRowCount(0);
+        JenisCB.setSelectedIndex(0);
+        KategoriCB.setSelectedIndex(0);
+        rakCB.setSelectedIndex(0);
+        thnCB.setSelectedIndex(0);
+        cariTF.setText("");
+//        Statement stmt = send.query();
+            stmt = send.query();
+            ResultSet rs;
+           
+            String q, w, e, r, t, y, u, i, o, p;
+            try {
+                rs = stmt.executeQuery("select * from perpus.buku");
+                while(rs.next()){
+                q = rs.getString("ISBN");
+                w = rs.getString("judul");
+                e = rs.getString("pengarang");
+                r = rs.getString("penerbit");
+                t = rs.getString("thn_buku");
+                y = rs.getString("jenis_buku");
+                u = rs.getString("Kategori");
+                i = rs.getString("tgl_pengadaan");
+                o = rs.getString("lokasi");
+                p = rs.getString("jmlh");
+                model_buku.addRow(new Object[]{q, w, e, r, t,y,u,i,o,p});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
         this.titleBuku.setText("Buku");
         panelBawah.removeAll();
         panelBawah.add(panelBuku);
+        bukuTabel.setModel(model_buku);
+        bukuTabel.setAutoCreateRowSorter(true);
+//        editbukuB.setEnabled(false);
+//        hapusbukuB.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
-    }//GEN-LAST:event_bukuBHomeActionPerformed
+    }//GEN-LAST:event_bukuBBawahActionPerformed
 
-    private void presensiBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBHomeActionPerformed
+    private void presensiBBawahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBBawahActionPerformed
         // TODO add your handling code here:
         this.titlePresensi.setText("Presensi");
         panelBawah.removeAll();
@@ -871,16 +1006,71 @@ public class Guest extends javax.swing.JFrame {
         
 
         
-    }//GEN-LAST:event_presensiBHomeActionPerformed
+    }//GEN-LAST:event_presensiBBawahActionPerformed
 
-    private void presensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBActionPerformed
+    private void presensiBAtasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiBAtasActionPerformed
         // TODO add your handling code here:
+        pr.setRowFilter(RowFilter.regexFilter(""));
+        model_presensi.setRowCount(0);
+//        tipetanggalpresensiCB.setSelectedIndex(0);
+//        TingkatPresensiCB.setSelectedIndex(0);
+//        JurusanPresensiCB.setSelectedIndex(0);
+//        kelasPresensiCB.setSelectedIndex(0);
+//        kegfield.setText("");
+        
+        stmt = send.query();
+        ResultSet rs;
+        String q, w, e, r, t,y,u,i,o; 
+        
+        //jurusan
+//        try{
+//            ResultSet rs_jurusan = stmt.executeQuery("select distinct kelas.jurusan from perpus.kelas order by kelas.jurusan asc");
+//            while(rs_jurusan.next()){
+//                String jurusan = rs_jurusan.getString("jurusan");
+//               JurusanPresensiCB.addItem(jurusan); 
+//            }   
+//        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+//        }
+        
+        try {
+                rs = stmt.executeQuery("select * from perpus.presensi_view");
+                while(rs.next()){
+                q = rs.getString("no_presensi");
+                w = rs.getString("nis");
+                y = rs.getString("nama");
+                u = rs.getString("tingkat");
+                i = rs.getString("jurusan");
+                o = rs.getString("kelas");
+                e = rs.getString("tanggal");
+                t = rs.getString("kegiatan");
+                model_presensi.addRow(new Object[]{q,w,y,u,i,o,e,t});}
+            }
+            catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+            }
+        
+        
         this.titlePresensi.setText("Presensi");
         panelBawah.removeAll();
         panelBawah.add(panelPresensi);
+        presensitabel.setModel(model_presensi);
+        presensitabel.setAutoCreateRowSorter(true);
+//        tanggal1presensiLabel.setEnabled(false);
+//        tanggal2presensiLabel.setEnabled(false);
+//        tahunpresensiField1.setEnabled(false);
+//        tahunpresensiField2.setEnabled(false);
+//        bulanpresensifield1.setEnabled(false);
+//        bulanpresensifield2.setEnabled(false);
+//        haripresensiField1.setEnabled(false);
+//        haripresensiField2.setEnabled(false);
+//        labelpresensit1.setEnabled(false);
+//        labelpresensit2.setEnabled(false);
+//        labelpresensit3.setEnabled(false);
+//        labelpresensit4.setEnabled(false);
         panelBawah.repaint();
         panelBawah.revalidate();
-    }//GEN-LAST:event_presensiBActionPerformed
+    }//GEN-LAST:event_presensiBAtasActionPerformed
 
     private void exitGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGMActionPerformed
         // TODO add your handling code here:
@@ -897,18 +1087,84 @@ public class Guest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exitGMActionPerformed
 
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+    private void datapinjamBAatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datapinjamBAatasActionPerformed
         // TODO add your handling code here:
+//        this.titleDatapinjam.setText("Data Pinjam");
+//        panelBawah.removeAll();
+//        panelBawah.add(panelDatapinjam);
+//        panelBawah.repaint();
+//        panelBawah.revalidate();
+        model_datapinjam.setRowCount(0);
+        stmt = send.query();
+        ResultSet rs;
+
+        String q,w,e,r,t,y,u,i,o,p,z,x,c;
+        try {
+            rs = stmt.executeQuery("select * from perpus.pinjam");
+            while(rs.next()){
+                q = rs.getString("id_transaksi");
+                w = rs.getString("isbn");
+                e = rs.getString("judul");
+                r = rs.getString("nis");
+                t = rs.getString("siswa");
+                y = rs.getString("tingkat");
+                u = rs.getString("jurusan");
+                i = rs.getString("kelas");
+                o = rs.getString("id_petugas");
+                p = rs.getString("petugas");
+                z = rs.getString("t_pinjam");
+                x = rs.getString("t_kembali");
+                c = rs.getString("denda");
+                model_datapinjam.addRow(new Object[]{q,w,e,r,t,y,u,i,o,p,z,x,c});}
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
         this.titleDatapinjam.setText("Data Pinjam");
         panelBawah.removeAll();
         panelBawah.add(panelDatapinjam);
+        datapinjamTabel.setModel(model_datapinjam);
+        datapinjamTabel.setAutoCreateRowSorter(true);
         panelBawah.repaint();
         panelBawah.revalidate();
-    }//GEN-LAST:event_jButton41ActionPerformed
+    }//GEN-LAST:event_datapinjamBAatasActionPerformed
 
-    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+    private void datapinjamBBawahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datapinjamBBawahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton42ActionPerformed
+        model_datapinjam.setRowCount(0);
+        stmt = send.query();
+        ResultSet rs;
+
+        String q,w,e,r,t,y,u,i,o,p,z,x,c;
+        try {
+            rs = stmt.executeQuery("select * from perpus.pinjam");
+            while(rs.next()){
+                q = rs.getString("id_transaksi");
+                w = rs.getString("isbn");
+                e = rs.getString("judul");
+                r = rs.getString("nis");
+                t = rs.getString("siswa");
+                y = rs.getString("tingkat");
+                u = rs.getString("jurusan");
+                i = rs.getString("kelas");
+                o = rs.getString("id_petugas");
+                p = rs.getString("petugas");
+                z = rs.getString("t_pinjam");
+                x = rs.getString("t_kembali");
+                c = rs.getString("denda");
+                model_datapinjam.addRow(new Object[]{q,w,e,r,t,y,u,i,o,p,z,x,c});}
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
+        }
+        this.titleDatapinjam.setText("Data Pinjam");
+        panelBawah.removeAll();
+        panelBawah.add(panelDatapinjam);
+        datapinjamTabel.setModel(model_datapinjam);
+        datapinjamTabel.setAutoCreateRowSorter(true);
+        panelBawah.repaint();
+        panelBawah.revalidate();
+    }//GEN-LAST:event_datapinjamBBawahActionPerformed
 
     private void caridatapinjamBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caridatapinjamBActionPerformed
         // TODO add your handling code here:
@@ -1118,9 +1374,12 @@ public class Guest extends javax.swing.JFrame {
         tr.setRowFilter(RowFilter.andFilter(filters));
     }//GEN-LAST:event_cariBukuBActionPerformed
 
-    private void tambahPresensiBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahPresensiBActionPerformed
+    private void presensiTambahBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presensiTambahBActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tambahPresensiBActionPerformed
+        tambaheditPresensi tep = new tambaheditPresensi();
+        tep.setVisible(true);
+        
+    }//GEN-LAST:event_presensiTambahBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1160,21 +1419,20 @@ public class Guest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JenisCB;
     private javax.swing.JComboBox<String> KategoriCB;
-    private javax.swing.JButton bukuB;
-    private javax.swing.JButton bukuBHome;
+    private javax.swing.JButton bukuBAtas;
+    private javax.swing.JButton bukuBBawah;
     private javax.swing.JTable bukuTabel;
     private javax.swing.JButton cariBukuB;
     private javax.swing.JTextField cariTF;
     private javax.swing.JButton caridatapinjamB;
+    private javax.swing.JButton datapinjamBAatas;
+    private javax.swing.JButton datapinjamBBawah;
     private javax.swing.JTextField datapinjamField;
     private javax.swing.JTable datapinjamTabel;
     private javax.swing.JButton exitGM;
     private javax.swing.JButton homeB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton41;
-    private javax.swing.JButton jButton42;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1201,8 +1459,6 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel kategoriL;
     private javax.swing.JPanel panelAtas;
     private javax.swing.JPanel panelBawah;
@@ -1212,13 +1468,16 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JPanel panelPresensi;
     private javax.swing.JLabel penerbitL1;
     private javax.swing.JLabel penerbitL2;
-    private javax.swing.JButton presensiB;
-    private javax.swing.JButton presensiBHome;
+    private javax.swing.JButton presensiBAtas;
+    private javax.swing.JButton presensiBBawah;
+    private javax.swing.JButton presensiCariB;
+    private javax.swing.JTextField presensiTF;
+    private javax.swing.JButton presensiTambahB;
+    private javax.swing.JTable presensitabel;
     private javax.swing.JComboBox<String> rakCB;
     private javax.swing.JLabel rakL;
     private javax.swing.JLabel rakL2;
     private javax.swing.JLabel sumberL;
-    private javax.swing.JButton tambahPresensiB;
     private javax.swing.JComboBox<String> thnCB;
     private javax.swing.JLabel titleBuku;
     private javax.swing.JLabel titleDatapinjam;
