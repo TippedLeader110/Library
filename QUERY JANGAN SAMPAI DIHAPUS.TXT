@@ -78,8 +78,8 @@ FOR EACH ROW BEGIN
 declare lks text;
 select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
-insert into lok_book (id_rak, lokasi) 
-values (new.id_rak, lks);
+insert into lok_book (id_rak, rak, tingkat, lokasi) 
+values (new.id_rak, left(new.id_rak,1), right(new.id_rak,1), lks);
 end if;
 END!
 
@@ -91,8 +91,8 @@ FOR EACH ROW BEGIN
 declare lks text;
 select concat('rak ',left(new.id_rak,1),' tingkat ',right(new.id_rak,1)) into lks;
 if not exists (select id_rak from lok_book where id_rak = new.id_rak) then
-insert into lok_book (id_rak, lokasi) 
-values (new.id_rak, lks);
+insert into lok_book (id_rak, rak, tingkat, lokasi) 
+values (new.id_rak, left(new.id_rak,1), right(new.id_rak,1), lks);
 end if;
 END!
 
