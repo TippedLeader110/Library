@@ -3942,7 +3942,6 @@ public class Main extends javax.swing.JFrame {
                     panelBawah.removeAll();
                     panelBawah.add(pengaturanPanel);
                     userTabel.setModel(model_user);
-                    tambahUserB.setEnabled(false);
                     panelBawah.repaint();
                     panelBawah.revalidate();
                 }
@@ -4522,7 +4521,7 @@ public class Main extends javax.swing.JFrame {
                 r = rs.getString("tipe");
                 t = rs.getString("nominal");
                 y = rs.getString("keterangan");
-                model_cashflow.addRow(new Object[]{q,w,e,r,t});}
+                model_cashflow.addRow(new Object[]{q,w,e,r,t,y});}
             }
             catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
@@ -4768,13 +4767,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
             String ket = Cariket.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             kastabel.setRowSorter(cf);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(5);
             if(tipe_t.equals("Hari ini")){
@@ -4789,6 +4781,9 @@ public class Main extends javax.swing.JFrame {
                     
             }
             else if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                 filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                 if(!petugas.equals("Petugas"))
@@ -4799,8 +4794,11 @@ public class Main extends javax.swing.JFrame {
                     filters.add(RowFilter.regexFilter("^(?i)"+ket));
             }
             else if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
-                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
+                filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                 if(!petugas.equals("Petugas"))
                     filters.add(RowFilter.regexFilter("^"+petugas+"$"));
                 if(!tipe.equals("Tipe Kas"))
@@ -4809,6 +4807,11 @@ public class Main extends javax.swing.JFrame {
                     filters.add(RowFilter.regexFilter("^(?i)"+ket));
             }
             else if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
+                Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                 filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                 if(!petugas.equals("Petugas"))
@@ -4848,13 +4851,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
             String ket = Cariket.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             if(tipe.equals("Tipe Kas")){
                 filters.add(RowFilter.regexFilter(""));
                 if(!petugas.equals("Petugas"))
@@ -4867,14 +4863,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -4892,14 +4897,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -4925,13 +4939,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
             String ket = Cariket.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             if(petugas.equals("Petugas")){
                 filters.add(RowFilter.regexFilter(""));
                 if(!tipe.equals("Tipe Kas"))
@@ -4944,14 +4951,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -4968,14 +4984,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5056,13 +5081,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunpresensiField2.getText()+""+bulanpresensifield2.getText()+""+haripresensiField2.getText();
             String keg = kegfield.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             presensitabel.setRowSorter(pr);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(6);
             if(tipe_t.equals("Hari ini")){
@@ -5079,6 +5097,9 @@ public class Main extends javax.swing.JFrame {
                     
             }
             else if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                 filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                 if(!tingkat.equals("Tingkat"))
@@ -5091,6 +5112,9 @@ public class Main extends javax.swing.JFrame {
                     filters.add(RowFilter.regexFilter("^(?i)"+keg));
             }
             else if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                 filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                 if(!tingkat.equals("Tingkat"))
@@ -5103,6 +5127,11 @@ public class Main extends javax.swing.JFrame {
                     filters.add(RowFilter.regexFilter("^(?i)"+keg));
             }
             else if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                System.out.println(parsed1+" "+d1);
+                Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                 filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                 filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                 if(!tingkat.equals("Tingkat"))
@@ -5149,14 +5178,7 @@ public class Main extends javax.swing.JFrame {
             String t1 = tahunField1.getText()+""+bulanfield1.getText()+""+hariField1.getText();
             String t2 = tahunField2.getText()+""+bulanfield2.getText()+""+hariField2.getText();
             String ket = Cariket.getText();
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
+
             if(ket.equals("")){
                 filters.add(RowFilter.regexFilter(""));
                 if(!tipe.equals("Tipe Kas"))
@@ -5169,14 +5191,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5193,14 +5224,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5239,13 +5279,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunpresensiField2.getText()+""+bulanpresensifield2.getText()+""+haripresensiField2.getText();
             String keg = kegfield.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             presensitabel.setRowSorter(pr);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(6);
             if(tingkat.equals("Tingkat")){
@@ -5262,14 +5295,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                         java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5289,14 +5331,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                         java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5322,16 +5373,9 @@ public class Main extends javax.swing.JFrame {
             String t1 = tahunpresensiField1.getText()+""+bulanpresensifield1.getText()+""+haripresensiField1.getText();
             String t2 = tahunpresensiField2.getText()+""+bulanpresensifield2.getText()+""+haripresensiField2.getText();
             String keg = kegfield.getText();
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             presensitabel.setRowSorter(pr);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(6);
+            
             if(jurusan.equals("Jurusan")){
                 filters.add(RowFilter.regexFilter(""));
                 if(!tingkat.equals("Tingkat"))
@@ -5346,14 +5390,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5373,14 +5426,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5407,13 +5469,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunpresensiField2.getText()+""+bulanpresensifield2.getText()+""+haripresensiField2.getText();
             String keg = kegfield.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             presensitabel.setRowSorter(pr);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(6);
             if(kelas.equals("Kelas")){
@@ -5430,14 +5485,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5457,14 +5521,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5491,13 +5564,6 @@ public class Main extends javax.swing.JFrame {
             String t2 = tahunpresensiField2.getText()+""+bulanpresensifield2.getText()+""+haripresensiField2.getText();
             String keg = kegfield.getText();
             
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Date parsed1 = format.parse(t1);
-            java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
-            
-            Date parsed2 = format.parse(t2);
-            java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
-            
             presensitabel.setRowSorter(pr);
             List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(6);
             if(jurusan.equals("Kelas")){
@@ -5514,14 +5580,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }
@@ -5541,14 +5616,23 @@ public class Main extends javax.swing.JFrame {
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal Tertentu (Tanggal 1)")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
+                        System.out.println(parsed1+" "+d1);
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d1) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Hari ini")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d_now) );
                     }
                     if(tipe_t.equals("Tanggal 1 - Tanggal 2")){
+                        Date parsed1 = new SimpleDateFormat("yyyyMMdd").parse(t1);
+                        java.sql.Date d1 = new java.sql.Date(parsed1.getTime()); 
+                        Date parsed2 = new SimpleDateFormat("yyyyMMdd").parse(t2);
+                        java.sql.Date d2 = new java.sql.Date(parsed2.getTime());
                         filters.add( RowFilter.dateFilter(ComparisonType.AFTER, d1) );
                         filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, d2) );
                     }

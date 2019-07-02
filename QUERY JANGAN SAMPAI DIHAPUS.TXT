@@ -2,22 +2,22 @@ VIEW PINJAM (untuk data pinjam)
 create or replace view pinjam as 
 select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama as siswa, a.tingkat, a.jurusan, a.kelas, b.id_petugas, b.nama as petugas, d.t_pinjam, d.t_kembali, d.denda
 from pinjam_book d 
-inner join siswa_view a on a.nis = d.nis
+inner join siswa_view_all a on a.nis = d.nis
 inner join petugas b on b.id_petugas = d.id_petugas
 inner join book c on c.isbn = d.isbn; 
 
 -------------------------------------------------------
 
-VIEW KEMBALI
+VIEW KEMBALI (untuk table pengembalian)
 create or replace view kembali as 
 select d.id_transaksi, c.isbn, c.judul, a.nis, a.nama, d.t_pinjam, d.t_kembali, d.t_deadline 
 from pinjam_book d 
-inner join siswa a on a.nis = d.nis 
+inner join siswa_all a on a.nis = d.nis 
 inner join book c on c.isbn = d.isbn;
 
 -------------------------------------------------------
 
-FUNCTION DENDA
+FUNCTION DENDA (untuk mencari tahu berapa denda id_transaksi tsb)
 create or replace function denda (date1 date, id int(11), id_trans int(11), uang int(11))
 returns int 
 begin
@@ -34,7 +34,7 @@ end!
 
 -------------------------------------------------------
 
-TRIGGER PEMINJAMAN
+TRIGGER PEMINJAMAN (bila dipinjam jumlah buku -1)
 CREATE TRIGGER peminjaman after INSERT ON pinjam_book
 FOR EACH ROW BEGIN
 if exists(select t_pinjam from pinjam_book where id_transaksi = new.id_transaksi and t_pinjam is not null) then
@@ -47,7 +47,7 @@ END!
 
 -------------------------------------------------------
 
-TRIGGER PENGEMBALIAN/KAS
+TRIGGER PENGEMBALIAN/KAS (bila di kembalikan, jumlah buku +1, bila ada denda insert ke cashflow dengan keterangan denda)
 CREATE TRIGGER pengembalian_kas after update ON pinjam_book
 FOR EACH ROW BEGIN
 if exists (select t_kembali from pinjam_book where id_transaksi = new.id_transaksi and t_kembali is not null) then
@@ -64,7 +64,7 @@ END!
 
 ------------------------------------------------------- 
 
-VIEW BUKU 
+VIEW BUKU (view buku dengan detail lokasi berdasarkan id_rak)
 create or replace view buku as 
 select a.isbn, b.lokasi, a.penerbit, a.pengarang, a.thn_buku, a.jmlh, a.tgl_pengadaan, a.judul, a.jenis_buku, a.kategori
 from book a 
@@ -72,7 +72,7 @@ inner join lok_book b on a.id_rak = b.id_rak;
 
 -------------------------------------------------------
 
-TRIGGER insert_lokasi
+TRIGGER insert_lokasi (bila di buku mencoba input id_rak baru, dibuat lagi di tabel lok_book)
 CREATE TRIGGER insert_lokasi after insert ON book
 FOR EACH ROW BEGIN
 declare lks text;
@@ -85,7 +85,7 @@ END!
 
 -------------------------------------------------------
 	
-TRIGGER insert_lokasi2
+TRIGGER insert_lokasi2 (bila di buku mencoba update dengan id_rak baru, dibuat lagi di tabel lok_book)
 CREATE TRIGGER insert_lokasi2 after update ON book
 FOR EACH ROW BEGIN
 declare lks text;
@@ -98,7 +98,7 @@ END!
 
 -------------------------------------------------------
 
-VIEW SISWA_VIEW
+VIEW SISWA_VIEW (untuk detail kelas siswa berdasarkan id_kelas)
 create or replace view siswa_view as 
 select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
 from siswa a
@@ -106,7 +106,7 @@ inner join kelas b on a.id_kelas = b.id_kelas;
 
 -------------------------------------------------------
 
-VIEW PRESENSI_VIEW
+VIEW PRESENSI_VIEW (untuk detail kelas siswa yang mengisi presensi berdasarkan id_kelas)
 create or replace view presensi_view as
 select a.no_presensi, a.nis, b.nama, c.tingkat, c.jurusan, c.kelas, a.tanggal, a.kegiatan
 from presensi a
@@ -115,10 +115,22 @@ inner join kelas c on b.id_kelas = c.id_kelas;
 
 -------------------------------------------------------
 
-TRIGGER INSERT SISWA_DELETE
+TRIGGER INSERT SISWA_DELETE (bila di delete insert ke log_siswa)
 create trigger siswa_delete before delete on siswa
 for each row begin
 insert into log_siswa select * from siswa where nis = old.nis;
 end!
 
 -------------------------------------------------------
+
+VIEW SISWA_ALL (untuk union siswa berdasarkan siswa yang sudah di hapus)
+create or replace view siswa_all as 
+select * from siswa union select * from log_siswa
+
+--------------------------------------------------------
+
+VIEW SISWA_VIEW_ALL (untuk detail kelas siswa_all berdasarkan id_kelas)
+create or replace view siswa_view_all as 
+select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
+from siswa_all a
+inner join kelas b on a.id_kelas = b.id_kelas;
