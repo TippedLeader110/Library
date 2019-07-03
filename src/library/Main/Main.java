@@ -4417,7 +4417,7 @@ public class Main extends javax.swing.JFrame {
         stmt = send.query();
         ResultSet rs;
         try{
-            rs = stmt.executeQuery("select * from perpus.buku where jenis_buku = 'Umum' and isbn = "+isbn);
+            rs = stmt.executeQuery("select * from perpus.buku where jenis_buku = 'Umum' and isbn = '"+isbn+"'");
             while(rs.next()){
                 String q = rs.getString("isbn");
                 String w = rs.getString("judul");
