@@ -10,6 +10,8 @@ package library.Mysql;
  * @author TippedLeader
  */
 import java.sql.*;  
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MysqlCon{  
@@ -20,6 +22,21 @@ public class MysqlCon{
         Connection con=DriverManager.getConnection(  
         "jdbc:mysql://localhost","root","");  
         }catch(Exception e){ System.out.println(e);}  
+    }
+    
+    public Connection koneksi(){
+        Connection khusus = null;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus", "root", "");
+            return khusus;
+        }
+        catch (SQLException ex) {
+            return null;            
+        } catch (ClassNotFoundException ex){
+            return null;
+        }
     }
     
     public Statement query() {

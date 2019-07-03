@@ -6,19 +6,15 @@
 package library.Main;
 
 
-import java.awt.print.PrinterException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -37,6 +33,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.RowFilter.ComparisonType;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author My Computer
@@ -124,6 +125,21 @@ public class Main extends javax.swing.JFrame {
      TableRowSorter<DefaultTableModel> tp = new TableRowSorter<DefaultTableModel>(model_datapinjam);
      TableRowSorter<DefaultTableModel> cf = new TableRowSorter<DefaultTableModel>(model_cashflow);
      TableRowSorter<DefaultTableModel> pr = new TableRowSorter<DefaultTableModel>(model_presensi);
+     
+     public Connection koneksi(){
+        Connection khusus = null;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus", "root", "");
+            return khusus;
+        }
+        catch (SQLException ex) {
+            return null;            
+        } catch (ClassNotFoundException ex){
+            return null;
+        }
+    }
     public Main() {
         initComponents();
         
@@ -387,18 +403,24 @@ public class Main extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         laporanBuku = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
+        jButton34 = new javax.swing.JButton();
+        jButton40 = new javax.swing.JButton();
         jPanel29 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
+        jButton37 = new javax.swing.JButton();
+        jButton41 = new javax.swing.JButton();
         jPanel30 = new javax.swing.JPanel();
         jLabel54 = new javax.swing.JLabel();
         jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
+        jButton30 = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
+        jButton38 = new javax.swing.JButton();
+        jButton42 = new javax.swing.JButton();
         kasPanel = new javax.swing.JPanel();
         titleKas = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
@@ -1682,7 +1704,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(penerbitL2)))
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         panelBawah.add(bukuPanel, "card2");
@@ -1697,11 +1719,11 @@ public class Main extends javax.swing.JFrame {
 
         jLabel52.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel52.setText("Laporan Data Buku & Keanggotaan");
+        jLabel52.setText("Laporan Data Buku");
 
         laporanBuku.setBackground(new java.awt.Color(255, 255, 255));
         laporanBuku.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        laporanBuku.setText("Laporan Data Buku");
+        laporanBuku.setText("Laporan Data Semua Buku");
         laporanBuku.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         laporanBuku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1711,8 +1733,33 @@ public class Main extends javax.swing.JFrame {
 
         jButton23.setBackground(new java.awt.Color(255, 255, 255));
         jButton23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton23.setText("Laporan Data Anggota");
+        jButton23.setText("Laporan Data Buku Umum");
         jButton23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        jButton34.setBackground(new java.awt.Color(255, 255, 255));
+        jButton34.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton34.setText("Laporan Data Buku Mapel");
+        jButton34.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton34ActionPerformed(evt);
+            }
+        });
+
+        jButton40.setBackground(new java.awt.Color(255, 255, 255));
+        jButton40.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton40.setText("Laporan Data Buku Khusus");
+        jButton40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton40ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
@@ -1724,7 +1771,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel52)
                     .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(laporanBuku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel28Layout.setVerticalGroup(
@@ -1736,6 +1785,10 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(laporanBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1743,17 +1796,47 @@ public class Main extends javax.swing.JFrame {
 
         jLabel53.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel53.setText("Laporan Peringkat Presensi");
+        jLabel53.setText("Laporan Data Siswa");
 
         jButton24.setBackground(new java.awt.Color(255, 255, 255));
         jButton24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton24.setText("Laporan Presensi (Kunjungan)");
+        jButton24.setText("Laporan Data Semua Siswa");
         jButton24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setBackground(new java.awt.Color(255, 255, 255));
         jButton25.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton25.setText("Laporan Peringkat Pengunjung");
+        jButton25.setText("Laporan Data Siswa Tingkat X");
         jButton25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+
+        jButton37.setBackground(new java.awt.Color(255, 255, 255));
+        jButton37.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton37.setText("Laporan Data Siswa Tingkat XI");
+        jButton37.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
+
+        jButton41.setBackground(new java.awt.Color(255, 255, 255));
+        jButton41.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton41.setText("Laporan Data Siswa Tingkat XII");
+        jButton41.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton41ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -1765,7 +1848,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel53)
                     .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
@@ -1777,6 +1862,10 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1784,17 +1873,27 @@ public class Main extends javax.swing.JFrame {
 
         jLabel54.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel54.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel54.setText("Laporan Pendapatan");
+        jLabel54.setText("Laporan Data Staff dan Data Pinjam");
 
         jButton26.setBackground(new java.awt.Color(255, 255, 255));
         jButton26.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton26.setText("Laporan Kas Harian Operator");
+        jButton26.setText("Laporan Data Semua Staff");
         jButton26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
 
-        jButton27.setBackground(new java.awt.Color(255, 255, 255));
-        jButton27.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton27.setText("Laporan Pendapatan Denda");
-        jButton27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton30.setBackground(new java.awt.Color(255, 255, 255));
+        jButton30.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton30.setText("Laporan Data Semua Data Pinjam");
+        jButton30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
@@ -1803,11 +1902,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel30Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel54)
-                    .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addComponent(jLabel54)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1817,25 +1919,55 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jPanel31.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel58.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel58.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel58.setText("Laporan Aliran Kas");
+        jLabel58.setText("Laporan Data Presensi");
 
         jButton28.setBackground(new java.awt.Color(255, 255, 255));
         jButton28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton28.setText("Laporan Kas Masuk");
+        jButton28.setText("Laporan Data Semua Presensi");
         jButton28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
 
         jButton29.setBackground(new java.awt.Color(255, 255, 255));
         jButton29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton29.setText("Laporan Kas Keluar");
+        jButton29.setText("Laporan Data Presensi Hari ini");
         jButton29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        jButton38.setBackground(new java.awt.Color(255, 255, 255));
+        jButton38.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton38.setText("Laporan Data Presensi Bulan  ini");
+        jButton38.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton38ActionPerformed(evt);
+            }
+        });
+
+        jButton42.setBackground(new java.awt.Color(255, 255, 255));
+        jButton42.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton42.setText("Laporan Data Presensi Tahun ini");
+        jButton42.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton42ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
@@ -1847,7 +1979,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel58)
                     .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel31Layout.setVerticalGroup(
@@ -1859,6 +1993,10 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1867,35 +2005,37 @@ public class Main extends javax.swing.JFrame {
         laporanPanelLayout.setHorizontalGroup(
             laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(laporanPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLaporan)
                     .addGroup(laporanPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(titleLaporan))
                     .addGroup(laporanPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1232, Short.MAX_VALUE))
+                        .addGap(429, 429, 429)
+                        .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(laporanPanelLayout.createSequentialGroup()
+                                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(laporanPanelLayout.createSequentialGroup()
+                                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(813, Short.MAX_VALUE))
         );
         laporanPanelLayout.setVerticalGroup(
             laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(laporanPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLaporan)
+                .addGap(1, 1, 1)
+                .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(laporanPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(laporanPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addGroup(laporanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         panelBawah.add(laporanPanel, "card10");
@@ -2204,7 +2344,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(editkasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hapuskasB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
 
@@ -2449,7 +2589,7 @@ public class Main extends javax.swing.JFrame {
         );
         pengeUmumPLayout.setVerticalGroup(
             pengeUmumPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 841, Short.MAX_VALUE)
+            .addGap(0, 605, Short.MAX_VALUE)
             .addGroup(pengeUmumPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pengeUmumPLayout.createSequentialGroup()
                     .addContainerGap()
@@ -2553,7 +2693,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(caridatapinjamB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         panelBawah.add(datapinjamPanel, "card14");
@@ -2664,7 +2804,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(GantiTahunAjaranB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         panelBawah.add(pengaturanPanel, "card8");
@@ -2808,7 +2948,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(hapusstaffB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         panelBawah.add(staffPanel, "card5");
@@ -3014,7 +3154,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(editsiswaB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(303, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         panelBawah.add(siswaPanel, "card3");
@@ -3074,6 +3214,11 @@ public class Main extends javax.swing.JFrame {
         tipetanggalpresensiCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tipetanggalpresensiCBItemStateChanged(evt);
+            }
+        });
+        tipetanggalpresensiCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipetanggalpresensiCBActionPerformed(evt);
             }
         });
 
@@ -3323,7 +3468,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(hapusPresensiB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         panelBawah.add(presensiPanel, "card12");
@@ -4604,56 +4749,22 @@ public class Main extends javax.swing.JFrame {
     private void laporanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanBukuActionPerformed
         // TODO add your handling code here:
         int jawab = JOptionPane.showOptionDialog(this, 
-                        "Anda ingin Mencetak Laporan Buku?", 
+                        "Anda ingin Mencetak Laporan Semua Buku?", 
                         "Konfirmasi", 
                         JOptionPane.YES_NO_OPTION, 
                         JOptionPane.QUESTION_MESSAGE, null, null, null);
         
         if(jawab == JOptionPane.YES_OPTION){
-            String header = "";
             
-            /*
-            String printTime = "logged at time {0,time} on date {0, date}";
-            StringBuffer result1 = new StringBuffer();
-            MessageFormat messageFormat = new MessageFormat(printTime);
-            messageFormat.format(new Object[] { new Date() }, result1, null);
-            System.out.println(result1);
-
-            */
-            String ketWaktu = "Dicetak Pada {0,time} , {0, date}";
-            StringBuffer result1 = new StringBuffer();
-            
-            MessageFormat printTime = new MessageFormat(ketWaktu);
-            printTime.format(new Object[] { new Date() }, result1, null);
-//            System.out.println(result1);
-            
-                if(JenisCB.getSelectedItem().equals("Umum")){
-                    header = " Umum";
-                }
-                else if(JenisCB.getSelectedItem().equals("Khusus")){
-                    header = " Khusus";
-                }
-                else if(JenisCB.getSelectedItem().equals("Mapel")){
-                    header = " Mapel";
-                }else{
-                    header = "";
-                }               
-            
-            MessageFormat judul = new MessageFormat("Laporan Buku" + header);
-//            MessageFormat footer = new MessageFormat("page(0,number,integer)");
-
-            try {                
-                bukuTabel.print(JTable.PrintMode.FIT_WIDTH, judul, printTime);
-//                boolean complete = bukuTabel.print();
-//                if(complete){
-//                 JOptionPane.showMessageDialog(null, "Selesai Mencetak!","Informasi", JOptionPane.INFORMATION_MESSAGE);                 
-//                }
-            } catch (PrinterException ex){
-                System.err.print("Error Printer");
-            }
-                        
-        }                
-        
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAllBook.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
     }//GEN-LAST:event_laporanBukuActionPerformed
 
     private void JenisCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JenisCBActionPerformed
@@ -5641,6 +5752,283 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_GantiTahunAjaranBActionPerformed
 
+    private void tipetanggalpresensiCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipetanggalpresensiCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipetanggalpresensiCBActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Umum?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportUmumBook.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+        // TODO add your handling code here:
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Mapel?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportMapelBook.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
+        // TODO add your handling code here:
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Khusus?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportKhususBook.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton40ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Semua Staff?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAllStaff.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+        // TODO add your handling code here:
+                        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Semua Data Pinjam?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAllDPinjam.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Semua Siswa?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAllSiswa.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Tingkat 10?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportT10Book.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        // TODO add your handling code here:
+                        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Tingkat 11?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportT11Siswa.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton37ActionPerformed
+
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        // TODO add your handling code here:
+                        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Buku Tingkat 12?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportT12Book.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton41ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        // TODO add your handling code here:
+                        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Semua Data Presensi?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAllPresensi.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        // TODO add your handling code here:
+                        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Presensi Hari ini?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportTodayPresensi.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Presensi Bulan ini?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportMonthlyPresensi.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton38ActionPerformed
+
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                        "Anda ingin Mencetak Laporan Presensi Tahun ini?", 
+                        "Konfirmasi", 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if(jawab == JOptionPane.YES_OPTION){
+            
+           try {
+               String file = "C:\\xampp\\htdocs\\Library\\report\\reportAnnuaPresensi.jrxml";
+               JasperReport jr = JasperCompileManager.compileReport(file);
+               JasperPrint jp = JasperFillManager.fillReport(jr, null, koneksi());
+               JasperViewer.viewReport(jp, false);
+           }catch(Exception e){
+               
+           }
+        }
+    }//GEN-LAST:event_jButton42ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5743,9 +6131,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton34;
+    private javax.swing.JButton jButton37;
+    private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton40;
+    private javax.swing.JButton jButton41;
+    private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

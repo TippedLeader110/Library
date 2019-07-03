@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7929e70-dc8b-4202-b1e5-a4e6ad718e7b">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from pinjam_book;]]>
+	</queryString>
+	<field name="id_transaksi" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_petugas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ISBN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_pinjam" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_deadline" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_kembali" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="denda" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="166" y="0" width="222" height="26" uuid="08c1267b-6c5c-4d82-ad34-0818845a6cbc"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Semua Data Pinjam]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="0" width="250" height="20" uuid="20dd567d-ed3f-4513-9f67-2f456058deab"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Perpustakaan SMK Negeri 1 Percut Sei Tuan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="44" height="20" uuid="1279f3c9-c2b3-48e4-837b-153b244f89d2"/>
+				<text><![CDATA[id_transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="1" width="84" height="20" uuid="45ce8e66-b3bc-4f56-89bd-f4c96eb1fbe1"/>
+				<text><![CDATA[nis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="1" width="28" height="20" uuid="7a9b5b30-0a99-47eb-9de5-bdf8407f8e15"/>
+				<text><![CDATA[id_petugas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="1" width="95" height="20" uuid="4e9e7264-ad1a-4b7a-9521-cfba63945f13"/>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="1" width="57" height="20" uuid="047756a9-a759-4ec8-8a28-39bc58c8b2f7"/>
+				<text><![CDATA[t_pinjam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="1" width="83" height="20" uuid="d5f59c2d-1468-4cae-adb0-3580ad8edbf9"/>
+				<text><![CDATA[t_deadline]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="1" width="66" height="20" uuid="9a493793-1f65-4d03-83d4-24d91782102b"/>
+				<text><![CDATA[t_kembali]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="1" width="66" height="20" uuid="1b9558ae-09ef-4c69-8976-20d4eac24f18"/>
+				<text><![CDATA[denda]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="44" height="20" uuid="79a286b8-50bd-4c65-b0fa-4ef76c532bcd"/>
+				<textFieldExpression><![CDATA[$F{id_transaksi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="41" y="11" width="84" height="20" uuid="7e1ffc86-ceec-4a96-89c7-20395710a931"/>
+				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="11" width="28" height="20" uuid="fb8e1bf9-1ec2-4bb5-9f2e-cd7232cb1994"/>
+				<textFieldExpression><![CDATA[$F{id_petugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="11" width="95" height="20" uuid="70496355-306b-4107-820a-53b5f7399d83"/>
+				<textFieldExpression><![CDATA[$F{ISBN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="11" width="57" height="20" uuid="c928a5f5-2549-4e38-af87-2f9f3fea8e35"/>
+				<textFieldExpression><![CDATA[$F{t_pinjam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="11" width="83" height="20" uuid="5713bcff-82e7-4977-ae8b-13914e96eb57"/>
+				<textFieldExpression><![CDATA[$F{t_deadline}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="11" width="66" height="20" uuid="61fbbcca-e9c9-47a0-b283-b0ed582a581b"/>
+				<textFieldExpression><![CDATA[$F{t_kembali}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="489" y="11" width="66" height="20" uuid="2a2d3507-1173-446e-b95e-cef685c2151e"/>
+				<textFieldExpression><![CDATA[$F{denda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="15" width="63" height="20" uuid="97111873-dd98-46cc-ba0f-efc78d5a0a9d"/>
+				<text><![CDATA[Dicetak pada:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="15" width="100" height="20" uuid="784ec986-aa3b-479c-a3c3-d8695dca4ad1"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="14" width="100" height="20" uuid="97df8209-cc13-4354-badb-f4fc21d7e52c"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

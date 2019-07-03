@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea5c7e83-bb2d-41a6-9a11-64fcb7b7e31b">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from presensi_view;]]>
+	</queryString>
+	<field name="no_presensi" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nis" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tingkat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jurusan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kelas" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kegiatan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="157" y="0" width="239" height="26" uuid="79e2a6e2-33d4-4b91-b697-f89648e384a0"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Semua Data Presensi]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="0" width="250" height="20" uuid="2260c660-a4ca-478b-a323-4d35886353c5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Perpustakaan SMK Negeri 1 Percut Sei Tuan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="45" height="20" uuid="1b603df5-a03d-43b0-b264-0b7bc0a3a20f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="0" width="49" height="20" uuid="77707d45-1777-4eeb-82a1-819a6fe67ccd"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="0" width="100" height="20" uuid="97f897ba-93e4-46c9-a26b-17476a0394c4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="1" width="42" height="20" uuid="a0f308cb-bb0e-4f73-9c84-8ba4ab260c30"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tingkat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="1" width="100" height="20" uuid="fc8d5638-66df-4ff0-bc76-f4ca04208e6d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jurusan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="1" width="48" height="20" uuid="41cca122-0b1b-4f51-a139-87152861379d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kelas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="1" width="49" height="20" uuid="fd496f12-f432-45f4-a4e8-03059458888d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="1" width="77" height="20" uuid="4cd1fa1c-1492-4c78-a3ae-6e2f4a7d5c60"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kegiatan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="8" width="45" height="20" uuid="255b8483-702f-42e1-a448-4fa75a015e48"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{no_presensi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="8" width="49" height="20" uuid="91fea64f-e5f5-4b0f-9109-ae0df51a6dec"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="8" width="100" height="20" uuid="36c59abf-69f5-4f0d-b494-8786df9c50a1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="9" width="42" height="20" uuid="e820e3ab-f089-481b-8a98-8905816b444d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tingkat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="9" width="100" height="20" uuid="7e8fae04-df4d-4f0f-82f6-89aa4e935610"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jurusan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="9" width="48" height="20" uuid="54ea313f-9e26-4285-a1ab-c80318186c90"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{kelas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="9" width="49" height="20" uuid="1a4a2250-24e4-4a7f-94c5-cc8d6ed5cfcf"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="9" width="77" height="20" uuid="06cdbd57-632a-426d-9a3b-4b42cc59ff28"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{kegiatan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="263" y="17" width="100" height="20" uuid="d59186bc-0e6d-4c09-bb81-9aa08fdde00b"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="194" y="17" width="63" height="20" uuid="3b0248ef-93cf-47f2-accf-6c1758520c20"/>
+				<text><![CDATA[Dicetak pada:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="13" width="100" height="20" uuid="99b0005d-4c50-4b5e-823e-cf3d81b20d1b"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
