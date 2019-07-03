@@ -37,7 +37,7 @@ public class tambaheditStaff extends javax.swing.JFrame {
         try{
             ResultSet rs = stmt.executeQuery("SELECT * FROM perpus.petugas where id_petugas = " + val);
             while (rs.next()){
-                JId.setText(rs.getString("id"));
+                JId.setText(rs.getString("id_petugas"));
                 JNama.setText(rs.getString("nama"));
                 JTelepon.setText(rs.getString("alamat"));
                 JTelepon.setText(rs.getString("no_telp"));

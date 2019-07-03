@@ -203,13 +203,14 @@ public class tambaheditAkun extends javax.swing.JFrame {
         // TODO add your handling code here:
         crud c = new crud();
         String id = idCB.getSelectedItem().toString();
-        
-        if(id!=this.val){
+        if(!id.equals(this.val)){
             JOptionPane.showMessageDialog(this, "Kesalahan, id tidak boleh diganti", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             idCB.setSelectedItem(val);
         }
-        else
-           c.updateAkun(id,userField.getText(),passField.getText());
+        else{
+            c.updateAkun(id,userField.getText(),passField.getText());
+            this.dispose();
+        }
     }//GEN-LAST:event_simpanUserBActionPerformed
 
     /**
