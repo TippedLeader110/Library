@@ -279,12 +279,15 @@ public class editSiswa extends javax.swing.JFrame {
                     String id_kelas = rs2.getString("id_kelas");
                     if(v!=this.val){
                         c.updateSiswa(this.val, JId.getText(),JNama.getText(), id_kelas,JAlamat.getText(), JTelepon.getText());
+                        this.dispose();
                     }
                     else
                         c.updateSiswa2(this.val, JNama.getText(), id_kelas, JAlamat.getText(), JTelepon.getText());
+                        this.dispose();
                     }
         }catch (SQLException ex){
                 JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                this.dispose();
         }
     }//GEN-LAST:event_simpanBActionPerformed
 
