@@ -134,3 +134,32 @@ create or replace view siswa_view_all as
 select a.nis, a.nama, b.tingkat, b.jurusan, b.kelas, a.alamat, a.no_telp
 from siswa_all a
 inner join kelas b on a.id_kelas = b.id_kelas;
+
+--------------------------------------------------------
+
+EVENT HAPUS_DB (Supaya db tidak menumpuk di beberapa tabel, dihapus 2 tahun berkala)
+create event hapus_db on schedule every 2 year
+starts '2020-08-01 00:00:00' on completion not preserve
+enable comment 'hapus database agar tidaq numpuk'
+do
+begin
+TRUNCATE TABLE log_siswa;
+TRUNCATE TABLE presensi;
+TRUNCATE TABLE pinjam_book;
+DELETE from siswa where id_kelas = 'A.tpg.0'
+AND id_kelas = 'A.tptu.0'
+AND id_kelas = 'A.tpm.0'
+AND id_kelas = 'A.tkj.0'
+AND id_kelas = 'A.tkro.0'
+AND id_kelas = 'A.tgtl.0'
+AND id_kelas = 'A.titl.0'
+AND id_kelas = 'A.tg.0'
+AND id_kelas = 'A.tbsm.0'
+AND id_kelas = 'A.tav.0'
+AND id_kelas = 'A.rpl.0'
+AND id_kelas = 'A.pst.0'
+AND id_kelas = 'A.dpib.0'
+AND id_kelas = 'A.bkp.0';
+end!
+
+--------------------------------------------------------
