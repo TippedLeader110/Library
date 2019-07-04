@@ -1023,7 +1023,16 @@ public class Guest extends javax.swing.JFrame {
         ResultSet rs;
         String q, w, e, r, t,y,u,i,o; 
         
-       
+        //jurusan
+//        try{
+//            ResultSet rs_jurusan = stmt.executeQuery("select distinct kelas.jurusan from perpus.kelas order by kelas.jurusan asc");
+//            while(rs_jurusan.next()){
+//                String jurusan = rs_jurusan.getString("jurusan");
+//               JurusanPresensiCB.addItem(jurusan); 
+//            }   
+//        }catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
+//        }
         
         try {
                 rs = stmt.executeQuery("select * from perpus.presensi_view");

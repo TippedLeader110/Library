@@ -163,20 +163,3 @@ AND id_kelas = 'A.bkp.0';
 end!
 
 --------------------------------------------------------
-STAFF VIEW
-CREATE OR REPLACE view staff_view as
-select id_petugas, nama, alamat, no_telp, level from petugas;
-
----------------------------------------------------------
-VIEW PRESENSI YEAR
-create or replace view v_presensi_tyear as
-select * from presensi where year(tanggal)= year(curdate());
-!
-----------------------------------------------------------
-VIEW PRESENSI MONTH
-create or replace view v_presensi_tmonth as
-select * from presensi where month(tanggal)= month(curdate());
-!
-----------------------------------------------------------
-VIEW
-
