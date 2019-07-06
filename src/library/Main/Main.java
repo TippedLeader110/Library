@@ -4471,7 +4471,7 @@ public class Main extends javax.swing.JFrame {
             while(rs.next()){
                 String id = rs.getString("id_petugas");
                 while(row<max_row){
-                    String isbn = bukuPinjamMapelTabel.getModel().getValueAt(row, 0).toString();
+                    String isbn = bukuPinjamUmumTabel.getModel().getValueAt(row, 0).toString();
                     int rs2 = c.createPinjam(nis, id, isbn, durasi);
                     if(rs2!=0){
                         row++;
