@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 07:51 PM
+-- Generation Time: Jul 06, 2019 at 08:24 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -473,8 +473,8 @@ INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh
 ('978-5621-745-443-7', 'a2', ' Graha Ilmu', 'Ir. Markoni, S.H., M.T.', 2018, 100, '2019-06-18', 'Teori Dasar Teknik Tenaga Listrik Edisi 2', 'Mapel', 'TJTL 11'),
 ('978-5621-745-443-8', 'a3', ' Graha Ilmu', 'Ir. Markoni, S.H., M.T.', 2018, 100, '2019-06-18', 'Teori Dasar Teknik Tenaga Listrik Edisi 3', 'Mapel', 'TJTL 12'),
 ('978-602-250-149-7', 'a2', 'Gema Insani', 'Fikri Habibullah M', 2013, 8, '2019-06-16', 'Tuhan, Izinkan Aku Pacaran', 'Khusus', 'Romansa'),
-('978-602-250-235-7', 'a1', 'Gema Insani', 'Uwais Ramadhan', 2015, 3, '2019-06-16', 'Kisah 7 Bayi Bisa Bicara', 'Umum', 'IPA'),
-('978-602-250-262-3', 'a1', 'Gema Insani', 'Toni Raharjo', 2015, 17, '2019-06-16', 'Jejak-jejak Cinta', 'Umum', 'Novel'),
+('978-602-250-235-7', 'a1', 'Gema Insani', 'Uwais Ramadhan', 2015, 0, '2019-06-16', 'Kisah 7 Bayi Bisa Bicara', 'Umum', 'IPA'),
+('978-602-250-262-3', 'a1', 'Gema Insani', 'Toni Raharjo', 2015, 16, '2019-06-16', 'Jejak-jejak Cinta', 'Umum', 'Novel'),
 ('978-602-260-233-3', 'a3', 'Gema Insani', 'Salma', 2014, 3, '2019-06-16', 'Tetap Sehat setelah Usia 40 Tahun', 'Umum', 'IPA'),
 ('978-602-277-035-0', 'a2', 'Yrama Widya', 'Drs. Daryanto', 2018, 100, '2019-06-17', 'Teknik Sepeda Motor Seri Buku Terampil', 'Mapel', 'TBSM 10'),
 ('978-602-277-035-1', 'a3', 'Yrama Widya', 'Drs. Daryanto', 2018, 100, '2019-06-17', 'Teknik Sepeda Motor Seri Buku Kreatif', 'Mapel', 'TBSM 11'),
@@ -902,6 +902,16 @@ CREATE TABLE `pinjam_book` (
   `t_kembali` date DEFAULT NULL,
   `denda` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pinjam_book`
+--
+
+INSERT INTO `pinjam_book` (`id_transaksi`, `nis`, `id_petugas`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
+(1, '10318', 3, '978-602-250-235-7', '2019-07-07', '2019-07-08', NULL, NULL),
+(2, '10318', 3, '978-602-250-235-7', '2019-07-07', '2019-07-08', NULL, NULL),
+(3, '30516', 3, '978-602-250-262-3', '2019-07-07', '2019-07-08', NULL, NULL),
+(4, '30516', 3, '978-602-250-235-7', '2019-07-07', '2019-07-08', NULL, NULL);
 
 --
 -- Triggers `pinjam_book`
@@ -1343,6 +1353,12 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `cashflow`
   MODIFY `no_cashflow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pinjam_book`
+--
+ALTER TABLE `pinjam_book`
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `presensi`
