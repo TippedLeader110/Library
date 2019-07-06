@@ -110,6 +110,8 @@ public class tambahBuku extends javax.swing.JFrame {
         ResetTableB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tambah Buku");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
 
         jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 

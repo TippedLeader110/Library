@@ -20,9 +20,10 @@ public class splashCode {
        try{
            for(int i = 0; i <= 100; i++){
                Thread.sleep(35);
-//               Splash.nama.setText(Integer.toString(i)+ "%");
+               Splash.persen.setText(Integer.toString(i)+ "%");
+               Splash.persen.setVisible(false);
                Splash.loadingbar.setValue(i);
-                 
+               
                
                if(i == 100){
                    Splash.setVisible(false);

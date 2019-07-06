@@ -45,6 +45,7 @@ public class infoSekolah extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
         setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

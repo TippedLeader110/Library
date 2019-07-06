@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import library.Main.Main;
 import library.Mysql.MysqlCon;
 
 /**
@@ -37,10 +39,10 @@ public class tambaheditPresensi extends javax.swing.JFrame {
         edit = true;
         initComponents();
          try{
-            ResultSet rs = stmt.executeQuery("SELECT nis, keterangan FROM perpus.presensi where no_presensi = " + val);
+            ResultSet rs = stmt.executeQuery("SELECT nis, kegiatan FROM perpus.presensi where no_presensi = " + val);
             while (rs.next()){
-               nisField.setText(rs.getString("username"));
-               ketField.setText(rs.getString("password"));
+               nisField.setText(rs.getString("nis"));
+               ketField.setText(rs.getString("kegiatan"));
             }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);   
@@ -68,6 +70,8 @@ public class tambaheditPresensi extends javax.swing.JFrame {
         batalB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tambah atau Edit Presensi");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -154,7 +158,7 @@ public class tambaheditPresensi extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(batalB, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +178,7 @@ public class tambaheditPresensi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +203,17 @@ public class tambaheditPresensi extends javax.swing.JFrame {
         else{
             c.createPresensi(nisField.getText(), ketField.getText());
         }
+        
+        
+        Main main = new Main();
+        DefaultTableModel model =(DefaultTableModel)main.presensitabel.getModel();
+        model.fireTableDataChanged();
+        
+        
+        
+         
         this.dispose(); 
+        
     }//GEN-LAST:event_simpanBActionPerformed
 
     /**

@@ -84,6 +84,8 @@ public class editSiswa extends javax.swing.JFrame {
         KelasCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Siswa");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
 
         jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 

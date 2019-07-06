@@ -304,9 +304,9 @@ public class crud extends library.Main.Main {
         }
      }
      
-     public void updatePresensi(String val, String nis, String ket){
+     public void updatePresensi(String val, String nis, String keg){
          try{
-             rs = stmt.executeUpdate("update perpus.presensi set nis = "+nis+", keterangan = '"+ket+"' where no_presensi = "+val);
+             rs = stmt.executeUpdate("update perpus.presensi set nis = "+nis+", kegiatan = '"+keg+"' where no_presensi = "+val);
          }catch (SQLException ex){
             JOptionPane.showMessageDialog(this, "Kesalahan : " + ex, "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }if(rs!=0){

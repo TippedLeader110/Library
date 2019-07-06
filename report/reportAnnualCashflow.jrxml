@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cdad2817-4393-462c-aaa8-e5b857cd5814">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from perpus.cashflow inner join perpus.petugas on cashflow.id_petugas = petugas.id_petugas where year(tanggal) = year(curdate());]]>
+	</queryString>
+	<field name="no_cashflow" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nominal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipe" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="keterangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="149" y="0" width="262" height="26" uuid="8bb627b9-04d8-48bb-8c03-82f49ef8c37a"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Transaksi Kas Tahun ini]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="0" width="250" height="20" uuid="5c5a7a69-dd4c-411c-936f-f9e0c09cd7a9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Perpustakaan SMK Negeri 1 Percut Sei Tuan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="0" width="38" height="20" uuid="263cb7b8-7ec4-42a1-8098-7066854f7360"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="0" width="82" height="20" uuid="d954f0e6-ef12-451d-b3fc-bda220a2110e"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tipe Kas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="0" width="112" height="20" uuid="3680fa18-b0b6-41a7-b3ba-1f4eb93524ae"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nominal (Rp)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="0" width="81" height="20" uuid="b847a7da-5e75-435e-a0a9-be4f27b8cba1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tanggal Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="0" width="137" height="20" uuid="e359aa74-d4de-4436-8ad9-6992d6313000"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Keterangan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="76" height="20" uuid="8bc55e3b-fcb9-47ec-a929-ec1b39eeefda"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama Petugas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="0" width="38" height="20" uuid="5afcf26c-36db-4ea7-8303-b0e1bffb1d39"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{no_cashflow}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="112" height="20" uuid="51ed171a-a708-4198-93a5-bf085a1082d0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="0" width="82" height="20" uuid="3d76d2c9-8ec0-4c62-9985-b4297538904d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tipe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="0" width="76" height="20" uuid="02214529-3ad0-475e-b76d-eb97eaf2ef7e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="81" height="20" uuid="dac73b8f-a3b8-4ba2-aa8a-fa6fb94c7c4e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="0" width="137" height="20" uuid="c301d255-438b-4d59-9664-9029b69fdd6e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="256" y="11" width="100" height="20" uuid="5d52f420-3d1a-41fd-9ee7-10f152cb5897"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="187" y="11" width="63" height="20" uuid="7ae303b6-25a1-4d0b-b1ba-8592b6da8da8"/>
+				<text><![CDATA[Dicetak pada:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="453" y="6" width="100" height="20" uuid="72cf6dee-b1c5-4f61-af1f-70b1b3b7dfa6"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

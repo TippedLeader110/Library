@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2019 at 06:02 PM
+-- Generation Time: Jul 05, 2019 at 07:51 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -418,11 +418,11 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh`, `tgl_pengadaan`, `Judul`, `jenis_buku`, `kategori`) VALUES
-(' 978-602-374-278-1', 'a1', 'Yrama Widya ', 'MH Sapto Widodo', 2018, 100, '2019-06-17', 'Sistem Kelistrikan Refrigerasi Dan Tata Udara Untuk SMK Kelas X', 'Mapel', 'TPTU 10'),
 (' 978-602-374-278-2', 'a2', 'Yrama Widya ', 'MH Sapto Widodo', 2018, 100, '2019-06-17', 'Sistem Kelistrikan Refrigerasi Dan Tata Udara Untuk SMK Kelas XI', 'Mapel', 'TPTU 11'),
 (' 978-602-374-333-9', 'b2', 'Yrama Widya', 'Drs.Daryanto', 2017, 100, '2019-06-17', 'TEKNIK PENDINGIN AC, FREEZER, KULKAS – SERI BUKU TERAMPIL', 'Mapel', 'TPTU 10'),
 (' 978-602-374-334-1', 'b3', 'Yrama Widya', 'Drs.Daryanto', 2017, 100, '2019-06-17', 'TEKNIK PENDINGIN AC, FREEZER, KULKAS – SERI BUKU KREATIF', 'Mapel', 'TPTU 11'),
 (' 978-602-374-334-2', 'c1', 'Yrama Widya', 'Drs.Daryanto', 2018, 100, '2019-06-17', 'TEKNIK PENDINGIN AC, FREEZER, KULKAS – SERI BUKU INOVATIF', 'Mapel', 'TPTU 12'),
+('104449105211', 'a2', 'Yudhistira', 'SN.Sharma dkk', 2014, 100, '2019-07-03', 'M-M', 'Mapel', 'TKP 12'),
 ('972-223-273-11-1', 'a3', 'Grasindo', 'Anton Mabruri', 2016, 100, '2019-06-17', 'Manajemen Produksi Program Acara Jilid 1', 'Mapel', 'PST 10'),
 ('972-223-273-11-2', 'b2', 'Grasindo', 'Anton Mabruri', 2017, 100, '2019-06-17', 'Manajemen Produksi Program Acara Jilid 2', 'Mapel', 'PST 11'),
 ('972-223-273-11-3', 'b3', 'Grasindo', 'Anton Mabruri', 2017, 100, '2019-06-17', 'Manajemen Produksi Program Acara Jilid 3', 'Mapel', 'PST 12'),
@@ -441,7 +441,7 @@ INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh
 ('975-228-383-11-4', 'b2', 'Mediatama', 'NOVIANA IRNAWATI', 2013, 100, '2019-06-18', 'PEMELIHARAAN KELISTRIKAN KENDARAAN RINGAN SMK KELAS X REVISI', 'Mapel', 'TITL 10'),
 ('975-228-383-11-6', 'b3', 'Mediatama', 'NOVIANA IRNAWATI', 2013, 100, '2019-06-18', 'PEMELIHARAAN KELISTRIKAN KENDARAAN RINGAN SMK KELAS XI', 'Mapel', 'TITL 11'),
 ('975-228-383-11-7', 'c1', 'Mediatama', 'NOVIANA IRNAWATI', 2013, 100, '2019-06-18', 'PEMELIHARAAN KELISTRIKAN KENDARAAN RINGAN SMK KELAS XII', 'Mapel', 'TITL 12'),
-('975-83-1276-33-21-1', 'a1', 'Yudistira', 'Sastro Wijoyo', 2017, 100, '2019-06-18', 'Desain Pemodelan dan Informasi Bangunan Kelas X', 'Mapel', 'DPIB 10'),
+('975-83-1276-33-21-1', 'a1', 'Yudistira', 'Sastro Wijoyo', 2017, 104, '2019-06-18', 'Desain Pemodelan dan Informasi Bangunan Kelas X', 'Mapel', 'DPIB 10'),
 ('975-83-1276-33-21-4', 'a2', 'Yudistira', 'Sastro Wijoyo', 2017, 100, '2019-06-18', 'Desain Pemodelan dan Informasi Bangunan Kelas XI', 'Mapel', 'DPIB 11'),
 ('975-83-1276-33-21-6', 'a3', 'Yudistira', 'Sastro Wijoyo', 2017, 100, '2019-06-18', 'Desain Pemodelan dan Informasi Bangunan Kelas XII', 'Mapel', 'DPIB 12'),
 ('976-224-873-044-3', 'a1', 'BSE', 'RIna Mariana', 2017, 100, '2019-06-18', 'Dasar Pemetaan dan Geomatika Jilid 1', 'Mapel', 'TG 10'),
@@ -486,6 +486,7 @@ INSERT INTO `book` (`ISBN`, `id_rak`, `Penerbit`, `Pengarang`, `thn_buku`, `jmlh
 ('978-602-277-184-6', 'a2', 'Yrama Widya', 'WAHYU A & ADE M', 2016, 100, '2019-06-18', 'TEKNOLOGI INFORMASI DAN KOMUNIKASI BERBASIS KARAKTER UNTUK SMA/MA KELAS XI', 'Mapel', 'TIK 11'),
 ('978-602-277-184-7', 'a3', 'Yrama Widya', 'WAHYU A & ADE M', 2016, 100, '2019-06-18', 'TEKNOLOGI INFORMASI DAN KOMUNIKASI BERBASIS KARAKTER UNTUK SMA/MA KELAS XII', 'Mapel', 'TIK 12'),
 ('978-602-289-123-94', 'a1', 'Alfabeta, cv', 'Jacobus Ranjabar', 2015, 18, '2019-06-16', 'Perubahan Sosial', 'Umum', 'Sosial'),
+('978-602-374-278-1', 'a1', 'Yrama Widya ', 'MH Sapto Widodo', 2018, 100, '2019-06-17', 'Sistem Kelistrikan Refrigerasi Dan Tata Udara Untuk SMK Kelas X', 'Mapel', 'TPTU 10'),
 ('978-602-374-442-6', 'a1', 'Yrama Widya', 'SUPRIYADI', 2015, 100, '2019-06-18', 'EKSIS MEMPERBAIKI TRANSMISI MANUAL DAN OTOMATIS SEPEDA MOTOR UNTUK SMK/MAK KELAS X', 'Mapel', 'TO 10'),
 ('978-602-374-442-7', 'a2', 'Yrama Widya', 'SUPRIYADI', 2015, 100, '2019-06-18', 'EKSIS MEMPERBAIKI TRANSMISI MANUAL DAN OTOMATIS SEPEDA MOTOR UNTUK SMK/MAK KELAS XI', 'Mapel', 'TO 11'),
 ('978-602-374-442-8', 'a3', 'Yrama Widya', 'SUPRIYADI', 2015, 100, '2019-06-18', 'EKSIS MEMPERBAIKI TRANSMISI MANUAL DAN OTOMATIS SEPEDA MOTOR UNTUK SMK/MAK KELAS XII', 'Mapel', 'TO 12'),
@@ -614,7 +615,7 @@ CREATE TABLE `buku` (
 
 CREATE TABLE `cashflow` (
   `no_cashflow` int(11) NOT NULL,
-  `id_petugas` int(255) NOT NULL,
+  `id_petugas` int(32) NOT NULL,
   `tipe` enum('Pemasukan','Pengeluaran','','') NOT NULL,
   `tanggal` int(11) NOT NULL,
   `nominal` int(255) NOT NULL,
@@ -626,7 +627,8 @@ CREATE TABLE `cashflow` (
 --
 
 INSERT INTO `cashflow` (`no_cashflow`, `id_petugas`, `tipe`, `tanggal`, `nominal`, `keterangan`) VALUES
-(1, 3, 'Pemasukan', 20190702, 100000, 'Pemasukan Bulan Juni 2019');
+(1, 3, 'Pemasukan', 20190702, 100000, 'Pemasukan Bulan Juni 2019'),
+(2, 3, 'Pengeluaran', 20190703, 2000000, 'Donasi');
 
 -- --------------------------------------------------------
 
@@ -782,8 +784,8 @@ CREATE TABLE `kembali` (
 `id_transaksi` int(11)
 ,`isbn` varchar(32)
 ,`judul` varchar(150)
-,`nis` int(11)
-,`nama` varchar(100)
+,`nis` varchar(50)
+,`nama` varchar(255)
 ,`t_pinjam` date
 ,`t_kembali` date
 ,`t_deadline` date
@@ -796,12 +798,19 @@ CREATE TABLE `kembali` (
 --
 
 CREATE TABLE `log_siswa` (
-  `nis` int(11) NOT NULL,
-  `nama` varchar(32) NOT NULL,
+  `nis` varchar(50) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `id_kelas` varchar(11) NOT NULL,
-  `alamat` text NOT NULL,
-  `no_telp` text NOT NULL
+  `alamat` text,
+  `no_telp` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log_siswa`
+--
+
+INSERT INTO `log_siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
+('2', '1', '10.pst.1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -839,10 +848,10 @@ CREATE TABLE `petugas` (
   `id_petugas` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `nama` varchar(11) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
   `alamat` text,
   `no_telp` text,
-  `level` int(4) NOT NULL
+  `level` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -851,9 +860,9 @@ CREATE TABLE `petugas` (
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama`, `alamat`, `no_telp`, `level`) VALUES
 (1, 'bayhaqi', '1', 'bayhaqi', 'Jl. Karya karya kasih', '083199332211', 1),
-(3, 'usokun', '123123', 'Ali Hidayat', 'Jl. Pertahanan', '083122112211', 1),
+(3, 'usokun', '123', 'Ali Hidayat', 'Jl. Pertahanan', '083122112211', 1),
 (4, 'nopal', '123', 'Nopal', 'Jl. Bumi', '081212343434', 2),
-(5, 'bambang', '12345', 'bambang', 'Jl. Langit', '085242445533', 2);
+(5, 'Fahmi', '123', '  Parjo', ' Jl. Kalasan no 102', '  085242445533', 2);
 
 -- --------------------------------------------------------
 
@@ -865,13 +874,13 @@ CREATE TABLE `pinjam` (
 `id_transaksi` int(11)
 ,`isbn` varchar(32)
 ,`judul` varchar(150)
-,`nis` int(11)
-,`siswa` varchar(100)
+,`nis` varchar(50)
+,`siswa` varchar(255)
 ,`tingkat` varchar(11)
 ,`jurusan` text
 ,`kelas` int(11)
 ,`id_petugas` int(11)
-,`petugas` varchar(11)
+,`petugas` varchar(255)
 ,`t_pinjam` date
 ,`t_kembali` date
 ,`denda` int(8)
@@ -886,20 +895,13 @@ CREATE TABLE `pinjam` (
 CREATE TABLE `pinjam_book` (
   `id_transaksi` int(11) NOT NULL,
   `nis` varchar(50) NOT NULL,
-  `id_petugas` varchar(35) NOT NULL,
+  `id_petugas` int(50) NOT NULL,
   `ISBN` varchar(32) NOT NULL,
   `t_pinjam` date DEFAULT NULL,
   `t_deadline` date NOT NULL,
   `t_kembali` date DEFAULT NULL,
   `denda` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pinjam_book`
---
-
-INSERT INTO `pinjam_book` (`id_transaksi`, `nis`, `id_petugas`, `ISBN`, `t_pinjam`, `t_deadline`, `t_kembali`, `denda`) VALUES
-(1, '1', '1', '1', '2019-05-06', '0000-00-00', '0000-00-00', NULL);
 
 --
 -- Triggers `pinjam_book`
@@ -939,7 +941,7 @@ DELIMITER ;
 
 CREATE TABLE `presensi` (
   `no_presensi` int(11) NOT NULL,
-  `nis` int(255) NOT NULL,
+  `nis` varchar(50) NOT NULL,
   `tanggal` date NOT NULL,
   `kegiatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -949,9 +951,18 @@ CREATE TABLE `presensi` (
 --
 
 INSERT INTO `presensi` (`no_presensi`, `nis`, `tanggal`, `kegiatan`) VALUES
-(1, 6617, '2019-07-02', 'Meminjam Buku'),
-(2, 6617, '2019-07-02', 'meminjam buku'),
-(3, 9317, '2019-07-02', 'Membaca buku di perpus');
+(1, '10318', '2019-07-04', 'Membaca'),
+(2, '22017', '2019-07-04', 'Membaca buku'),
+(4, '30516', '2019-07-05', 'Membaca Buku'),
+(5, '10318', '2019-07-05', 'Membaca'),
+(6, '22117', '2019-07-05', 'Membaca'),
+(7, '22017', '2019-07-05', 'Membaca dan menulis'),
+(8, '52217', '2019-07-05', 'membaca'),
+(9, '24617', '2019-07-06', 'Membaca'),
+(10, '52217', '2019-07-06', 'Membaca'),
+(11, '48717', '2019-07-06', 'Membaca'),
+(12, '22317', '2019-07-06', 'Membaca'),
+(13, '49117', '2019-07-06', 'membaca');
 
 -- --------------------------------------------------------
 
@@ -961,8 +972,8 @@ INSERT INTO `presensi` (`no_presensi`, `nis`, `tanggal`, `kegiatan`) VALUES
 --
 CREATE TABLE `presensi_view` (
 `no_presensi` int(11)
-,`nis` int(255)
-,`nama` varchar(100)
+,`nis` varchar(50)
+,`nama` varchar(255)
 ,`tingkat` varchar(11)
 ,`jurusan` text
 ,`kelas` int(11)
@@ -977,8 +988,8 @@ CREATE TABLE `presensi_view` (
 --
 
 CREATE TABLE `siswa` (
-  `nis` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `nis` varchar(50) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `id_kelas` varchar(11) NOT NULL,
   `alamat` text,
   `no_telp` text
@@ -989,48 +1000,56 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `id_kelas`, `alamat`, `no_telp`) VALUES
-(6617, 'ANDREAN IRGI AFFANDY', '11.dpib.1', 'Jl. Krakatau no.102', '085372839918'),
-(7017, 'DIMAS PRAYOGA', '11.dpib.1', 'Jl. Seksama no.3', '08520022933'),
-(7117, 'ANJELO PUTRI SILALAHI', '11.dpib.2', 'Jl. Seksama no.99', '08528726222'),
-(7417, 'GUSTI FRANS COKKY', '11.dpib.2', 'Jl. Medan Baru no.17', '085722833122'),
-(7717, 'M.RIZVAN', '11.dpib.3', 'Jl. Besar Tembung no.87', '085299237362'),
-(7917, 'NADILA TIFANI', '11.dpib.3', 'Jl. Besar Tembung no.7', '08128829221'),
-(9317, 'AHMAD SAYYID FADHIL', '11.dpib.1', 'Jl. Karya Jaya no.102', '081233119232'),
-(9417, 'AZIZAH SIREGAR', '11.dpib.1', 'Jl. Karya Kasih no.2', '081238723232'),
-(9517, 'DAME RONA LUBIS', '11.dpib.2', 'Jl. A.H Nasution', '081288331275'),
-(9617, 'DEVITA HALISA FITRI', '11.dpib.2', 'Jl. A.H Nasution no.11', '08221133121'),
-(9717, 'DIAH AYU PRATIWI', '11.dpib.3', 'Jl. Jaya Wijaya no.112', '08212229332'),
-(9817, 'DWI REKSA PRIAMITRA', '11.dpib.3', 'Jl. Pattimura no.1', '082100912211'),
-(22017, 'ADI SAPUTRA', '11.titl.1', 'Jl. Raflesia no.4', '0831338221'),
-(22117, 'AHMAD ZEIN B.MANALU', '11.titl.1', 'Jl. Sakura no.29', '08220928211'),
-(22317, 'BAGUS ARIA', '11.titl.2', 'Jl. Kejora no.111', '08129922012'),
-(23317, 'JULIANDI', '11.titl.2', 'Jl. Patumbak no.11', '085233821128'),
-(24617, 'JULIANDI', '11.titl.3', 'Jl. Brigib no.113', '081348581233'),
-(25017, 'YOPI ARDIANSYAH', '11.titl.3', 'Jl. Angkasa Pura no.11', '081203391122'),
-(48717, 'ADITIA SYAHPUTRA', '11.tkro.1', 'Jl. Seksama no.12', '081273556722'),
-(48817, 'AHADI ANUAR', '11.tkro.1', 'Jl. Seksama no.1', '081300292331'),
-(48917, 'ALDO RIZKY YULDI', '11.tkro.2', 'Jl. Bersama I no.11', '08526663373'),
-(49017, 'ALFAUZAN', '11.tkro.2', 'Jl. Bersama I no.12', '081299383731'),
-(49117, 'ARISANDI PRATAMA', '11.tkro.3', 'Jl.Seksama Ujung no.8', '081311827721'),
-(49217, 'DEDI YUSUF', '11.tkro.3', 'Jl. Lantasan Lama no.13', '08319928333'),
-(52217, 'ABDULLAH MARYUGUNA NASUTION', '11.tbsm.1', 'Jl. Timbang Deli no.11', '085261721122'),
-(52317, 'AHMAD ANGGA PRASETIA HSB', '11.tbsm.1', 'Jl. Deli Tua no.4', '085288123311'),
-(52417, 'AHMAD RIPAI LUBIS', '11.tbsm.2', 'Jl. Deli Tua no.108', '085277112822'),
-(52517, 'ALFIANSYAH NAJID', '11.tbsm.2', 'Jl. Patumbak no.1', '081200918221'),
-(52617, 'ANORE PRATAMA', '11.tbsm.3', 'Jl. Sekata no.11', '081300876767'),
-(52717, 'ARIS SAHPUTRA NASUTION', '11.tbsm.3', 'Jl. Abadi no.12', '081200824232'),
-(58717, 'ANNISA WULAN DARI', '11.tav.1', 'Jl. Petisah no.9', '085273140221'),
-(58817, 'AYU RISKA', '11.tav.1', 'Jl. Petisah no.102', '08572283312'),
-(58917, 'CHINTIA CAHYANI', '11.tav.2', 'Jl. Petisah Ujung no.2', '085200273383'),
-(59017, 'DESRI NURSAKINAH SAFITRI HARAHAP', '11.tav.2', 'Jl. Petisah Ujung no.2', '08537221822'),
-(59117, 'EMILIA VITALOKA', '11.tav.3', 'Jl. Karya Bakti no.1', '08310022933'),
-(59217, 'FERRY IRAWAN', '11.tav.3', 'Jl. Karya Bakti no.99', '08221029211'),
-(72217, 'ADELLA SILVIA', '11.tkj.1', 'Jl. Kliwon no.11', '08319924412'),
-(72317, 'AFRIANDISYAH DAMANIK', '11.tkj.1', 'Jl. Eka Surya no.4', '081233942321'),
-(72417, 'AHMAD NAZRY', '11.tkj.2', 'Jl. Eka Surya no.110', '081399228122'),
-(72517, 'ALI MARWANSYAH PANJAITAN', '11.tkj.2', 'Jl. Eka Tani no.1', '081388222155'),
-(72617, 'ANDIKA', '11.tkj.3', 'Jl. Sumber no.3', '08129922822'),
-(72717, 'ANNISA PUTRI AYU DIA', '11.tkj.3', 'Jl. Sulawesi no.2', '08121122322');
+('10318', 'MEILA CHAIRUMI', '10.pst.1', 'Jl. Bandrek no.183', '081233839233'),
+('10418', 'MUHAMMAD BAGAS PERWIRA', '10.pst.1', 'Jl. Anggrek no.11', '081303881192'),
+('22017', 'ADI SAPUTRA', '11.titl.1', 'Jl. Raflesia no.4', '0831338221'),
+('22117', 'AHMAD ZEIN B.MANALU', '11.titl.1', 'Jl. Sakura no.29', '08220928211'),
+('22317', 'BAGUS ARIA', '11.titl.2', 'Jl. Kejora no.111', '08129922012'),
+('23317', 'JULIANDI', '11.titl.2', 'Jl. Patumbak no.11', '085233821128'),
+('24617', 'JULIANDI', '11.titl.3', 'Jl. Brigib no.113', '081348581233'),
+('25017', 'YOPI ARDIANSYAH', '11.titl.3', 'Jl. Angkasa Pura no.11', '081203391122'),
+('30116', 'ALFIANSYAH', '12.pst.3', 'Jl. Perintis no.12', '083122938112'),
+('30216', 'EGGIA HASIBUAN', '12.tav.2', 'Jl. Limau Manis no.11', '081299220182'),
+('30316', 'HASRIANSYAH MANURUNG', '12.tbsm.3', 'Jl. Ketaren no.90', '082122331299'),
+('30416', 'MHD RAFI', '12.titl.3', 'Jl. Besar Tembung no.114', '085388229112'),
+('30516', 'MUHAMMAD AZHARI', '12.tkj.3', 'Jl. Garu II A no.11', '081200339212'),
+('30616', 'IBNU AZHARI', '12.tkro.1', 'Jl. Bandrek no.110', '082209101728'),
+('48717', 'ADITIA SYAHPUTRA', '11.tkro.1', 'Jl. Seksama no.12', '081273556722'),
+('48817', 'AHADI ANUAR', '11.tkro.1', 'Jl. Seksama no.1', '081300292331'),
+('48917', 'ALDO RIZKY YULDI', '11.tkro.2', 'Jl. Bersama I no.11', '08526663373'),
+('49017', 'ALFAUZAN', '11.tkro.2', 'Jl. Bersama I no.12', '081299383731'),
+('49117', 'ARISANDI PRATAMA', '11.tkro.3', 'Jl.Seksama Ujung no.8', '081311827721'),
+('49217', 'DEDI YUSUF', '11.tkro.3', 'Jl. Lantasan Lama no.13', '08319928333'),
+('52217', 'ABDULLAH MARYUGUNA NASUTION', '11.tbsm.1', 'Jl. Timbang Deli no.11', '085261721122'),
+('52317', 'AHMAD ANGGA PRASETIA HSB', '11.tbsm.1', 'Jl. Deli Tua no.4', '085288123311'),
+('52417', 'AHMAD RIPAI LUBIS', '11.tbsm.2', 'Jl. Deli Tua no.108', '085277112822'),
+('52517', 'ALFIANSYAH NAJID', '11.tbsm.2', 'Jl. Patumbak no.1', '081200918221'),
+('52617', 'ANORE PRATAMA', '11.tbsm.3', 'Jl. Sekata no.11', '081300876767'),
+('52717', 'ARIS SAHPUTRA NASUTION', '11.tbsm.3', 'Jl. Abadi no.12', '081200824232'),
+('58718', 'ANNISA WULAN DARI', '10.tav.1', 'Jl. Petisah no.9', '085273140221'),
+('58817', 'AYU RISKA', '11.tav.1', 'Jl. Petisah no.102', '08572283312'),
+('58917', 'CHINTIA CAHYANI', '11.tav.2', 'Jl. Petisah Ujung no.2', '085200273383'),
+('59018', 'DESRI NURSAKINAH SAFITRI HARAHAP', '10.tav.2', 'Jl. Petisah Ujung no.2', '08537221822'),
+('59117', 'EMILIA VITALOKA', '11.tav.3', 'Jl. Karya Bakti no.1', '08310022933'),
+('59217', 'FERRY IRAWAN', '11.tav.3', 'Jl. Karya Bakti no.99', '08221029211'),
+('6617', 'ANDREAN IRGI AFFANDY', '11.dpib.1', 'Jl. Krakatau no.102', '085372839918'),
+('7017', 'DIMAS PRAYOGA', '11.dpib.1', 'Jl. Seksama no.3', '08520022933'),
+('7117', 'ANJELO PUTRI SILALAHI', '11.dpib.2', 'Jl. Seksama no.99', '08528726222'),
+('72217', 'ADELLA SILVIA', '11.tkj.1', 'Jl. Kliwon no.11', '08319924412'),
+('72318', 'AFRIANDISYAH DAMANIK', '10.tkj.1', 'Jl. Eka Surya no.4', '081233942321'),
+('72418', 'AHMAD NAZRY', '10.tkj.2', 'Jl. Eka Surya no.110', '081399228122'),
+('72517', 'ALI MARWANSYAH PANJAITAN', '11.tkj.2', 'Jl. Eka Tani no.1', '081388222155'),
+('72617', 'ANDIKA', '11.tkj.3', 'Jl. Sumber no.3', '08129922822'),
+('72717', 'ANNISA PUTRI AYU DIA', '11.tkj.3', 'Jl. Sulawesi no.2', '08121122322'),
+('7417', 'GUSTI FRANS COKKY', '11.dpib.2', 'Jl. Medan Baru no.17', '085722833122'),
+('7717', 'M.RIZVAN', '11.dpib.3', 'Jl. Besar Tembung no.87', '085299237362'),
+('7917', 'NADILA TIFANI', '11.dpib.3', 'Jl. Besar Tembung no.7', '08128829221'),
+('9317', 'AHMAD SAYYID FADHIL', '11.dpib.1', 'Jl. Karya Jaya no.102', '081233119232'),
+('9417', 'AZIZAH SIREGAR', '11.dpib.1', 'Jl. Karya Kasih no.2', '081238723232'),
+('9517', 'DAME RONA LUBIS', '11.dpib.2', 'Jl. A.H Nasution', '081288331275'),
+('9617', 'DEVITA HALISA FITRI', '11.dpib.2', 'Jl. A.H Nasution no.11', '08221133121'),
+('9717', 'DIAH AYU PRATIWI', '11.dpib.3', 'Jl. Jaya Wijaya no.112', '08212229332'),
+('9817', 'DWI REKSA PRIAMITRA', '11.dpib.3', 'Jl. Pattimura no.1', '082100912211');
 
 --
 -- Triggers `siswa`
@@ -1049,8 +1068,8 @@ DELIMITER ;
 -- (See below for the actual view)
 --
 CREATE TABLE `siswa_all` (
-`nis` int(11)
-,`nama` varchar(100)
+`nis` varchar(50)
+,`nama` varchar(255)
 ,`id_kelas` varchar(11)
 ,`alamat` text
 ,`no_telp` text
@@ -1063,8 +1082,8 @@ CREATE TABLE `siswa_all` (
 -- (See below for the actual view)
 --
 CREATE TABLE `siswa_view` (
-`nis` int(11)
-,`nama` varchar(100)
+`nis` varchar(50)
+,`nama` varchar(255)
 ,`tingkat` varchar(11)
 ,`jurusan` text
 ,`kelas` int(11)
@@ -1079,13 +1098,66 @@ CREATE TABLE `siswa_view` (
 -- (See below for the actual view)
 --
 CREATE TABLE `siswa_view_all` (
-`nis` int(11)
-,`nama` varchar(100)
+`nis` varchar(50)
+,`nama` varchar(255)
 ,`tingkat` varchar(11)
 ,`jurusan` text
 ,`kelas` int(11)
 ,`alamat` text
 ,`no_telp` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `staff_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `staff_view` (
+`id_petugas` int(11)
+,`nama` varchar(255)
+,`alamat` text
+,`no_telp` text
+,`level` int(1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_presensi_tmonth`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_presensi_tmonth` (
+`no_presensi` int(11)
+,`nis` varchar(50)
+,`tanggal` date
+,`kegiatan` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_presensi_today`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_presensi_today` (
+`no_presensi` int(11)
+,`nis` varchar(50)
+,`tanggal` date
+,`kegiatan` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_presensi_tyear`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_presensi_tyear` (
+`no_presensi` int(11)
+,`nis` varchar(50)
+,`tanggal` date
+,`kegiatan` text
 );
 
 -- --------------------------------------------------------
@@ -1151,6 +1223,42 @@ DROP TABLE IF EXISTS `siswa_view_all`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `siswa_view_all`  AS  select `a`.`nis` AS `nis`,`a`.`nama` AS `nama`,`b`.`tingkat` AS `tingkat`,`b`.`jurusan` AS `jurusan`,`b`.`kelas` AS `kelas`,`a`.`alamat` AS `alamat`,`a`.`no_telp` AS `no_telp` from (`siswa_all` `a` join `kelas` `b` on((`a`.`id_kelas` = `b`.`id_kelas`))) ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `staff_view`
+--
+DROP TABLE IF EXISTS `staff_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `staff_view`  AS  select `petugas`.`id_petugas` AS `id_petugas`,`petugas`.`nama` AS `nama`,`petugas`.`alamat` AS `alamat`,`petugas`.`no_telp` AS `no_telp`,`petugas`.`level` AS `level` from `petugas` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_presensi_tmonth`
+--
+DROP TABLE IF EXISTS `v_presensi_tmonth`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_presensi_tmonth`  AS  select `presensi`.`no_presensi` AS `no_presensi`,`presensi`.`nis` AS `nis`,`presensi`.`tanggal` AS `tanggal`,`presensi`.`kegiatan` AS `kegiatan` from `presensi` where (month(`presensi`.`tanggal`) = month(curdate())) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_presensi_today`
+--
+DROP TABLE IF EXISTS `v_presensi_today`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_presensi_today`  AS  select `presensi`.`no_presensi` AS `no_presensi`,`presensi`.`nis` AS `nis`,`presensi`.`tanggal` AS `tanggal`,`presensi`.`kegiatan` AS `kegiatan` from `presensi` where (`presensi`.`tanggal` = curdate()) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_presensi_tyear`
+--
+DROP TABLE IF EXISTS `v_presensi_tyear`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_presensi_tyear`  AS  select `presensi`.`no_presensi` AS `no_presensi`,`presensi`.`nis` AS `nis`,`presensi`.`tanggal` AS `tanggal`,`presensi`.`kegiatan` AS `kegiatan` from `presensi` where (year(`presensi`.`tanggal`) = year(curdate())) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -1168,7 +1276,8 @@ ALTER TABLE `book`
 --
 ALTER TABLE `cashflow`
   ADD PRIMARY KEY (`no_cashflow`),
-  ADD UNIQUE KEY `no_cashflow` (`no_cashflow`);
+  ADD UNIQUE KEY `no_cashflow` (`no_cashflow`),
+  ADD KEY `id_petugas` (`id_petugas`);
 
 --
 -- Indexes for table `kelas`
@@ -1205,21 +1314,25 @@ ALTER TABLE `petugas`
 ALTER TABLE `pinjam_book`
   ADD PRIMARY KEY (`id_transaksi`),
   ADD UNIQUE KEY `id_transaksi` (`id_transaksi`),
-  ADD KEY `ISBN` (`ISBN`);
+  ADD KEY `ISBN` (`ISBN`),
+  ADD KEY `nis` (`nis`),
+  ADD KEY `id_petugas` (`id_petugas`);
 
 --
 -- Indexes for table `presensi`
 --
 ALTER TABLE `presensi`
   ADD PRIMARY KEY (`no_presensi`),
-  ADD UNIQUE KEY `no_presensi` (`no_presensi`);
+  ADD UNIQUE KEY `no_presensi` (`no_presensi`),
+  ADD KEY `nis` (`nis`);
 
 --
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`nis`),
-  ADD UNIQUE KEY `nis` (`nis`);
+  ADD UNIQUE KEY `nis` (`nis`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1229,19 +1342,75 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `cashflow`
 --
 ALTER TABLE `cashflow`
-  MODIFY `no_cashflow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `no_cashflow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `no_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `no_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `siswa`
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `book`
+--
+ALTER TABLE `book`
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`id_rak`) REFERENCES `lok_book` (`id_rak`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cashflow`
+--
+ALTER TABLE `cashflow`
+  ADD CONSTRAINT `cashflow_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pinjam_book`
+--
+ALTER TABLE `pinjam_book`
+  ADD CONSTRAINT `pinjam_book_ibfk_1` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pinjam_book_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pinjam_book_ibfk_3` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `presensi`
+--
+ALTER TABLE `presensi`
+  ADD CONSTRAINT `presensi_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `nis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72718;
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON UPDATE CASCADE;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `hapus_db` ON SCHEDULE EVERY 2 YEAR STARTS '2020-08-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'hapus database agar tidaq numpuk' DO begin
+TRUNCATE TABLE log_siswa;
+TRUNCATE TABLE presensi;
+TRUNCATE TABLE pinjam_book;
+DELETE from siswa where id_kelas = 'A.tpg.0'
+AND id_kelas = 'A.tptu.0'
+AND id_kelas = 'A.tpm.0'
+AND id_kelas = 'A.tkj.0'
+AND id_kelas = 'A.tkro.0'
+AND id_kelas = 'A.tgtl.0'
+AND id_kelas = 'A.titl.0'
+AND id_kelas = 'A.tg.0'
+AND id_kelas = 'A.tbsm.0'
+AND id_kelas = 'A.tav.0'
+AND id_kelas = 'A.rpl.0'
+AND id_kelas = 'A.pst.0'
+AND id_kelas = 'A.dpib.0'
+AND id_kelas = 'A.bkp.0';
+end$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

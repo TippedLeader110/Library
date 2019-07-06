@@ -5,6 +5,8 @@
  */
 package splashScreen;
 
+import java.awt.Color;
+
 /**
  *
  * @author My Computer
@@ -16,6 +18,7 @@ public class splash extends javax.swing.JFrame {
      */
     public splash() {
         initComponents();
+        this.setOpacity(1f);
     }
 
     /**
@@ -28,31 +31,40 @@ public class splash extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        persen = new javax.swing.JLabel();
         loadingbar = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Loading ..");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loadingbar.setBackground(new java.awt.Color(255, 255, 255));
-        loadingbar.setForeground(new java.awt.Color(255, 179, 24));
-        loadingbar.setBorderPainted(false);
-        jPanel1.add(loadingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 580, 310, -1));
+        persen.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        persen.setForeground(new java.awt.Color(255, 255, 255));
+        persen.setText("0%");
+        jPanel1.add(persen, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/splash-screen.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 900, -1));
+        loadingbar.setBackground(new java.awt.Color(255, 255, 255));
+        loadingbar.setForeground(new java.awt.Color(255, 153, 0));
+        loadingbar.setPreferredSize(new java.awt.Dimension(146, 10));
+        jPanel1.add(loadingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 330, 15));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/pss-360x360.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 350, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
         );
 
         pack();
@@ -98,5 +110,6 @@ public class splash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JProgressBar loadingbar;
+    public javax.swing.JLabel persen;
     // End of variables declaration//GEN-END:variables
 }

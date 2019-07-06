@@ -113,6 +113,8 @@ public class editBuku extends javax.swing.JFrame {
         JNewKategori = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Buku");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/resources/images/icon-JFrame.png")).getImage());
 
         jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 
