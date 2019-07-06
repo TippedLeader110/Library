@@ -4507,20 +4507,25 @@ public class Main extends javax.swing.JFrame {
                 String t = rs.getString("kategori");
                 String y = rs.getString("lokasi");
                 
-                model_bukupinjam.addRow(new Object[]{q, w, e, r});
+                model_bukupinjam.addRow(new Object[]{q, w, e, r, t,y});
+                bukuPinjamUmumTabel.setModel(model_bukupinjam);
+                
+                int count_row = model_bukupinjam.getRowCount();
+                int max_pinjam;
+                if(maksField.getText().equals("")){
+                    max_pinjam = 0;
+                }
+                else
+                    max_pinjam = Integer.valueOf(maksField.getText());
+                int row = 0;
+                if(count_row==max_pinjam+1){
+                    JOptionPane.showMessageDialog(this, "Maksimal "+ max_pinjam +" buku" , "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    model_bukupinjam.setRowCount(Integer.parseInt(maksField.getText()));
+                }
             }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gagal Terhubung : " + ex);
         }
-
-        int count_row = model_bukupinjam.getRowCount();
-        int max_pinjam = Integer.valueOf(maksField.getText());
-        int row = 0;
-        if(count_row==max_pinjam+1){
-            JOptionPane.showMessageDialog(this, "Maksimal "+ max_pinjam +" buku" , "Kesalahan", JOptionPane.ERROR_MESSAGE);
-            model_bukupinjam.setRowCount(Integer.parseInt(maksField.getText()));
-        }
-        bukuPinjamUmumTabel.setModel(model_bukupinjam);
     }//GEN-LAST:event_tambahbukuPinjamFieldActionPerformed
 
     private void cariSiswaPinjamUmumBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariSiswaPinjamUmumBActionPerformed
