@@ -20,7 +20,7 @@ public class MysqlCon{
         try{  
         Class.forName("com.mysql.jdbc.Driver");  
         Connection con=DriverManager.getConnection(  
-        "jdbc:mysql://localhost","root","");  
+        "jdbc:mysql://localhost:3306/perpus?useTimezone=&serverTimezone=UTC", "root", "");  
         }catch(Exception e){ System.out.println(e);}  
     }
     
@@ -29,7 +29,7 @@ public class MysqlCon{
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus", "root", "");
+            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus?useTimezone=&serverTimezone=UTC", "root", "");
             return khusus;
         }
         catch (SQLException ex) {
@@ -44,8 +44,7 @@ public class MysqlCon{
         Connection con;
         Statement stmt = null;
         try {  
-            con = DriverManager.getConnection(  
-                    "jdbc:mysql://localhost","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus?useTimezone=&serverTimezone=UTC", "root", "");
             stmt =con.createStatement();  
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gagal Terhubung");
@@ -57,8 +56,7 @@ public class MysqlCon{
         int num = 0;
 //    try{  
 //        Class.forName("com.mysql.jdbc.Driver");  
-        Connection con=DriverManager.getConnection(  
-        "jdbc:mysql://localhost","root","");  
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus?useTimezone=&serverTimezone=UTC", "root", "");  
         Statement stmt=con.createStatement();  
         ResultSet rs=stmt.executeQuery("select perpus.login('" + F1 + "', '" + F2 + "')");  
         

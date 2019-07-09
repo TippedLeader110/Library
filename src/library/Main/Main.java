@@ -133,7 +133,7 @@ public class Main extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus", "root", "");
+            khusus = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/perpus?useTimezone=&serverTimezone=UTC", "root", "");
             return khusus;
         }
         catch (SQLException ex) {
@@ -379,9 +379,9 @@ public class Main extends javax.swing.JFrame {
         simpanPinjamUmum = new javax.swing.JButton();
         resetbukuPinjamUmum = new javax.swing.JButton();
         pemiMapelP = new javax.swing.JPanel();
-        tingkatPinjamMapelCB = new javax.swing.JComboBox<>();
-        jurusanPinjamMapelCB = new javax.swing.JComboBox<>();
-        kelasPinjamMapelCB = new javax.swing.JComboBox<>();
+        tingkatPinjamMapelCB = new javax.swing.JComboBox<String>();
+        jurusanPinjamMapelCB = new javax.swing.JComboBox<String>();
+        kelasPinjamMapelCB = new javax.swing.JComboBox<String>();
         titlePemBukuMapel = new javax.swing.JLabel();
         simpanPinjamMapelB = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -412,9 +412,9 @@ public class Main extends javax.swing.JFrame {
         kategoriL = new javax.swing.JLabel();
         sumberL = new javax.swing.JLabel();
         rakL = new javax.swing.JLabel();
-        JenisCB = new javax.swing.JComboBox<>();
-        KategoriCB = new javax.swing.JComboBox<>();
-        rakCB = new javax.swing.JComboBox<>();
+        JenisCB = new javax.swing.JComboBox<String>();
+        KategoriCB = new javax.swing.JComboBox<String>();
+        rakCB = new javax.swing.JComboBox<String>();
         tambahbukuB = new javax.swing.JButton();
         editbukuB = new javax.swing.JButton();
         hapusbukuB = new javax.swing.JButton();
@@ -422,7 +422,7 @@ public class Main extends javax.swing.JFrame {
         cariBukuB = new javax.swing.JButton();
         penerbitL1 = new javax.swing.JLabel();
         penerbitL2 = new javax.swing.JLabel();
-        thnCB = new javax.swing.JComboBox<>();
+        thnCB = new javax.swing.JComboBox<String>();
         rakL2 = new javax.swing.JLabel();
         laporanPanel = new javax.swing.JPanel();
         titleLaporan = new javax.swing.JLabel();
@@ -467,8 +467,8 @@ public class Main extends javax.swing.JFrame {
         kastabel = new javax.swing.JTable();
         jPanel19 = new javax.swing.JPanel();
         tampiltanggalButton = new javax.swing.JButton();
-        petugasCB = new javax.swing.JComboBox<>();
-        tipeCB = new javax.swing.JComboBox<>();
+        petugasCB = new javax.swing.JComboBox<String>();
+        tipeCB = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         Cariket = new javax.swing.JTextField();
         CariketB = new javax.swing.JButton();
@@ -531,7 +531,7 @@ public class Main extends javax.swing.JFrame {
         staffTabel = new javax.swing.JTable();
         siswaPanel = new javax.swing.JPanel();
         titleSiswa = new javax.swing.JLabel();
-        tingkatSiswaCB = new javax.swing.JComboBox<>();
+        tingkatSiswaCB = new javax.swing.JComboBox<String>();
         jLabel39 = new javax.swing.JLabel();
         cariSiswaField = new javax.swing.JTextField();
         cariSiswaB = new javax.swing.JButton();
@@ -542,9 +542,9 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         siswaTabel = new javax.swing.JTable();
-        jurusanSiswaCB = new javax.swing.JComboBox<>();
+        jurusanSiswaCB = new javax.swing.JComboBox<String>();
         jLabel93 = new javax.swing.JLabel();
-        kelasSiswaCB = new javax.swing.JComboBox<>();
+        kelasSiswaCB = new javax.swing.JComboBox<String>();
         jLabel94 = new javax.swing.JLabel();
         presensiPanel = new javax.swing.JPanel();
         titlePresensi = new javax.swing.JLabel();
@@ -553,9 +553,9 @@ public class Main extends javax.swing.JFrame {
         hapusPresensiB = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         kegfield = new javax.swing.JTextField();
-        TingkatPresensiCB = new javax.swing.JComboBox<>();
-        JurusanPresensiCB = new javax.swing.JComboBox<>();
-        kelasPresensiCB = new javax.swing.JComboBox<>();
+        TingkatPresensiCB = new javax.swing.JComboBox<String>();
+        JurusanPresensiCB = new javax.swing.JComboBox<String>();
+        kelasPresensiCB = new javax.swing.JComboBox<String>();
         carikegB = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane24 = new javax.swing.JScrollPane();
@@ -1180,13 +1180,13 @@ public class Main extends javax.swing.JFrame {
         pemiMapelP.setBackground(new java.awt.Color(255, 255, 255));
 
         tingkatPinjamMapelCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tingkatPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih Tingkat--", "10", "11", "12", "Alumni" }));
+        tingkatPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Pilih Tingkat--", "10", "11", "12", "Alumni" }));
 
         jurusanPinjamMapelCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jurusanPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih Jurusan--", "Produksi dan Siaran Televisi", "Teknik Audio Vidio", "Teknik dan Bisnis Sepeda Motor", "Teknik Instalasi Tenaga Listrik", "Teknik Komputer dan Jaringan", "Teknik Kendaraan Ringan Otomotif", "Teknik Pengelasan", "Teknik Pemesinan", "Teknik Pendingin dan Tata Udara", "Bisnis dan Konstruksi Properti", "Desain Permodelan dan Informasi Bangunan", "Rekayasa Perangkat Lunak", "Teknik Geomatika", "Teknik Jaringan Tenaga Listrik" }));
+        jurusanPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Pilih Jurusan--", "Produksi dan Siaran Televisi", "Teknik Audio Vidio", "Teknik dan Bisnis Sepeda Motor", "Teknik Instalasi Tenaga Listrik", "Teknik Komputer dan Jaringan", "Teknik Kendaraan Ringan Otomotif", "Teknik Pengelasan", "Teknik Pemesinan", "Teknik Pendingin dan Tata Udara", "Bisnis dan Konstruksi Properti", "Desain Permodelan dan Informasi Bangunan", "Rekayasa Perangkat Lunak", "Teknik Geomatika", "Teknik Jaringan Tenaga Listrik" }));
 
         kelasPinjamMapelCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        kelasPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Kelas--", "1", "2", "3" }));
+        kelasPinjamMapelCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Pilih Kelas--", "1", "2", "3" }));
 
         titlePemBukuMapel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titlePemBukuMapel.setForeground(new java.awt.Color(51, 51, 51));
@@ -1524,7 +1524,7 @@ public class Main extends javax.swing.JFrame {
         rakL.setText("Rak");
 
         JenisCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        JenisCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jenis", "Umum", "Khusus", "Mapel" }));
+        JenisCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jenis", "Umum", "Khusus", "Mapel" }));
         JenisCB.setName("Kategori"); // NOI18N
         JenisCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1538,7 +1538,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         KategoriCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        KategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kategori" }));
+        KategoriCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kategori" }));
         KategoriCB.setName("Kategori"); // NOI18N
         KategoriCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1547,7 +1547,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         rakCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        rakCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rak" }));
+        rakCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rak" }));
         rakCB.setName("Kategori"); // NOI18N
         rakCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1620,7 +1620,7 @@ public class Main extends javax.swing.JFrame {
         penerbitL2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         thnCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        thnCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tahun Buku" }));
+        thnCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tahun Buku" }));
         thnCB.setName("Kategori"); // NOI18N
         thnCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -2247,7 +2247,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         petugasCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        petugasCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Petugas" }));
+        petugasCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Petugas" }));
         petugasCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 petugasCBItemStateChanged(evt);
@@ -2255,7 +2255,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         tipeCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        tipeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipe Kas", "Pemasukan", "Pengeluaran" }));
+        tipeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipe Kas", "Pemasukan", "Pengeluaran" }));
         tipeCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tipeCBItemStateChanged(evt);
@@ -3006,7 +3006,7 @@ public class Main extends javax.swing.JFrame {
         titleSiswa.setText("Title");
 
         tingkatSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tingkatSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tingkat", "10", "11", "12", "Alumni" }));
+        tingkatSiswaCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tingkat", "10", "11", "12", "Alumni" }));
         tingkatSiswaCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tingkatSiswaCBItemStateChanged(evt);
@@ -3113,7 +3113,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jPanel2);
 
         jurusanSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jurusanSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jurusan" }));
+        jurusanSiswaCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jurusan" }));
         jurusanSiswaCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jurusanSiswaCBItemStateChanged(evt);
@@ -3125,7 +3125,7 @@ public class Main extends javax.swing.JFrame {
         jLabel93.setText("Jurusan");
 
         kelasSiswaCB.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        kelasSiswaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kelas", "1", "2", "3" }));
+        kelasSiswaCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas", "1", "2", "3" }));
         kelasSiswaCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 kelasSiswaCBItemStateChanged(evt);
@@ -3252,7 +3252,7 @@ public class Main extends javax.swing.JFrame {
         kegfield.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
         TingkatPresensiCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        TingkatPresensiCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tingkat", "10", "11", "12" }));
+        TingkatPresensiCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tingkat", "10", "11", "12" }));
         TingkatPresensiCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TingkatPresensiCBItemStateChanged(evt);
@@ -3260,7 +3260,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         JurusanPresensiCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        JurusanPresensiCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jurusan" }));
+        JurusanPresensiCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jurusan" }));
         JurusanPresensiCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 JurusanPresensiCBItemStateChanged(evt);
@@ -3268,7 +3268,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         kelasPresensiCB.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        kelasPresensiCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kelas", "1", "2", "3" }));
+        kelasPresensiCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas", "1", "2", "3" }));
         kelasPresensiCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 kelasPresensiCBItemStateChanged(evt);
